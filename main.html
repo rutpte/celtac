@@ -31,23 +31,9 @@
             <a class="nav-link" href="main.html">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">contact</a>
-          </li>          
-		  <li class="nav-item">
-            <a class="nav-link" href="#">contact</a>
-          </li>
-		  <!-- 
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li> -->
+            <a class="nav-link" id="contact_info" href="#" data-toggle="modal" data-target="#modal" onclick="celtac.g_func.modal_contact(); return:false;">contact</a>
+
+          </li>  
         </ul>
 
         <button class="btn btn-outline-success my-2 my-sm-0" type="button">logout</button>
@@ -55,7 +41,29 @@
         
       </div>
     </nav>
-
+	<!-- ************************************************************************************************************** -->
+	<!-- //$('#modal').modal('show') -->
+		<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Modal title</h5><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			  </div>
+			  <div class="modal-body" id="modal-body">
+				...
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				
+			  </div>
+			</div>
+		  </div>
+		</div>
+	
+	<!-- ************************************************************************************************************** -->
     <main role="main" class="container">
 
       <div class="starter-template">
