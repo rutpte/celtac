@@ -1,6 +1,6 @@
 <?php
 require dirname(__FILE__) . '/includes/init.inc.php';
-?>
+?> 
 <!doctype html>
 <html lang="en">
   <head>
