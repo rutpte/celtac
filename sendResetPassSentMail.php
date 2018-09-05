@@ -8,8 +8,8 @@ require 'libs/PHPMailer/src/Exception.php';
 require 'libs/PHPMailer/src/PHPMailer.php';
 require 'libs/PHPMailer/src/SMTP.php';
 
-$from_email 		= 'pte.engineer@gmail.com';
-$from_email_pass  	= 'xxx';
+$from_email 		= 'celtac.order@gmail.com';
+$from_email_pass  	= 'celtac123';
 $mailTo 			= isset($_GET['email']) ? $_GET['email'] : 'iloveubon@gmail.com';
 
 $email_to 			= 'iloveubon@gmail.com';

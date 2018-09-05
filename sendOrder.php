@@ -15,8 +15,8 @@ require 'libs/PHPMailer/src/SMTP.php';
 //--> call method sum order and get data.
 //--> loop data for create content html and set it to $html_mail.
 
-$from_email 		= 'pte.engineer@gmail.com';
-$from_email_pass  	= 'xxx';
+$from_email 		= 'celtac.order@gmail.com';
+$from_email_pass  	= 'celtac123';
 $mailTo 			= array("yupa.pangtum@gmail.com", "thongjet@hotmail.com", "my_name_is_ken@live.com", "iloveubon@gmail.com", "zerokung_2011@hotmail.com");
 
 $email_to 			= 'iloveubon@gmail.com';
@@ -90,7 +90,7 @@ try {
     $mail->Port = 587;                                    // TCP port to connect to//587
 
     //Recipients
-    $mail->setFrom('pte.engineer@gmail.com', 'Pte');
+    $mail->setFrom('celtac.order@gmail.com', 'Order-Cell.');
 	
 	//--> loop add mail.Add a recipient
 	
