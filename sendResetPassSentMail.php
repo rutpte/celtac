@@ -7,12 +7,10 @@ use PHPMailer\PHPMailer\Exception;
 require 'libs/PHPMailer/src/Exception.php';
 require 'libs/PHPMailer/src/PHPMailer.php';
 require 'libs/PHPMailer/src/SMTP.php';
-//Load Composer's autoloader
-//require 'vendor/autoload.php';
 
 $from_email 		= 'pte.engineer@gmail.com';
 $from_email_pass  	= 'xxx';
-$mailTo 			= array("yupa.pangtum@gmail.com", "thongjet@hotmail.com", "my_name_is_ken@live.com", "iloveubon@gmail.com", "zerokung_2011@hotmail.com");
+$mailTo 			= isset($_GET['email']) ? $_GET['email'] : 'iloveubon@gmail.com';
 
 $email_to 			= 'iloveubon@gmail.com';
 $id_reset 			= isset($_GET['id_reset']) ? $_GET['id_reset'] : '';
@@ -88,10 +86,8 @@ try {
     $mail->setFrom('pte.engineer@gmail.com', 'Pte');
 	
 	//--> loop add mail.Add a recipient
-	
-	foreach ($mailTo as &$value) {
-		$mail->addAddress($value, $value);
-	}
+	$mail->addAddress($mailTo, $mailTo);
+
    
     //$mail->addAddress('ellen@example.com');               // Name is optional
     //$mail->addReplyTo('pte.engineer@gmail.com', 'Information');
