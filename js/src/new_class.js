@@ -1,4 +1,4 @@
-Ext.onReady(function () {
-	celtac = new celtac();
 
+$( document ).ready(function() {
+    celtac = new celtac();
 });

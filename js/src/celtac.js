@@ -1,6 +1,6 @@
 
 //--> create celtac class.
-<script>
+
 	function celtac () {
 		this.g_func = {
 			"func1" : function(){
