@@ -31,12 +31,12 @@ class DBConnection
             try {
                 // connect to postgres object databse
 				//--> default is ... db.
-                $this->db = new PDO(DSN_LMP, DB_USER, DB_PASS);//DSN_LMP,DSN_CLD
+                $this->db = new PDO(DSN_DEFAULT, DB_USER, DB_PASS); //DSN_DEFAULT defined on config file.
                 $this->db->setAttribute(PDO::ATTR_EMULATE_PREPARES,  false);
                 $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $e) {
                 // if can't connect display error message
-                echo 'Connection failed: <pre>' . $e->getMessage();
+                echo 'Connection failed default: <pre>' . $e->getMessage();
             }
         }//end if
     }
