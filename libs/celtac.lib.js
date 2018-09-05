@@ -31,15 +31,32 @@
 	//------------------------------------------------------------------------
 	var jsFiles = [
 		// [Ext]
-		"ext/adapter/ext/ext-base.js"
-		,"ext/ext-all.js"
-		,"ext/ux/TableGrid.js"
-		,"ext/ux/SearchField.js"
-		,"ext/ux/fileuploadfield/FileUploadField.js"
-		,"ext/ux/statusbar/StatusBar.js"
+		//"ext/ext-all.js"
+		//,"ext/adapter/ext/ext-base.js"
+		//,"ext/ux/TableGrid.js"
+		//,"ext/ux/SearchField.js"
+		//,"ext/ux/fileuploadfield/FileUploadField.js"
+		//,"ext/ux/statusbar/StatusBar.js"
+		
+		
+		// [jquery]
+		"assets/js/vendor/jquery-slim.min.js"
+		//[bootstrap]
+		,"dist/js/bootstrap.min.js"
+		//,"dist/js/bootstrap.bundle.min.js"
+		//,"dist/js/ie10-viewport-bug-workaround.js"
+		//,"dist/js/ie-emulation-modes-warning.js"
+		//,"dist/js/xxxx"
+		
 
 		
-		// [FancyBox]
+		//[popper]
+		,"assets/js/vendor/popper.min.js"
+		
+
+
+		
+		//[fancybox]
 		//,"fancyBox/jquery-1.7.1.min.js"
 		//,"fancyBox/jquery.mousewheel-3.0.6.pack.js"
 		//,"fancyBox/jquery.fancybox.js"
@@ -48,13 +65,21 @@
 	];
 
 	var cssFiles = [
-		// [Ext]
-		"ext/resources/css/ext-all.css"
-		,"ext/ux/fileuploadfield/css/fileuploadfield.css"
-		
+
+		// [css bootstrap]
+		"dist/css/bootstrap.min.css"
+		,"dist/css/bootstrap-grid.min.css"
+		,"dist/css/bootstrap-reboot.min.css"
+		//,"dist/css/ie10-viewport-bug-workaround.css"
+		//,"dist/css/jumbotron-narrow.css"
 		// [FancyBox]
 		//,"fancyBox/jquery.fancybox.css"
 		//,"fancyBox/helpers/jquery.fancybox-buttons.css?v=2.0.3"
+		
+		// [Ext]
+		//,"ext/resources/css/ext-all.css"
+		//,"ext/ux/fileuploadfield/css/fileuploadfield.css"
+		
 	];
 
 	//--> write js lib file.
@@ -62,7 +87,7 @@
 		scriptTags += "<script type='text/javascript' src='" + host + jsFiles.shift() + "'></script>";
 	}
 	document.write(scriptTags);
-	console.log(scriptTags);
+	//console.log(scriptTags);
 	
 	
 	//--> write css for lib file.
@@ -70,7 +95,7 @@
 		styleTags += "<link rel='stylesheet' type='text/css' href='" + host + cssFiles.shift() + "'></script>";
 	}
 	document.write(styleTags);
-	console.log(styleTags);
+	//console.log(styleTags);
         
 	//debugger;
 
