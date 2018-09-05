@@ -44,7 +44,13 @@ define("DB_USER", 'postgres');
 //--> defined db.
 define("DB_CELTAC", 'celtac');
 //--> defined driver.
-define("DSN_CELTAC", 'pgsql:host= '. DB_HOST .'; dbname=' . DB_CELTAC .' port=' . PORT );
+if(true){
+	define("DSN_CELTAC", 'pgsql:host= '. DB_HOST .'; dbname=' . DB_CELTAC .' port=' . PORT );
+} else {
+	define("DSN_CELTAC", 'mysql:host= '. DB_HOST .'; dbname=' . DB_CELTAC .' port=' . PORT );
+}
+//--$connection = new PDO("mysql:dbname=$db;host=$host", $username, $password);
+
 //--> defined default for class connection.
 define("DSN_DEFAULT", DSN_CELTAC);
 //------------------------------------------------
