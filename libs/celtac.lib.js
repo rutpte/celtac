@@ -40,7 +40,8 @@
 		
 		
 		// [jquery]
-		"assets/js/vendor/jquery-slim.min.js"
+		"assets/js/vendor/jquery.js"
+		,"assets/js/vendor/jquery-cookie.js"
 		//[bootstrap]
 		,"dist/js/bootstrap.min.js"
 		//,"dist/js/bootstrap.bundle.min.js"

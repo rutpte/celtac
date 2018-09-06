@@ -1,6 +1,6 @@
 <?php
 require_once dirname(__FILE__) . '/dbconfig.inc.php';
-
+$_SESSION['logined']  = false;
 try {
     $pdoCeltac = new PDO(DSN_CELTAC, DB_USER, DB_PASS);
 

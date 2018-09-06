@@ -22,23 +22,30 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 
 	<body class="text-center">
 
+<?
+ if (!isset($_SESSION['username'])) {
+//!isset($_SESSION['username'])
 
-		<form class="form-signin">
+?>
+		<form class="form-signin" id="login">
 			<img class="mb-4" src="logo.jpg" alt="" width="72" height="72">
 			<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 			<label for="inputEmail" class="sr-only">Email address</label>
-			<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+			<input type="email" id="email" class="form-control" placeholder="Email address" required autofocus>
 			<label for="inputPassword" class="sr-only">Password</label>
-			<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+			<input type="password" id="password" class="form-control" placeholder="Password" required>
 			<div class="checkbox mb-3">
 				<label>
-					<input type="checkbox" value="remember-me"> Remember me
+					<input id="remember" type="checkbox" value="remember-me"> Remember me
 				</label>
 			</div>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			<!-- <button class="btn btn-lg btn-primary btn-block" type="button" id="sing_in">Sign in2</button> -->
 			<p class="mt-5 mb-3 text-muted">&copy; Celtac Co.,Ltd.</p>
 		</form>
-		
+<? 
+ } else {
+?>
 		<!--- ******************************************************************* -->
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
 		  <a class="navbar-brand" href="#">Celtac</a>
@@ -57,7 +64,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 			  </li>  
 			</ul>
 
-			<button class="btn btn-outline-success my-2 my-sm-0" type="button">logout</button>
+			<button class="btn btn-outline-success my-2 my-sm-0" type="button" id="logout">logout</button>
 			<button class="btn my-2 my-sm-0" type="button">user</button>
 			
 		  </div>
@@ -83,6 +90,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				</div>
 			  </div>
 			</div>
+			
 		
 		<!-- ************************************************************************************************************** -->
 		<main role="main" class="container">
@@ -93,6 +101,9 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 		  </div>
 
 		</main>
+<?
+ }
+?>
 	</body>
 	<script type='text/javascript' src='js/js_index_src.js'></script>
 	<script>
