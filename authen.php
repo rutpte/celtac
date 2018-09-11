@@ -12,9 +12,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $auth = new Authentication($pdoCeltac);
 			
 			//--> create sesstion.
-            $loged_in = $auth->login($email, $passwd);
-			if ($loged_in->success) {
-				//-- header('Location: http://' . $_SERVER['HTTP_HOST'] . PROJ_NAME);
+            $loged_in_rs = $auth->login($email, $passwd);
+			//print_r ($loged_in_rs); 
+			//var_dump($loged_in_rs);
+			//var_dump($loged_in_rs["success"]);
+			
+			//exit();
+			if ($loged_in_rs["success"]) {
+				echo json_encode($loged_in_rs);
+				//exit();
 			} else {
 				if ($email == '') {
 					$login_error_msg = '<span style="color:#d14">กรุณากรอกชื่อผู้ใช้</span>';
@@ -23,6 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				} else {
 					$login_error_msg = '<span style="color:#d14">ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง</span>';
 				}
+				
+				echo $login_error_msg;
 			}
         break;
         case "logout" :
@@ -32,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // --> if don't post "q" parameter
         default:
             $result='{"success default":false}';
-        echo json_encode($result);
+			echo json_encode($result);
     }
 	//end switch
 	
@@ -65,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // --> if don't post "q" parameter
         default:
             $result='{"success":false}';
-        echo json_encode($result);
+			echo json_encode($result);
     }
 }
 

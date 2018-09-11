@@ -67,7 +67,7 @@ class Authentication extends DBConnection
 			//exit;
             // JSON array for javasrcipt
             //--> where to use this json
-            $json = array(
+            $rs_array = array(
                 'owner_id'        => $result->id,
                 'username'        => $result->username,
                 'first_name'      => $result->first_name,
@@ -79,23 +79,23 @@ class Authentication extends DBConnection
                 'success'         => true
             );
         }  else {
-            $json = array(
+            $rs_array = array(
                 'success' => false
             );
         }
 
-        return json_encode($json);
+        return $rs_array;
     }
 
     public function logout()
     {
         session_destroy();
 
-        $json = array(
+        $rs_array = array(
             'success' => 'true'
         );
-
-        return json_encode($json);
+		return $rs_array;
+        //return json_encode($rs_array);
     }
 
     /**

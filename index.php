@@ -27,7 +27,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 //!isset($_SESSION['username'])
 
 ?>
-		<form class="form-signin" id="login">
+		<form class="form-signin" id="login_form">
 			<img class="mb-4" src="logo.jpg" alt="" width="72" height="72">
 			<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 			<label for="inputEmail" class="sr-only">Email address</label>
@@ -39,8 +39,8 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 					<input id="remember" type="checkbox" value="remember-me"> Remember me
 				</label>
 			</div>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-			<!-- <button class="btn btn-lg btn-primary btn-block" type="button" id="sing_in">Sign in2</button> -->
+			<!-- <button class="btn btn-lg btn-primary btn-block" id="login"type="submit">Sign in</button>-->
+			<button class="btn btn-lg btn-primary btn-block" type="button" id="sing_in">Sign in</button>
 			<p class="mt-5 mb-3 text-muted">&copy; Celtac Co.,Ltd.</p>
 		</form>
 <? 

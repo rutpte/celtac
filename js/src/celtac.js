@@ -56,14 +56,14 @@
 				});
 			}
 			,"init_login" : function(){
-				$("#login").submit(function() {
-				//$("#sing_in").click(function() {
+				//$("#login").submit(function() {
+				$("#sing_in").click(function() {
 					
 					console.log("login");
 					//debugger;
 					var email 		= $('#email').val();
 					var password 	= $('#password').val();
-					debugger;
+					//debugger;
 					//--> ajack create session.
 					
 
@@ -79,12 +79,12 @@
 						type: "GET",
 						success:function(response){
 							//console.debug('response : ',response);
+							//debugger;
 							var obj_response = jQuery.parseJSON(response);
-							debugger;
+							//debugger;
 							//console.debug('respont : ',respont);
-							if (obj_response.seccess) {
-								viewer.map.zoomToExtent(viewer.g_var.wktParse.read(respont.Bound).geometry.getBounds());
-								callback();
+							if (obj_response.success) {
+								location.reload();
 							}
 						},
 						error:function(response){
@@ -107,20 +107,14 @@
 						dataType: 'text', // Notice! JSONP <-- P (lowercase)
 						method : 'POST',
 						data: { 
-							"q"              : "logout",
-							"email"          : email,
-							"passwd"         : password
+							"q"              : "logout"
 						},
 						type: "GET",
 						success:function(response){
 							//console.debug('response : ',response);
-							var obj_response = jQuery.parseJSON(response);
-							debugger;
-							//console.debug('respont : ',respont);
-							if (obj_response.seccess) {
-								viewer.map.zoomToExtent(viewer.g_var.wktParse.read(respont.Bound).geometry.getBounds());
-								callback();
-							}
+							
+							//refresh a page.
+							location.reload();
 						},
 						error:function(response){
 							console.debug(response);
