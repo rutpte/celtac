@@ -22,15 +22,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				echo json_encode($loged_in_rs);
 				//exit();
 			} else {
+				$login_error_msg = array();
+				$login_error_msg["success"] = false;
 				if ($email == '') {
-					$login_error_msg = '<span style="color:#d14">กรุณากรอกชื่อผู้ใช้</span>';
+					$login_error_msg["msg"] = 'กรุณากรอกชื่อผู้ใช้';
 				} else if ($passwd == '') {
-					$login_error_msg = '<span style="color:#d14">กรุณากรอกรหัสผ่าน</span>';
+					$login_error_msg["msg"] = 'กรุณากรอกรหัสผ่าน';
 				} else {
-					$login_error_msg = '<span style="color:#d14">ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง</span>';
+					$login_error_msg["msg"] = 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง';
 				}
 				
-				echo $login_error_msg;
+				echo json_encode($login_error_msg);
 			}
         break;
         case "logout" :

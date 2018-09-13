@@ -16,7 +16,7 @@ try {
 // Automatically called in case you are trying to use a class.
 function __autoload($classname) 
 {
-    $filename = DOC_ROOT . PROJ_NAME . '/classes/' . $classname . '.class.php';
+    $filename = DOC_ROOT .'/'. PROJ_NAME . '/classes/' . $classname . '.class.php';
     if(file_exists($filename)) {
         require_once $filename;
     } else {

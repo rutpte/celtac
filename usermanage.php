@@ -6,34 +6,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $q = isset($_GET['q']) ? $_GET['q'] : '';
     switch ($q)
     {
-        case "login" :
-            if(isset($_GET['username']) && isset($_GET['passwd'])) {
-                $authen = new Authentication($pdo);
-
-                $username = isset($_GET['username']) ? $_GET['username'] : '';
-                $passwd = isset($_GET['passwd']) ? md5($_GET['passwd']) : '';
-
-                echo $authen->login($username, $passwd);
-            }
-        break;
-
-        case "logout" :
-            session_destroy();
-
-            $json = array(
-                'success' => 'true'
-            );
-
-            echo json_encode($json);
-            exit;
-        break;
-
-        case "institutestore" :
-            $mu = new UserManage($pdo);
-            echo $mu->getInstituteStore();
-            exit;
-        break;
-
         case "userstore" :
             $mu = new UserManage($pdo);
             echo $mu->getUserStore();
@@ -80,10 +52,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         'phone_no'     => isset($_POST['phone_no']) ? $_POST['phone_no'] : ''
     );
 
-    $mu = new UserManage($pdo, $post);
+    $mu = new UserManage($pdo);
     switch ($q) {
         case "add" :
-            echo $mu->addUser();
+            echo $mu->addUser($post);
         break;
         case "edit" :
             echo $mu->updateUser($id, $is_admin);
@@ -136,6 +108,16 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 				//echo $value_db; exit;
                 //--> send to class function with $user_name for delete and add new with $value_db.
                 echo $mu->savePermissionLayer ($user_name, $value_db);
+        break;
+        case "get_all_user" :
+			$rs = array();
+			$rs["success"] = false;
+
+			if ($_SESSION['is_superuser']) {
+				$rs = $mu->get_all_user ();
+			} 
+			echo $rs;
+			
         break;
     }
 }

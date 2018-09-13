@@ -55,7 +55,7 @@ if(true){
 define("DSN_DEFAULT", DSN_CELTAC);
 //------------------------------------------------
 // Define project name
-define("PROJ_NAME", '/celtac');
+define("PROJ_NAME", 'celtac');
 
 // Document root
 define("DOC_ROOT", $_SERVER['DOCUMENT_ROOT']);

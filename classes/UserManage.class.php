@@ -214,21 +214,7 @@ class UserManage extends DBConnection
 //         return $result;
 //     }
     
-    public function getInstituteStore ()
-    {
-        $callback = isset($_GET["callback"]) ? $_GET["callback"] : false;
 
-        $sql = "SELECT id AS institute_id, title AS institute_title FROM institute";
-
-        $sth = $this->db->prepare($sql);
-
-        $sth->execute();
-
-        $result = Array();
-        $result["items"] = $sth->fetchAll(PDO::FETCH_CLASS);
-
-        return self::crossJSON($result, $callback);
-    }
     
     public function getUserStore () {
         $query    = isset($_GET["query"]) ? trim($_GET["query"]) : "";
@@ -290,6 +276,7 @@ class UserManage extends DBConnection
 
         return $this->db->query($sql)->fetchObject()->count;
     }
+	
     public function getPermissionLayer ($username)
     {
         $sql ="
@@ -492,8 +479,37 @@ class UserManage extends DBConnection
         }
     }
     //-------------------------------------------------------------
-
-
+    
+    public function get_all_user ()
+    {
+        $sql ="
+            select 
+                *
+            from staff
+			where 1=1
+			and is_superuser != 't'
+        ";
+        //echo "<pre>", $sql; exit;
+        $sth = $this->db->prepare($sql);  //sql2
+        $result = array();
+        if (!$sth->execute()) {
+            echo '<pre>'.$sql;
+            print_r($sth->errorInfo());
+        } else {
+			$get_num_row = $sth->rowCount();
+            //var_dump($sth->rowCount());
+            //$result = $sth->fetchObject();
+			if($get_num_row > 0){
+				$result = $sth->fetchAll(PDO::FETCH_ASSOC);
+				
+				$result["success"] = true;
+				return json_encode($result);
+			} else {
+				$result["success"] = false;
+				return json_encode($result);
+			}
+        }
+    }
     //---------------------------------------------------------
     /**
      * __destruct
