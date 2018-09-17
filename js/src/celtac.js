@@ -62,6 +62,15 @@
 				
 				
 			}
+			,"modal_add_order" : function(){
+				
+
+					
+					//-----------------------
+					$('#modal_add_order').modal('show');
+				
+				
+			}
 			,"init_cookie_login" : function(){
 				
 				//--> part 1. set auto complete by cookie.
@@ -172,6 +181,7 @@
 				});
 			}
 			,"gen_qrcode_contact" : function(){
+				$("#contact_qrcode").empty();
 				$("#contact_qrcode").qrcode({
 					//render:"table"
 					width: 128,
