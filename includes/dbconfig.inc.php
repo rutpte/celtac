@@ -9,7 +9,7 @@ if ($_SERVER['HTTP_HOST'] == 'xxxxx') {
     // Port
     define("PORT", '5432');
     // Database password
-    define("DB_PASS", 'pgpteadmin');
+    define("DB_PASS", 'xxx');
 
 	
 
@@ -21,7 +21,7 @@ if ($_SERVER['HTTP_HOST'] == 'xxxxx') {
     // Port
     define("PORT", '5432');
     // Database password
-    define("DB_PASS", 'pgpteadmin');
+    define("DB_PASS", 'xxx');
 
 
 } else {
@@ -31,9 +31,9 @@ if ($_SERVER['HTTP_HOST'] == 'xxxxx') {
     // Database host
     define("DB_HOST", '127.0.0.1');
     // Port
-    define("PORT", '5432');
+    define("PORT", '5434');
     // Database password
-    define("DB_PASS", 'pgceltacadmin');
+    define("DB_PASS", 'pgpteadmin');
 
 
 }

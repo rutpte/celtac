@@ -29,33 +29,58 @@
 				celtac.g_func.gen_qrcode_contact();
 				
 			}
-			,"modal_user" : function(){
-				
-					$.ajax({
-						url: "usermanage.php",
-						dataType: 'text', // Notice! JSONP <-- P (lowercase)
-						method : 'POST',
-						data: { 
-							"q"              : "get_all_user"
-						},
-						type: "GET",
-						success:function(response){
-							//console.debug('response : ',response);
-							//debugger;
-							//console.log(response);
-							var obj_response = jQuery.parseJSON(response);
-							
-							//console.debug('respont : ',respont);
-							if (obj_response.success) {
+			,"user" : function(q,obj){
+				switch (q) {
+					case "show_model_adduser":
+						$('#modal_add_user').modal('show');
+						break;
+					case "xxx":
+						//--..yourcode.
+						break;					
+					case "xxx":
+						//--..yourcode.
+						break;					
+					case "xxx":
+						//--..yourcode.
+						break;					
+					case "xxx":
+						//--..yourcode.
+						break;					
+					case "xxx":
+						//--..yourcode.
+						break;					
+					case "xxx":
+						//--..yourcode.
+						break;
+					case  "get_all_user":
+						$.ajax({
+							url: "usermanage.php",
+							dataType: 'text', // Notice! JSONP <-- P (lowercase)
+							method : 'POST',
+							data: { 
+								"q"              : "get_all_user"
+							},
+							type: "GET",
+							success:function(response){
+								//console.debug('response : ',response);
+								//debugger;
+								//console.log(response);
+								var obj_response = jQuery.parseJSON(response);
 								
-							} else {
+								//console.debug('respont : ',respont);
+								if (obj_response.success) {
+									
+								} else {
 
+								}
+							},
+							error:function(response){
+								console.debug(response);
 							}
-						},
-						error:function(response){
-							console.debug(response);
-						}
-					});
+						});
+						break;
+				}
+
 					
 					//-----------------------
 					$('#modal_user').modal('show');

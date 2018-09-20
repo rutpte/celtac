@@ -26,7 +26,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 
 
 		<!--- ******************************************************************* -->
-		<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
 		  <a class="navbar-brand" href="#">Celtac</a>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -44,7 +44,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 			</ul>
 
 			<button class="btn btn-outline-success my-2 my-sm-0" type="button" id="logout">logout</button>
-			<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.modal_user()">user</button>
+			<!--<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.modal_user()">user</button>-->
 			
 		  </div>
 		</nav>
@@ -76,11 +76,12 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 		<!-- ************************************************************************************************************** -->		
 		<!-- //$('#modal_user').modal('show') -->
 		
+			<!--
 			<div class="modal fade" id="modal_user" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 			  <div class="modal-dialog" role="document">
 				<div class="modal-content">
 				  <div class="modal-header">
-					<h5 class="modal-title" id="modalLabel">user</h5><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
+					<h5 class="modal-title" id="modalLabel">user</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					  <span aria-hidden="true">&times;</span>
 					</button>
@@ -107,14 +108,95 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				</div>
 			  </div>
 			</div>
+			-->
 			
+		
+		<!-- ************************************************************************************************************** -->
+		<!-- model user -->
+			<div class="modal fade" id="modal_add_user" tabindex="-1" role="dialog"  aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<h5 class="modal-title">new user</h5><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body" id="modal-body-add_user">
+						<form class="needs-validation" novalidate>
+							<div class="row">
+							  <div class="col-md-6 mb-3">
+								<label for="firstName">First name</label>
+								<input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+								<div class="invalid-feedback">
+								  Valid first name is required.
+								</div>
+							  </div>
+							  <div class="col-md-6 mb-3">
+								<label for="lastName">Last name</label>
+								<input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+								<div class="invalid-feedback">
+								  Valid last name is required.
+								</div>
+							  </div>
+							</div>
+
+							<div class="mb-3">
+							  <label for="address">Address</label>
+							  <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+							  <div class="invalid-feedback">
+								Please enter your shipping address.
+							  </div>
+							</div>
+
+							<div class="mb-3">
+							  <label for="email">Email</label>
+							  <input type="email" class="form-control" id="email" placeholder="you@example.com">
+							  <div class="invalid-feedback">
+								Please enter a valid email address for shipping updates.
+							  </div>
+							</div>
+							
+							<div class="mb-3">
+							  <label for="pass">password</span></label>
+							  <input type="text" class="form-control" id="pass" placeholder="password">
+							</div>
+
+							<hr class="mb-4">
+							<button class="btn btn-primary btn-lg btn-block" type="button">Save</button>
+						  </form>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					
+				  </div>
+				</div>
+			  </div>
+			</div>
+		
 		
 		<!-- ************************************************************************************************************** -->
 		<main role="main" class="container">
 
-		  <div class="starter-template">
-			<h1>Bootstrap starter template</h1>
-			<p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+
+		  <div>
+
+				<div class="row">
+				<div class="col-3">name</div>
+				<div class="col-3">email</div>
+				<div class="col-3">edit</div>
+				<div class="col-3">delete</div>
+				</div>
+
+				<div class="row">
+				<div class="col-3">.col-4</div>
+				<div class="col-3">.col-4</div>
+				<div class="col-3"><a href="#" onclick="celtac.g_func.modal_contact()">.col-4</a></div>
+				<div class="col-3"><a href="#" onclick="celtac.g_func.modal_contact()">.col-4</a></div>
+				</div>
+
+				<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.user('show_model_adduser')">&plus;</button>
+				
 		  </div>
 
 		</main>
