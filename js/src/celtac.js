@@ -35,43 +35,77 @@
 						$('#modal_add_user').modal('show');
 						break;
 					case "add":
+						var email		= $('#email').val();
+						var pass		= $('#pass').val();
+						var company		= $('#company').val();
+						var phone		= $('#phone').val();
 						var firstName	= $('#firstName').val();
 						var lastName	= $('#lastName').val();
 						var address		= $('#address').val();
-						var email		= $('#email').val();
-						var pass		= $('#pass').val();
-						
-						$.ajax({
-							url: "usermanage.php",
-							dataType: 'text', // Notice! JSONP <-- P (lowercase)
-							method : 'POST',
-							data: { 
-								"q"              : "add_user"
-								,"firstName"              : firstName
-								,"lastName"              : lastName
-								,"address"              : address
-								,"email"              : email
-								,"pass"              : pass
-								
-							},
-							type: "GET",
-							success:function(response){
-								//console.debug('response : ',response);
-								//debugger;
-								//console.log(response);
-								var obj_response = jQuery.parseJSON(response);
-								
-								//console.debug('respont : ',respont);
-								if (obj_response.success) {
-									location.reload();
-								} else {
 
+						debugger;
+						// console.log(company);
+						// console.log(phone);
+						// console.log(firstName);
+						// console.log(lastName);
+						// console.log(address);
+						// console.log(email);
+						// console.log(pass);
+						
+						if (email == ""){
+							$('#email_vlid').text("*needed value.").css('color', 'red');
+						} else if (pass == ""){
+							$('#pass_vlid').text("*needed value.").css('color', 'red');
+						} else if(company == ""){
+							$('#company_vlid').text("*needed value.").css('color', 'red');
+						} else if (phone == ""){
+							$('#phone_vlid').text("*needed value.").css('color', 'red');
+						} else if (firstName == ""){
+							$('#firstName_vlid').text("*needed value.").css('color', 'red');
+						} else if (lastName == ""){
+							$('#lastName_vlid').text("*needed value.").css('color', 'red');
+						} else if (address == ""){
+							$('#address_vlid').text("*needed value.").css('color', 'red');
+						}
+						
+						if(true){
+							$.ajax({
+								url: "usermanage.php",
+								dataType: 'text', // Notice! JSONP <-- P (lowercase)
+								method : 'POST',
+								data: { 
+									"q"              : "add_user"
+									,"company"       : company
+									,"phone"         : phone
+									,"firstName"     : firstName
+									,"lastName"      : lastName
+									,"address"       : address
+									,"email"         : email
+									,"pass"          : pass
+									
+								},
+								type: "GET",
+								success:function(response){
+									//console.debug('response : ',response);
+									//debugger;
+									//console.log(response);
+									var obj_response = jQuery.parseJSON(response);
+									debugger;
+									//console.debug('respont : ',respont);
+									if (obj_response.success) {
+										alert("complete.");
+										location.reload();
+									} else {
+
+									}
+								},
+								error:function(response){
+									console.debug(response);
 								}
-							},
-							error:function(response){
-								console.debug(response);
-							}
-						});
+							});
+							
+						}//end if false.
+
 						break;					
 					case "xxx":
 						//--..yourcode.

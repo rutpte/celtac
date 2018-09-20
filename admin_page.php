@@ -124,44 +124,47 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				  </div>
 				  <div class="modal-body" id="modal-body-add_user">
 						<form class="needs-validation" novalidate>
-							<div class="row">
-							  <div class="col-md-6 mb-3">
-								<label for="firstName">First name</label>
-								<input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-								<div class="invalid-feedback">
-								  Valid first name is required.
-								</div>
-							  </div>
-							  <div class="col-md-6 mb-3">
-								<label for="lastName">Last name</label>
-								<input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-								<div class="invalid-feedback">
-								  Valid last name is required.
-								</div>
-							  </div>
-							</div>
-
 							<div class="mb-3">
-							  <label for="address">Address</label>
-							  <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
-							  <div class="invalid-feedback">
-								Please enter your shipping address.
-							  </div>
-							</div>
-
-							<div class="mb-3">
-							  <label for="email">Email</label>
-							  <input type="email" class="form-control" id="email" placeholder="you@example.com">
-							  <div class="invalid-feedback">
-								Please enter a valid email address for shipping updates.
-							  </div>
+								<label for="email">Email</label>
+								<input type="email" class="form-control" id="email" placeholder="you@example.com">
+								<div id="email_vlid"></div>
 							</div>
 							
 							<div class="mb-3">
-							  <label for="pass">password</span></label>
-							  <input type="text" class="form-control" id="pass" placeholder="password">
-
+								<label for="pass">password</span></label>
+								<input type="text" class="form-control" id="pass" placeholder="password">
+								<div id="pass_vlid"></div>
 							</div>
+							<div class="mb-3">
+								<label for="company">company</label>
+								<input type="text" class="form-control" id="company" placeholder="company name" required>
+								<div id="company_vlid"></div>
+							</div>
+							<div class="mb-3">
+								<label for="company">phone no.</label>
+								<input type="text" class="form-control" id="phone" placeholder="088-888-8888" required>
+								<div id="phone_vlid"></div>
+							</div>
+							<div class="row">
+							  <div class="col-md-6 mb-3">
+									<label for="firstName">First name</label>
+									<input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+									<div id="firstName_vlid"></div>
+							  </div>
+							  <div class="col-md-6 mb-3">
+									<label for="lastName">Last name</label>
+									<input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+									<div id="lastName_vlid"></div>
+							  </div>
+							</div>
+
+							<div class="mb-3">
+								<label for="address">Address</label>
+								<input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+								<div id="address_vlid"></div>
+							</div>
+
+
 
 							<hr class="mb-4">
 							<button class="btn btn-primary btn-lg btn-block" type="button" onclick="celtac.g_func.user('add')">Save</button>

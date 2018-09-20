@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $mu = new UserManage($pdo);
     switch ($q) {
         case "add_user" :
-            echo $mu->addUser($post);
+            echo $mu->addUser($_POST);
         break;
         case "edit" :
 			$id       = isset($_POST['id']) ? intval($_POST['id']) : '';

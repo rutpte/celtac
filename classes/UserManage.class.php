@@ -29,11 +29,17 @@ class UserManage extends DBConnection
 
     }
 
-    public function addUser()
+    public function addUser($post)
     {
+		//var_dump($post);exit;
+		if(!$_SESSION['is_superuser']){
+			$result['success'] = false;
+			return json_encode($result);
+		}
+		
         $sql = "
             INSERT INTO staff (
-                username
+                company
 				, passwd
 				, first_name
 				, last_name
@@ -43,34 +49,35 @@ class UserManage extends DBConnection
 				, is_active
 				, is_superuser
 				, date_joined
+				, address
             )
             VALUES (
-                :username
-				, :passwd
-				, :first_name
-				, :last_name
-				, :email
-				, :phone_no
+				'{$post['company']}'
+				, '{$post['pass']}'
+				, '{$post['firstName']}'
+				, '{$post['lastName']}'
+				, '{$post['email']}'
+				, '{$post['phone']}'
 				, false
 				, true
 				, false
 				, NOW()
+				, '{$post['address']}'
 			);
         ";
-
+//echo '<pre>';
+//echo $sql;
         try {
             $sth = $this->db->prepare($sql);
-firstName
-lastName
-address
-email
-pass
-            $sth->bindValue(':username', $this->post['username']);
-            $sth->bindValue(':passwd', $this->post['passwd']);
-            $sth->bindValue(':first_name', $this->post['firstName']);
-            $sth->bindValue(':last_name', $this->post['lastName']);
-            $sth->bindValue(':email', $this->post['email']);
-            $sth->bindValue(':phone_no', $this->post['phone_no']);
+			
+			/*
+            $sth->bindValue(':company', $post['company']);
+            $sth->bindValue(':passwd', $post['passwd']);
+            $sth->bindValue(':first_name', $post['firstName']);
+            $sth->bindValue(':last_name', $post['lastName']);
+            $sth->bindValue(':email', $post['email']);
+            $sth->bindValue(':phone_no', $post['phone_no']);
+			*/
 
 
             $sth->execute();
