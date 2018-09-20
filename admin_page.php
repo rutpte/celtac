@@ -2,8 +2,14 @@
 require dirname(__FILE__) . '/includes/init.inc.php';
 
  if ($_SESSION['is_superuser'] =='t') {
-
+	$mu = new UserManage($pdo);
+	$rs = $mu->get_all_user();
+	//echo($rs); exit;
 ?> 
+<script>
+	var all_user = <?php echo $rs ;?>;
+	console.log(all_user);
+</script>
 <!doctype html>
 <html lang="en">
 	<head>
@@ -163,9 +169,11 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 								<input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
 								<div id="address_vlid"></div>
 							</div>
-
-
-
+							<hr class="mb-4">
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="is_staff">
+								<label class="custom-control-label" for="is_staff">to be staff</label>
+							</div>
 							<hr class="mb-4">
 							<button class="btn btn-primary btn-lg btn-block" type="button" onclick="celtac.g_func.user('add')">Save</button>
 						  </form>
@@ -193,14 +201,25 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				<div class="col-3">edit</div>
 				<div class="col-3">delete</div>
 				</div>
-
+				
+				<script>
+				var i;
+				for (i = 0; i < all_user.length; i++) { 
+					//how to crate div and add to another div.
+				
+				</script>
+				
 				<div class="row">
 				<div class="col-3">.col-4</div>
 				<div class="col-3">.col-4</div>
 				<div class="col-3"><a href="#" onclick="celtac.g_func.modal_contact()">.col-4</a></div>
 				<div class="col-3"><a href="#" onclick="celtac.g_func.modal_contact()">.col-4</a></div>
 				</div>
-
+				
+				<script>
+				}
+				</script>
+				
 				<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.user('show_model_adduser')">&plus;</button>
 				
 		  </div>

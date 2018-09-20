@@ -55,7 +55,7 @@ class Authentication extends DBConnection
 
             // Set PHP session for refresh page
             $_SESSION['owner_id']        = $result->id;
-            $_SESSION['username']        = $result->username;
+            //$_SESSION['username']        = $result->username;
             $_SESSION['first_name']      = $result->first_name;
             $_SESSION['last_name']       = $result->last_name;
             $_SESSION['email']           = $result->email;
@@ -66,16 +66,16 @@ class Authentication extends DBConnection
 			//print_r($_SESSION);
 			//exit;
             // JSON array for javasrcipt
-            //--> where to use this json
+            //--> where to use this json, it not use because if reload page it will gone.
             $rs_array = array(
                 'owner_id'        => $result->id,
-                'username'        => $result->username,
                 'first_name'      => $result->first_name,
                 'last_name'       => $result->last_name,
                 'email'           => $result->email,
                 'phone_no'        => $result->phone_no,
-                'institute_id'    => $result->institute_id,
+                'company'         => $result->company,
                 'is_superuser'    => $result->is_superuser,
+				'is_staff'    	  => $result->is_staff,
                 'success'         => true
             );
         }  else {

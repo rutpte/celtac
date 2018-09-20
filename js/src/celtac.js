@@ -42,8 +42,10 @@
 						var firstName	= $('#firstName').val();
 						var lastName	= $('#lastName').val();
 						var address		= $('#address').val();
+						var is_staff	= $('#is_staff').is(":checked");
+						
 
-						debugger;
+						//debugger;
 						// console.log(company);
 						// console.log(phone);
 						// console.log(firstName);
@@ -51,24 +53,31 @@
 						// console.log(address);
 						// console.log(email);
 						// console.log(pass);
-						
+						var sta_validate = true;
 						if (email == ""){
 							$('#email_vlid').text("*needed value.").css('color', 'red');
+							sta_validate = false;
 						} else if (pass == ""){
 							$('#pass_vlid').text("*needed value.").css('color', 'red');
+							sta_validate = false;
 						} else if(company == ""){
 							$('#company_vlid').text("*needed value.").css('color', 'red');
+							sta_validate = false;
 						} else if (phone == ""){
 							$('#phone_vlid').text("*needed value.").css('color', 'red');
+							sta_validate = false;
 						} else if (firstName == ""){
 							$('#firstName_vlid').text("*needed value.").css('color', 'red');
+							sta_validate = false;
 						} else if (lastName == ""){
 							$('#lastName_vlid').text("*needed value.").css('color', 'red');
+							sta_validate = false;
 						} else if (address == ""){
 							$('#address_vlid').text("*needed value.").css('color', 'red');
+							sta_validate = false;
 						}
 						
-						if(true){
+						if(sta_validate){
 							$.ajax({
 								url: "usermanage.php",
 								dataType: 'text', // Notice! JSONP <-- P (lowercase)
@@ -82,6 +91,7 @@
 									,"address"       : address
 									,"email"         : email
 									,"pass"          : pass
+									,"is_staff"		 : is_staff	
 									
 								},
 								type: "GET",
@@ -107,8 +117,39 @@
 						}//end if false.
 
 						break;					
-					case "xxx":
+					case "init_admin_page":
 						//--..yourcode.
+						if(true){
+							$.ajax({
+								url: "usermanage.php",
+								dataType: 'text', // Notice! JSONP <-- P (lowercase)
+								method : 'POST',
+								data: { 
+									"q" : "get_all_user"
+								},
+								type: "GET",
+								success:function(response){
+									//console.debug('response : ',response);
+									//debugger;
+									//console.log(response);
+									var obj_response = jQuery.parseJSON(response);
+									debugger;
+									//console.debug('respont : ',respont);
+									if (obj_response.success) {
+										console.log(obj_response);
+										window.location = window.location.hostname+"/"+celtac.pjName+"/admin_page.php";
+										//header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/admin_page.php");
+									} else {
+
+									}
+								},
+								error:function(response){
+									console.debug(response);
+								}
+							});
+							
+						}//end if false.
+						//header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/admin_page.php");
 						break;					
 					case "xxx":
 						//--..yourcode.
@@ -234,6 +275,8 @@
 							//debugger;
 							//console.debug('respont : ',respont);
 							if (obj_response.success) {
+								//debugger;
+								//celtac.g_var.user = obj_response;
 								location.reload();
 							} else {
 								//console.log(obj_response.msg);

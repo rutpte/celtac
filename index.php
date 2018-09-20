@@ -25,7 +25,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 	<body class="text-center">
 
 <?
- if (!isset($_SESSION['username'])) {
+ if (!isset($_SESSION['email'])) {
 ?>
 		<form class="form-signin" id="login_form">
 			<img class="mb-4" src="logo.jpg" alt="" width="72" height="72">
@@ -46,28 +46,13 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 			
 		</form>
 <? 
- } else if($_SESSION['is_superuser']){
-	
+}else if($_SESSION['is_superuser']){
 	header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/admin_page.php");
-	
- } else if($_SESSION['is_staff']){
-	
+} else if($_SESSION['is_staff']){
 	header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/staff_page.php");
- } else {
-	//var_dump($_SESSION); exit;
+} else {
 	header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/customer_page.php");
- }
+}
 ?>
 	</body>
-	<!--<script type='text/javascript' src='js/js_index_src.js'></script>-->
-	<script>
-		
-		//------------------------------------------------------------------------------------------------
-		$( document ).ready(function() {
-			console.log( "ready!" );
-		});
-		
-		
-	</script>
-  
 </html>

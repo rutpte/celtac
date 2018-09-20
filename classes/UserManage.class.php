@@ -58,7 +58,7 @@ class UserManage extends DBConnection
 				, '{$post['lastName']}'
 				, '{$post['email']}'
 				, '{$post['phone']}'
-				, false
+				, {$post['is_staff']}
 				, true
 				, false
 				, NOW()
@@ -510,7 +510,17 @@ class UserManage extends DBConnection
     {
         $sql ="
             select 
-                *
+				id
+				,company
+				,first_name
+				,last_name
+				,email
+				,is_staff
+				,is_superuser
+				,last_login
+				,date_joined
+				,phone_no
+				,address
             from staff
 			where 1=1
 			and is_superuser != 't'
@@ -528,7 +538,7 @@ class UserManage extends DBConnection
 			if($get_num_row > 0){
 				$result = $sth->fetchAll(PDO::FETCH_ASSOC);
 				
-				$result["success"] = true;
+				//$result["success"] = true;
 				return json_encode($result);
 			} else {
 				$result["success"] = false;
