@@ -33,26 +33,45 @@ class UserManage extends DBConnection
     {
         $sql = "
             INSERT INTO staff (
-                username, passwd, first_name, last_name, 
-                email, phone_no, institute_id, is_staff,
-                is_active, is_superuser, date_joined
+                username
+				, passwd
+				, first_name
+				, last_name
+				, email
+				, phone_no
+				, is_staff
+				, is_active
+				, is_superuser
+				, date_joined
             )
             VALUES (
-                :username, :passwd, :first_name, :last_name,
-                :email, :phone_no, :institute_id, true,
-                true, false, NOW());
+                :username
+				, :passwd
+				, :first_name
+				, :last_name
+				, :email
+				, :phone_no
+				, false
+				, true
+				, false
+				, NOW()
+			);
         ";
 
         try {
             $sth = $this->db->prepare($sql);
-
+firstName
+lastName
+address
+email
+pass
             $sth->bindValue(':username', $this->post['username']);
             $sth->bindValue(':passwd', $this->post['passwd']);
-            $sth->bindValue(':first_name', $this->post['first_name']);
-            $sth->bindValue(':last_name', $this->post['last_name']);
+            $sth->bindValue(':first_name', $this->post['firstName']);
+            $sth->bindValue(':last_name', $this->post['lastName']);
             $sth->bindValue(':email', $this->post['email']);
             $sth->bindValue(':phone_no', $this->post['phone_no']);
-            $sth->bindValue(':institute_id', $this->post['institute_id']);
+
 
             $sth->execute();
 

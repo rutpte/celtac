@@ -39,25 +39,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     }
 } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $q        = isset($_POST['q']) ? $_POST['q'] : '';
-    $id       = isset($_POST['id']) ? intval($_POST['id']) : '';
-    $is_admin = isset($_POST['is_admin']) ? $_POST['is_admin'] : '';
-
-    $post = array(
-        'username'     => isset($_POST['username']) ? $_POST['username'] : '',
-        'passwd'       => isset($_POST['passwd']) ? md5($_POST['passwd']) : '',
-        'first_name'   => isset($_POST['first_name']) ? $_POST['first_name'] : '',
-        'last_name'    => isset($_POST['last_name']) ? $_POST['last_name'] : '',
-        'institute_id' => isset($_POST['institute_id']) ? $_POST['institute_id'] : '',
-        'email'        => isset($_POST['email']) ? $_POST['email'] : '',
-        'phone_no'     => isset($_POST['phone_no']) ? $_POST['phone_no'] : ''
-    );
-
     $mu = new UserManage($pdo);
     switch ($q) {
-        case "add" :
+        case "add_user" :
             echo $mu->addUser($post);
         break;
         case "edit" :
+			$id       = isset($_POST['id']) ? intval($_POST['id']) : '';
+			$is_admin = isset($_POST['is_admin']) ? $_POST['is_admin'] : '';
+
             echo $mu->updateUser($id, $is_admin);
         break;
         case "changePasswd" :

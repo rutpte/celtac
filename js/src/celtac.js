@@ -34,8 +34,44 @@
 					case "show_model_adduser":
 						$('#modal_add_user').modal('show');
 						break;
-					case "xxx":
-						//--..yourcode.
+					case "add":
+						var firstName	= $('#firstName').val();
+						var lastName	= $('#lastName').val();
+						var address		= $('#address').val();
+						var email		= $('#email').val();
+						var pass		= $('#pass').val();
+						
+						$.ajax({
+							url: "usermanage.php",
+							dataType: 'text', // Notice! JSONP <-- P (lowercase)
+							method : 'POST',
+							data: { 
+								"q"              : "add_user"
+								,"firstName"              : firstName
+								,"lastName"              : lastName
+								,"address"              : address
+								,"email"              : email
+								,"pass"              : pass
+								
+							},
+							type: "GET",
+							success:function(response){
+								//console.debug('response : ',response);
+								//debugger;
+								//console.log(response);
+								var obj_response = jQuery.parseJSON(response);
+								
+								//console.debug('respont : ',respont);
+								if (obj_response.success) {
+									location.reload();
+								} else {
+
+								}
+							},
+							error:function(response){
+								console.debug(response);
+							}
+						});
 						break;					
 					case "xxx":
 						//--..yourcode.

@@ -160,11 +160,14 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<div class="mb-3">
 							  <label for="pass">password</span></label>
 							  <input type="text" class="form-control" id="pass" placeholder="password">
+
 							</div>
 
 							<hr class="mb-4">
-							<button class="btn btn-primary btn-lg btn-block" type="button">Save</button>
+							<button class="btn btn-primary btn-lg btn-block" type="button" onclick="celtac.g_func.user('add')">Save</button>
 						  </form>
+						  
+						  
 				  </div>
 				  <div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
