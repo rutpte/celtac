@@ -10,8 +10,15 @@
 			,"func2" : function(){
 				console.log("usesing func2");
 			}
-			,"func3" : function(){
-				console.log("usesing func3");
+			,"manage_page" : function(user_type){
+				//--> not use but keep for prototype.
+				if(user_type == "superuser"){
+					window.location = window.location.origin+ "/" + celtac.pjName + "/admin_page.php";
+				} else if(user_type == "staff"){
+					window.location = window.location.origin+ "/" + celtac.pjName + "/staff_page.php";
+				} else if(user_type == "customer"){
+					window.location = window.location.origin+ "/" + celtac.pjName + "/customer_page.php";
+				}
 			}
 			,"modal_contact" : function(){
 				
@@ -277,7 +284,7 @@
 							if (obj_response.success) {
 								//debugger;
 								//celtac.g_var.user = obj_response;
-								location.reload();
+								window.location = window.location.origin+ "/" + celtac.pjName + "/index.php";
 							} else {
 								//console.log(obj_response.msg);
 								$("#error_login_info").text(obj_response.msg);

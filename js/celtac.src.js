@@ -28,7 +28,7 @@
 		//,"src/init_xxx.js?_=" + time
 		//,"src/init_xxx.js?_=" + time
 		//,"src/init_xxx.js?_=" + time
-		,"src/new_class.js?_=" + time
+		,"src/init_domready.js?_=" + time
 
  
  

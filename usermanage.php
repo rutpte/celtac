@@ -44,6 +44,7 @@ if ($_SESSION['is_superuser'] =='t') {
 		switch ($q) {
 			case "get_all_user" : //--> still not use on this case from js.
 				echo $mu->get_all_user();
+				//json_encode
 			break;
 			case "add_user" :
 				echo $mu->addUser($_POST);

@@ -539,10 +539,10 @@ class UserManage extends DBConnection
 				$result = $sth->fetchAll(PDO::FETCH_ASSOC);
 				
 				//$result["success"] = true;
-				return json_encode($result);
+				return ($result);
 			} else {
 				$result["success"] = false;
-				return json_encode($result);
+				return ($result);
 			}
         }
     }

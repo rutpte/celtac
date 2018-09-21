@@ -2,14 +2,18 @@
 require dirname(__FILE__) . '/includes/init.inc.php';
 
  if ($_SESSION['is_superuser'] =='t') {
-	$mu = new UserManage($pdo);
-	$rs = $mu->get_all_user();
-	//echo($rs); exit;
+	$mu 	= new UserManage($pdo);
+	$rs_arr = $mu->get_all_user();
+	//print_r($rs); exit;
+	//print_r($value['name']);exit;
+	
+	// echo '<pre>';
+	// foreach ($rs_arr as &$value) {
+		// print_r($value);
+	// }
+	// exit;
 ?> 
-<script>
-	var all_user = <?php echo $rs ;?>;
-	console.log(all_user);
-</script>
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -22,7 +26,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 		<title>celtac order</title>
 		<script type='text/javascript' src='js/js_index_src.js'></script>
 		<!-- Bootstrap core CSS -->
-		<!-- <link href="libs/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+		<link href="css/css.css" rel="stylesheet">
 
 
 
@@ -130,27 +134,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				  </div>
 				  <div class="modal-body" id="modal-body-add_user">
 						<form class="needs-validation" novalidate>
-							<div class="mb-3">
-								<label for="email">Email</label>
-								<input type="email" class="form-control" id="email" placeholder="you@example.com">
-								<div id="email_vlid"></div>
-							</div>
-							
-							<div class="mb-3">
-								<label for="pass">password</span></label>
-								<input type="text" class="form-control" id="pass" placeholder="password">
-								<div id="pass_vlid"></div>
-							</div>
-							<div class="mb-3">
-								<label for="company">company</label>
-								<input type="text" class="form-control" id="company" placeholder="company name" required>
-								<div id="company_vlid"></div>
-							</div>
-							<div class="mb-3">
-								<label for="company">phone no.</label>
-								<input type="text" class="form-control" id="phone" placeholder="088-888-8888" required>
-								<div id="phone_vlid"></div>
-							</div>
+						
 							<div class="row">
 							  <div class="col-md-6 mb-3">
 									<label for="firstName">First name</label>
@@ -163,10 +147,74 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 									<div id="lastName_vlid"></div>
 							  </div>
 							</div>
+							
+							<hr class="mb-4">
+							
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="email">Email</label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<input type="email" class="form-control" id="email" placeholder="you@example.com">
+									</div>
+								</div>
+								<div id="email_vlid"></div>
+							</div>
+							
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="pass">password</span></label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<input type="text" class="form-control" id="pass" placeholder="password">
+									</div>
+								</div>
+								<div id="pass_vlid"></div>
+							</div>
+							
+							<hr class="mb-4">
+							
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="company">company</label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<input type="text" class="form-control" id="company" placeholder="company name" required>
+									</div>
+								</div>
+								<div id="company_vlid"></div>
+							</div>
+							
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="company">phone no.</label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<input type="text" class="form-control" id="phone" placeholder="088-888-8888" required>
+									</div>
+								</div>
+								<div id="phone_vlid"></div>
+							</div>
+
 
 							<div class="mb-3">
-								<label for="address">Address</label>
-								<input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="address">Address</label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+									</div>
+								</div>
 								<div id="address_vlid"></div>
 							</div>
 							<hr class="mb-4">
@@ -196,30 +244,26 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 		  <div>
 
 				<div class="row">
-				<div class="col-3">name</div>
-				<div class="col-3">email</div>
-				<div class="col-3">edit</div>
-				<div class="col-3">delete</div>
+				<div class="col-4"><div style="color:#77797c">name</div></div>
+				<div class="col-5"><div style="color:#77797c">email</div></div>
+				<div class="col-1"><div style="color:#77797c">edit</div></div>
+				<div class="col-2"><div style="color:#77797c">del</div></div>
 				</div>
 				
-				<script>
-				var i;
-				for (i = 0; i < all_user.length; i++) { 
-					//how to crate div and add to another div.
-				
-				</script>
+<?php 
+	foreach ($rs_arr as &$value) {
+
+?>
 				
 				<div class="row">
-				<div class="col-3">.col-4</div>
-				<div class="col-3">.col-4</div>
-				<div class="col-3"><a href="#" onclick="celtac.g_func.modal_contact()">.col-4</a></div>
-				<div class="col-3"><a href="#" onclick="celtac.g_func.modal_contact()">.col-4</a></div>
+				<div class="col-4"><div class="text"><?php echo $value['first_name'].$value['last_name']?></div></div>
+				<div class="col-5"><div class="text"><?php echo $value['email']?></div></div>
+				<div class="col-1"><a href="#" onclick="celtac.g_func.modal_user_edit(<?php echo $value['id']?>)">&#9998;</a></div>
+				<div class="col-2"><a href="#" onclick="celtac.g_func.modal_user_del(<?php echo $value['id']?>)">&#9764;</a></div>
 				</div>
-				
-				<script>
-				}
-				</script>
-				
+<?php 
+	}
+?>
 				<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.user('show_model_adduser')">&plus;</button>
 				
 		  </div>
