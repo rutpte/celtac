@@ -12,8 +12,19 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 		// print_r($value);
 	// }
 	// exit;
+	//---------------------
+	$arr_key = array();
+	foreach ($rs_arr as &$value) {
+		$arr_key[$value['id']] = $value;
+	}
+	
+	// echo '<pre>';
+	// print_r($arr_key);
+	// exit;
 ?> 
-
+<script>
+ var obj_all_user = <?php echo json_encode($arr_key) ?>
+</script>
 <!doctype html>
 <html lang="en">
 	<head>
