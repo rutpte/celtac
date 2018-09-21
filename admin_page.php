@@ -22,9 +22,14 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 	// print_r($arr_key);
 	// exit;
 ?> 
+
+
 <script>
  var obj_all_user = <?php echo json_encode($arr_key) ?>
 </script>
+
+
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -246,8 +251,28 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				</div>
 			  </div>
 			</div>
-		
-		
+		<!-- ************************************************************************************************************** -->
+			<div class="modal fade" id="modal_confirm" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<p class="modal-title" id="modalLabel">Confirmation.</p><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body" id="modal-body-contact">
+					<h3 style="color:red">warning.</h3>
+					<p class="lead">Are you sure to delete this user?.</p>
+				  </div>
+				  <div class="modal-footer">
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					
+				  </div>
+				</div>
+			  </div>
+			</div>
 		<!-- ************************************************************************************************************** -->
 		<main role="main" class="container">
 
@@ -269,8 +294,8 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				<div class="row">
 				<div class="col-4"><div class="text"><?php echo $value['first_name'].$value['last_name']?></div></div>
 				<div class="col-5"><div class="text"><?php echo $value['email']?></div></div>
-				<div class="col-1"><a href="#" onclick="celtac.g_func.modal_user_edit(<?php echo $value['id']?>)">&#9998;</a></div>
-				<div class="col-2"><a href="#" onclick="celtac.g_func.modal_user_del(<?php echo $value['id']?>)">&#9764;</a></div>
+				<div class="col-1"><a href="#" onclick="celtac.g_func.user('edit',<?php echo $value['id']?>)">&#9998;</a></div>
+				<div class="col-2"><a href="#" onclick="celtac.g_func.user('delete',<?php echo $value['id']?>)">&#9764;</a></div>
 				</div>
 <?php 
 	}
