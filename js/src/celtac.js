@@ -158,8 +158,39 @@
 						}//end if false.
 						//header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/admin_page.php");
 						break;					
-					case "xxx":
-						//--..yourcode.
+					case "delete":
+						var id = obj; debugger;
+						$('#modal_delete_confirm').modal('show');
+						if(true){
+							$.ajax({
+								url: "usermanage.php",
+								dataType: 'text', // Notice! JSONP <-- P (lowercase)
+								method : 'POST',
+								data: { 
+									"q" : "delete_userx"
+								},
+								type: "GET",
+								success:function(response){
+									//console.debug('response : ',response);
+									//debugger;
+									//console.log(response);
+									var obj_response = jQuery.parseJSON(response);
+									debugger;
+									//console.debug('respont : ',respont);
+									if (obj_response.success) {
+										console.log(obj_response);
+										window.location = window.location.hostname+"/"+celtac.pjName+"/admin_page.php";
+										//header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/admin_page.php");
+									} else {
+
+									}
+								},
+								error:function(response){
+									console.debug(response);
+								}
+							});
+							
+						}//end if false.
 						break;					
 					case "xxx":
 						//--..yourcode.

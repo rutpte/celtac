@@ -252,7 +252,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 			  </div>
 			</div>
 		<!-- ************************************************************************************************************** -->
-			<div class="modal fade" id="modal_confirm" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+			<div class="modal fade" id="modal_delete_confirm" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 			  <div class="modal-dialog" role="document">
 				<div class="modal-content">
 				  <div class="modal-header">
@@ -266,8 +266,8 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 					<p class="lead">Are you sure to delete this user?.</p>
 				  </div>
 				  <div class="modal-footer">
-				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					<button type="button" id="xx" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+					<button type="button" id="" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 					
 				  </div>
 				</div>
