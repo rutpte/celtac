@@ -107,10 +107,10 @@
 									//debugger;
 									//console.log(response);
 									var obj_response = jQuery.parseJSON(response);
-									debugger;
+									//debugger;
 									//console.debug('respont : ',respont);
 									if (obj_response.success) {
-										alert("complete.");
+										//alert("complete.");
 										location.reload();
 									} else {
 
@@ -376,9 +376,8 @@
 				}
 
 				//--> part 2. keep user pass word in cookie.
-				$("#login").submit(function() {
+				$("#sing_in").click(function() {
 					console.log("submited");
-					
 					//--> keep cookie.
 					if ($('#remember').is(':checked')) {
 						var email = $('#email').val();
