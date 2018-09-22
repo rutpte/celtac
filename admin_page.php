@@ -136,7 +136,121 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 			</div>
 			-->
 			
-		
+		<!-- ************************************************************************************************************** -->
+		<!-- model user -->
+			<div class="modal fade" id="modal_edit_user" tabindex="-1" role="dialog"  aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<h5 class="modal-title">eidt user</h5><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body" id="modal-body-edit_user">
+						<form class="needs-validation" novalidate>
+						
+							<div class="row">
+							  <div class="col-md-6 mb-3">
+									<label for="firstName">First name</label>
+									<input type="text" class="form-control" id="firstName_edit" placeholder="" value="" required>
+									<div id="firstName_vlid_edit"></div>
+							  </div>
+							  <div class="col-md-6 mb-3">
+									<label for="lastName">Last name</label>
+									<input type="text" class="form-control" id="lastName_edit" placeholder="" value="" required>
+									<div id="lastName_vlid_edit"></div>
+							  </div>
+							</div>
+							
+							<hr class="mb-4">
+							
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="email">Email</label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<input type="email" class="form-control" id="email_edit" placeholder="you@example.com">
+									</div>
+								</div>
+								<div id="email_vlid_edit"></div>
+							</div>
+							
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="pass">password</span></label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<input type="text" class="form-control" id="pass_edit" placeholder="password">
+									</div>
+								</div>
+								<div id="pass_vlid_edit"></div>
+							</div>
+							
+							<hr class="mb-4">
+							
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="company">company</label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<input type="text" class="form-control" id="company_edit" placeholder="company name" required>
+									</div>
+								</div>
+								<div id="company_vlid_edit"></div>
+							</div>
+							
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="company">phone no.</label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<input type="text" class="form-control" id="phone_edit" placeholder="088-888-8888" required>
+									</div>
+								</div>
+								<div id="phone_vlid_edit"></div>
+							</div>
+
+
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="address">Address</label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<input type="text" class="form-control" id="address_edit" placeholder="1234 Main St" required>
+									</div>
+								</div>
+								<div id="address_vlid_edit"></div>
+							</div>
+							<hr class="mb-4">
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="is_staff_edit">
+								<label class="custom-control-label" for="is_staff_edit">to be staff</label>
+							</div>
+							<hr class="mb-4">
+							<button class="btn btn-primary btn-lg btn-block" type="button" onclick="celtac.g_func.user('update_user')">Save</button>
+							<input id="user_id_edit" type="hidden" value="">
+						  </form>
+						  
+						  
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					
+				  </div>
+				</div>
+			  </div>
+			</div>
 		<!-- ************************************************************************************************************** -->
 		<!-- model user -->
 			<div class="modal fade" id="modal_add_user" tabindex="-1" role="dialog"  aria-hidden="true">
@@ -263,10 +377,10 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				  </div>
 				  <div class="modal-body" id="modal-body-contact">
 					<h3 style="color:red">warning.</h3>
-					<p class="lead">Are you sure to delete this user?.</p>
+					<p class="lead">Are you sure to delete this user?</p>
 				  </div>
 				  <div class="modal-footer">
-					<button type="button" id="xx" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+					<button type="button" id="del_ok" class="btn btn-secondary" data-dismiss="modal">Ok</button>
 					<button type="button" id="" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 					
 				  </div>
@@ -292,10 +406,10 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 ?>
 				
 				<div class="row">
-				<div class="col-4"><div class="text"><?php echo $value['first_name'].$value['last_name']?></div></div>
+				<div class="col-4"><div class="text"><?php echo $value['first_name']." ".$value['last_name']?></div></div>
 				<div class="col-5"><div class="text"><?php echo $value['email']?></div></div>
-				<div class="col-1"><a href="#" onclick="celtac.g_func.user('edit',<?php echo $value['id']?>)">&#9998;</a></div>
-				<div class="col-2"><a href="#" onclick="celtac.g_func.user('delete',<?php echo $value['id']?>)">&#9764;</a></div>
+				<div class="col-1"><a href="#" onclick="celtac.g_func.user('edit_user_model',<?php echo $value['id']?>)">&#9998;</a></div>
+				<div class="col-2"><a href="#" onclick="celtac.g_func.user('delete_user',<?php echo $value['id']?>)">&#9764;</a></div>
 				</div>
 <?php 
 	}

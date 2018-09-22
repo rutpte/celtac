@@ -123,7 +123,118 @@
 							
 						}//end if false.
 
-						break;					
+						break;	
+					case "edit_user_model":
+						var id_user = obj;
+						$('#modal_edit_user').modal('show');
+						console.log(obj_all_user[id_user]);
+						
+						var email = obj_all_user[id_user].email;
+						var pass = obj_all_user[id_user].pass;
+						var company = obj_all_user[id_user].company;
+						var phone = obj_all_user[id_user].phone_no;
+						var firstName = obj_all_user[id_user].first_name;
+						var lastName = obj_all_user[id_user].last_name;
+						var address = obj_all_user[id_user].address;
+						var is_staff = obj_all_user[id_user].is_staff;
+						
+						
+						//--> auto add exits data.
+						
+						$('#modal_edit_user').find('#user_id_edit').val(id_user);
+						$('#modal_edit_user').find('#email_edit').val(email);
+						$('#modal_edit_user').find('#pass_edit').val(pass);
+						$('#modal_edit_user').find('#company_edit').val(company);
+						$('#modal_edit_user').find('#phone_edit').val(phone);
+						$('#modal_edit_user').find('#firstName_edit').val(firstName);
+						$('#modal_edit_user').find('#lastName_edit').val(lastName);
+						$('#modal_edit_user').find('#address_edit').val(address);
+						$('#modal_edit_user').find('#is_staff_edit').prop('checked', is_staff);
+						//--> mission complete.
+
+					break;
+					case "update_user":
+						var id_user 	= $('#modal_edit_user').find('#user_id_edit').val();
+						var email		= $('#modal_edit_user').find('#email_edit').val();
+						var pass		= $('#modal_edit_user').find('#pass_edit').val();
+						var company		= $('#modal_edit_user').find('#company_edit').val();
+						var phone		= $('#modal_edit_user').find('#phone_edit').val();
+						var firstName	= $('#modal_edit_user').find('#firstName_edit').val();
+						var lastName	= $('#modal_edit_user').find('#lastName_edit').val();
+						var address		= $('#modal_edit_user').find('#address_edit').val();
+						var is_staff	= $('#modal_edit_user').find('#is_staff_edit').is(":checked");
+						
+
+						//debugger;
+						// console.log(company);
+						// console.log(phone);
+						// console.log(firstName);
+						// console.log(lastName);
+						// console.log(address);
+						// console.log(email);
+						// console.log(pass);
+						var sta_validate = true;
+						if (email == ""){
+							$('#email_vlid_edit').text("*needed value.").css('color', 'red');
+							sta_validate = false;
+						} else if(company == ""){
+							$('#company_vlid_edit').text("*needed value.").css('color', 'red');
+							sta_validate = false;
+						} else if (phone == ""){
+							$('#phone_vlid_edit').text("*needed value.").css('color', 'red');
+							sta_validate = false;
+						} else if (firstName == ""){
+							$('#firstName_vlid_edit').text("*needed value.").css('color', 'red');
+							sta_validate = false;
+						} else if (lastName == ""){
+							$('#lastName_vlid_edit').text("*needed value.").css('color', 'red');
+							sta_validate = false;
+						} else if (address == ""){
+							$('#address_vlid_edit').text("*needed value.").css('color', 'red');
+							sta_validate = false;
+						}
+						
+						if(sta_validate){
+							$.ajax({
+								url: "usermanage.php",
+								dataType: 'text', // Notice! JSONP <-- P (lowercase)
+								method : 'POST',
+								data: {
+									"q"              : "update_user"
+									,"id"		     : id_user 
+									,"company"       : company
+									,"phone"         : phone
+									,"firstName"     : firstName
+									,"lastName"      : lastName
+									,"address"       : address
+									,"email"         : email
+									,"pass"          : pass
+									,"is_staff"		 : is_staff	
+									
+								},
+								type: "GET",
+								success:function(response){
+									//console.debug('response : ',response);
+									//debugger;
+									//console.log(response);
+									var obj_response = jQuery.parseJSON(response);
+									
+									//console.debug('respont : ',respont);
+									if (obj_response.success) {
+										
+										location.reload();
+									} else {
+
+									}
+								},
+								error:function(response){
+									console.debug(response);
+								}
+							});
+							
+						}//end if false.
+
+						break;						
 					case "init_admin_page":
 						//--..yourcode.
 						if(true){
@@ -158,16 +269,18 @@
 						}//end if false.
 						//header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/admin_page.php");
 						break;					
-					case "delete":
-						var id = obj; debugger;
+					case "delete_user":
+						var id_user = obj;
 						$('#modal_delete_confirm').modal('show');
-						if(true){
+						var cilck_ok = false;
+						$('#modal_delete_confirm').find('#del_ok').click(function() {
 							$.ajax({
 								url: "usermanage.php",
 								dataType: 'text', // Notice! JSONP <-- P (lowercase)
 								method : 'POST',
 								data: { 
-									"q" : "delete_userx"
+									"q" : "delete_user"
+									,"id" : id_user
 								},
 								type: "GET",
 								success:function(response){
@@ -175,11 +288,12 @@
 									//debugger;
 									//console.log(response);
 									var obj_response = jQuery.parseJSON(response);
-									debugger;
+									
 									//console.debug('respont : ',respont);
 									if (obj_response.success) {
 										console.log(obj_response);
-										window.location = window.location.hostname+"/"+celtac.pjName+"/admin_page.php";
+										location.reload();
+										//window.location = window.location.hostname+"/"+celtac.pjName+"/admin_page.php";
 										//header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/admin_page.php");
 									} else {
 
@@ -189,8 +303,8 @@
 									console.debug(response);
 								}
 							});
-							
-						}//end if false.
+						});
+
 						break;					
 					case "xxx":
 						//--..yourcode.

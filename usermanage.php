@@ -48,8 +48,15 @@ if ($_SESSION['is_superuser'] =='t') {
 			break;
 			case "add_user" :
 				echo $mu->addUser($_POST);
+			break;			
+			case "update_user" :
+				echo $mu->updateUser($_POST);
 			break;
-			case "edit" :
+			case "delete_user" :
+				$id       = isset($_POST['id']) ? intval($_POST['id']) : '';
+
+				echo $mu->deleteUser($id);
+			break;			case "edit" :
 				$id       = isset($_POST['id']) ? intval($_POST['id']) : '';
 				$is_admin = isset($_POST['is_admin']) ? $_POST['is_admin'] : '';
 

@@ -94,8 +94,84 @@ class UserManage extends DBConnection
 
         return json_encode($result);
     }
+    public function deleteUser($id, $isAdmin=null)
+    {
+		if(!$_SESSION['is_superuser']){
+			$result['success'] = false;
+			return json_encode($result);
+		}
+		//-------------------------------
+        $sql = "
+            UPDATE staff SET
+                is_active = false
+            WHERE id = {$id}
+        ";
 
-    public function updateUser($id, $isAdmin=null)
+        try {
+            $sth = $this->db->prepare($sql);
+
+            $sth->execute();
+//             var_dump($sth, $this->db->errorInfo());
+//             $sth->debugDumpParams();
+            $result = array();
+            if ($sth->rowCount() > 0) {
+                $result['success'] = true;
+            } else {
+                $result['success'] = false;
+            }
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+
+        return json_encode($result);
+    }
+    public function updateUser($post)
+    {
+		if(!$_SESSION['is_superuser']){
+			$result['success'] = false;
+			return json_encode($result);
+		}
+		//-------------------------------
+		if ($post['pass'] != ""){
+			$update_passwd = ", passwd		= '{$post['pass']}'";
+		} else {
+			$update_passwd = "";
+		}
+        
+
+        $sql = "
+            UPDATE staff SET
+                company 		= '{$post['company']}'
+					{$update_passwd}
+				, first_name	= '{$post['firstName']}'
+				, last_name		= '{$post['lastName']}'
+				, email			= '{$post['email']}'
+				, phone_no		= '{$post['phone']}'
+				, is_staff		= '{$post['is_staff']}'
+				, address		= '{$post['address']}'
+            WHERE id = {$post['id']}
+        ";
+// echo '<pre>';
+// echo $sql; exit;
+        try {
+            $sth = $this->db->prepare($sql);
+
+            $sth->execute();
+//             var_dump($sth, $this->db->errorInfo());
+//             $sth->debugDumpParams();
+            $result = array();
+            if ($sth->rowCount() > 0) {
+                $result['success'] = true;
+            } else {
+                $result['success'] = false;
+            }
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+
+        return json_encode($result);
+    }
+    public function updateUserBC($id, $isAdmin=null)
     {
         $updateusername = ($isAdmin == 'true') ? "username     = :username," : '';
 
@@ -524,6 +600,7 @@ class UserManage extends DBConnection
             from staff
 			where 1=1
 			and is_superuser != 't'
+			and is_active != 'f'
         ";
         //echo "<pre>", $sql; exit;
         $sth = $this->db->prepare($sql);  //sql2
