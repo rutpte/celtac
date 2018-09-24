@@ -14,20 +14,20 @@ header('Content-type: application/json');
 			break;
 		}
 	} else if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		$q        = isset($_POST['q']) ? $_POST['q'] : '';
-		$obj = new UserManage($pdo);
+		$q   = isset($_POST['q']) ? $_POST['q'] : '';
+		$obj = new Order($pdo);
 		switch ($q) {
 			case "xxx" : //--> still not use on this case from js.
 				echo $obj->get_xxx();
 				//json_encode
 			break;
-			case "get_oder" :
+			case "get_order" :
 				$rs = array();
 				$rs["success"] = false;
 
-				if ($_SESSION['is_superuser']) {
-					$rs = $obj->get_oder ();
-				} 
+				
+				$rs = $obj->getOrder ();
+				
 				echo $rs;
 				
 			break;

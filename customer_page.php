@@ -1,10 +1,34 @@
 <?php
 require dirname(__FILE__) . '/includes/init.inc.php';
-//session_destroy();
-//var_dump($_SESSION['username']); exit;
- if (isset($_SESSION['username'])) {
+ if (isset($_SESSION['email'])) {
+	$obj 	= new Order($pdo);
+	$rs_arr = $obj->getOrder();
+	//print_r($rs); exit;
+	//print_r($value['name']);exit;
+	
+	// echo '<pre>';
+	// foreach ($rs_arr as &$value) {
+		// print_r($value);
+	// }
+	// exit;
+	//---------------------
+	$arr_key = array();
+	foreach ($rs_arr as &$value) {
+		$arr_key[$value['id']] = $value;
+	}
+	
+	// echo '<pre>';
+	// print_r($arr_key);
+	// exit;
+
+
 
 ?> 
+<script>
+ var obj_all_user = <?php echo json_encode($arr_key) ?>
+ 
+</script>
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -14,10 +38,10 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 		<meta name="author" content="">
 		<link rel="icon" href="logo.jpg">
 
-		<title>customer page</title>
+		<title>celtac order</title>
 		<script type='text/javascript' src='js/js_index_src.js'></script>
 		<!-- Bootstrap core CSS -->
-		<!-- <link href="libs/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+		<link href="css/css.css" rel="stylesheet">
 
 
 
@@ -27,7 +51,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 
 
 		<!--- ******************************************************************* -->
-		<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
 		  <a class="navbar-brand" href="#">Celtac</a>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -45,7 +69,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 			</ul>
 
 			<button class="btn btn-outline-success my-2 my-sm-0" type="button" id="logout">logout</button>
-			<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.modal_user()">user</button>
+			<!--<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.modal_user()">user</button>-->
 			
 		  </div>
 		</nav>
@@ -73,198 +97,172 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 			  </div>
 			</div>
 			
-		
-		<!-- ************************************************************************************************************** -->		
-		<!-- //$('#modal_user').modal('show') -->
-		
-			<div class="modal fade" id="modal_user" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+
+			
+		<!-- ************************************************************************************************************** -->
+		<!-- model user -->
+			<div class="modal fade" id="modal_edit_order" tabindex="-1" role="dialog"  aria-hidden="true">
 			  <div class="modal-dialog" role="document">
 				<div class="modal-content">
 				  <div class="modal-header">
-					<h5 class="modal-title" id="modalLabel">user</h5><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
+					<h5 class="modal-title">edit order</h5><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					  <span aria-hidden="true">&times;</span>
 					</button>
 				  </div>
-				  <div class="modal-body" id="modal-body-user">
-					  <div class="row">
-						<div class="col-3">name</div>
-						<div class="col-3">email</div>
-						<div class="col-3">edit</div>
-						<div class="col-3">delete</div>
-					  </div>
-					  
-					  <div class="row">
-						<div class="col-3">.col-4</div>
-						<div class="col-3">.col-4</div>
-						<div class="col-3">.col-4</div>
-						<div class="col-3">.col-4</div>
-					  </div>
-				  </div>
-				  <div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					
-				  </div>
-				</div>
-			  </div>
-			</div>
-		<!-- ************************************************************************************************************** -->		
-		<!-- //$('#modal_user').modal('show') -->
-		
-			<div class="modal fade" id="modal_add_order" tabindex="-1" role="dialog"  aria-hidden="true">
-			  <div class="modal-dialog" role="document">
-				<div class="modal-content">
-				  <div class="modal-header">
-					<h5 class="modal-title">add order</h5><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					  <span aria-hidden="true">&times;</span>
-					</button>
-				  </div>
-				  <div class="modal-body" id="modal-body-add_order">
+				  <div class="modal-body" id="modal-body-edit_user">
 						<form class="needs-validation" novalidate>
-							<div class="row">
-							  <div class="col-md-6 mb-3">
-								<label for="firstName">First name</label>
-								<input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-								<div class="invalid-feedback">
-								  Valid first name is required.
-								</div>
-							  </div>
-							  <div class="col-md-6 mb-3">
-								<label for="lastName">Last name</label>
-								<input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-								<div class="invalid-feedback">
-								  Valid last name is required.
-								</div>
-							  </div>
-							</div>
-
+							<!-- **************************************** -->
 							<div class="mb-3">
-							  <label for="username">Username</label>
-							  <div class="input-group">
-								<div class="input-group-prepend">
-								  <span class="input-group-text">@</span>
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="customer_name">customer name</label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<input type="text" class="form-control" id="customer_name" placeholder="customer name">
+									</div>
 								</div>
-								<input type="text" class="form-control" id="username" placeholder="Username" required>
-								<div class="invalid-feedback" style="width: 100%;">
-								  Your username is required.
-								</div>
-							  </div>
+								<div id="customer_name_vlid_edit"></div>
 							</div>
-
+							<!-- **************************************** -->
 							<div class="mb-3">
-							  <label for="email">Email <span class="text-muted">(Optional)</span></label>
-							  <input type="email" class="form-control" id="email" placeholder="you@example.com">
-							  <div class="invalid-feedback">
-								Please enter a valid email address for shipping updates.
-							  </div>
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="customer_name">type</label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<select class="custom-select d-block w-100" id="country" required>
+											<option value="cell">Cell</option>
+											<option value="prp_ready">PRP Ready</option>
+											<option value="placenta">Placenta</option>
+										</select>
+									</div>
+								</div>
+								<div id="customer_name_vlid_edit"></div>
 							</div>
-
+							<!-- **************************************** -->
 							<div class="mb-3">
-							  <label for="address">Address</label>
-							  <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
-							  <div class="invalid-feedback">
-								Please enter your shipping address.
-							  </div>
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="customer_name">quantity</label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<input type="text" class="form-control" id="customer_name" placeholder="customer name">
+									</div>
+								</div>
+								<div id="customer_name_vlid_edit"></div>
 							</div>
-
+							<!-- **************************************** -->
 							<div class="mb-3">
-							  <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-							  <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="customer_name">vial</label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<input type="text" class="form-control" id="customer_name" placeholder="customer name">
+									</div>
+								</div>
+								<div id="customer_name_vlid_edit"></div>
 							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="customer_name">total_cel</label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<input type="text" class="form-control" id="customer_name" placeholder="customer name">
+									</div>
+								</div>
+								<div id="customer_name_vlid_edit"></div>
+							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="customer_name">package</label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<select class="custom-select d-block w-100" id="country" required>
+											<option value="ID">ID</option>
+											<option value="IV">IV</option>
+										</select>
+									</div>
+								</div>
+								<div id="customer_name_vlid_edit"></div>
+							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="delivery_time">delivery date</label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<input type="text" class="form-control" id="customer_name" placeholder="customer name">
+									</div>
+								</div>
+								<div id="customer_name_vlid_edit"></div>
+							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="delivery_time">delivery time</label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<select class="custom-select d-block w-100" id="country" required>
+											
+											<?php 
+												$h = 0;
+												while ($h<=23) {
 
-							<div class="row">
-							  <div class="col-md-5 mb-3">
-								<label for="country">Country</label>
-								<select class="custom-select d-block w-100" id="country" required>
-								  <option value="">Choose...</option>
-								  <option>United States</option>
-								</select>
-								<div class="invalid-feedback">
-								  Please select a valid country.
+											?>
+													<option value=<?php $h?>><?php $h ?></option>
+											<?php 
+													$h = $h+1;
+												}
+
+											?>
+										</select>
+										<select class="custom-select d-block w-100" id="country" required>
+											<?php 
+												$min = 0;
+												while ($min<=59) {
+
+											?>
+													<option value=<?php $min?>><?php $min?></option>
+											<?php 
+													$min = $min+1;
+												}
+
+											?>
+										</select>
+									</div>
 								</div>
-							  </div>
-							  <div class="col-md-4 mb-3">
-								<label for="state">State</label>
-								<select class="custom-select d-block w-100" id="state" required>
-								  <option value="">Choose...</option>
-								  <option>California</option>
-								</select>
-								<div class="invalid-feedback">
-								  Please provide a valid state.
-								</div>
-							  </div>
-							  <div class="col-md-3 mb-3">
-								<label for="zip">Zip</label>
-								<input type="text" class="form-control" id="zip" placeholder="" required>
-								<div class="invalid-feedback">
-								  Zip code required.
-								</div>
-							  </div>
+								<div id="customer_name_vlid_edit"></div>
 							</div>
+							<!-- **************************************** -->
 							<hr class="mb-4">
 							<div class="custom-control custom-checkbox">
-							  <input type="checkbox" class="custom-control-input" id="same-address">
-							  <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
+								<input type="checkbox" class="custom-control-input" id="is_staff_edit">
+								<label class="custom-control-label" for="is_staff_edit">to be staff</label>
 							</div>
-							<div class="custom-control custom-checkbox">
-							  <input type="checkbox" class="custom-control-input" id="save-info">
-							  <label class="custom-control-label" for="save-info">Save this information for next time</label>
-							</div>
+							<!-- **************************************** -->
 							<hr class="mb-4">
-
-							<h4 class="mb-3">Payment</h4>
-
-							<div class="d-block my-3">
-							  <div class="custom-control custom-radio">
-								<input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-								<label class="custom-control-label" for="credit">Credit card</label>
-							  </div>
-							  <div class="custom-control custom-radio">
-								<input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-								<label class="custom-control-label" for="debit">Debit card</label>
-							  </div>
-							  <div class="custom-control custom-radio">
-								<input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
-								<label class="custom-control-label" for="paypal">PayPal</label>
-							  </div>
-							</div>
-							<div class="row">
-							  <div class="col-md-6 mb-3">
-								<label for="cc-name">Name on card</label>
-								<input type="text" class="form-control" id="cc-name" placeholder="" required>
-								<small class="text-muted">Full name as displayed on card</small>
-								<div class="invalid-feedback">
-								  Name on card is required
-								</div>
-							  </div>
-							  <div class="col-md-6 mb-3">
-								<label for="cc-number">Credit card number</label>
-								<input type="text" class="form-control" id="cc-number" placeholder="" required>
-								<div class="invalid-feedback">
-								  Credit card number is required
-								</div>
-							  </div>
-							</div>
-							<div class="row">
-							  <div class="col-md-3 mb-3">
-								<label for="cc-expiration">Expiration</label>
-								<input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-								<div class="invalid-feedback">
-								  Expiration date required
-								</div>
-							  </div>
-							  <div class="col-md-3 mb-3">
-								<label for="cc-cvv">CVV</label>
-								<input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-								<div class="invalid-feedback">
-								  Security code required
-								</div>
-							  </div>
-							</div>
-							<hr class="mb-4">
-							<button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+							<button class="btn btn-primary btn-lg btn-block" type="button" onclick="celtac.g_func.user('update_user')">Save</button>
+							<input id="user_id_edit" type="hidden" value="">
+							<!-- **************************************** -->
 						  </form>
+						  
+						  
 				  </div>
 				  <div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -273,29 +271,170 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				</div>
 			  </div>
 			</div>
-		
+		<!-- ************************************************************************************************************** -->
+		<!-- model user -->
+			<div class="modal fade" id="modal_add_user" tabindex="-1" role="dialog"  aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<h5 class="modal-title">new user</h5><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body" id="modal-body-add_user">
+						<form class="needs-validation" novalidate>
+						
+							<div class="row">
+							  <div class="col-md-6 mb-3">
+									<label for="firstName">First name</label>
+									<input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+									<div id="firstName_vlid"></div>
+							  </div>
+							  <div class="col-md-6 mb-3">
+									<label for="lastName">Last name</label>
+									<input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+									<div id="lastName_vlid"></div>
+							  </div>
+							</div>
+							
+							<hr class="mb-4">
+							
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="email">Email</label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<input type="email" class="form-control" id="email" placeholder="you@example.com">
+									</div>
+								</div>
+								<div id="email_vlid"></div>
+							</div>
+							
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="pass">password</span></label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<input type="text" class="form-control" id="pass" placeholder="password">
+									</div>
+								</div>
+								<div id="pass_vlid"></div>
+							</div>
+							
+							<hr class="mb-4">
+							
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="company">company</label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<input type="text" class="form-control" id="company" placeholder="company name" required>
+									</div>
+								</div>
+								<div id="company_vlid"></div>
+							</div>
+							
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="company">phone no.</label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<input type="text" class="form-control" id="phone" placeholder="088-888-8888" required>
+									</div>
+								</div>
+								<div id="phone_vlid"></div>
+							</div>
+
+
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-md-2 mb-3">
+										<label for="address">Address</label>
+									</div>
+									
+									<div class="col-md-10 mb-3">
+										<input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+									</div>
+								</div>
+								<div id="address_vlid"></div>
+							</div>
+							<hr class="mb-4">
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="is_staff">
+								<label class="custom-control-label" for="is_staff">to be staff</label>
+							</div>
+							<hr class="mb-4">
+							<button class="btn btn-primary btn-lg btn-block" type="button" onclick="celtac.g_func.user('add')">Save</button>
+						  </form>
+						  
+						  
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					
+				  </div>
+				</div>
+			  </div>
+			</div>
+		<!-- ************************************************************************************************************** -->
+			<div class="modal fade" id="modal_delete_confirm" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<p class="modal-title" id="modalLabel">Confirmation.</p><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body" id="modal-body-contact">
+					<h3 style="color:red">warning.</h3>
+					<p class="lead">Are you sure to delete this user?</p>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" id="del_ok" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+					<button type="button" id="" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					
+				  </div>
+				</div>
+			  </div>
+			</div>
 		<!-- ************************************************************************************************************** -->
 		<main role="main" class="container">
 
-		  <div class="starter-template">
-			<h1>Bootstrap starter template</h1>
-			<p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
-			
-				<div class="row">
-				<div class="col-3">name</div>
-				<div class="col-3">email</div>
-				<div class="col-3">edit</div>
-				<div class="col-3">delete</div>
-				</div>
+
+		  <div>
 
 				<div class="row">
-				<div class="col-3">.col-4</div>
-				<div class="col-3">.col-4</div>
-				<div class="col-3"><a href="#" onclick="celtac.g_func.modal_contact()">.col-4</a></div>
-				<div class="col-3"><a href="#" onclick="celtac.g_func.modal_contact()">.col-4</a></div>
+				<div class="col-4"><div style="color:#77797c">name</div></div>
+				<div class="col-5"><div style="color:#77797c">email</div></div>
+				<div class="col-1"><div style="color:#77797c">edit</div></div>
+				<div class="col-2"><div style="color:#77797c">del</div></div>
 				</div>
 				
-				<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.modal_add_order()">add order</button>
+<?php 
+	foreach ($rs_arr as &$value) {
+
+?>
+				
+				<div class="row">
+				<div class="col-4"><div class="text"><?php echo $value['first_name']." ".$value['last_name']?></div></div>
+				<div class="col-5"><div class="text"><?php echo $value['email']?></div></div>
+				<div class="col-1"><a href="#" onclick="celtac.g_func.user('edit_user_model',<?php echo $value['id']?>)">&#9998;</a></div>
+				<div class="col-2"><a href="#" onclick="celtac.g_func.user('delete_user',<?php echo $value['id']?>)">&#9764;</a></div>
+				</div>
+<?php 
+	}
+?>
+				<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.user('show_model_adduser')">&plus;</button>
 				
 		  </div>
 

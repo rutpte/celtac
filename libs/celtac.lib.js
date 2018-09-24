@@ -43,6 +43,10 @@
 		"assets/js/vendor/jquery.js"
 		,"assets/js/vendor/jquery-cookie.js"
 		,"assets/js/vendor/jquery-qrcode.js"
+		,"assets/js/vendor/jq_plugin/date_time/picker.js"
+		,"assets/js/vendor/jq_plugin/date_time/picker.date.js"
+		,"assets/js/vendor/jq_plugin/date_time/picker.time.js"
+		,"assets/js/vendor/jq_plugin/date_time/legacy.js"
 		
 		//[bootstrap]
 		,"dist/js/bootstrap.min.js"
@@ -79,9 +83,13 @@
 		//,"fancyBox/jquery.fancybox.css"
 		//,"fancyBox/helpers/jquery.fancybox-buttons.css?v=2.0.3"
 		
-		// [Ext]
-		//,"ext/resources/css/ext-all.css"
-		//,"ext/ux/fileuploadfield/css/fileuploadfield.css"
+		// [jq-plugin]
+		,"assets/js/vendor/jq_plugin/date_time/themes/classic.css"
+		,"assets/js/vendor/jq_plugin/date_time/themes/classic.date.css"
+		,"assets/js/vendor/jq_plugin/date_time/themes/classic.time.css"
+		,"assets/js/vendor/jq_plugin/date_time/themes/default.css"
+		,"assets/js/vendor/jq_plugin/date_time/themes/default.date.css"
+		,"assets/js/vendor/jq_plugin/date_time/themes/default.time.css"
 		
 	];
 
