@@ -1,0 +1,32 @@
+-- Table: "order"
+
+-- DROP TABLE "order";
+
+CREATE TABLE "order"
+(
+  id integer NOT NULL,
+  order_code character varying(100) NOT NULL,
+  customer_name character varying(200) NOT NULL,
+  product_type character varying(200) NOT NULL,
+  quantity integer NOT NULL,
+  vial integer,
+  total_cel integer,
+  "package" character varying(50),
+  delivery_time timestamp without time zone NOT NULL,
+  "giveaway
+giveaway
+giveaway
+giveaway" character varying(200),
+  sender character varying(200) NOT NULL,
+  receiver character varying(200) NOT NULL,
+  dealer_person character varying(200) NOT NULL,
+  dealer_company character varying(200) NOT NULL,
+  price_rate character varying(200) NOT NULL,
+  "note`" character varying(500),
+  CONSTRAINT order_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE "order"
+  OWNER TO postgres;
