@@ -5,7 +5,7 @@
 CREATE TABLE "order"
 (
   id serial NOT NULL,
-  order_code character varying(100) NOT NULL,
+  order_code character varying(100),
   customer_name character varying(200) NOT NULL,
   product_type character varying(200) NOT NULL,
   quantity integer NOT NULL,
