@@ -4,7 +4,7 @@
 
 CREATE TABLE "order"
 (
-  id integer NOT NULL,
+  id serial NOT NULL,
   order_code character varying(100) NOT NULL,
   customer_name character varying(200) NOT NULL,
   product_type character varying(200) NOT NULL,
