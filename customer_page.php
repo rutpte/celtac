@@ -100,26 +100,26 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 
 			
 		<!-- ************************************************************************************************************** -->
-		<!-- model user -->
-			<div class="modal fade" id="modal_edit_order" tabindex="-1" role="dialog"  aria-hidden="true">
+		<!-- model order edit-->
+			<div class="modal fade" id="modal_add_order_edit" tabindex="-1" role="dialog"  aria-hidden="true">
 			  <div class="modal-dialog" role="document">
 				<div class="modal-content">
 				  <div class="modal-header">
-					<h5 class="modal-title">edit order</h5><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
+					<h5 class="modal-title">new order edit</h5><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					  <span aria-hidden="true">&times;</span>
 					</button>
 				  </div>
-				  <div class="modal-body" id="modal-body-edit_user">
+				  <div class="modal-body" id="modal-body-add_order_edit">
 						<form class="needs-validation" novalidate>
 							<!-- **************************************** -->
 							<div class="mb-3">
 								<div class="row">
-									<div class="col-md-2 mb-3">
+									<div class="col-4 mb-3">
 										<label for="customer_name">customer name</label>
 									</div>
 									
-									<div class="col-md-10 mb-3">
+									<div class="col-8 mb-3">
 										<input type="text" class="form-control" id="customer_name" placeholder="customer name">
 									</div>
 								</div>
@@ -128,136 +128,227 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<!-- **************************************** -->
 							<div class="mb-3">
 								<div class="row">
-									<div class="col-md-2 mb-3">
-										<label for="customer_name">type</label>
+									<div class="col-4 mb-3">
+										<label for="product_type">product type</label>
 									</div>
 									
-									<div class="col-md-10 mb-3">
-										<select class="custom-select d-block w-100" id="country" required>
+									<div class="col-8 mb-3">
+										<select class="custom-select d-block w-100" id="product_type" required>
 											<option value="cell">Cell</option>
 											<option value="prp_ready">PRP Ready</option>
 											<option value="placenta">Placenta</option>
 										</select>
 									</div>
 								</div>
-								<div id="customer_name_vlid_edit"></div>
+								<div id="product_type_vlid_edit"></div>
 							</div>
 							<!-- **************************************** -->
 							<div class="mb-3">
 								<div class="row">
-									<div class="col-md-2 mb-3">
-										<label for="customer_name">quantity</label>
+									<div class="col-4 mb-3">
+										<label for="quantity">quantity</label>
 									</div>
 									
-									<div class="col-md-10 mb-3">
-										<input type="text" class="form-control" id="customer_name" placeholder="customer name">
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="quantity" placeholder="quantity">
 									</div>
 								</div>
-								<div id="customer_name_vlid_edit"></div>
+								<div id="quantity_vlid_edit"></div>
 							</div>
 							<!-- **************************************** -->
 							<div class="mb-3">
 								<div class="row">
-									<div class="col-md-2 mb-3">
-										<label for="customer_name">vial</label>
+									<div class="col-4 mb-3">
+										<label for="vial">vial</label>
 									</div>
 									
-									<div class="col-md-10 mb-3">
-										<input type="text" class="form-control" id="customer_name" placeholder="customer name">
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="vial" placeholder="vial">
 									</div>
 								</div>
-								<div id="customer_name_vlid_edit"></div>
+								<div id="vial_vlid"></div>
 							</div>
 							<!-- **************************************** -->
 							<div class="mb-3">
 								<div class="row">
-									<div class="col-md-2 mb-3">
-										<label for="customer_name">total_cel</label>
+									<div class="col-4 mb-3">
+										<label for="total_cel">total_cel</label>
 									</div>
 									
-									<div class="col-md-10 mb-3">
-										<input type="text" class="form-control" id="customer_name" placeholder="customer name">
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="total_cel" placeholder="total of cel">
 									</div>
 								</div>
-								<div id="customer_name_vlid_edit"></div>
+								<div id="total_cel_vlid_edit"></div>
 							</div>
 							<!-- **************************************** -->
 							<div class="mb-3">
 								<div class="row">
-									<div class="col-md-2 mb-3">
-										<label for="customer_name">package</label>
+									<div class="col-4 mb-3">
+										<label for="package">package</label>
 									</div>
 									
-									<div class="col-md-10 mb-3">
-										<select class="custom-select d-block w-100" id="country" required>
+									<div class="col-8 mb-3">
+										<select class="custom-select d-block w-100" id="package" required>
 											<option value="ID">ID</option>
 											<option value="IV">IV</option>
 										</select>
 									</div>
 								</div>
-								<div id="customer_name_vlid_edit"></div>
+								<div id="package_vlid"></div>
 							</div>
 							<!-- **************************************** -->
 							<div class="mb-3">
 								<div class="row">
-									<div class="col-md-2 mb-3">
-										<label for="delivery_time">delivery date</label>
+									<div class="col-4 mb-3">
+										<label for="delivery_date">delivery date</label>
 									</div>
 									
-									<div class="col-md-10 mb-3">
-										<input type="text" class="form-control" id="customer_name" placeholder="customer name">
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="delivery_date" placeholder="date">
 									</div>
 								</div>
-								<div id="customer_name_vlid_edit"></div>
+								<div id="delivery_date_vlid_edit"></div>
 							</div>
 							<!-- **************************************** -->
 							<div class="mb-3">
 								<div class="row">
-									<div class="col-md-2 mb-3">
-										<label for="delivery_time">delivery time</label>
+									<div class="col-4 mb-3">
+										<label>delivery time</label>
 									</div>
 									
-									<div class="col-md-10 mb-3">
-										<select class="custom-select d-block w-100" id="country" required>
-											
-											<?php 
-												$h = 0;
-												while ($h<=23) {
+									<div class="col-8 mb-3">
+										<div class="row">
+											<div class="col-6">
+												<select class="custom-select" id="delivery_time_hour" required>
+													
+													<?php 
+														$h = 0;
+														while ($h<=23) {
 
-											?>
-													<option value=<?php $h?>><?php $h ?></option>
-											<?php 
-													$h = $h+1;
-												}
+													?>
+															<option value=<?php echo $h?>><?php echo $h ?></option>
+													<?php 
+															$h = $h+1;
+														}
 
-											?>
-										</select>
-										<select class="custom-select d-block w-100" id="country" required>
-											<?php 
-												$min = 0;
-												while ($min<=59) {
+													?>
+												</select>
+											</div>
+											<div class="col-6">
+												<select class="custom-select" id="delivery_time_minute" required>
+													<?php 
+														$min = 0;
+														while ($min<=59) {
 
-											?>
-													<option value=<?php $min?>><?php $min?></option>
-											<?php 
-													$min = $min+1;
-												}
+													?>
+															<option value=<?php echo $min?>><?php echo $min?></option>
+													<?php 
+															$min = $min+1;
+														}
 
-											?>
-										</select>
+													?>
+												</select>
+											</div>
+										</div>
 									</div>
 								</div>
-								<div id="customer_name_vlid_edit"></div>
+								<div id="delivery_time_hour_vlid_edit"></div>
+							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-4 mb-3">
+										<label for="giveaway">giveaway</label>
+									</div>
+									
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="giveaway" placeholder="giveaway">
+									</div>
+								</div>
+								<div id="giveaway_vlid_edit"></div>
+							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-4 mb-3">
+										<label for="sender">sender</label>
+									</div>
+									
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="sender" placeholder="sender">
+									</div>
+								</div>
+								<div id="sender_vlid_edit"></div>
+							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-4 mb-3">
+										<label for="receiver">receiver</label>
+									</div>
+									
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="receiver" placeholder="receiver">
+									</div>
+								</div>
+								<div id="receiver_vlid_edit"></div>
+							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-4 mb-3">
+										<label for="dealer_person">dealer_person</label>
+									</div>
+									
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="dealer_person" placeholder="dealer person">
+									</div>
+								</div>
+								<div id="dealer_person_vlid_edit"></div>
+							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-4 mb-3">
+										<label for="dealer_company">dealer_company</label>
+									</div>
+									
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="dealer_company" placeholder="dealer company">
+									</div>
+								</div>
+								<div id="dealer_company_vlid_edit"></div>
+							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-4 mb-3">
+										<label for="price_rate">price_rate</label>
+									</div>
+									
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="price_rate" placeholder="price rate">
+									</div>
+								</div>
+								<div id="price_rate_vlid_edit"></div>
+							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-4 mb-3">
+										<label for="comment_else">comment_else</label>
+									</div>
+									
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="comment_else" placeholder="comment">
+									</div>
+								</div>
+								<div id="comment_else_vlid_edit"></div>
 							</div>
 							<!-- **************************************** -->
 							<hr class="mb-4">
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input" id="is_staff_edit">
-								<label class="custom-control-label" for="is_staff_edit">to be staff</label>
-							</div>
-							<!-- **************************************** -->
-							<hr class="mb-4">
-							<button class="btn btn-primary btn-lg btn-block" type="button" onclick="celtac.g_func.user('update_user')">Save</button>
+							<button class="btn btn-primary btn-lg btn-block" type="button" onclick="celtac.g_func.order('add_order')">Save</button>
 							<input id="user_id_edit" type="hidden" value="">
 							<!-- **************************************** -->
 						  </form>
@@ -272,108 +363,257 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 			  </div>
 			</div>
 		<!-- ************************************************************************************************************** -->
-		<!-- model user -->
-			<div class="modal fade" id="modal_add_user" tabindex="-1" role="dialog"  aria-hidden="true">
+		<!-- model order -->
+			<div class="modal fade" id="modal_add_order" tabindex="-1" role="dialog"  aria-hidden="true">
 			  <div class="modal-dialog" role="document">
 				<div class="modal-content">
 				  <div class="modal-header">
-					<h5 class="modal-title">new user</h5><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
+					<h5 class="modal-title">new order</h5><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					  <span aria-hidden="true">&times;</span>
 					</button>
 				  </div>
-				  <div class="modal-body" id="modal-body-add_user">
+				  <div class="modal-body" id="modal-body-add_order">
 						<form class="needs-validation" novalidate>
-						
-							<div class="row">
-							  <div class="col-md-6 mb-3">
-									<label for="firstName">First name</label>
-									<input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-									<div id="firstName_vlid"></div>
-							  </div>
-							  <div class="col-md-6 mb-3">
-									<label for="lastName">Last name</label>
-									<input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-									<div id="lastName_vlid"></div>
-							  </div>
-							</div>
-							
-							<hr class="mb-4">
-							
+							<!-- **************************************** -->
 							<div class="mb-3">
 								<div class="row">
-									<div class="col-md-2 mb-3">
-										<label for="email">Email</label>
+									<div class="col-4 mb-3">
+										<label for="customer_name">customer name</label>
 									</div>
 									
-									<div class="col-md-10 mb-3">
-										<input type="email" class="form-control" id="email" placeholder="you@example.com">
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="customer_name" placeholder="customer name">
 									</div>
 								</div>
-								<div id="email_vlid"></div>
+								<div id="customer_name_vlid"></div>
 							</div>
-							
+							<!-- **************************************** -->
 							<div class="mb-3">
 								<div class="row">
-									<div class="col-md-2 mb-3">
-										<label for="pass">password</span></label>
+									<div class="col-4 mb-3">
+										<label for="product_type">product type</label>
 									</div>
 									
-									<div class="col-md-10 mb-3">
-										<input type="text" class="form-control" id="pass" placeholder="password">
+									<div class="col-8 mb-3">
+										<select class="custom-select d-block w-100" id="product_type" required>
+											<option value="cell">Cell</option>
+											<option value="prp_ready">PRP Ready</option>
+											<option value="placenta">Placenta</option>
+										</select>
 									</div>
 								</div>
-								<div id="pass_vlid"></div>
+								<div id="product_type_vlid"></div>
 							</div>
-							
-							<hr class="mb-4">
-							
+							<!-- **************************************** -->
 							<div class="mb-3">
 								<div class="row">
-									<div class="col-md-2 mb-3">
-										<label for="company">company</label>
+									<div class="col-4 mb-3">
+										<label for="quantity">quantity</label>
 									</div>
 									
-									<div class="col-md-10 mb-3">
-										<input type="text" class="form-control" id="company" placeholder="company name" required>
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="quantity" placeholder="quantity">
 									</div>
 								</div>
-								<div id="company_vlid"></div>
+								<div id="quantity_vlid"></div>
 							</div>
-							
+							<!-- **************************************** -->
 							<div class="mb-3">
 								<div class="row">
-									<div class="col-md-2 mb-3">
-										<label for="company">phone no.</label>
+									<div class="col-4 mb-3">
+										<label for="vial">vial</label>
 									</div>
 									
-									<div class="col-md-10 mb-3">
-										<input type="text" class="form-control" id="phone" placeholder="088-888-8888" required>
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="vial" placeholder="vial">
 									</div>
 								</div>
-								<div id="phone_vlid"></div>
+								<div id="vial_vlid"></div>
 							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-4 mb-3">
+										<label for="total_cel">total_cel</label>
+									</div>
+									
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="total_cel" placeholder="total of cel">
+									</div>
+								</div>
+								<div id="total_cel_vlid"></div>
+							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-4 mb-3">
+										<label for="package">package</label>
+									</div>
+									
+									<div class="col-8 mb-3">
+										<select class="custom-select d-block w-100" id="package" required>
+											<option value="ID">ID</option>
+											<option value="IV">IV</option>
+										</select>
+									</div>
+								</div>
+								<div id="package_vlid"></div>
+							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-4 mb-3">
+										<label for="delivery_date">delivery date</label>
+									</div>
+									
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="delivery_date" placeholder="date">
+									</div>
+								</div>
+								<div id="delivery_date_vlid"></div>
+							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-4 mb-3">
+										<label>delivery time</label>
+									</div>
+									
+									<div class="col-8 mb-3">
+										<div class="row">
+											<div class="col-6">
+												<select class="custom-select" id="delivery_time_hour" required>
+													
+													<?php 
+														$h = 0;
+														while ($h<=23) {
 
+													?>
+															<option value=<?php echo $h?>><?php echo $h ?></option>
+													<?php 
+															$h = $h+1;
+														}
 
-							<div class="mb-3">
-								<div class="row">
-									<div class="col-md-2 mb-3">
-										<label for="address">Address</label>
-									</div>
-									
-									<div class="col-md-10 mb-3">
-										<input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+													?>
+												</select>
+											</div>
+											<div class="col-6">
+												<select class="custom-select" id="delivery_time_minute" required>
+													<?php 
+														$min = 0;
+														while ($min<=59) {
+
+													?>
+															<option value=<?php echo $min?>><?php echo $min?></option>
+													<?php 
+															$min = $min+1;
+														}
+
+													?>
+												</select>
+											</div>
+										</div>
 									</div>
 								</div>
-								<div id="address_vlid"></div>
+								<div id="delivery_time_hour_vlid"></div>
 							</div>
-							<hr class="mb-4">
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input" id="is_staff">
-								<label class="custom-control-label" for="is_staff">to be staff</label>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-4 mb-3">
+										<label for="giveaway">giveaway</label>
+									</div>
+									
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="giveaway" placeholder="giveaway">
+									</div>
+								</div>
+								<div id="giveaway_vlid"></div>
 							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-4 mb-3">
+										<label for="sender">sender</label>
+									</div>
+									
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="sender" placeholder="sender">
+									</div>
+								</div>
+								<div id="sender_vlid"></div>
+							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-4 mb-3">
+										<label for="receiver">receiver</label>
+									</div>
+									
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="receiver" placeholder="receiver">
+									</div>
+								</div>
+								<div id="receiver_vlid"></div>
+							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-4 mb-3">
+										<label for="dealer_person">dealer_person</label>
+									</div>
+									
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="dealer_person" placeholder="dealer person">
+									</div>
+								</div>
+								<div id="dealer_person_vlid"></div>
+							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-4 mb-3">
+										<label for="dealer_company">dealer_company</label>
+									</div>
+									
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="dealer_company" placeholder="dealer company">
+									</div>
+								</div>
+								<div id="dealer_company_vlid"></div>
+							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-4 mb-3">
+										<label for="price_rate">price_rate</label>
+									</div>
+									
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="price_rate" placeholder="price rate">
+									</div>
+								</div>
+								<div id="price_rate_vlid"></div>
+							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-4 mb-3">
+										<label for="comment_else">comment_else</label>
+									</div>
+									
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="comment_else" placeholder="comment">
+									</div>
+								</div>
+								<div id="comment_else_vlid"></div>
+							</div>
+							<!-- **************************************** -->
 							<hr class="mb-4">
-							<button class="btn btn-primary btn-lg btn-block" type="button" onclick="celtac.g_func.user('add')">Save</button>
+							<button class="btn btn-primary btn-lg btn-block" type="button" onclick="celtac.g_func.order('add_order')">Save</button>
+							<input id="user_id_edit" type="hidden" value="">
+							<!-- **************************************** -->
 						  </form>
 						  
 						  
@@ -428,13 +668,13 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				<div class="row">
 				<div class="col-4"><div class="text"><?php echo $value['first_name']." ".$value['last_name']?></div></div>
 				<div class="col-5"><div class="text"><?php echo $value['email']?></div></div>
-				<div class="col-1"><a href="#" onclick="celtac.g_func.user('edit_user_model',<?php echo $value['id']?>)">&#9998;</a></div>
-				<div class="col-2"><a href="#" onclick="celtac.g_func.user('delete_user',<?php echo $value['id']?>)">&#9764;</a></div>
+				<div class="col-1"><a href="#" onclick="celtac.g_func.order('edit_user_model',<?php echo $value['id']?>)">&#9998;</a></div>
+				<div class="col-2"><a href="#" onclick="celtac.g_func.order('delete_user',<?php echo $value['id']?>)">&#9764;</a></div>
 				</div>
 <?php 
 	}
 ?>
-				<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.user('show_model_adduser')">&plus;</button>
+				<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.order('show_model_addorder')">&plus;</button>
 				
 		  </div>
 
