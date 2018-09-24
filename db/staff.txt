@@ -1,0 +1,27 @@
+-- Table: staff
+
+-- DROP TABLE staff;
+
+CREATE TABLE staff
+(
+  id serial NOT NULL,
+  company character varying(30) NOT NULL,
+  first_name character varying(30) NOT NULL,
+  last_name character varying(30) NOT NULL,
+  email character varying(75) NOT NULL,
+  passwd character varying(128) NOT NULL,
+  is_staff boolean NOT NULL,
+  is_active boolean NOT NULL,
+  is_superuser boolean NOT NULL,
+  last_login timestamp(6) without time zone,
+  date_joined timestamp(6) without time zone,
+  phone_no character varying,
+  address character varying,
+  CONSTRAINT staff_pkey PRIMARY KEY (id),
+  CONSTRAINT staff_username_key UNIQUE (company)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE staff
+  OWNER TO postgres;
