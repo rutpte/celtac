@@ -1,6 +1,6 @@
 <?php
 /************************************************
- | Class name  : UserManage.class.php           |
+ | Class name  : Order.class.php           |
  | Last Modify : Jan 2013                       |
  | By          : rut                            |
  | E-mail      : zerokung_2011@hotmail.com      |
@@ -28,42 +28,69 @@ class Order extends DBConnection
 
     public function addOrder($post)
     {
-		//var_dump($post);exit;
-		if(!$_SESSION['is_superuser']){
-			$result['success'] = false;
-			return json_encode($result);
-		}
-		
+		$order_code			= isset($post['order_code']) 		? $post['order_code'] 		: '';
+		$customer_name		= isset($post['customer_name']) 	? $post['customer_name'] 	: '';
+		$product_type		= isset($post['product_type']) 		? $post['product_type'] 	: '';
+		$quantity			= isset($post['quantity']) 			? $post['quantity'] 		: '';
+		$vial				= isset($post['vial']) 				? $post['vial'] 			: '';
+		$total_cel			= isset($post['total_cel']) 		? $post['total_cel'] 		: '';
+		$package_type		= isset($post['package_type']) 		? $post['package_type'] 	: '';
+		$delivery_time		= isset($post['delivery_time']) 	? $post['delivery_time'] 	: '';
+		$giveaway			= isset($post['giveaway']) 			? $post['giveaway'] 		: '';
+		$sender				= isset($post['sender']) 			? $post['sender'] 			: '';
+		$receiver			= isset($post['receiver']) 			? $post['receiver'] 		: '';
+		$dealer_person		= isset($post['dealer_person']) 	? $post['dealer_person'] 	: '';
+		$dealer_company		= isset($post['dealer_company']) 	? $post['dealer_company'] 	: '';
+		$user_id			= isset($post['user_id']) 			? $post['user_id'] 			: '';
+		$last_update_date 	= isset($post['last_update_date']) 	? $post['last_update_date'] : '';
+		$price_rate			= isset($post['price_rate']) 		? $post['price_rate']		: '';
+		$comment_else		= isset($post['comment_else']) 		? $post['comment_else' ]	: '';
+
         $sql = "
-            INSERT INTO staff (
-                company
-				, passwd
-				, first_name
-				, last_name
-				, email
-				, phone_no
-				, is_staff
-				, is_active
-				, is_superuser
-				, date_joined
-				, address
+            INSERT INTO order_product (
+				order_code 
+				,customer_name 
+				,product_type 
+				,quantity  
+				,vial 
+				,total_cel 
+				,package_type 
+				,delivery_time 
+				,giveaway 
+				,sender 
+				,receiver 
+				,dealer_person 
+				,dealer_company 
+				,user_id 
+				,order_date 
+				,last_update_date 
+				,price_rate 
+				,comment_else 
             )
             VALUES (
-				'{$post['company']}'
-				, '{$post['pass']}'
-				, '{$post['firstName']}'
-				, '{$post['lastName']}'
-				, '{$post['email']}'
-				, '{$post['phone']}'
-				, {$post['is_staff']}
-				, true
-				, false
+				'{$order_code}'
+				, '{$customer_name}'
+				, '{$product_type}'
+				, '{$quantity}'
+				, '{$vial}'
+				, '{$total_cel}'
+				, '{$package_type}'
+				, '{$delivery_time}'
+				, '{$giveaway}'
+				, '{$sender}'
+				, '{$receiver}'
+				, '{$dealer_person}'
+				, '{$dealer_company}'
+				, '{$user_id}'
 				, NOW()
-				, '{$post['address']}'
+				, '{$last_update_date}'
+				, '{$price_rate}'
+				, '{$comment_else}'
+
 			);
         ";
-//echo '<pre>';
-//echo $sql;
+echo '<pre>';
+echo $sql;
         try {
             $sth = $this->db->prepare($sql);
 			
@@ -93,10 +120,7 @@ class Order extends DBConnection
     }
     public function deleteOrder($id, $isAdmin=null)
     {
-		if(!$_SESSION['is_superuser']){
-			$result['success'] = false;
-			return json_encode($result);
-		}
+
 		//-------------------------------
         $sql = "
             UPDATE staff SET
@@ -124,10 +148,7 @@ class Order extends DBConnection
     }
     public function updateOrder($post)
     {
-		if(!$_SESSION['is_superuser']){
-			$result['success'] = false;
-			return json_encode($result);
-		}
+
 		//-------------------------------
 		if ($post['pass'] != ""){
 			$update_passwd = ", passwd		= '{$post['pass']}'";

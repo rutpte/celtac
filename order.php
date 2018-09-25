@@ -17,8 +17,8 @@ header('Content-type: application/json');
 		$q   = isset($_POST['q']) ? $_POST['q'] : '';
 		$obj = new Order($pdo);
 		switch ($q) {
-			case "xxx" : //--> still not use on this case from js.
-				echo $obj->get_xxx();
+			case "add_order" : //--> still not use on this case from js.
+				echo $obj->addOrder($_POST);
 				//json_encode
 			break;
 			case "get_order" :
@@ -34,4 +34,7 @@ header('Content-type: application/json');
 		}
 	}
 
+ } else {
+	$result['success'] = false;
+	echo json_encode($result);
  }
