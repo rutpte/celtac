@@ -398,6 +398,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 									
 									<div class="col-8 mb-3">
 										<select class="custom-select d-block w-100" id="product_type" required>
+											<option value=""> - </option>
 											<option value="cell">Cell</option>
 											<option value="prp_ready">PRP Ready</option>
 											<option value="placenta">Placenta</option>
@@ -456,6 +457,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 										<select class="custom-select d-block w-100" id="package_type" required>
 											<option value="ID">ID</option>
 											<option value="IV">IV</option>
+											<option value="IV">IM</option>
 										</select>
 									</div>
 								</div>

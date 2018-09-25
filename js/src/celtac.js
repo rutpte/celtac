@@ -409,17 +409,7 @@
 				
 				
 			}
-			,"modal_add_order" : function(){
-				
 
-					
-					//-----------------------
-					
-					$('#modal_add_order').modal('show');
-					
-
-				
-			}
 			,"order" : function(q,obj){
 				switch (q) {
 					case "show_model_addorder": 
@@ -439,8 +429,41 @@
 								event.preventDefault();
 							}
 						});
+						
+						$('#product_type').on('change', function() {
+							if(this.value == "cell"){
+								//$('#quantity').show();
+								//$('#vial').show();
+								$("#quantity").prop('disabled', false);
+								//$("#vial").prop('disabled', false);
+								$('#total_cel').prop('disabled', false);
+								
+								$('#quantity').on('keyup', function(){
+									var quantity = $('#quantity').val();
+									var vial = $('#vial').val();
+									var total_cel = parseInt(quantity*vial);
+									$('#total_cel').val(total_cel);
+								});
+								$('#vial').on('keyup', function(){
+									var quantity = $('#quantity').val();
+									var vial = $('#vial').val();
+									var total_cel = parseInt(quantity*vial);
+									$('#total_cel').val(total_cel);
+								});
+							} else {
+								//$('#quantity').hide();
+								//$('#vial').hide();
+								$("#quantity").prop('disabled', true);
+								//$("#vial").prop('disabled', true);
+								$('#total_cel').prop('disabled', true);
+							}
+							
+							
+						});
+						
+
 						break;
-					case "add":
+					case "add_order":
 						var customer_name			= $('#customer_name').val();
 						var product_type			= $('#product_type').val();
 						var quantity				= $('#quantity').val();
