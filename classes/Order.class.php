@@ -27,28 +27,46 @@ class Order extends DBConnection
     }
 
     public function addOrder($post){
+		//echo "                                   Hed "; exit;
+		//echo trim("                                   Hed "); exit;
+		
 		//var_dump($post);exit;
 		//$timestamp = strtotime("26-09-2018");
 		//var_dump($timestamp);exit;
 		//var_dump($post);exit;
 		//var_dump($_SESSION['owner_id']);exit;
-		$order_code			= isset($post['order_code']) 		? $post['order_code'] 		: '';
-		$customer_name		= isset($post['customer_name']) 	? $post['customer_name'] 	: '';
-		$product_type		= isset($post['product_type']) 		? $post['product_type'] 	: '';
-		$quantity			= isset($post['quantity']) 			? $post['quantity'] 		: '';
-		$vial				= isset($post['vial']) 				? $post['vial'] 			: '';
-		$total_cel			= isset($post['total_cel']) 		? $post['total_cel'] 		: '';
-		$package_type		= isset($post['package_type']) 		? $post['package_type'] 	: '';
-		$delivery_time		= isset($post['delivery_date']) 	? strtotime($post['delivery_date']) 	: '';
-		$giveaway			= isset($post['giveaway']) 			? $post['giveaway'] 		: '';
-		$sender				= isset($post['sender']) 			? $post['sender'] 			: '';
-		$receiver			= isset($post['receiver']) 			? $post['receiver'] 		: '';
-		$dealer_person		= isset($post['dealer_person']) 	? $post['dealer_person'] 	: '';
-		$dealer_company		= isset($post['dealer_company']) 	? $post['dealer_company'] 	: '';
-		$user_id			= isset($_SESSION['owner_id']) 		? $_SESSION['owner_id']		: '';
+		
+$hour			= $post['delivery_time_hour'];
+$minute			= $post['delivery_time_minute'];
+$date_raw 		= $post['delivery_date'];
+//2015-03-26 11:39:59
+$str_date		= $date_raw.' '.$hour.':'.$minute.':00';
+//echo $str_date; exit;
+$date_full 		= new DateTime($str_date);
+//--$date_formated 	= $date_full->format('d-m-Y H:i:s');
+$date_formated 	= $date_full;
+//echo $date->format('d-m-Y');
+//echo $date_formated; exit;
+
+
+		$order_code			= isset($post['order_code']) 			? "'".$post['order_code']."'" 										: 'null';
+		$customer_name		= isset($post['customer_name']) 		? "'".$post['customer_name']."'"									: 'null';
+		$product_type		= isset($post['product_type']) 			? "'".$post['product_type']."'"										: 'null';
+		$quantity			= isset($post['quantity']) 			&& $post['quantity'] != "" ? $post['quantity'] 							: 'null';
+		$vial				= isset($post['vial']) 					? $post['vial'] 													: 'null';
+		$total_cel			= isset($post['total_cel']) 		&& $post['total_cel'] != "" ? $post['total_cel'] 						: 'null';
+		$package_type		= isset($post['package_type']) 		&& $post['package_type'] != "" ? "'".$post['package_type']."'" 			: 'null';
+		//$delivery_time		= isset($post['delivery_date']) 	? strtotime($post['delivery_date']) 	: '';
+		$delivery_date_time	= isset($post['delivery_date']) 		? $date_formated 													: 'null';
+		$giveaway			= isset($post['giveaway']) 				? "'".$post['giveaway']."'" 										: 'null';
+		$sender				= isset($post['sender']) 				? "'".$post['sender']."'" 											: 'null';
+		$receiver			= isset($post['receiver']) 				? "'".$post['receiver']."'" 										: 'null';
+		$dealer_person		= isset($post['dealer_person']) 		? "'".$post['dealer_person']."'" 									: 'null';
+		$dealer_company		= isset($post['dealer_company']) 		? "'".$post['dealer_company']."'" 									: 'null';
+		$user_id			= isset($_SESSION['owner_id']) 			? $_SESSION['owner_id']												: 'null';
 		//$last_update_date 	= isset($post['last_update_date']) 	? $post['last_update_date'] : '';
-		$price_rate			= isset($post['price_rate']) 		? $post['price_rate']		: '';
-		$comment_else		= isset($post['comment_else']) 		? $post['comment_else' ]	: '';
+		$price_rate			= isset($post['price_rate']) 			? "'".$post['price_rate']."'"										: 'null';
+		$comment_else		= isset($post['comment_else']) 			? "'".$post['comment_else' ]."'"									: 'null';
 
         $sql = "
             INSERT INTO order_product (
@@ -59,7 +77,7 @@ class Order extends DBConnection
 				,vial 
 				,total_cel 
 				,package_type 
-				,delivery_time 
+				,delivery_date_time
 				,giveaway 
 				,sender 
 				,receiver 
@@ -72,24 +90,24 @@ class Order extends DBConnection
 				,comment_else 
             )
             VALUES (
-				'{$order_code}'
-				, '{$customer_name}'
-				, '{$product_type}'
-				, '{$quantity}'
-				, '{$vial}'
-				, '{$total_cel}'
-				, '{$package_type}'
-				, '{$delivery_time}'
-				, '{$giveaway}'
-				, '{$sender}'
-				, '{$receiver}'
-				, '{$dealer_person}'
-				, '{$dealer_company}'
-				, '{$user_id}'
+				{$order_code}
+				, {$customer_name}
+				, {$product_type}
+				, {$quantity}
+				, {$vial}
+				, {$total_cel}
+				, {$package_type}
+				, {$delivery_date_time}
+				, {$giveaway}
+				, {$sender}
+				, {$receiver}
+				, {$dealer_person}
+				, {$dealer_company}
+				, {$user_id}
 				, NOW()
 				, NOW()
-				, '{$price_rate}'
-				, '{$comment_else}'
+				, {$price_rate}
+				, {$comment_else}
 
 			);
         ";

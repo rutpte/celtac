@@ -443,16 +443,26 @@ $(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
 								var quantity = $('#quantity').val();
 								var vial = $('#vial').val();
 								var total_cel = parseInt(quantity*vial);
-								$('#total_cel').val(total_cel);
+								
+								
+								$('#quantity').prop('disabled', false);
 								$('#total_cel').prop('disabled', false);
+								$('#package_type').prop('disabled', false);
+								
+								$('#total_cel').val(total_cel);
+								$('#package_type').val('ID');
 							} else {
 								//$('#quantity').hide();
 								//$('#vial').hide();
 								//$("#quantity").prop('disabled', true);
 								//$("#vial").prop('disabled', true);
 								$('#total_cel').prop('disabled', true);
+								$('#quantity').prop('disabled', true);
+								$('#package_type').prop('disabled', true);
 								
 								$('#total_cel').val('');
+								$('#quantity').val('');
+								$('#package_type').val('');
 							
 							}
 						});
@@ -527,59 +537,83 @@ $(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
 							//$('#firstName').css('color', 'ui-state-error ui-corner-all');
 							celtac.g_func.notice_div_error(arr_dom_id,"customer_name");
 							sta_validate = false;
-						} else if (product_type == ""){
+						} 
+						if (product_type == ""){
 							celtac.g_func.notice_div_error(arr_dom_id,"product_type");
 							sta_validate = false;
-						} else if (quantity == ""){
-							celtac.g_func.notice_div_error(arr_dom_id,"quantity");
-							sta_validate = false;
-						} else if (vial == ""){
+						}
+						if (quantity == ""){
+							if(this.value == "cell"){
+								celtac.g_func.notice_div_error(arr_dom_id,"quantity");
+								sta_validate = false;
+							}
+
+						} 
+						if (vial == ""){
 							celtac.g_func.notice_div_error(arr_dom_id,"vial");
 							sta_validate = false;
-						} else if(total_cel == ""){
-							celtac.g_func.notice_div_error(arr_dom_id,"total_cel");
-							sta_validate = false;
-						} else if (package_type == ""){
-							celtac.g_func.notice_div_error(arr_dom_id,"package_type");
-							sta_validate = false;
+						}
+						if(total_cel == ""){
+							if(this.value == "cell"){
+								celtac.g_func.notice_div_error(arr_dom_id,"total_cel");
+								sta_validate = false;
+							}
 
-						} else if (delivery_date == ""){
+						} 
+						if (package_type == ""){
+							if(this.value == "cell"){
+								celtac.g_func.notice_div_error(arr_dom_id,"package_type");
+								sta_validate = false;
+							}
+
+
+						} 
+						if (delivery_date == ""){
 							celtac.g_func.notice_div_error(arr_dom_id,"delivery_date");
 							sta_validate = false;
 						
-						} else if (delivery_time_hour == ""){
+						} 
+						if (delivery_time_hour == ""){
 							celtac.g_func.notice_div_error(arr_dom_id,"delivery_time_hour");
 							sta_validate = false;
 						
-						} else if (delivery_time_minute == ""){
+						} 
+						if (delivery_time_minute == ""){
 							celtac.g_func.notice_div_error(arr_dom_id,"delivery_time_minute");
 							sta_validate = false;
 						
-						} else if (giveaway == ""){
+						} 
+						if (giveaway == ""){
 							celtac.g_func.notice_div_error(arr_dom_id,"giveaway");
 							sta_validate = false;
 						
-						} else if (sender == ""){
+						} 
+						if (sender == ""){
 							celtac.g_func.notice_div_error(arr_dom_id,"sender");
 							sta_validate = false;
 						
-						}  else if (receiver == ""){
+						} 
+						if (receiver == ""){
 							celtac.g_func.notice_div_error(arr_dom_id,"receiver");
 							sta_validate = false;
 						
-						} else if (dealer_person == ""){
+						} 
+						if (dealer_person == ""){
 							celtac.g_func.notice_div_error(arr_dom_id,"dealer_person");
 							sta_validate = false;
 						
-						} else if (dealer_company == ""){
+						}
+						if (dealer_company == ""){
 							celtac.g_func.notice_div_error(arr_dom_id,"dealer_company");
 							sta_validate = false;
 						
-						} else if (price_rate == ""){
+						} 
+						if (price_rate == ""){
 							celtac.g_func.notice_div_error(arr_dom_id,"price_rate");
 							sta_validate = false;
 						
-						} /*else if (comment_else == ""){
+						} /*
+						if (comment_else == ""){
 							celtac.g_func.notice_div_error(arr_dom_id,"comment_else");
 							sta_validate = false;
 						}*/

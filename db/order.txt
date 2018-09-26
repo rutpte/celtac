@@ -12,7 +12,7 @@ CREATE TABLE order_product
   vial integer,
   total_cel integer,
   package_type character varying(50),
-  delivery_time date,
+  delivery_date_time date,
   giveaway character varying(200),
   sender character varying(200) NOT NULL,
   receiver character varying(200) NOT NULL,
