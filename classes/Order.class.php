@@ -26,8 +26,12 @@ class Order extends DBConnection
         parent::__construct($pdo);
     }
 
-    public function addOrder($post)
-    {
+    public function addOrder($post){
+		//var_dump($post);exit;
+		//$timestamp = strtotime("26-09-2018");
+		//var_dump($timestamp);exit;
+		//var_dump($post);exit;
+		//var_dump($_SESSION['owner_id']);exit;
 		$order_code			= isset($post['order_code']) 		? $post['order_code'] 		: '';
 		$customer_name		= isset($post['customer_name']) 	? $post['customer_name'] 	: '';
 		$product_type		= isset($post['product_type']) 		? $post['product_type'] 	: '';
@@ -35,14 +39,14 @@ class Order extends DBConnection
 		$vial				= isset($post['vial']) 				? $post['vial'] 			: '';
 		$total_cel			= isset($post['total_cel']) 		? $post['total_cel'] 		: '';
 		$package_type		= isset($post['package_type']) 		? $post['package_type'] 	: '';
-		$delivery_time		= isset($post['delivery_time']) 	? $post['delivery_time'] 	: '';
+		$delivery_time		= isset($post['delivery_date']) 	? strtotime($post['delivery_date']) 	: '';
 		$giveaway			= isset($post['giveaway']) 			? $post['giveaway'] 		: '';
 		$sender				= isset($post['sender']) 			? $post['sender'] 			: '';
 		$receiver			= isset($post['receiver']) 			? $post['receiver'] 		: '';
 		$dealer_person		= isset($post['dealer_person']) 	? $post['dealer_person'] 	: '';
 		$dealer_company		= isset($post['dealer_company']) 	? $post['dealer_company'] 	: '';
-		$user_id			= isset($post['user_id']) 			? $post['user_id'] 			: '';
-		$last_update_date 	= isset($post['last_update_date']) 	? $post['last_update_date'] : '';
+		$user_id			= isset($_SESSION['owner_id']) 		? $_SESSION['owner_id']		: '';
+		//$last_update_date 	= isset($post['last_update_date']) 	? $post['last_update_date'] : '';
 		$price_rate			= isset($post['price_rate']) 		? $post['price_rate']		: '';
 		$comment_else		= isset($post['comment_else']) 		? $post['comment_else' ]	: '';
 
@@ -83,14 +87,14 @@ class Order extends DBConnection
 				, '{$dealer_company}'
 				, '{$user_id}'
 				, NOW()
-				, '{$last_update_date}'
+				, NOW()
 				, '{$price_rate}'
 				, '{$comment_else}'
 
 			);
         ";
 echo '<pre>';
-echo $sql;
+echo $sql; exit;
         try {
             $sth = $this->db->prepare($sql);
 			

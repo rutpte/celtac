@@ -112,6 +112,19 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				  </div>
 				  <div class="modal-body" id="modal-body-add_order_edit">
 						<form class="needs-validation" novalidate>
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-4 mb-3">
+										<label for="order_code_edit">order_code</label>
+									</div>
+									
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="order_code_edit" placeholder="CT-09/23">
+									</div>
+								</div>
+								<div id="order_code_vlid_edit"></div>
+								
+							</div>
 							<!-- **************************************** -->
 							<div class="mb-3">
 								<div class="row">
@@ -379,6 +392,20 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<div class="mb-3">
 								<div class="row">
 									<div class="col-4 mb-3">
+										<label for="order_code">order_code</label>
+									</div>
+									
+									<div class="col-8 mb-3">
+										<input type="text" class="form-control" id="order_code" placeholder="CT-09/23">
+									</div>
+								</div>
+								<div id="order_code_vlid"></div>
+								
+							</div>
+							<!-- **************************************** -->
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-4 mb-3">
 										<label for="customer_name">customer name</label>
 									</div>
 									
@@ -398,7 +425,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 									
 									<div class="col-8 mb-3">
 										<select class="custom-select d-block w-100" id="product_type" required>
-											<option value=""> - </option>
+											
 											<option value="cell">Cell</option>
 											<option value="prp_ready">PRP Ready</option>
 											<option value="placenta">Placenta</option>

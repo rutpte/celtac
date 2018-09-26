@@ -440,48 +440,61 @@ $(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
 						
 						$('#product_type').on('change', function() {
 							if(this.value == "cell"){
-								//$('#quantity').show();
-								//$('#vial').show();
-								$("#quantity").prop('disabled', false);
-								//$("#vial").prop('disabled', false);
+								var quantity = $('#quantity').val();
+								var vial = $('#vial').val();
+								var total_cel = parseInt(quantity*vial);
+								$('#total_cel').val(total_cel);
 								$('#total_cel').prop('disabled', false);
-								
-								$('#quantity').on('keyup', function(){
-									var quantity = $('#quantity').val();
-									var vial = $('#vial').val();
-									var total_cel = parseInt(quantity*vial);
-									$('#total_cel').val(total_cel);
-								});
-								$('#vial').on('keyup', function(){
-									var quantity = $('#quantity').val();
-									var vial = $('#vial').val();
-									var total_cel = parseInt(quantity*vial);
-									$('#total_cel').val(total_cel);
-								});
 							} else {
 								//$('#quantity').hide();
 								//$('#vial').hide();
-								$("#quantity").prop('disabled', true);
+								//$("#quantity").prop('disabled', true);
 								//$("#vial").prop('disabled', true);
 								$('#total_cel').prop('disabled', true);
+								
+								$('#total_cel').val('');
+							
 							}
-							
-							
+						});
+						
+						$('#quantity').on('keyup', function(){
+							var check_data = $('#product_type').val();
+							if(check_data == 'cell'){
+								var quantity = $('#quantity').val();
+								var vial = $('#vial').val();
+								var total_cel = parseInt(quantity*vial);
+								$('#total_cel').val(total_cel);
+							} 
+
+						});
+						$('#vial').on('keyup', function(){
+							var check_data = $('#product_type').val();
+							if(check_data == 'cell'){
+								var quantity = $('#quantity').val();
+								var vial = $('#vial').val();
+								var total_cel = parseInt(quantity*vial);
+								$('#total_cel').val(total_cel);
+							}
+
 						});
 						
 
 						break;
 					case "add_order":
+						var order_code				= $('#order_code').val();
 						var customer_name			= $('#customer_name').val();
 						var product_type			= $('#product_type').val();
 						var quantity				= $('#quantity').val();
 						var vial					= $('#vial').val();
 						var total_cel				= $('#total_cel').val();
 						var package_type			= $('#package_type').val();
-						var delivery_date			= $('#delivery_date').val();
+						//var delivery_date			= $('#delivery_date').val();
+						//var delivery_date			= $('#delivery_date').datepicker({ dateFormat: 'dd-mm-yy' }).val();
+						var delivery_date			= $('#delivery_date').datepicker("option", "dateFormat", "dd-mm-yy" ).val();
 						var delivery_time_hour		= $('#delivery_time_hour').val();
 						var delivery_time_minute	= $('#delivery_time_minute').val();
 						var giveaway				= $('#giveaway').val();
+						var sender					= $('#sender').val();
 						var receiver				= $('#receiver').val();
 						var dealer_person			= $('#dealer_person').val();
 						var dealer_company			= $('#dealer_company').val();
@@ -500,6 +513,7 @@ $(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
 						arr_dom_id.push('delivery_time_hour');
 						arr_dom_id.push('delivery_time_minute');
 						arr_dom_id.push('giveaway');
+						arr_dom_id.push('sender');
 						arr_dom_id.push('receiver');
 						arr_dom_id.push('dealer_person');
 						arr_dom_id.push('dealer_company');
@@ -545,7 +559,11 @@ $(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
 							celtac.g_func.notice_div_error(arr_dom_id,"giveaway");
 							sta_validate = false;
 						
-						} else if (receiver == ""){
+						} else if (sender == ""){
+							celtac.g_func.notice_div_error(arr_dom_id,"sender");
+							sta_validate = false;
+						
+						}  else if (receiver == ""){
 							celtac.g_func.notice_div_error(arr_dom_id,"receiver");
 							sta_validate = false;
 						
@@ -561,10 +579,10 @@ $(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
 							celtac.g_func.notice_div_error(arr_dom_id,"price_rate");
 							sta_validate = false;
 						
-						} else if (comment_else == ""){
+						} /*else if (comment_else == ""){
 							celtac.g_func.notice_div_error(arr_dom_id,"comment_else");
 							sta_validate = false;
-						}
+						}*/
 						
 						if(sta_validate){
 							$.ajax({
@@ -573,6 +591,7 @@ $(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
 								method : 'POST',
 								data: { 
 									"q"              			: "add_order"
+									,"order_code"         		: order_code	
 									,"customer_name"         	: customer_name	
 									,"product_type"				: product_type		
 									,"quantity"					: quantity			
@@ -582,7 +601,8 @@ $(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
 									,"delivery_date"			: delivery_date			
 									,"delivery_time_hour"		: delivery_time_hour		
 									,"delivery_time_minute"		: delivery_time_minute
-									,"giveaway"					: giveaway				
+									,"giveaway"					: giveaway
+									,"sender"					: sender									
 									,"receiver"					: receiver				
 									,"dealer_person"			: dealer_person		
 									,"dealer_company"			: dealer_company			
