@@ -7,8 +7,10 @@
 			"func1" : function(){
 				console.log("usesing func1");
 			}
-			,"func2" : function(){
-				console.log("usesing func2");
+			,"pad" : function(num, size){
+				var s = num+"";
+				while (s.length < size) s = "0" + s;
+				return s;
 			}
 			,"manage_page" : function(user_type){
 				//--> not use but keep for prototype.
@@ -36,7 +38,16 @@
 				celtac.g_func.gen_qrcode_contact();
 				
 			}
-			,"notice_div_error" : function(arr_dom_id,str_current_dom_id){
+			,"notice_div_error" : function(status,str_current_dom_id){
+				
+				if(status){
+					$('#'+str_current_dom_id+'').addClass('ui-state-error ui-corner-all');
+				} else {
+					$('#'+str_current_dom_id+'').removeClass('ui-state-error ui-corner-all');
+				}
+				
+			}
+			,"notice_div_error_BC" : function(arr_dom_id,str_current_dom_id){
 				for (i = 0; i < arr_dom_id.length; i++) {
 					if(arr_dom_id[i] == str_current_dom_id){
 						$('#'+arr_dom_id[i]+'').addClass('ui-state-error ui-corner-all');
@@ -490,18 +501,56 @@ $(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
 						//-------------------------------------------------------
 						//alert( new Date().getTimezoneOffset() );
 						//Date.parse('2012-01-26T13:51:50.417-07:00');
+						
+						//date = new Date('2018-09-30 03:00:02');
+						//date.getTime();
+						//celtac.g_func.pad();
+
+						//-----
 						$('#delivery_time_hour').on('change', function() {
-							var date = new Date();
-							var current_timestamp = date.getTime();
+							var rs = celtac.g_func.order('check_avalible_time_order');
+							if(!rs){
+								$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+								$('#modal_notice_customer').modal('show');
+								
+							}
 							
-							var daliverly_date = new Date("2016-07-27T07:45:00Z");
 						});
+						//---
 						$('#delivery_time_minute').on('change', function() {
-							var date = new Date();
-							var current_timestamp = date.getTime();
+							var rs = celtac.g_func.order('check_avalible_time_order');
+							if(!rs){
+								$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+								$('#modal_notice_customer').modal('show');
+								
+
+							}
 							
-							var daliverly_date = new Date("2016-07-27T07:45:00Z");
 						});
+						break;
+					case "check_avalible_time_order":
+						var validate_date_daliverly = function(){
+							var date 				= new Date();
+							var current_timestamp 	= date.getTime();
+							
+							var str_daliverly_date 			= $('#delivery_date').datepicker("option", "dateFormat", "yy-mm-dd" ).val();
+							var h 							= $('#delivery_time_hour').val();
+							var m 							= $('#delivery_time_minute').val();
+							var str_date_time				= str_daliverly_date+' '+celtac.g_func.pad(h,2)+':'+celtac.g_func.pad(m,2)+':'+'00';
+							//debugger;
+							var obj_daliverly_date  			= new Date(str_date_time);
+							var timestamp_daliverly_date 		= obj_daliverly_date.getTime();
+							var minli_different_time_daliverly	= timestamp_daliverly_date - current_timestamp;
+							var min_different_time_daliverly	= (minli_different_time_daliverly / 1000)/60; //change to minute.
+							if (min_different_time_daliverly < 300){
+								console.log("not avalible order in your time specify");
+								return false;
+							} else {
+								return true;
+							}
+						}
+						var rs = validate_date_daliverly();
+						return rs;
 						break;
 					case "add_order":
 						var order_code				= $('#order_code').val();
@@ -542,95 +591,149 @@ $(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
 						arr_dom_id.push('dealer_company');
 						arr_dom_id.push('price_rate');
 						arr_dom_id.push('comment_else');
+						
 
 						
 						var sta_validate = true;
-						if (customer_name == ""){
-							
-							//$('#firstName').css('color', 'ui-state-error ui-corner-all');
-							celtac.g_func.notice_div_error(arr_dom_id,"customer_name");
-							sta_validate = false;
-						} 
-						if (product_type == ""){
-							celtac.g_func.notice_div_error(arr_dom_id,"product_type");
-							sta_validate = false;
-						}
-						if (quantity == ""){
-							if(this.value == "cell"){
-								celtac.g_func.notice_div_error(arr_dom_id,"quantity");
-								sta_validate = false;
-							}
-
-						} 
-						if (vial == ""){
-							celtac.g_func.notice_div_error(arr_dom_id,"vial");
-							sta_validate = false;
-						}
-						if(total_cel == ""){
-							if(this.value == "cell"){
-								celtac.g_func.notice_div_error(arr_dom_id,"total_cel");
-								sta_validate = false;
-							}
-
-						} 
-						if (package_type == ""){
-							if(this.value == "cell"){
-								celtac.g_func.notice_div_error(arr_dom_id,"package_type");
-								sta_validate = false;
-							}
-
-
-						} 
-						if (delivery_date == ""){
-							celtac.g_func.notice_div_error(arr_dom_id,"delivery_date");
-							sta_validate = false;
-						
-						} 
-						if (delivery_time_hour == ""){
-							celtac.g_func.notice_div_error(arr_dom_id,"delivery_time_hour");
-							sta_validate = false;
-						
-						} 
-						if (delivery_time_minute == ""){
-							celtac.g_func.notice_div_error(arr_dom_id,"delivery_time_minute");
-							sta_validate = false;
-						
-						} 
-						if (giveaway == ""){
-							celtac.g_func.notice_div_error(arr_dom_id,"giveaway");
-							sta_validate = false;
-						
-						} 
-						if (sender == ""){
-							celtac.g_func.notice_div_error(arr_dom_id,"sender");
-							sta_validate = false;
-						
-						} 
-						if (receiver == ""){
-							celtac.g_func.notice_div_error(arr_dom_id,"receiver");
-							sta_validate = false;
-						
-						} 
-						if (dealer_person == ""){
-							celtac.g_func.notice_div_error(arr_dom_id,"dealer_person");
-							sta_validate = false;
-						
-						}
-						if (dealer_company == ""){
-							celtac.g_func.notice_div_error(arr_dom_id,"dealer_company");
-							sta_validate = false;
-						
-						} 
 						if (price_rate == ""){
-							celtac.g_func.notice_div_error(arr_dom_id,"price_rate");
+							celtac.g_func.notice_div_error(true,"price_rate");
 							sta_validate = false;
 						
-						} /*
+						}else {
+							celtac.g_func.notice_div_error(false,"price_rate");
+						}
+						//--
+						if (dealer_company == ""){
+							celtac.g_func.notice_div_error(true,"dealer_company");
+							sta_validate = false;
+						}else {
+							celtac.g_func.notice_div_error(false,"dealer_company");
+						}
+						//--
+						if (dealer_person == ""){
+							celtac.g_func.notice_div_error(true,"dealer_person");
+							sta_validate = false;
+						
+						}else {
+							celtac.g_func.notice_div_error(false,"dealer_person");
+						}
+						//--
+						if (receiver == ""){
+							celtac.g_func.notice_div_error(true,"receiver");
+							sta_validate = false;
+						
+						}else {
+							celtac.g_func.notice_div_error(false,"receiver");
+						}
+						//--
+						if (sender == ""){
+							celtac.g_func.notice_div_error(true,"sender");
+							sta_validate = false;
+						
+						}else {
+							celtac.g_func.notice_div_error(false,"sender");
+						}
+						//--
+						if (giveaway == ""){
+							celtac.g_func.notice_div_error(true,"giveaway");
+							sta_validate = false;
+						
+						}else {
+							celtac.g_func.notice_div_error(false,"giveaway");
+						}
+						//--
+						if (delivery_time_minute == ""){
+							celtac.g_func.notice_div_error(true,"delivery_time_minute");
+							sta_validate = false;
+						
+						}else {
+							celtac.g_func.notice_div_error(false,"delivery_time_minute");
+						}
+						//--
+						if (delivery_time_hour == ""){
+							celtac.g_func.notice_div_error(true,"delivery_time_hour");
+							sta_validate = false;
+						
+						}else {
+							celtac.g_func.notice_div_error(false,"delivery_time_hour");
+						} 
+						//--
+						if (delivery_date == ""){
+							celtac.g_func.notice_div_error(true,"delivery_date");
+							sta_validate = false;
+						
+						}else {
+							celtac.g_func.notice_div_error(false,"delivery_date");
+						} 
+						//--
+						if (package_type == ""){
+							if($('#product_type').val() == "cell"){
+								celtac.g_func.notice_div_error(true,"package_type");
+								sta_validate = false;
+							}
+						}else {
+							if($('#product_type').val() == "cell"){
+								celtac.g_func.notice_div_error(false,"package_type");
+							}
+						} 
+						//--
+						if(total_cel == ""){
+							if($('#product_type').val() == "cell"){
+								celtac.g_func.notice_div_error(true,"total_cel");
+								sta_validate = false;
+							}
+						} else {
+							if($('#product_type').val() == "cell"){
+								celtac.g_func.notice_div_error(false,"total_cel");
+							}
+						} 
+						//--
+						if (vial == ""){
+							celtac.g_func.notice_div_error(true,"vial");
+							sta_validate = false;
+						}else {
+							celtac.g_func.notice_div_error(false,"vial");
+						}
+						//--
+						if (quantity == ""){
+							if($('#product_type').val() == "cell"){
+								celtac.g_func.notice_div_error(true,"quantity");
+								sta_validate = false;
+							}
+						} else {
+							if($('#product_type').val() == "cell"){
+								celtac.g_func.notice_div_error(false,"quantity");
+							}
+						} 
+						//--
+						if (product_type == ""){
+							celtac.g_func.notice_div_error(true,"product_type");
+							sta_validate = false;
+						}else {
+							celtac.g_func.notice_div_error(false,"product_type");
+						}
+						//--
+						if (customer_name == ""){
+							celtac.g_func.notice_div_error(true,"customer_name");
+							sta_validate = false;
+						} else {
+							celtac.g_func.notice_div_error(false,"customer_name");
+						}
+
+						/*
 						if (comment_else == ""){
 							celtac.g_func.notice_div_error(arr_dom_id,"comment_else");
 							sta_validate = false;
 						}*/
 						
+						var rs = celtac.g_func.order('check_avalible_time_order');
+						if(!rs){
+							$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+							$('#modal_notice_customer').modal('show');
+							
+							sta_validate = false;
+						}
+							
 						if(sta_validate){
 							$.ajax({
 								url: "order.php",

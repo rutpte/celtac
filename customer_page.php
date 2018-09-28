@@ -679,6 +679,27 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 			  </div>
 			</div>
 		<!-- ************************************************************************************************************** -->
+			<div class="modal fade" id="modal_notice_customer" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<p class="modal-title" id="modalLabel">notice.</p><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body" id="modal-body-contact">
+					<h3 style="color:red">notice.</h3>
+					<p class="lead" id="msg_modal_notice_customer">-</p>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" id="" class="btn btn-secondary" data-dismiss="modal"> ok </button>
+					
+				  </div>
+				</div>
+			  </div>
+			</div>
+		<!-- ************************************************************************************************************** -->
 		<main role="main" class="container">
 
 
