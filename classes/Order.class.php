@@ -36,17 +36,26 @@ class Order extends DBConnection
 		//var_dump($post);exit;
 		//var_dump($_SESSION['owner_id']);exit;
 		
-$hour			= $post['delivery_time_hour'];
-$minute			= $post['delivery_time_minute'];
-$date_raw 		= $post['delivery_date'];
-//2015-03-26 11:39:59
-$str_date		= $date_raw.' '.$hour.':'.$minute.':00';
-//echo $str_date; exit;
-$date_full 		= new DateTime($str_date);
-//--$date_formated 	= $date_full->format('d-m-Y H:i:s');
-$date_formated 	= $date_full;
-//echo $date->format('d-m-Y');
-//echo $date_formated; exit;
+		$hour			= $post['delivery_time_hour'];
+		$minute			= $post['delivery_time_minute'];
+		$date_raw 		= $post['delivery_date'];
+		//2015-03-26 11:39:59
+		$str_date		= $date_raw.' '.$hour.':'.$minute.':00'; //27-09-2018 14:0:00
+		//echo $str_date; exit;
+		//$date_full 		= new DateTime($str_date);
+		$obj_date 		= new DateTime($str_date);;
+		$date_formated 	= $obj_date->format('Y-m-d H:i:s');
+		//$date_timestamp = strtotime($date_formated);
+		//echo strtotime($date_formated); exit;
+		//echo date('Y-m-d H:i:s', strtotime($test)); exit;
+		//echo $str_date;
+		//echo  '</br>';
+		//echo strtotime($str_date);exit;
+		//echo date('Y-m-d', strtotime($str_date)); exit;
+		//--$date_formated 	= $date_full->format('d-m-Y H:i:s');
+		//$date_formated 	= $date_full;
+		//echo $date->format('d-m-Y');
+		//echo $date_formated; exit;
 
 
 		$order_code			= isset($post['order_code']) 			? "'".$post['order_code']."'" 										: 'null';
@@ -57,7 +66,7 @@ $date_formated 	= $date_full;
 		$total_cel			= isset($post['total_cel']) 		&& $post['total_cel'] != "" ? $post['total_cel'] 						: 'null';
 		$package_type		= isset($post['package_type']) 		&& $post['package_type'] != "" ? "'".$post['package_type']."'" 			: 'null';
 		//$delivery_time		= isset($post['delivery_date']) 	? strtotime($post['delivery_date']) 	: '';
-		$delivery_date_time	= isset($post['delivery_date']) 		? $date_formated 													: 'null';
+		$delivery_date_time	= isset($post['delivery_date']) 		? "'".$date_formated."'" 													: 'null';
 		$giveaway			= isset($post['giveaway']) 				? "'".$post['giveaway']."'" 										: 'null';
 		$sender				= isset($post['sender']) 				? "'".$post['sender']."'" 											: 'null';
 		$receiver			= isset($post['receiver']) 				? "'".$post['receiver']."'" 										: 'null';
@@ -111,8 +120,8 @@ $date_formated 	= $date_full;
 
 			);
         ";
-echo '<pre>';
-echo $sql; exit;
+//echo '<pre>';
+//echo $sql; exit;
         try {
             $sth = $this->db->prepare($sql);
 			
@@ -144,12 +153,17 @@ echo $sql; exit;
     {
 
 		//-------------------------------
+		/*
         $sql = "
-            UPDATE staff SET
+            UPDATE order_product SET
                 is_active = false
             WHERE id = {$id}
         ";
-
+		*/
+        $sql = "
+            DELETE FROM order_product
+            WHERE id = {$id}
+        ";
         try {
             $sth = $this->db->prepare($sql);
 
@@ -220,7 +234,10 @@ echo $sql; exit;
             from order_product
 			where 1=1
 			and user_id = '{$_SESSION['owner_id']}'
+			and delivery_date_time >= now()
+			order by order_code
         ";
+		//now()::date
         //echo "<pre>", $sql; exit;
         $sth = $this->db->prepare($sql);  //sql2
         $result = array();

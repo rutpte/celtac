@@ -6,7 +6,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 	//print_r($rs); exit;
 	//print_r($value['name']);exit;
 	
-	// echo '<pre>';
+	 // echo '<pre>';
 	// foreach ($rs_arr as &$value) {
 		// print_r($value);
 	// }
@@ -683,25 +683,59 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 
 
 		  <div>
-
+				<!--
 				<div class="row">
-				<div class="col-4"><div style="color:#77797c">name</div></div>
-				<div class="col-5"><div style="color:#77797c">email</div></div>
-				<div class="col-1"><div style="color:#77797c">edit</div></div>
-				<div class="col-2"><div style="color:#77797c">del</div></div>
-				</div>
+				<div class="col-3"><div style="color:#77797c">code</div></div>
+				<div class="col-2"><div style="color:#77797c">customer</div></div>
+				<div class="col-2"><div style="color:#77797c">product</div></div>
+				<div class="col-4"><div style="color:#77797c">time</div></div>
+				<div class="col-1"><div style="color:#77797c"></div></div>
+				
+				</div> 
+				-->
 				
 <?php 
+	$pre_code = '';
+	//$swichted = false;
+	$index_color = 0;
 	foreach ($rs_arr as &$value) {
 
+		if($pre_code != ''){
+			
+			if($value['order_code'] == $pre_code){
+				if(($index_color%2)==0){
+					$color = '#fcfcfc';
+				} else {
+					$color = '#c6c6c6';
+				}
+				$pre_code = $value['order_code'];
+			}else{
+				$index_color++;
+				if($color == '#c6c6c6'){
+					$color = '#fcfcfc';
+				} else {
+					$color = '#c6c6c6';
+				}
+				$pre_code = $value['order_code'];
+			}
+		} else {
+			//--> init_config.
+			$color = '#fcfcfc';
+			$pre_code = $value['order_code'];
+		}
 ?>
 				
-				<div class="row">
-				<div class="col-4"><div class="text"><?php echo $value['first_name']." ".$value['last_name']?></div></div>
-				<div class="col-5"><div class="text"><?php echo $value['email']?></div></div>
-				<div class="col-1"><a href="#" onclick="celtac.g_func.order('edit_order_model',<?php echo $value['id']?>)">&#9998;</a></div>
-				<div class="col-2"><a href="#" onclick="celtac.g_func.order('delete_order',<?php echo $value['id']?>)">&#9764;</a></div>
+				<div class="row"  style="background-color:<?php echo $color; ?>">
+				<div class="col-2"><div><?php echo $value['order_code']?></div></div>
+				<div class="col-2"><div><?php echo $value['customer_name']?></div></div>
+				<div class="col-2"><div><?php echo $value['product_type']?></div></div>
+				<div class="col-4"><div><?php echo $value['delivery_date_time']?></div></div>
+				<div class="col-1"><a href="#" onclick="celtac.g_func.order('edit_order_model',<?php echo $value['id']?>)"><span class="ui-icon ui-icon-search"></span></p></a></div>
+				<div class="col-1"><a href="#" onclick="celtac.g_func.order('delete_order',<?php echo $value['id']?>)"><span class="ui-icon ui-icon-trash"></span></p></a></div>
+				<!--<div class="col-2"><a href="#" onclick="celtac.g_func.order('edit_order_model',<?php //echo $value['id']?>)">&#9998;</a></div>-->
+				<!--<div class="col-1"><a href="#" onclick="celtac.g_func.order('delete_order',<?php //echo $value['id']?>)">&#9764;</a></div> -->
 				</div>
+				
 <?php 
 	}
 ?>

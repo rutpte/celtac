@@ -487,8 +487,21 @@ $(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
 							}
 
 						});
-						
-
+						//-------------------------------------------------------
+						//alert( new Date().getTimezoneOffset() );
+						//Date.parse('2012-01-26T13:51:50.417-07:00');
+						$('#delivery_time_hour').on('change', function() {
+							var date = new Date();
+							var current_timestamp = date.getTime();
+							
+							var daliverly_date = new Date("2016-07-27T07:45:00Z");
+						});
+						$('#delivery_time_minute').on('change', function() {
+							var date = new Date();
+							var current_timestamp = date.getTime();
+							
+							var daliverly_date = new Date("2016-07-27T07:45:00Z");
+						});
 						break;
 					case "add_order":
 						var order_code				= $('#order_code').val();
