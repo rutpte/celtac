@@ -235,7 +235,7 @@ class Order extends DBConnection
 			where 1=1
 			and user_id = '{$_SESSION['owner_id']}'
 			and delivery_date_time >= now()
-			order by order_code
+			--order by order_code
         ";
 		//now()::date
         //echo "<pre>", $sql; exit;

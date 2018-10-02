@@ -20,7 +20,12 @@ header('Content-type: application/json');
 			case "add_order" : //--> still not use on this case from js.
 				echo $obj->addOrder($_POST);
 				//json_encode
+			break;			
+			case "delete_order" : //--> still not use on this case from js.
+				$id       = isset($_POST['id']) ? intval($_POST['id']) : '';
+				echo $obj->deleteOrder($id);
 			break;
+			
 			case "get_order" :
 				$rs = array();
 				$rs["success"] = false;

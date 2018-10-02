@@ -424,590 +424,755 @@
 			,"order" : function(q,obj){
 				switch (q) {
 					case "show_model_addorder": 
-						
-						$('#modal_add_order').modal('show');
-						$('#delivery_date').datepicker();
-/*						
-$(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
-	//this.value = this.value.replace(/[^0-9\.]/g,'');
-	$(this).val($(this).val().replace(/[^0-9\.]/g,''));
-	if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
-		event.preventDefault();
-	}
-});
-*/
-						$("#quantity").on("keypress keyup blur",function (event) {   
-							$(this).val($(this).val().replace(/[^\d].+/, ""));
-							if ((event.which < 48 || event.which > 57)) {
-								event.preventDefault();
-							}
-						});
-						$("#vial").on("keypress keyup blur",function (event) {   
-							$(this).val($(this).val().replace(/[^\d].+/, ""));
-							if ((event.which < 48 || event.which > 57)) {
-								event.preventDefault();
-							}
-						});
-						
-						$('#product_type').on('change', function() {
-							if(this.value == "cell"){
-								var quantity = $('#quantity').val();
-								var vial = $('#vial').val();
-								var total_cel = parseInt(quantity*vial);
-								
-								
-								$('#quantity').prop('disabled', false);
-								$('#total_cel').prop('disabled', false);
-								$('#package_type').prop('disabled', false);
-								
-								$('#total_cel').val(total_cel);
-								$('#package_type').val('ID');
-							} else {
-								//$('#quantity').hide();
-								//$('#vial').hide();
-								//$("#quantity").prop('disabled', true);
-								//$("#vial").prop('disabled', true);
-								$('#total_cel').prop('disabled', true);
-								$('#quantity').prop('disabled', true);
-								$('#package_type').prop('disabled', true);
-								
-								$('#total_cel').val('');
-								$('#quantity').val('');
-								$('#package_type').val('');
+						if(true){
+							$('#modal_add_order').modal('show');
+							$('#delivery_date').datepicker();
+							$('#delivery_date').datepicker("option", "dateFormat", "yy-mm-dd");
+							/*						
+							$(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
+								//this.value = this.value.replace(/[^0-9\.]/g,'');
+								$(this).val($(this).val().replace(/[^0-9\.]/g,''));
+								if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+									event.preventDefault();
+								}
+							});
+							*/
+							$("#quantity").on("keypress keyup blur",function (event) {   
+								$(this).val($(this).val().replace(/[^\d].+/, ""));
+								if ((event.which < 48 || event.which > 57)) {
+									event.preventDefault();
+								}
+							});
+							$("#vial").on("keypress keyup blur",function (event) {   
+								$(this).val($(this).val().replace(/[^\d].+/, ""));
+								if ((event.which < 48 || event.which > 57)) {
+									event.preventDefault();
+								}
+							});
 							
-							}
-						});
-						
-						$('#quantity').on('keyup', function(){
-							var check_data = $('#product_type').val();
-							if(check_data == 'cell'){
-								var quantity = $('#quantity').val();
-								var vial = $('#vial').val();
-								var total_cel = parseInt(quantity*vial);
-								$('#total_cel').val(total_cel);
-							} 
-
-						});
-						$('#vial').on('keyup', function(){
-							var check_data = $('#product_type').val();
-							if(check_data == 'cell'){
-								var quantity = $('#quantity').val();
-								var vial = $('#vial').val();
-								var total_cel = parseInt(quantity*vial);
-								$('#total_cel').val(total_cel);
-							}
-
-						});
-						//-------------------------------------------------------
-						//alert( new Date().getTimezoneOffset() );
-						//Date.parse('2012-01-26T13:51:50.417-07:00');
-						
-						//date = new Date('2018-09-30 03:00:02');
-						//date.getTime();
-						//celtac.g_func.pad();
-
-						//-----
-						$('#delivery_time_hour').on('change', function() {
-							var rs = celtac.g_func.order('check_avalible_time_order');
-							if(!rs){
-								$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
-								$('#modal_notice_customer').modal('show');
+							$('#product_type').on('change', function() {
+								if(this.value == "cell"){
+									var quantity = $('#quantity').val();
+									var vial = $('#vial').val();
+									var total_cel = parseInt(quantity*vial);
+									
+									
+									$('#quantity').prop('disabled', false);
+									$('#total_cel').prop('disabled', false);
+									$('#package_type').prop('disabled', false);
+									
+									$('#total_cel').val(total_cel);
+									$('#package_type').val('ID');
+								} else {
+									//$('#quantity').hide();
+									//$('#vial').hide();
+									//$("#quantity").prop('disabled', true);
+									//$("#vial").prop('disabled', true);
+									$('#total_cel').prop('disabled', true);
+									$('#quantity').prop('disabled', true);
+									$('#package_type').prop('disabled', true);
+									
+									$('#total_cel').val('');
+									$('#quantity').val('');
+									$('#package_type').val('');
 								
-							}
+								}
+							});
 							
-						});
-						//---
-						$('#delivery_time_minute').on('change', function() {
-							var rs = celtac.g_func.order('check_avalible_time_order');
-							if(!rs){
-								$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
-								$('#modal_notice_customer').modal('show');
-								
+							$('#quantity').on('keyup', function(){
+								var check_data = $('#product_type').val();
+								if(check_data == 'cell'){
+									var quantity = $('#quantity').val();
+									var vial = $('#vial').val();
+									var total_cel = parseInt(quantity*vial);
+									$('#total_cel').val(total_cel);
+								} 
 
-							}
+							});
+							$('#vial').on('keyup', function(){
+								var check_data = $('#product_type').val();
+								if(check_data == 'cell'){
+									var quantity = $('#quantity').val();
+									var vial = $('#vial').val();
+									var total_cel = parseInt(quantity*vial);
+									$('#total_cel').val(total_cel);
+								}
+
+							});
+							//-------------------------------------------------------
+							//alert( new Date().getTimezoneOffset() );
+							//Date.parse('2012-01-26T13:51:50.417-07:00');
 							
-						});
+							//date = new Date('2018-09-30 03:00:02');
+							//date.getTime();
+							//celtac.g_func.pad();
+
+							//-----
+							$('#delivery_time_hour').on('change', function() {
+								var str_daliverly_date 			= $('#delivery_date').datepicker().val();
+								var h 							= $('#delivery_time_hour').val();
+								var m 							= $('#delivery_time_minute').val();
+								
+								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m);
+								if(!rs){
+									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+									$('#modal_notice_customer').modal('show');
+									
+								}
+								
+							});
+							//---
+							$('#delivery_time_minute').on('change', function() {
+								var str_daliverly_date 			= $('#delivery_date').datepicker().val();
+								var h 							= $('#delivery_time_hour').val();
+								var m 							= $('#delivery_time_minute').val();
+								
+								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m);
+								if(!rs){
+									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+									$('#modal_notice_customer').modal('show');
+									
+
+								}
+								
+							});
+						}
+						
 						break;
 					case "check_avalible_time_order":
-						var validate_date_daliverly = function(){
-							var date 				= new Date();
-							var current_timestamp 	= date.getTime();
+						//--> not use. 
+						if(true){
+							var validate_date_daliverly = function(){
+								var date 				= new Date();
+								var current_timestamp 	= date.getTime();
+								
+								var str_daliverly_date 			= $('#delivery_date').datepicker("option", "dateFormat", "yy-mm-dd" ).val();
+								var h 							= $('#delivery_time_hour').val();
+								var m 							= $('#delivery_time_minute').val();
+								var str_date_time				= str_daliverly_date+' '+celtac.g_func.pad(h,2)+':'+celtac.g_func.pad(m,2)+':'+'00';
+								//debugger;
+								var obj_daliverly_date  			= new Date(str_date_time);
+								var timestamp_daliverly_date 		= obj_daliverly_date.getTime();
+								var minli_different_time_daliverly	= timestamp_daliverly_date - current_timestamp;
+								var min_different_time_daliverly	= (minli_different_time_daliverly / 1000)/60; //change to minute.
+								if (min_different_time_daliverly < 300){
+									console.log("not avalible order in your time specify");
+									return false;
+								} else {
+									return true;
+								}
+							}
+							var rs = validate_date_daliverly();
+							return rs;
+						}
+
+						break;
+					case "add_order":
+						if(true){
+							var order_code				= $('#order_code').val();
+							var customer_name			= $('#customer_name').val();
+							var product_type			= $('#product_type').val();
+							var quantity				= $('#quantity').val();
+							var vial					= $('#vial').val();
+							var total_cel				= $('#total_cel').val();
+							var package_type			= $('#package_type').val();
+							//var delivery_date			= $('#delivery_date').val();
+							//var delivery_date			= $('#delivery_date').datepicker({ dateFormat: 'dd-mm-yy' }).val();
+							var delivery_date			= $('#delivery_date').datepicker("option", "dateFormat", "dd-mm-yy" ).val();
+							var delivery_time_hour		= $('#delivery_time_hour').val();
+							var delivery_time_minute	= $('#delivery_time_minute').val();
+							var giveaway				= $('#giveaway').val();
+							var sender					= $('#sender').val();
+							var receiver				= $('#receiver').val();
+							var dealer_person			= $('#dealer_person').val();
+							var dealer_company			= $('#dealer_company').val();
+							var price_rate				= $('#price_rate').val();
+							var comment_else			= $('#comment_else').val();
+
+							
+
+							var arr_dom_id = new Array();
+							arr_dom_id.push('customer_name');
+							arr_dom_id.push('product_type');
+							arr_dom_id.push('quantity');
+							arr_dom_id.push('vial');
+							arr_dom_id.push('package_type');
+							arr_dom_id.push('delivery_date');
+							arr_dom_id.push('delivery_time_hour');
+							arr_dom_id.push('delivery_time_minute');
+							arr_dom_id.push('giveaway');
+							arr_dom_id.push('sender');
+							arr_dom_id.push('receiver');
+							arr_dom_id.push('dealer_person');
+							arr_dom_id.push('dealer_company');
+							arr_dom_id.push('price_rate');
+							arr_dom_id.push('comment_else');
+							
+
+							
+							var sta_validate = true;
+							if (price_rate == ""){
+								celtac.g_func.notice_div_error(true,"price_rate");
+								sta_validate = false;
+							
+							}else {
+								celtac.g_func.notice_div_error(false,"price_rate");
+							}
+							//--
+							if (dealer_company == ""){
+								celtac.g_func.notice_div_error(true,"dealer_company");
+								sta_validate = false;
+							}else {
+								celtac.g_func.notice_div_error(false,"dealer_company");
+							}
+							//--
+							if (dealer_person == ""){
+								celtac.g_func.notice_div_error(true,"dealer_person");
+								sta_validate = false;
+							
+							}else {
+								celtac.g_func.notice_div_error(false,"dealer_person");
+							}
+							//--
+							if (receiver == ""){
+								celtac.g_func.notice_div_error(true,"receiver");
+								sta_validate = false;
+							
+							}else {
+								celtac.g_func.notice_div_error(false,"receiver");
+							}
+							//--
+							if (sender == ""){
+								celtac.g_func.notice_div_error(true,"sender");
+								sta_validate = false;
+							
+							}else {
+								celtac.g_func.notice_div_error(false,"sender");
+							}
+							//--
+							if (giveaway == ""){
+								celtac.g_func.notice_div_error(true,"giveaway");
+								sta_validate = false;
+							
+							}else {
+								celtac.g_func.notice_div_error(false,"giveaway");
+							}
+							//--
+							if (delivery_time_minute == ""){
+								celtac.g_func.notice_div_error(true,"delivery_time_minute");
+								sta_validate = false;
+							
+							}else {
+								celtac.g_func.notice_div_error(false,"delivery_time_minute");
+							}
+							//--
+							if (delivery_time_hour == ""){
+								celtac.g_func.notice_div_error(true,"delivery_time_hour");
+								sta_validate = false;
+							
+							}else {
+								celtac.g_func.notice_div_error(false,"delivery_time_hour");
+							} 
+							//--
+							if (delivery_date == ""){
+								celtac.g_func.notice_div_error(true,"delivery_date");
+								sta_validate = false;
+							
+							}else {
+								celtac.g_func.notice_div_error(false,"delivery_date");
+							} 
+							//--
+							if (package_type == ""){
+								if($('#product_type').val() == "cell"){
+									celtac.g_func.notice_div_error(true,"package_type");
+									sta_validate = false;
+								}
+							}else {
+								if($('#product_type').val() == "cell"){
+									celtac.g_func.notice_div_error(false,"package_type");
+								}
+							} 
+							//--
+							if(total_cel == ""){
+								if($('#product_type').val() == "cell"){
+									celtac.g_func.notice_div_error(true,"total_cel");
+									sta_validate = false;
+								}
+							} else {
+								if($('#product_type').val() == "cell"){
+									celtac.g_func.notice_div_error(false,"total_cel");
+								}
+							} 
+							//--
+							if (vial == ""){
+								celtac.g_func.notice_div_error(true,"vial");
+								sta_validate = false;
+							}else {
+								celtac.g_func.notice_div_error(false,"vial");
+							}
+							//--
+							if (quantity == ""){
+								if($('#product_type').val() == "cell"){
+									celtac.g_func.notice_div_error(true,"quantity");
+									sta_validate = false;
+								}
+							} else {
+								if($('#product_type').val() == "cell"){
+									celtac.g_func.notice_div_error(false,"quantity");
+								}
+							} 
+							//--
+							if (product_type == ""){
+								celtac.g_func.notice_div_error(true,"product_type");
+								sta_validate = false;
+							}else {
+								celtac.g_func.notice_div_error(false,"product_type");
+							}
+							//--
+							if (customer_name == ""){
+								celtac.g_func.notice_div_error(true,"customer_name");
+								sta_validate = false;
+							} else {
+								celtac.g_func.notice_div_error(false,"customer_name");
+							}
+
+							/*
+							if (comment_else == ""){
+								celtac.g_func.notice_div_error(arr_dom_id,"comment_else");
+								sta_validate = false;
+							}*/
 							
 							var str_daliverly_date 			= $('#delivery_date').datepicker("option", "dateFormat", "yy-mm-dd" ).val();
 							var h 							= $('#delivery_time_hour').val();
 							var m 							= $('#delivery_time_minute').val();
-							var str_date_time				= str_daliverly_date+' '+celtac.g_func.pad(h,2)+':'+celtac.g_func.pad(m,2)+':'+'00';
-							//debugger;
-							var obj_daliverly_date  			= new Date(str_date_time);
-							var timestamp_daliverly_date 		= obj_daliverly_date.getTime();
-							var minli_different_time_daliverly	= timestamp_daliverly_date - current_timestamp;
-							var min_different_time_daliverly	= (minli_different_time_daliverly / 1000)/60; //change to minute.
-							if (min_different_time_daliverly < 300){
-								console.log("not avalible order in your time specify");
-								return false;
-							} else {
-								return true;
-							}
-						}
-						var rs = validate_date_daliverly();
-						return rs;
-						break;
-					case "add_order":
-						var order_code				= $('#order_code').val();
-						var customer_name			= $('#customer_name').val();
-						var product_type			= $('#product_type').val();
-						var quantity				= $('#quantity').val();
-						var vial					= $('#vial').val();
-						var total_cel				= $('#total_cel').val();
-						var package_type			= $('#package_type').val();
-						//var delivery_date			= $('#delivery_date').val();
-						//var delivery_date			= $('#delivery_date').datepicker({ dateFormat: 'dd-mm-yy' }).val();
-						var delivery_date			= $('#delivery_date').datepicker("option", "dateFormat", "dd-mm-yy" ).val();
-						var delivery_time_hour		= $('#delivery_time_hour').val();
-						var delivery_time_minute	= $('#delivery_time_minute').val();
-						var giveaway				= $('#giveaway').val();
-						var sender					= $('#sender').val();
-						var receiver				= $('#receiver').val();
-						var dealer_person			= $('#dealer_person').val();
-						var dealer_company			= $('#dealer_company').val();
-						var price_rate				= $('#price_rate').val();
-						var comment_else			= $('#comment_else').val();
-
-						
-
-						var arr_dom_id = new Array();
-						arr_dom_id.push('customer_name');
-						arr_dom_id.push('product_type');
-						arr_dom_id.push('quantity');
-						arr_dom_id.push('vial');
-						arr_dom_id.push('package_type');
-						arr_dom_id.push('delivery_date');
-						arr_dom_id.push('delivery_time_hour');
-						arr_dom_id.push('delivery_time_minute');
-						arr_dom_id.push('giveaway');
-						arr_dom_id.push('sender');
-						arr_dom_id.push('receiver');
-						arr_dom_id.push('dealer_person');
-						arr_dom_id.push('dealer_company');
-						arr_dom_id.push('price_rate');
-						arr_dom_id.push('comment_else');
-						
-
-						
-						var sta_validate = true;
-						if (price_rate == ""){
-							celtac.g_func.notice_div_error(true,"price_rate");
-							sta_validate = false;
-						
-						}else {
-							celtac.g_func.notice_div_error(false,"price_rate");
-						}
-						//--
-						if (dealer_company == ""){
-							celtac.g_func.notice_div_error(true,"dealer_company");
-							sta_validate = false;
-						}else {
-							celtac.g_func.notice_div_error(false,"dealer_company");
-						}
-						//--
-						if (dealer_person == ""){
-							celtac.g_func.notice_div_error(true,"dealer_person");
-							sta_validate = false;
-						
-						}else {
-							celtac.g_func.notice_div_error(false,"dealer_person");
-						}
-						//--
-						if (receiver == ""){
-							celtac.g_func.notice_div_error(true,"receiver");
-							sta_validate = false;
-						
-						}else {
-							celtac.g_func.notice_div_error(false,"receiver");
-						}
-						//--
-						if (sender == ""){
-							celtac.g_func.notice_div_error(true,"sender");
-							sta_validate = false;
-						
-						}else {
-							celtac.g_func.notice_div_error(false,"sender");
-						}
-						//--
-						if (giveaway == ""){
-							celtac.g_func.notice_div_error(true,"giveaway");
-							sta_validate = false;
-						
-						}else {
-							celtac.g_func.notice_div_error(false,"giveaway");
-						}
-						//--
-						if (delivery_time_minute == ""){
-							celtac.g_func.notice_div_error(true,"delivery_time_minute");
-							sta_validate = false;
-						
-						}else {
-							celtac.g_func.notice_div_error(false,"delivery_time_minute");
-						}
-						//--
-						if (delivery_time_hour == ""){
-							celtac.g_func.notice_div_error(true,"delivery_time_hour");
-							sta_validate = false;
-						
-						}else {
-							celtac.g_func.notice_div_error(false,"delivery_time_hour");
-						} 
-						//--
-						if (delivery_date == ""){
-							celtac.g_func.notice_div_error(true,"delivery_date");
-							sta_validate = false;
-						
-						}else {
-							celtac.g_func.notice_div_error(false,"delivery_date");
-						} 
-						//--
-						if (package_type == ""){
-							if($('#product_type').val() == "cell"){
-								celtac.g_func.notice_div_error(true,"package_type");
-								sta_validate = false;
-							}
-						}else {
-							if($('#product_type').val() == "cell"){
-								celtac.g_func.notice_div_error(false,"package_type");
-							}
-						} 
-						//--
-						if(total_cel == ""){
-							if($('#product_type').val() == "cell"){
-								celtac.g_func.notice_div_error(true,"total_cel");
-								sta_validate = false;
-							}
-						} else {
-							if($('#product_type').val() == "cell"){
-								celtac.g_func.notice_div_error(false,"total_cel");
-							}
-						} 
-						//--
-						if (vial == ""){
-							celtac.g_func.notice_div_error(true,"vial");
-							sta_validate = false;
-						}else {
-							celtac.g_func.notice_div_error(false,"vial");
-						}
-						//--
-						if (quantity == ""){
-							if($('#product_type').val() == "cell"){
-								celtac.g_func.notice_div_error(true,"quantity");
-								sta_validate = false;
-							}
-						} else {
-							if($('#product_type').val() == "cell"){
-								celtac.g_func.notice_div_error(false,"quantity");
-							}
-						} 
-						//--
-						if (product_type == ""){
-							celtac.g_func.notice_div_error(true,"product_type");
-							sta_validate = false;
-						}else {
-							celtac.g_func.notice_div_error(false,"product_type");
-						}
-						//--
-						if (customer_name == ""){
-							celtac.g_func.notice_div_error(true,"customer_name");
-							sta_validate = false;
-						} else {
-							celtac.g_func.notice_div_error(false,"customer_name");
-						}
-
-						/*
-						if (comment_else == ""){
-							celtac.g_func.notice_div_error(arr_dom_id,"comment_else");
-							sta_validate = false;
-						}*/
-						
-						var rs = celtac.g_func.order('check_avalible_time_order');
-						if(!rs){
-							$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
-							$('#modal_notice_customer').modal('show');
 							
-							sta_validate = false;
-						}
+							var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m);
 							
-						if(sta_validate){
-							$.ajax({
-								url: "order.php",
-								dataType: 'text', // Notice! JSONP <-- P (lowercase)
-								method : 'POST',
-								data: { 
-									"q"              			: "add_order"
-									,"order_code"         		: order_code	
-									,"customer_name"         	: customer_name	
-									,"product_type"				: product_type		
-									,"quantity"					: quantity			
-									,"vial"						: vial				
-									,"total_cel"				: total_cel				
-									,"package_type"				: package_type			
-									,"delivery_date"			: delivery_date			
-									,"delivery_time_hour"		: delivery_time_hour		
-									,"delivery_time_minute"		: delivery_time_minute
-									,"giveaway"					: giveaway
-									,"sender"					: sender									
-									,"receiver"					: receiver				
-									,"dealer_person"			: dealer_person		
-									,"dealer_company"			: dealer_company			
-									,"price_rate"				: price_rate				
-									,"comment_else"				: comment_else
-									
-								},
-								type: "GET",
-								success:function(response){
-									//console.debug('response : ',response);
-									//debugger;
-									//console.log(response);
-									var obj_response = jQuery.parseJSON(response);
-									//debugger;
-									//console.debug('respont : ',respont);
-									if (obj_response.success) {
-										//alert("complete.");
-										location.reload();
-									} else {
+							if(!rs){
+								$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+								$('#modal_notice_customer').modal('show');
+								
+								sta_validate = false;
+							}
+								
+							if(sta_validate){
+								$('#bt_save_add_order').prop('disabled', true);
+								$('#loading_modal').modal('show');
+								$.ajax({
+									url: "order.php",
+									dataType: 'text', // Notice! JSONP <-- P (lowercase)
+									method : 'POST',
+									data: { 
+										"q"              			: "add_order"
+										,"order_code"         		: order_code	
+										,"customer_name"         	: customer_name	
+										,"product_type"				: product_type		
+										,"quantity"					: quantity			
+										,"vial"						: vial				
+										,"total_cel"				: total_cel				
+										,"package_type"				: package_type			
+										,"delivery_date"			: delivery_date			
+										,"delivery_time_hour"		: delivery_time_hour		
+										,"delivery_time_minute"		: delivery_time_minute
+										,"giveaway"					: giveaway
+										,"sender"					: sender									
+										,"receiver"					: receiver				
+										,"dealer_person"			: dealer_person		
+										,"dealer_company"			: dealer_company			
+										,"price_rate"				: price_rate				
+										,"comment_else"				: comment_else
+										
+									},
+									type: "GET",
+									success:function(response){
+										$('#loading_modal').modal('hide');
+										//console.debug('response : ',response);
+										//debugger;
+										//console.log(response);
+										var obj_response = jQuery.parseJSON(response);
+										//debugger;
+										//console.debug('respont : ',respont);
+										if (obj_response.success) {
+											//alert("complete.");
+											location.reload();
+										} else {
 
+										}
+									},
+									error:function(response){
+										$('#loading_modal').modal('hide');
+										console.debug(response);
 									}
-								},
-								error:function(response){
-									console.debug(response);
-								}
-							});
-							
-						}//end if false.
+								});
+								
+							}//end if false.
+						}
+						
 
 						break;	
-					case "edit_user_model":
-						var id_user = obj;
-						$('#modal_edit_user').modal('show');
-						console.log(obj_all_user[id_user]);
-						
-						var email = obj_all_user[id_user].email;
-						var pass = obj_all_user[id_user].pass;
-						var company = obj_all_user[id_user].company;
-						var phone = obj_all_user[id_user].phone_no;
-						var firstName = obj_all_user[id_user].first_name;
-						var lastName = obj_all_user[id_user].last_name;
-						var address = obj_all_user[id_user].address;
-						var is_staff = obj_all_user[id_user].is_staff;
-						
-						
-						//--> auto add exits data.
-						
-						$('#modal_edit_user').find('#user_id_edit').val(id_user);
-						$('#modal_edit_user').find('#email_edit').val(email);
-						$('#modal_edit_user').find('#pass_edit').val(pass);
-						$('#modal_edit_user').find('#company_edit').val(company);
-						$('#modal_edit_user').find('#phone_edit').val(phone);
-						$('#modal_edit_user').find('#firstName_edit').val(firstName);
-						$('#modal_edit_user').find('#lastName_edit').val(lastName);
-						$('#modal_edit_user').find('#address_edit').val(address);
-						$('#modal_edit_user').find('#is_staff_edit').prop('checked', is_staff);
-						//--> mission complete.
+					case "edit_order":
+						if(true){
+							$('#xx').prop('disabled', false);
+							
+							var id_user = obj;
+							$('#modal_edit_user').modal('show');
+							console.log(obj_all_user[id_user]);
+							
+							var email = obj_all_user[id_user].email;
+							var pass = obj_all_user[id_user].pass;
+							var company = obj_all_user[id_user].company;
+							var phone = obj_all_user[id_user].phone_no;
+							var firstName = obj_all_user[id_user].first_name;
+							var lastName = obj_all_user[id_user].last_name;
+							var address = obj_all_user[id_user].address;
+							var is_staff = obj_all_user[id_user].is_staff;
+							
+							
+							//--> auto add exits data.
+							
+							$('#modal_edit_user').find('#user_id_edit').val(id_user);
+							$('#modal_edit_user').find('#email_edit').val(email);
+							$('#modal_edit_user').find('#pass_edit').val(pass);
+							$('#modal_edit_user').find('#company_edit').val(company);
+							$('#modal_edit_user').find('#phone_edit').val(phone);
+							$('#modal_edit_user').find('#firstName_edit').val(firstName);
+							$('#modal_edit_user').find('#lastName_edit').val(lastName);
+							$('#modal_edit_user').find('#address_edit').val(address);
+							$('#modal_edit_user').find('#is_staff_edit').prop('checked', is_staff);
+							//--> mission complete.
+						}
+
 
 					break;
-					case "update_user":
-						var id_user 	= $('#modal_edit_user').find('#user_id_edit').val();
-						var email		= $('#modal_edit_user').find('#email_edit').val();
-						var pass		= $('#modal_edit_user').find('#pass_edit').val();
-						var company		= $('#modal_edit_user').find('#company_edit').val();
-						var phone		= $('#modal_edit_user').find('#phone_edit').val();
-						var firstName	= $('#modal_edit_user').find('#firstName_edit').val();
-						var lastName	= $('#modal_edit_user').find('#lastName_edit').val();
-						var address		= $('#modal_edit_user').find('#address_edit').val();
-						var is_staff	= $('#modal_edit_user').find('#is_staff_edit').is(":checked");
-						
+					case "update_order":
+						if(true){
+							var id_user 	= $('#modal_edit_user').find('#user_id_edit').val();
+							var email		= $('#modal_edit_user').find('#email_edit').val();
+							var pass		= $('#modal_edit_user').find('#pass_edit').val();
+							var company		= $('#modal_edit_user').find('#company_edit').val();
+							var phone		= $('#modal_edit_user').find('#phone_edit').val();
+							var firstName	= $('#modal_edit_user').find('#firstName_edit').val();
+							var lastName	= $('#modal_edit_user').find('#lastName_edit').val();
+							var address		= $('#modal_edit_user').find('#address_edit').val();
+							var is_staff	= $('#modal_edit_user').find('#is_staff_edit').is(":checked");
+							
 
-						//debugger;
-						// console.log(company);
-						// console.log(phone);
-						// console.log(firstName);
-						// console.log(lastName);
-						// console.log(address);
-						// console.log(email);
-						// console.log(pass);
-						var sta_validate = true;
-						if (email == ""){
-							$('#email_vlid_edit').text("*needed value.").css('color', 'red');
-							sta_validate = false;
-						} else if(company == ""){
-							$('#company_vlid_edit').text("*needed value.").css('color', 'red');
-							sta_validate = false;
-						} else if (phone == ""){
-							$('#phone_vlid_edit').text("*needed value.").css('color', 'red');
-							sta_validate = false;
-						} else if (firstName == ""){
-							$('#firstName_vlid_edit').text("*needed value.").css('color', 'red');
-							sta_validate = false;
-						} else if (lastName == ""){
-							$('#lastName_vlid_edit').text("*needed value.").css('color', 'red');
-							sta_validate = false;
-						} else if (address == ""){
-							$('#address_vlid_edit').text("*needed value.").css('color', 'red');
-							sta_validate = false;
+							//debugger;
+							// console.log(company);
+							// console.log(phone);
+							// console.log(firstName);
+							// console.log(lastName);
+							// console.log(address);
+							// console.log(email);
+							// console.log(pass);
+							var sta_validate = true;
+							if (email == ""){
+								$('#email_vlid_edit').text("*needed value.").css('color', 'red');
+								sta_validate = false;
+							} else if(company == ""){
+								$('#company_vlid_edit').text("*needed value.").css('color', 'red');
+								sta_validate = false;
+							} else if (phone == ""){
+								$('#phone_vlid_edit').text("*needed value.").css('color', 'red');
+								sta_validate = false;
+							} else if (firstName == ""){
+								$('#firstName_vlid_edit').text("*needed value.").css('color', 'red');
+								sta_validate = false;
+							} else if (lastName == ""){
+								$('#lastName_vlid_edit').text("*needed value.").css('color', 'red');
+								sta_validate = false;
+							} else if (address == ""){
+								$('#address_vlid_edit').text("*needed value.").css('color', 'red');
+								sta_validate = false;
+							}
+							
+							if(sta_validate){
+								$.ajax({
+									url: "usermanage.php",
+									dataType: 'text', // Notice! JSONP <-- P (lowercase)
+									method : 'POST',
+									data: {
+										"q"              : "update_user"
+										,"id"		     : id_user 
+										,"company"       : company
+										,"phone"         : phone
+										,"firstName"     : firstName
+										,"lastName"      : lastName
+										,"address"       : address
+										,"email"         : email
+										,"pass"          : pass
+										,"is_staff"		 : is_staff	
+										
+									},
+									type: "GET",
+									success:function(response){
+										//console.debug('response : ',response);
+										//debugger;
+										//console.log(response);
+										var obj_response = jQuery.parseJSON(response);
+										
+										//console.debug('respont : ',respont);
+										if (obj_response.success) {
+											
+											location.reload();
+										} else {
+
+										}
+									},
+									error:function(response){
+										console.debug(response);
+									}
+								});
+								
+							}//end if false.
+						}
+						break;										
+					case "delete_order":
+						if(true){
+							var id = obj;
+							$('#modal_delete_confirm').modal('show');
+							var cilck_ok = false;
+							$('#modal_delete_confirm').find('#del_ok').click(function() {
+								$.ajax({
+									url: "order.php",
+									dataType: 'text', // Notice! JSONP <-- P (lowercase)
+									method : 'POST',
+									data: { 
+										"q" : "delete_order"
+										,"id" : id
+									},
+									type: "GET",
+									success:function(response){
+										//console.debug('response : ',response);
+										//debugger;
+										//console.log(response);
+										var obj_response = jQuery.parseJSON(response);
+										
+										//console.debug('respont : ',respont);
+										if (obj_response.success) {
+											console.log(obj_response);
+											location.reload();
+											//window.location = window.location.hostname+"/"+celtac.pjName+"/admin_page.php";
+											//header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/admin_page.php");
+										} else {
+
+										}
+									},
+									error:function(response){
+										console.debug(response);
+									}
+								});
+							});
+
 						}
 						
-						if(sta_validate){
-							$.ajax({
-								url: "usermanage.php",
-								dataType: 'text', // Notice! JSONP <-- P (lowercase)
-								method : 'POST',
-								data: {
-									"q"              : "update_user"
-									,"id"		     : id_user 
-									,"company"       : company
-									,"phone"         : phone
-									,"firstName"     : firstName
-									,"lastName"      : lastName
-									,"address"       : address
-									,"email"         : email
-									,"pass"          : pass
-									,"is_staff"		 : is_staff	
-									
-								},
-								type: "GET",
-								success:function(response){
-									//console.debug('response : ',response);
-									//debugger;
-									//console.log(response);
-									var obj_response = jQuery.parseJSON(response);
-									
-									//console.debug('respont : ',respont);
-									if (obj_response.success) {
-										
-										location.reload();
-									} else {
-
-									}
-								},
-								error:function(response){
-									console.debug(response);
-								}
-							});
-							
-						}//end if false.
-
-						break;						
-					case "init_admin_page":
-						//--..yourcode.
+						break;					
+					case "view_order":
 						if(true){
-							$.ajax({
-								url: "usermanage.php",
-								dataType: 'text', // Notice! JSONP <-- P (lowercase)
-								method : 'POST',
-								data: { 
-									"q" : "get_all_user"
-								},
-								type: "GET",
-								success:function(response){
-									//console.debug('response : ',response);
-									//debugger;
-									//console.log(response);
-									var obj_response = jQuery.parseJSON(response);
-									debugger;
-									//console.debug('respont : ',respont);
-									if (obj_response.success) {
-										console.log(obj_response);
-										window.location = window.location.hostname+"/"+celtac.pjName+"/admin_page.php";
-										//header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/admin_page.php");
-									} else {
+							var id = obj;
+							var data = obj_all_order[id];
+							//--> show modal view.
+							$('#modal_view_order').modal('show');
+							
+							//--> add data from js_data.
+							$('#order_code_view').val(data.order_code);
+							$('#customer_name_view').val(data.customer_name);
+							$('#product_type_view').val(data.product_type);
+							$('#quantity_view').val(data.quantity);
+							$('#vial_view').val(data.vial);
+							$('#total_cel_view').val(data.total_cel);
+							$('#package_type_view').val(data.package_type);
+							$('#delivery_date_view').val(data.delivery_date_time);
+							$('#giveaway_view').val(data.giveaway);
+							$('#sender_view').val(data.sender);
+							$('#receiver_view').val(data.receiver);
+							$('#dealer_person_view').val(data.dealer_person);
+							$('#dealer_company_view').val(data.dealer_company);
+							$('#price_rate_view').val(data.price_rate);
+							$('#comment_else_view').val(data.comment_else);
+							$('#order_id_view').val(data.id);
 
-									}
-								},
-								error:function(response){
-									console.debug(response);
+							//--> disable view input.
+							$('#order_code_view').prop('disabled', true);
+							$('#customer_name_view').prop('disabled', true);
+							$('#product_type_view').prop('disabled', true);
+							$('#quantity_view').prop('disabled', true);
+							$('#vial_view').prop('disabled', true);
+							$('#total_cel_view').prop('disabled', true);
+							$('#package_type_view').prop('disabled', true);
+							$('#delivery_date_view').prop('disabled', true);
+							$('#giveaway_view').prop('disabled', true);
+							$('#sender_view').prop('disabled', true);
+							$('#receiver_view').prop('disabled', true);
+							$('#dealer_person_view').prop('disabled', true);
+							$('#dealer_company_view').prop('disabled', true);
+							$('#price_rate_view').prop('disabled', true);
+							$('#comment_else_view').prop('disabled', true);
+							
+						}
+
+						
+						break;					
+					case "edit_order_model": 
+						if(true){
+							var id = $('#order_id_view').val();
+							//debugger;
+							$('#modal_add_order_edit').modal('show');
+							$('#delivery_date_edit').datepicker();
+							$('#delivery_date_edit').datepicker("option", "dateFormat", "yy-mm-dd");
+							//--> replace exist data to form.
+							var data 				= obj_all_order[id];
+							var arr_full_date_time 	= data.delivery_date_time.split(" ");
+							var arr_full_only_time	= arr_full_date_time[1].split(":");
+							var full_date			= arr_full_date_time[0];
+							
+							//--> init_disable for edit.
+							if(data.product_type != "cell"){
+								$('#quantity_edit').prop('disabled', true);
+								$('#total_cel_edit').prop('disabled', true);
+								$('#package_type_edit').prop('disabled', true);
+							}
+							//debugger;
+							//--> add data from js_data.
+							$('#order_code_edit').val(data.order_code);
+							$('#customer_name_edit').val(data.customer_name);
+							$('#product_type_edit').val(data.product_type);
+							$('#quantity_edit').val(data.quantity);
+							$('#vial_edit').val(data.vial);
+							$('#total_cel_edit').val(data.total_cel);
+							$('#package_type_edit').val(data.package_type);
+							
+							$('#delivery_date_edit').val(full_date);
+							$('#delivery_time_hour_edit').val(parseInt(arr_full_only_time[0]));
+							$('#delivery_time_minute_edit').val(parseInt(arr_full_only_time[1]));
+							
+							$('#giveaway_edit').val(data.giveaway);
+							$('#sender_edit').val(data.sender);
+							$('#receiver_edit').val(data.receiver);
+							$('#dealer_person_edit').val(data.dealer_person);
+							$('#dealer_company_edit').val(data.dealer_company);
+							$('#price_rate_edit').val(data.price_rate);
+							$('#comment_else_edit').val(data.comment_else);
+							$('#order_id_edit').val(data.id);
+							//---------------------------------------------
+
+							/*						
+							$(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
+								//this.value = this.value.replace(/[^0-9\.]/g,'');
+								$(this).val($(this).val().replace(/[^0-9\.]/g,''));
+								if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+									event.preventDefault();
+								}
+							});
+							*/
+							$("#quantity_edit").on("keypress keyup blur",function (event) {   
+								$(this).val($(this).val().replace(/[^\d].+/, ""));
+								if ((event.which < 48 || event.which > 57)) {
+									event.preventDefault();
+								}
+							});
+							$("#vial_edit").on("keypress keyup blur",function (event) {   
+								$(this).val($(this).val().replace(/[^\d].+/, ""));
+								if ((event.which < 48 || event.which > 57)) {
+									event.preventDefault();
 								}
 							});
 							
-						}//end if false.
-						//header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/admin_page.php");
-						break;					
-					case "delete_user":
-						var id_user = obj;
-						$('#modal_delete_confirm').modal('show');
-						var cilck_ok = false;
-						$('#modal_delete_confirm').find('#del_ok').click(function() {
-							$.ajax({
-								url: "usermanage.php",
-								dataType: 'text', // Notice! JSONP <-- P (lowercase)
-								method : 'POST',
-								data: { 
-									"q" : "delete_user"
-									,"id" : id_user
-								},
-								type: "GET",
-								success:function(response){
-									//console.debug('response : ',response);
-									//debugger;
-									//console.log(response);
-									var obj_response = jQuery.parseJSON(response);
+							$('#product_type_edit').on('change', function() {
+								if(this.value == "cell"){
+									var quantity = $('#quantity_edit').val();
+									var vial = $('#vial_edit').val();
+									var total_cel = parseInt(quantity*vial);
 									
-									//console.debug('respont : ',respont);
-									if (obj_response.success) {
-										console.log(obj_response);
-										location.reload();
-										//window.location = window.location.hostname+"/"+celtac.pjName+"/admin_page.php";
-										//header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/admin_page.php");
-									} else {
-
-									}
-								},
-								error:function(response){
-									console.debug(response);
+									
+									$('#quantity_edit').prop('disabled', false);
+									$('#total_cel_edit').prop('disabled', false);
+									$('#package_type_edit').prop('disabled', false);
+									
+									$('#total_cel_edit').val(total_cel);
+									$('#package_type_edit').val('ID');
+								} else {
+									//$('#quantity').hide();
+									//$('#vial').hide();
+									//$("#quantity").prop('disabled', true);
+									//$("#vial").prop('disabled', true);
+									$('#total_cel_edit').prop('disabled', true);
+									$('#quantity_edit').prop('disabled', true);
+									$('#package_type_edit').prop('disabled', true);
+									
+									$('#total_cel_edit').val('');
+									$('#quantity_edit').val('');
+									$('#package_type_edit').val('');
+								
 								}
 							});
-						});
+							
+							//--> cal auto.
+							$('#quantity_edit').on('keyup', function(){
+								var check_data = $('#product_type_edit').val();
+								if(check_data == 'cell'){
+									var quantity = $('#quantity_edit').val();
+									var vial = $('#vial_edit').val();
+									var total_cel = parseInt(quantity*vial);
+									$('#total_cel_edit').val(total_cel);
+								} 
 
-						break;					
-					case "xxx":
-						//--..yourcode.
-						break;					
-					case "xxx":
-						//--..yourcode.
-						break;					
-					case "xxx":
-						//--..yourcode.
-						break;
-					case  "get_all_user":
-						$.ajax({
-							url: "usermanage.php",
-							dataType: 'text', // Notice! JSONP <-- P (lowercase)
-							method : 'POST',
-							data: { 
-								"q"              : "get_all_user"
-							},
-							type: "GET",
-							success:function(response){
-								//console.debug('response : ',response);
-								//debugger;
-								//console.log(response);
-								var obj_response = jQuery.parseJSON(response);
+							});
+							$('#vial_edit').on('keyup', function(){
+								var check_data = $('#product_type_edit').val();
+								if(check_data == 'cell'){
+									var quantity = $('#quantity_edit').val();
+									var vial = $('#vial_edit').val();
+									var total_cel = parseInt(quantity*vial);
+									$('#total_cel_edit').val(total_cel);
+								}
+
+							});
+							//-------------------------------------------------------
+							//alert( new Date().getTimezoneOffset() );
+							//Date.parse('2012-01-26T13:51:50.417-07:00');
+							
+							//date = new Date('2018-09-30 03:00:02');
+							//date.getTime();
+							//celtac.g_func.pad();
+
+							//-----> check delay date time.1
+							$('#delivery_time_hour_edit').on('change', function() {
+								var str_daliverly_date 			= $('#delivery_date_edit').datepicker().val();
+								var h 							= $('#delivery_time_hour_edit').val();
+								var m 							= $('#delivery_time_minute_edit').val();
 								
-								//console.debug('respont : ',respont);
-								if (obj_response.success) {
+								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m);
+								
+								if(!rs){
+									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+									$('#modal_notice_customer').modal('show');
 									
-								} else {
+								}
+								
+							});
+							//-----> check delay date time.2
+							$('#delivery_time_minute_edit').on('change', function() {
+								var str_daliverly_date 			= $('#delivery_date_edit').datepicker().val();
+								var h 							= $('#delivery_time_hour_edit').val();
+								var m 							= $('#delivery_time_minute_edit').val();
+								
+								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m);
+								
+								if(!rs){
+									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+									$('#modal_notice_customer').modal('show');
+									
 
 								}
-							},
-							error:function(response){
-								console.debug(response);
-							}
-						});
+								
+							});
+						}
+						break;					
+					case "xxx":
+						//--..yourcode.
 						break;
 				}
-
-					
-					//-----------------------
-					$('#modal_user').modal('show');
-				
-				
 			}
 			,"init_cookie_login" : function(){
 				
@@ -1127,6 +1292,32 @@ $(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
 					height: 128,
 					text: "http://google.com"
 				});
+			}
+			,check_avalible_time_order : function(str_daliverly_date, h, m){
+				if(true){
+					var validate_date_daliverly = function(){
+						var date 				= new Date();
+						var current_timestamp 	= date.getTime();
+						
+						//var str_daliverly_date 			= $('#delivery_date').datepicker("option", "dateFormat", "yy-mm-dd" ).val();
+						//var h 							= $('#delivery_time_hour').val();
+						//var m 							= $('#delivery_time_minute').val();
+						var str_date_time					= str_daliverly_date+' '+celtac.g_func.pad(h,2)+':'+celtac.g_func.pad(m,2)+':'+'00';
+						//debugger;
+						var obj_daliverly_date  			= new Date(str_date_time);
+						var timestamp_daliverly_date 		= obj_daliverly_date.getTime();
+						var minli_different_time_daliverly	= timestamp_daliverly_date - current_timestamp;
+						var min_different_time_daliverly	= (minli_different_time_daliverly / 1000)/60; //change to minute.
+						if (min_different_time_daliverly < 300){
+							console.log("not avalible order in your time specify");
+							return false;
+						} else {
+							return true;
+						}
+					}
+					var rs = validate_date_daliverly();
+					return rs;
+				}
 			}
 		};
 		this.g_var = {
