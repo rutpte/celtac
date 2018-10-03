@@ -100,7 +100,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 
 		<!-- ************************************** modal_view_order ************************************************************************ -->
 		<!-- model view order -->
-			<div class="modal fade" id="modal_view_order" tabindex="-1" role="dialog"  aria-hidden="true">
+			<div class="modal fade" id="modal_view_order" tabindex="-1" role="dialog"  aria-hidden="true"   style="overflow-y: scroll">
 			  <div class="modal-dialog" role="document">
 				<div class="modal-content">
 				  <div class="modal-header">
@@ -310,7 +310,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 		</div>
 		<!-- ********************************************* modal_add_order_edit ***************************************************************** -->
 		<!-- model order edit-->
-			<div class="modal fade" id="modal_add_order_edit" tabindex="-1" role="dialog"  aria-hidden="true">
+			<div class="modal fade" id="modal_add_order_edit" tabindex="-1" role="dialog"  aria-hidden="true"   style="overflow-y: scroll">
 			  <div class="modal-dialog" role="document">
 				<div class="modal-content">
 				  <div class="modal-header">
@@ -321,13 +321,13 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				  </div>
 				  <div class="modal-body" id="modal-body-add_order_edit">
 						<form class="needs-validation" novalidate>
-							<div class="mb-3">
+							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="order_code_edit">order_code</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="order_code_edit" placeholder="CT-09/23">
 									</div>
 								</div>
@@ -335,26 +335,26 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 								
 							</div>
 							<!-- **************************************** -->
-							<div class="mb-3">
+							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="customer_name_edit">customer name</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="customer_name_edit" placeholder="customer name">
 									</div>
 								</div>
 								<div id="customer_name_vlid_edit"></div>
 							</div>
 							<!-- **************************************** -->
-							<div class="mb-3">
+							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="product_type_edit">product type</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<select class="custom-select d-block w-100" id="product_type_edit" required>
 											<option value="cell">Cell</option>
 											<option value="prp_ready">PRP Ready</option>
@@ -365,52 +365,52 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 								<div id="product_type_vlid_edit"></div>
 							</div>
 							<!-- **************************************** -->
-							<div class="mb-3">
+							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="quantity_edit">quantity</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="quantity_edit" placeholder="quantity">
 									</div>
 								</div>
 								<div id="quantity_vlid_edit"></div>
 							</div>
 							<!-- **************************************** -->
-							<div class="mb-3">
+							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="vial_edit">vial</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="vial_edit" placeholder="vial">
 									</div>
 								</div>
 								<div id="vial_vlid"></div>
 							</div>
 							<!-- **************************************** -->
-							<div class="mb-3">
+							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="total_cel_edit">total_cel</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="total_cel_edit" placeholder="total of cel">
 									</div>
 								</div>
 								<div id="total_cel_vlid_edit"></div>
 							</div>
 							<!-- **************************************** -->
-							<div class="mb-3">
+							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="package_edit">package</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<select class="custom-select d-block w-100" id="package_edit" required>
 											<option value="ID">ID</option>
 											<option value="IV">IV</option>
@@ -420,26 +420,26 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 								<div id="package_vlid"></div>
 							</div>
 							<!-- **************************************** -->
-							<div class="mb-3">
+							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="delivery_date_edit">delivery date</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="delivery_date_edit" placeholder="date">
 									</div>
 								</div>
 								<div id="delivery_date_vlid_edit"></div>
 							</div>
 							<!-- **************************************** -->
-							<div class="mb-3">
+							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label>delivery time</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<div class="row">
 											<div class="col-6">
 												<select class="custom-select" id="delivery_time_hour_edit" required>
@@ -478,91 +478,91 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 								<div id="delivery_time_hour_vlid_edit"></div>
 							</div>
 							<!-- **************************************** -->
-							<div class="mb-3">
+							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="giveaway_edit">giveaway</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="giveaway_edit" placeholder="giveaway">
 									</div>
 								</div>
 								<div id="giveaway_vlid_edit"></div>
 							</div>
 							<!-- **************************************** -->
-							<div class="mb-3">
+							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="sender_edit">sender</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="sender_edit" placeholder="sender">
 									</div>
 								</div>
 								<div id="sender_vlid_edit"></div>
 							</div>
 							<!-- **************************************** -->
-							<div class="mb-3">
+							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="receiver_edit">receiver</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="receiver_edit" placeholder="receiver">
 									</div>
 								</div>
 								<div id="receiver_vlid_edit"></div>
 							</div>
 							<!-- **************************************** -->
-							<div class="mb-3">
+							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="dealer_person_edit">dealer_person</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="dealer_person_edit" placeholder="dealer person">
 									</div>
 								</div>
 								<div id="dealer_person_vlid_edit"></div>
 							</div>
 							<!-- **************************************** -->
-							<div class="mb-3">
+							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="dealer_company_edit">dealer_company</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="dealer_company_edit" placeholder="dealer company">
 									</div>
 								</div>
 								<div id="dealer_company_vlid_edit"></div>
 							</div>
 							<!-- **************************************** -->
-							<div class="mb-3">
+							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="price_rate_edit">price_rate</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="price_rate_edit" placeholder="price rate">
 									</div>
 								</div>
 								<div id="price_rate_vlid_edit"></div>
 							</div>
 							<!-- **************************************** -->
-							<div class="mb-3">
+							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="comment_else_edit">comment_else</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="comment_else_edit" placeholder="comment">
 									</div>
 								</div>
@@ -570,7 +570,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							</div>
 							<!-- **************************************** -->
 							<hr class="mb-4">
-							<button class="btn btn-primary btn-lg btn-block" type="button" onclick="celtac.g_func.order('edit_order')">update</button>
+							<button class="btn btn-primary btn-lg btn-block" id="bt_save_update_order"  type="button" onclick="celtac.g_func.order('edit_order')">update</button>
 							<input id="order_id_edit" type="hidden" value="">
 							<!-- **************************************** -->
 						  </form>
@@ -586,7 +586,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 			</div>
 		<!-- ************************************** modal_add_order ************************************************************************ -->
 		<!-- model order -->
-			<div class="modal fade" id="modal_add_order" tabindex="-1" role="dialog"  aria-hidden="true">
+			<div class="modal fade" id="modal_add_order" tabindex="-1" role="dialog"  aria-hidden="true"  style="overflow-y: scroll">
 			  <div class="modal-dialog" role="document">
 				<div class="modal-content">
 				  <div class="modal-header">
@@ -595,16 +595,16 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 					  <span aria-hidden="true">&times;</span>
 					</button>
 				  </div>
-				  <div class="modal-body" id="modal-body-add_order">
+				  <div class="modal-body" id="modal-body-add_order"   style="overflow-y: scroll">
 						<form class="needs-validation" novalidate>
 							<!-- **************************************** -->
 							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="order_code">order_code</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="order_code" placeholder="CT-09/23">
 									</div>
 								</div>
@@ -614,11 +614,11 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<!-- **************************************** -->
 							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="customer_name">customer name</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="customer_name" placeholder="customer name">
 									</div>
 								</div>
@@ -628,11 +628,11 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<!-- **************************************** -->
 							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="product_type">product type</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<select class="custom-select d-block w-100" id="product_type" required>
 											
 											<option value="cell">Cell</option>
@@ -646,11 +646,11 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<!-- **************************************** -->
 							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="quantity">quantity</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="quantity" placeholder="quantity">
 									</div>
 								</div>
@@ -659,11 +659,11 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<!-- **************************************** -->
 							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="vial">vial</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="vial" placeholder="vial">
 									</div>
 								</div>
@@ -672,11 +672,11 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<!-- **************************************** -->
 							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="total_cel">total_cel</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="total_cel" placeholder="total of cel">
 									</div>
 								</div>
@@ -685,11 +685,11 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<!-- **************************************** -->
 							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="package_type">package</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<select class="custom-select d-block w-100" id="package_type" required>
 											<option value="ID">ID</option>
 											<option value="IV">IV</option>
@@ -702,11 +702,11 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<!-- **************************************** -->
 							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="delivery_date">delivery date</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="delivery_date" placeholder="date">
 									</div>
 								</div>
@@ -715,11 +715,11 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<!-- **************************************** -->
 							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label>delivery time</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<div class="row">
 											<div class="col-6">
 												<select class="custom-select" id="delivery_time_hour" required>
@@ -760,11 +760,11 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<!-- **************************************** -->
 							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="giveaway">giveaway</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="giveaway" placeholder="giveaway">
 									</div>
 								</div>
@@ -773,11 +773,11 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<!-- **************************************** -->
 							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="sender">sender</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="sender" placeholder="sender">
 									</div>
 								</div>
@@ -786,11 +786,11 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<!-- **************************************** -->
 							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="receiver">receiver</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="receiver" placeholder="receiver">
 									</div>
 								</div>
@@ -799,11 +799,11 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<!-- **************************************** -->
 							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="dealer_person">dealer_person</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="dealer_person" placeholder="dealer person">
 									</div>
 								</div>
@@ -812,11 +812,11 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<!-- **************************************** -->
 							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="dealer_company">dealer_company</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="dealer_company" placeholder="dealer company">
 									</div>
 								</div>
@@ -825,11 +825,11 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<!-- **************************************** -->
 							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="price_rate">price_rate</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="price_rate" placeholder="price rate">
 									</div>
 								</div>
@@ -838,11 +838,11 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<!-- **************************************** -->
 							<div>
 								<div class="row">
-									<div class="col-4 mb-3">
+									<div class="col-4">
 										<label for="comment_else">comment_else</label>
 									</div>
 									
-									<div class="col-8 mb-3">
+									<div class="col-8">
 										<input type="text" class="form-control" id="comment_else" placeholder="comment">
 									</div>
 								</div>
@@ -866,7 +866,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 			</div>
 		
 		<!-- ************************************************************************************************************** -->
-			<div class="modal fade" id="modal_delete_confirm" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+			<div class="modal fade" id="modal_delete_confirm" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"   style="overflow-y: scroll">
 			  <div class="modal-dialog" role="document">
 				<div class="modal-content">
 				  <div class="modal-header">
@@ -888,7 +888,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 			  </div>
 			</div>
 		<!-- ************************************************************************************************************** -->
-			<div class="modal fade" id="loading_modal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="loading_modal" tabindex="-1" role="dialog" aria-hidden="true"   style="overflow-y: scroll">
 			  <div class="modal-dialog" role="document">
 				<div class="modal-content">
 				  <div class="modal-header">
@@ -907,7 +907,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 			  </div>
 			</div>
 		<!-- ************************************************************************************************************** -->
-			<div class="modal fade" id="modal_notice_customer" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+			<div class="modal fade" id="modal_notice_customer" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="false"   style="overflow-y: scroll">
 			  <div class="modal-dialog" role="document">
 				<div class="modal-content">
 				  <div class="modal-header">

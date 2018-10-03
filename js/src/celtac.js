@@ -62,247 +62,256 @@
 						$('#modal_add_user').modal('show');
 						break;
 					case "add":
-						var email		= $('#email').val();
-						var pass		= $('#pass').val();
-						var company		= $('#company').val();
-						var phone		= $('#phone').val();
-						var firstName	= $('#firstName').val();
-						var lastName	= $('#lastName').val();
-						var address		= $('#address').val();
-						var is_staff	= $('#is_staff').is(":checked");
-						
-
-						//debugger;
-						// console.log(company);
-						// console.log(phone);
-						// console.log(firstName);
-						// console.log(lastName);
-						// console.log(address);
-						// console.log(email);
-						// console.log(pass);
-						var arr_dom_id = new Array();
-						arr_dom_id.push('firstName');
-						arr_dom_id.push('lastName');
-						arr_dom_id.push('email');
-						arr_dom_id.push('pass');
-						arr_dom_id.push('company');
-						arr_dom_id.push('phone');
-						arr_dom_id.push('address');
-
-						
-						var sta_validate = true;
-						if (firstName == ""){
-							celtac.g_func.notice_div_error(arr_dom_id,"firstName");
-							//$('#firstName').addClass('ui-state-error ui-corner-all');
-							//$('#firstName_vlid').text("*needed value.").css('color', 'red');
-							sta_validate = false;
-						} else if (lastName == ""){
-							celtac.g_func.notice_div_error(arr_dom_id,"lastName");
-							//$('#lastName_vlid').text("*needed value.").css('color', 'red');
-							sta_validate = false;
-						} else if (email == ""){
-							//$('#email_vlid').text("*needed value.").css('color', 'red');
-							celtac.g_func.notice_div_error(arr_dom_id,"email");
-							sta_validate = false;
-						} else if (pass == ""){
-							//$('#pass_vlid').text("*needed value.").css('color', 'red');
-							celtac.g_func.notice_div_error(arr_dom_id,"pass");
-							sta_validate = false;
-						} else if(company == ""){
-							//$('#company_vlid').text("*needed value.").css('color', 'red');
-							celtac.g_func.notice_div_error(arr_dom_id,"company");
-							sta_validate = false;
-						} else if (phone == ""){
-							//$('#phone_vlid').text("*needed value.").css('color', 'red');
-							celtac.g_func.notice_div_error(arr_dom_id,"phone");
-							sta_validate = false;
-
-						} else if (address == ""){
-							//$('#address_vlid').text("*needed value.").css('color', 'red');
-							celtac.g_func.notice_div_error(arr_dom_id,"address");
-							sta_validate = false;
-						}
-						
-						if(sta_validate){
-							$.ajax({
-								url: "usermanage.php",
-								dataType: 'text', // Notice! JSONP <-- P (lowercase)
-								method : 'POST',
-								data: { 
-									"q"              : "add_user"
-									,"company"       : company
-									,"phone"         : phone
-									,"firstName"     : firstName
-									,"lastName"      : lastName
-									,"address"       : address
-									,"email"         : email
-									,"pass"          : pass
-									,"is_staff"		 : is_staff	
-									
-								},
-								type: "GET",
-								success:function(response){
-									//console.debug('response : ',response);
-									//debugger;
-									//console.log(response);
-									var obj_response = jQuery.parseJSON(response);
-									//debugger;
-									//console.debug('respont : ',respont);
-									if (obj_response.success) {
-										//alert("complete.");
-										location.reload();
-									} else {
-
-									}
-								},
-								error:function(response){
-									console.debug(response);
-								}
-							});
+						if(true){
+							var email		= $('#email').val();
+							var pass		= $('#pass').val();
+							var company		= $('#company').val();
+							var phone		= $('#phone').val();
+							var firstName	= $('#firstName').val();
+							var lastName	= $('#lastName').val();
+							var address		= $('#address').val();
+							var is_staff	= $('#is_staff').is(":checked");
 							
-						}//end if false.
+
+							//debugger;
+							// console.log(company);
+							// console.log(phone);
+							// console.log(firstName);
+							// console.log(lastName);
+							// console.log(address);
+							// console.log(email);
+							// console.log(pass);
+							var arr_dom_id = new Array();
+							arr_dom_id.push('firstName');
+							arr_dom_id.push('lastName');
+							arr_dom_id.push('email');
+							arr_dom_id.push('pass');
+							arr_dom_id.push('company');
+							arr_dom_id.push('phone');
+							arr_dom_id.push('address');
+
+							
+							var sta_validate = true;
+							if (firstName == ""){
+								celtac.g_func.notice_div_error(arr_dom_id,"firstName");
+								//$('#firstName').addClass('ui-state-error ui-corner-all');
+								//$('#firstName_vlid').text("*needed value.").css('color', 'red');
+								sta_validate = false;
+							} else if (lastName == ""){
+								celtac.g_func.notice_div_error(arr_dom_id,"lastName");
+								//$('#lastName_vlid').text("*needed value.").css('color', 'red');
+								sta_validate = false;
+							} else if (email == ""){
+								//$('#email_vlid').text("*needed value.").css('color', 'red');
+								celtac.g_func.notice_div_error(arr_dom_id,"email");
+								sta_validate = false;
+							} else if (pass == ""){
+								//$('#pass_vlid').text("*needed value.").css('color', 'red');
+								celtac.g_func.notice_div_error(arr_dom_id,"pass");
+								sta_validate = false;
+							} else if(company == ""){
+								//$('#company_vlid').text("*needed value.").css('color', 'red');
+								celtac.g_func.notice_div_error(arr_dom_id,"company");
+								sta_validate = false;
+							} else if (phone == ""){
+								//$('#phone_vlid').text("*needed value.").css('color', 'red');
+								celtac.g_func.notice_div_error(arr_dom_id,"phone");
+								sta_validate = false;
+
+							} else if (address == ""){
+								//$('#address_vlid').text("*needed value.").css('color', 'red');
+								celtac.g_func.notice_div_error(arr_dom_id,"address");
+								sta_validate = false;
+							}
+							
+							if(sta_validate){
+								$.ajax({
+									url: "usermanage.php",
+									dataType: 'text', // Notice! JSONP <-- P (lowercase)
+									method : 'POST',
+									data: { 
+										"q"              : "add_user"
+										,"company"       : company
+										,"phone"         : phone
+										,"firstName"     : firstName
+										,"lastName"      : lastName
+										,"address"       : address
+										,"email"         : email
+										,"pass"          : pass
+										,"is_staff"		 : is_staff	
+										
+									},
+									type: "GET",
+									success:function(response){
+										//console.debug('response : ',response);
+										//debugger;
+										//console.log(response);
+										var obj_response = jQuery.parseJSON(response);
+										//debugger;
+										//console.debug('respont : ',respont);
+										if (obj_response.success) {
+											//alert("complete.");
+											location.reload();
+										} else {
+
+										}
+									},
+									error:function(response){
+										console.debug(response);
+									}
+								});
+								
+							}//end if false.
+						}
+
 
 						break;	
 					case "edit_user_model":
-						var id_user = obj;
-						$('#modal_edit_user').modal('show');
-						console.log(obj_all_user[id_user]);
-						
-						var email = obj_all_user[id_user].email;
-						var pass = obj_all_user[id_user].pass;
-						var company = obj_all_user[id_user].company;
-						var phone = obj_all_user[id_user].phone_no;
-						var firstName = obj_all_user[id_user].first_name;
-						var lastName = obj_all_user[id_user].last_name;
-						var address = obj_all_user[id_user].address;
-						var is_staff = obj_all_user[id_user].is_staff;
-						
-						
-						//--> auto add exits data.
-						
-						$('#modal_edit_user').find('#user_id_edit').val(id_user);
-						$('#modal_edit_user').find('#email_edit').val(email);
-						$('#modal_edit_user').find('#pass_edit').val(pass);
-						$('#modal_edit_user').find('#company_edit').val(company);
-						$('#modal_edit_user').find('#phone_edit').val(phone);
-						$('#modal_edit_user').find('#firstName_edit').val(firstName);
-						$('#modal_edit_user').find('#lastName_edit').val(lastName);
-						$('#modal_edit_user').find('#address_edit').val(address);
-						$('#modal_edit_user').find('#is_staff_edit').prop('checked', is_staff);
-						//--> mission complete.
+						if(true){
+							var id_user = obj;
+							$('#modal_edit_user').modal('show');
+							console.log(obj_all_user[id_user]);
+							
+							var email = obj_all_user[id_user].email;
+							var pass = obj_all_user[id_user].pass;
+							var company = obj_all_user[id_user].company;
+							var phone = obj_all_user[id_user].phone_no;
+							var firstName = obj_all_user[id_user].first_name;
+							var lastName = obj_all_user[id_user].last_name;
+							var address = obj_all_user[id_user].address;
+							var is_staff = obj_all_user[id_user].is_staff;
+							
+							
+							//--> auto add exits data.
+							
+							$('#modal_edit_user').find('#user_id_edit').val(id_user);
+							$('#modal_edit_user').find('#email_edit').val(email);
+							$('#modal_edit_user').find('#pass_edit').val(pass);
+							$('#modal_edit_user').find('#company_edit').val(company);
+							$('#modal_edit_user').find('#phone_edit').val(phone);
+							$('#modal_edit_user').find('#firstName_edit').val(firstName);
+							$('#modal_edit_user').find('#lastName_edit').val(lastName);
+							$('#modal_edit_user').find('#address_edit').val(address);
+							$('#modal_edit_user').find('#is_staff_edit').prop('checked', is_staff);
+							//--> mission complete.
+						}
+
 
 					break;
 					case "update_user":
-						var id_user 	= $('#modal_edit_user').find('#user_id_edit').val();
-						var email		= $('#modal_edit_user').find('#email_edit').val();
-						var pass		= $('#modal_edit_user').find('#pass_edit').val();
-						var company		= $('#modal_edit_user').find('#company_edit').val();
-						var phone		= $('#modal_edit_user').find('#phone_edit').val();
-						var firstName	= $('#modal_edit_user').find('#firstName_edit').val();
-						var lastName	= $('#modal_edit_user').find('#lastName_edit').val();
-						var address		= $('#modal_edit_user').find('#address_edit').val();
-						var is_staff	= $('#modal_edit_user').find('#is_staff_edit').is(":checked");
-						
-
-						var arr_dom_id = new Array();
-						arr_dom_id.push('firstName');
-						arr_dom_id.push('lastName');
-						arr_dom_id.push('email');
-						arr_dom_id.push('company');
-						arr_dom_id.push('phone');
-						arr_dom_id.push('address');
-						
-						/*
-						var sta_validate = true;
-						if (email == ""){
-							$('#email_vlid_edit').text("*needed value.").css('color', 'red');
-							sta_validate = false;
-						} else if(company == ""){
-							$('#company_vlid_edit').text("*needed value.").css('color', 'red');
-							sta_validate = false;
-						} else if (phone == ""){
-							$('#phone_vlid_edit').text("*needed value.").css('color', 'red');
-							sta_validate = false;
-						} else if (firstName == ""){
-							$('#firstName_vlid_edit').text("*needed value.").css('color', 'red');
-							sta_validate = false;
-						} else if (lastName == ""){
-							$('#lastName_vlid_edit').text("*needed value.").css('color', 'red');
-							sta_validate = false;
-						} else if (address == ""){
-							$('#address_vlid_edit').text("*needed value.").css('color', 'red');
-							sta_validate = false;
-						}
-						*/
-						//------------------
-						var sta_validate = true;
-						if (firstName == ""){
-							celtac.g_func.notice_div_error(arr_dom_id,"firstName");
-							//$('#firstName').addClass('ui-state-error ui-corner-all');
-							//$('#firstName_vlid').text("*needed value.").css('color', 'red');
-							sta_validate = false;
-						} else if (lastName == ""){
-							celtac.g_func.notice_div_error(arr_dom_id,"lastName");
-							//$('#lastName_vlid').text("*needed value.").css('color', 'red');
-							sta_validate = false;
-						} else if (email == ""){
-							//$('#email_vlid').text("*needed value.").css('color', 'red');
-							celtac.g_func.notice_div_error(arr_dom_id,"email");
-							sta_validate = false;
-						} else if(company == ""){
-							//$('#company_vlid').text("*needed value.").css('color', 'red');
-							celtac.g_func.notice_div_error(arr_dom_id,"company");
-							sta_validate = false;
-						} else if (phone == ""){
-							//$('#phone_vlid').text("*needed value.").css('color', 'red');
-							celtac.g_func.notice_div_error(arr_dom_id,"phone");
-							sta_validate = false;
-
-						} else if (address == ""){
-							//$('#address_vlid').text("*needed value.").css('color', 'red');
-							celtac.g_func.notice_div_error(arr_dom_id,"address");
-							sta_validate = false;
-						}
-						//------------------
-						if(sta_validate){
-							$.ajax({
-								url: "usermanage.php",
-								dataType: 'text', // Notice! JSONP <-- P (lowercase)
-								method : 'POST',
-								data: {
-									"q"              : "update_user"
-									,"id"		     : id_user 
-									,"company"       : company
-									,"phone"         : phone
-									,"firstName"     : firstName
-									,"lastName"      : lastName
-									,"address"       : address
-									,"email"         : email
-									,"pass"          : pass
-									,"is_staff"		 : is_staff	
-									
-								},
-								type: "GET",
-								success:function(response){
-									//console.debug('response : ',response);
-									//debugger;
-									//console.log(response);
-									var obj_response = jQuery.parseJSON(response);
-									
-									//console.debug('respont : ',respont);
-									if (obj_response.success) {
-										
-										location.reload();
-									} else {
-
-									}
-								},
-								error:function(response){
-									console.debug(response);
-								}
-							});
+						if(true){
+							var id_user 	= $('#modal_edit_user').find('#user_id_edit').val();
+							var email		= $('#modal_edit_user').find('#email_edit').val();
+							var pass		= $('#modal_edit_user').find('#pass_edit').val();
+							var company		= $('#modal_edit_user').find('#company_edit').val();
+							var phone		= $('#modal_edit_user').find('#phone_edit').val();
+							var firstName	= $('#modal_edit_user').find('#firstName_edit').val();
+							var lastName	= $('#modal_edit_user').find('#lastName_edit').val();
+							var address		= $('#modal_edit_user').find('#address_edit').val();
+							var is_staff	= $('#modal_edit_user').find('#is_staff_edit').is(":checked");
 							
-						}//end if false.
+
+							var arr_dom_id = new Array();
+							arr_dom_id.push('firstName');
+							arr_dom_id.push('lastName');
+							arr_dom_id.push('email');
+							arr_dom_id.push('company');
+							arr_dom_id.push('phone');
+							arr_dom_id.push('address');
+							
+							/*
+							var sta_validate = true;
+							if (email == ""){
+								$('#email_vlid_edit').text("*needed value.").css('color', 'red');
+								sta_validate = false;
+							} else if(company == ""){
+								$('#company_vlid_edit').text("*needed value.").css('color', 'red');
+								sta_validate = false;
+							} else if (phone == ""){
+								$('#phone_vlid_edit').text("*needed value.").css('color', 'red');
+								sta_validate = false;
+							} else if (firstName == ""){
+								$('#firstName_vlid_edit').text("*needed value.").css('color', 'red');
+								sta_validate = false;
+							} else if (lastName == ""){
+								$('#lastName_vlid_edit').text("*needed value.").css('color', 'red');
+								sta_validate = false;
+							} else if (address == ""){
+								$('#address_vlid_edit').text("*needed value.").css('color', 'red');
+								sta_validate = false;
+							}
+							*/
+							//------------------
+							var sta_validate = true;
+							if (firstName == ""){
+								celtac.g_func.notice_div_error(arr_dom_id,"firstName");
+								//$('#firstName').addClass('ui-state-error ui-corner-all');
+								//$('#firstName_vlid').text("*needed value.").css('color', 'red');
+								sta_validate = false;
+							} else if (lastName == ""){
+								celtac.g_func.notice_div_error(arr_dom_id,"lastName");
+								//$('#lastName_vlid').text("*needed value.").css('color', 'red');
+								sta_validate = false;
+							} else if (email == ""){
+								//$('#email_vlid').text("*needed value.").css('color', 'red');
+								celtac.g_func.notice_div_error(arr_dom_id,"email");
+								sta_validate = false;
+							} else if(company == ""){
+								//$('#company_vlid').text("*needed value.").css('color', 'red');
+								celtac.g_func.notice_div_error(arr_dom_id,"company");
+								sta_validate = false;
+							} else if (phone == ""){
+								//$('#phone_vlid').text("*needed value.").css('color', 'red');
+								celtac.g_func.notice_div_error(arr_dom_id,"phone");
+								sta_validate = false;
+
+							} else if (address == ""){
+								//$('#address_vlid').text("*needed value.").css('color', 'red');
+								celtac.g_func.notice_div_error(arr_dom_id,"address");
+								sta_validate = false;
+							}
+							//------------------
+							if(sta_validate){
+								$.ajax({
+									url: "usermanage.php",
+									dataType: 'text', // Notice! JSONP <-- P (lowercase)
+									method : 'POST',
+									data: {
+										"q"              : "update_user"
+										,"id"		     : id_user 
+										,"company"       : company
+										,"phone"         : phone
+										,"firstName"     : firstName
+										,"lastName"      : lastName
+										,"address"       : address
+										,"email"         : email
+										,"pass"          : pass
+										,"is_staff"		 : is_staff	
+										
+									},
+									type: "GET",
+									success:function(response){
+										//console.debug('response : ',response);
+										//debugger;
+										//console.log(response);
+										var obj_response = jQuery.parseJSON(response);
+										
+										//console.debug('respont : ',respont);
+										if (obj_response.success) {
+											
+											location.reload();
+										} else {
+
+										}
+									},
+									error:function(response){
+										console.debug(response);
+									}
+								});
+								
+							}//end if false.
+						}
+						
 
 						break;						
 					case "init_admin_page":
@@ -340,40 +349,43 @@
 						//header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/admin_page.php");
 						break;					
 					case "delete_user":
-						var id_user = obj;
-						$('#modal_delete_confirm').modal('show');
-						var cilck_ok = false;
-						$('#modal_delete_confirm').find('#del_ok').click(function() {
-							$.ajax({
-								url: "usermanage.php",
-								dataType: 'text', // Notice! JSONP <-- P (lowercase)
-								method : 'POST',
-								data: { 
-									"q" : "delete_user"
-									,"id" : id_user
-								},
-								type: "GET",
-								success:function(response){
-									//console.debug('response : ',response);
-									//debugger;
-									//console.log(response);
-									var obj_response = jQuery.parseJSON(response);
-									
-									//console.debug('respont : ',respont);
-									if (obj_response.success) {
-										console.log(obj_response);
-										location.reload();
-										//window.location = window.location.hostname+"/"+celtac.pjName+"/admin_page.php";
-										//header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/admin_page.php");
-									} else {
+						if(true){
+							var id_user = obj;
+							$('#modal_delete_confirm').modal('show');
+							var cilck_ok = false;
+							$('#modal_delete_confirm').find('#del_ok').click(function() {
+								$.ajax({
+									url: "usermanage.php",
+									dataType: 'text', // Notice! JSONP <-- P (lowercase)
+									method : 'POST',
+									data: { 
+										"q" : "delete_user"
+										,"id" : id_user
+									},
+									type: "GET",
+									success:function(response){
+										//console.debug('response : ',response);
+										//debugger;
+										//console.log(response);
+										var obj_response = jQuery.parseJSON(response);
+										
+										//console.debug('respont : ',respont);
+										if (obj_response.success) {
+											console.log(obj_response);
+											location.reload();
+											//window.location = window.location.hostname+"/"+celtac.pjName+"/admin_page.php";
+											//header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/admin_page.php");
+										} else {
 
+										}
+									},
+									error:function(response){
+										console.debug(response);
 									}
-								},
-								error:function(response){
-									console.debug(response);
-								}
+								});
 							});
-						});
+						}
+						
 
 						break;					
 					case "xxx":
@@ -812,39 +824,249 @@
 						break;	
 					case "edit_order":
 						if(true){
-							$('#xx').prop('disabled', false);
 							
-							var id_user = obj;
-							$('#modal_edit_user').modal('show');
-							console.log(obj_all_user[id_user]);
+							var order_id_edit			= $('#order_id_edit').val();
+							var order_code				= $('#order_code_edit').val();
+							var customer_name			= $('#customer_name_edit').val();
+							var product_type			= $('#product_type_edit').val();
+							var quantity				= $('#quantity_edit').val();
+							var vial					= $('#vial_edit').val();
+							var total_cel				= $('#total_cel_edit').val();
+							var package_type			= $('#package_type_edit').val();
+							var delivery_date			= $('#delivery_date_edit').datepicker("option", "dateFormat", "dd-mm-yy" ).val();
+							var delivery_time_hour		= $('#delivery_time_hour_edit').val();
+							var delivery_time_minute	= $('#delivery_time_minute_edit').val();
+							var giveaway				= $('#giveaway_edit').val();
+							var sender					= $('#sender_edit').val();
+							var receiver				= $('#receiver_edit').val();
+							var dealer_person			= $('#dealer_person_edit').val();
+							var dealer_company			= $('#dealer_company_edit').val();
+							var price_rate				= $('#price_rate_edit').val();
+							var comment_else			= $('#comment_else_edit').val();
+
 							
-							var email = obj_all_user[id_user].email;
-							var pass = obj_all_user[id_user].pass;
-							var company = obj_all_user[id_user].company;
-							var phone = obj_all_user[id_user].phone_no;
-							var firstName = obj_all_user[id_user].first_name;
-							var lastName = obj_all_user[id_user].last_name;
-							var address = obj_all_user[id_user].address;
-							var is_staff = obj_all_user[id_user].is_staff;
+
+							var arr_dom_id = new Array();
+							arr_dom_id.push('customer_name_edit');
+							arr_dom_id.push('product_type_edit');
+							arr_dom_id.push('quantity_edit');
+							arr_dom_id.push('vial_edit');
+							arr_dom_id.push('package_type_edit');
+							arr_dom_id.push('delivery_date_edit');
+							arr_dom_id.push('delivery_time_hour_edit');
+							arr_dom_id.push('delivery_time_minute_edit');
+							arr_dom_id.push('giveaway_edit');
+							arr_dom_id.push('sender_edit');
+							arr_dom_id.push('receiver_edit');
+							arr_dom_id.push('dealer_person_edit');
+							arr_dom_id.push('dealer_company_edit');
+							arr_dom_id.push('price_rate_edit');
+							arr_dom_id.push('comment_else_edit');
 							
+
 							
-							//--> auto add exits data.
+							var sta_validate = true;
+							if (price_rate == ""){
+								celtac.g_func.notice_div_error(true,"price_rate_edit");
+								sta_validate = false;
 							
-							$('#modal_edit_user').find('#user_id_edit').val(id_user);
-							$('#modal_edit_user').find('#email_edit').val(email);
-							$('#modal_edit_user').find('#pass_edit').val(pass);
-							$('#modal_edit_user').find('#company_edit').val(company);
-							$('#modal_edit_user').find('#phone_edit').val(phone);
-							$('#modal_edit_user').find('#firstName_edit').val(firstName);
-							$('#modal_edit_user').find('#lastName_edit').val(lastName);
-							$('#modal_edit_user').find('#address_edit').val(address);
-							$('#modal_edit_user').find('#is_staff_edit').prop('checked', is_staff);
-							//--> mission complete.
+							}else {
+								celtac.g_func.notice_div_error(false,"price_rate_edit");
+							}
+							//--
+							if (dealer_company == ""){
+								celtac.g_func.notice_div_error(true,"dealer_company_edit");
+								sta_validate = false;
+							}else {
+								celtac.g_func.notice_div_error(false,"dealer_company_edit");
+							}
+							//--
+							if (dealer_person == ""){
+								celtac.g_func.notice_div_error(true,"dealer_person_edit");
+								sta_validate = false;
+							
+							}else {
+								celtac.g_func.notice_div_error(false,"dealer_person_edit");
+							}
+							//--
+							if (receiver == ""){
+								celtac.g_func.notice_div_error(true,"receiver_edit");
+								sta_validate = false;
+							
+							}else {
+								celtac.g_func.notice_div_error(false,"receiver_edit");
+							}
+							//--
+							if (sender == ""){
+								celtac.g_func.notice_div_error(true,"sender_edit");
+								sta_validate = false;
+							
+							}else {
+								celtac.g_func.notice_div_error(false,"sender_edit");
+							}
+							//--
+							if (giveaway == ""){
+								celtac.g_func.notice_div_error(true,"giveaway_edit");
+								sta_validate = false;
+							
+							}else {
+								celtac.g_func.notice_div_error(false,"giveaway_edit");
+							}
+							//--
+							if (delivery_time_minute == ""){
+								celtac.g_func.notice_div_error(true,"delivery_time_minute_edit");
+								sta_validate = false;
+							
+							}else {
+								celtac.g_func.notice_div_error(false,"delivery_time_minute_edit");
+							}
+							//--
+							if (delivery_time_hour == ""){
+								celtac.g_func.notice_div_error(true,"delivery_time_hour_edit");
+								sta_validate = false;
+							
+							}else {
+								celtac.g_func.notice_div_error(false,"delivery_time_hour_edit");
+							} 
+							//--
+							if (delivery_date == ""){
+								celtac.g_func.notice_div_error(true,"delivery_date_edit");
+								sta_validate = false;
+							
+							}else {
+								celtac.g_func.notice_div_error(false,"delivery_date_edit");
+							} 
+							//--
+							if (package_type == ""){
+								if($('#product_type').val() == "cell"){
+									celtac.g_func.notice_div_error(true,"package_type_edit");
+									sta_validate = false;
+								}
+							}else {
+								if($('#product_type').val() == "cell"){
+									celtac.g_func.notice_div_error(false,"package_type_edit");
+								}
+							} 
+							//--
+							if(total_cel == ""){
+								if($('#product_type').val() == "cell"){
+									celtac.g_func.notice_div_error(true,"total_cel_edit");
+									sta_validate = false;
+								}
+							} else {
+								if($('#product_type').val() == "cell"){
+									celtac.g_func.notice_div_error(false,"total_cel_edit");
+								}
+							} 
+							//--
+							if (vial == ""){
+								celtac.g_func.notice_div_error(true,"vial_edit");
+								sta_validate = false;
+							}else {
+								celtac.g_func.notice_div_error(false,"vial_edit");
+							}
+							//--
+							if (quantity == ""){
+								if($('#product_type').val() == "cell"){
+									celtac.g_func.notice_div_error(true,"quantity_edit");
+									sta_validate = false;
+								}
+							} else {
+								if($('#product_type').val() == "cell"){
+									celtac.g_func.notice_div_error(false,"quantity_edit");
+								}
+							} 
+							//--
+							if (product_type == ""){
+								celtac.g_func.notice_div_error(true,"product_type_edit");
+								sta_validate = false;
+							}else {
+								celtac.g_func.notice_div_error(false,"product_type_edit");
+							}
+							//--
+							if (customer_name == ""){
+								celtac.g_func.notice_div_error(true,"customer_name_edit");
+								sta_validate = false;
+							} else {
+								celtac.g_func.notice_div_error(false,"customer_name_edit");
+							}
+
+							/*
+							if (comment_else == ""){
+								celtac.g_func.notice_div_error(arr_dom_id,"comment_else");
+								sta_validate = false;
+							}*/
+							
+							var str_daliverly_date 			= $('#delivery_date_edit').datepicker("option", "dateFormat", "yy-mm-dd" ).val();
+							var h 							= $('#delivery_time_hour_edit').val();
+							var m 							= $('#delivery_time_minute_edit').val();
+							
+							var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m);
+							
+							if(!rs){
+								$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+								$('#modal_notice_customer').modal('show');
+								
+								sta_validate = false;
+							}
+								
+							if(sta_validate){
+								$('#bt_save_update_order').prop('disabled', true);
+								$('#loading_modal').modal('show');
+								$.ajax({
+									url: "order.php",
+									dataType: 'text', // Notice! JSONP <-- P (lowercase)
+									method : 'POST',
+									data: { 
+										"q"              					: "edit_order"
+										,"order_id_edit"					: order_id_edit
+										,"order_code_edit"         			: order_code	
+										,"customer_name_edit"         		: customer_name	
+										,"product_type_edit"				: product_type		
+										,"quantity_edit"					: quantity			
+										,"vial_edit"						: vial				
+										,"total_cel_edit"					: total_cel				
+										,"package_type_edit"				: package_type			
+										,"delivery_date_edit"				: delivery_date			
+										,"delivery_time_hour_edit"			: delivery_time_hour		
+										,"delivery_time_minute_edit"		: delivery_time_minute
+										,"giveaway_edit"					: giveaway
+										,"sender_edit"						: sender									
+										,"receiver_edit"					: receiver				
+										,"dealer_person_edit"				: dealer_person		
+										,"dealer_company_edit"				: dealer_company			
+										,"price_rate_edit"					: price_rate				
+										,"comment_else_edit"				: comment_else
+										
+									},
+									type: "GET",
+									success:function(response){
+										$('#loading_modal').modal('hide');
+										//console.debug('response : ',response);
+										//debugger;
+										//console.log(response);
+										var obj_response = jQuery.parseJSON(response);
+										//debugger;
+										//console.debug('respont : ',respont);
+										if (obj_response.success) {
+											//alert("complete.");
+											location.reload();
+										} else {
+
+										}
+									},
+									error:function(response){
+										$('#loading_modal').modal('hide');
+										console.debug(response);
+									}
+								});
+								
+							}//end if false.
 						}
 
 
 					break;
-					case "update_order":
+					case "update_order_bc":
 						if(true){
 							var id_user 	= $('#modal_edit_user').find('#user_id_edit').val();
 							var email		= $('#modal_edit_user').find('#email_edit').val();
