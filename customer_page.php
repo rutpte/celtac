@@ -47,7 +47,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 
 	</head>
 
-	<body class="text-center">
+	<body class="text-center rut_color">
 
 
 		<!--- **************************** nav bar *************************************** -->

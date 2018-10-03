@@ -1,5 +1,17 @@
 <?php
 require dirname(__FILE__) . '/includes/init.inc.php';
+ if (isset($_SESSION['email'])) {
+	$obj 	= new Order($pdo);
+	$rs_arr = $obj->getOrderAll();
+	foreach ($rs_arr as &$value) {
+		echo $value['id'];
+		echo $value['order_code'];
+		echo ' | ';
+	}
+	exit;
+} else {
+	header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/index.php");
+} 
 // Import PHPMailer classes into the global namespace
 // These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;
@@ -17,65 +29,54 @@ require 'libs/PHPMailer/src/SMTP.php';
 
 $from_email 		= 'celtac.order@gmail.com';
 $from_email_pass  	= 'celtac123';
-$mailTo 			= array("yupa.pangtum@gmail.com", "thongjet@hotmail.com", "my_name_is_ken@live.com", "iloveubon@gmail.com", "zerokung_2011@hotmail.com");
+//$mailTo 			= array("yupa.pangtum@gmail.com", "thongjet@hotmail.com", "my_name_is_ken@live.com", "iloveubon@gmail.com", "zerokung_2011@hotmail.com");
+$mailTo 			= array("iloveubon@gmail.com");
 
-$email_to 			= 'iloveubon@gmail.com';
-$id_reset 			= isset($_GET['id_reset']) ? $_GET['id_reset'] : '';
-$secure_code 		= isset($_GET['secure_code']) ? $_GET['secure_code'] : '';
-$project_name 		= "celtac";
-$host 				= "127.0.0.1";
 //-----------------------------------------------------------------------------------------
-    $link_confirm = "http://".$host."/".$project_name."/mailConfirmReset.php?id_reset=".$id_reset."&secure_code=".$secure_code;
-    $html_mail = '
-        <table cellspacing="0" cellpadding="0" width="100%" bgcolor="#ebebeb">
-            <tbody>
-                <tr>
-                    <td align="center" valign="top"></td>
-                </tr>
-            </tbody>
-        </table>
-        <table cellspacing="0" cellpadding="0" width="100%" bgcolor="#ebebeb">
-            <table style="border-left: 2px solid #e6e6e6; border-right: 2px solid #e6e6e6;" cellspacing="0" cellpadding="25" width="605">
-                <td width="596" align="center" style="background-color: #ffffff; border-top: 0px solid #000000; text-align: left; height: 50px;">
-                    <p style="margin-bottom: 3px; font-size: 22px; font-weight: bold; color: #494a48; font-family: arial; line-height: 110%;">
-                        confirm reset password.
-                    </p>
-                </td>
+$new_tb="";
 
-                <tr>
-                    <td style="background-color:#EEEEEE; border-top: 0px solid #333333; border-bottom: 1px solid #FFFFFF;" align="middle" valign="middle">
-                        <a href="'.$link_confirm.'">Confirm Click</a>
-                    </td>
-                <tr>
-                <td style="background-color: #ffffff; border-top: 0px solid #000000; text-align: left; height: 50px;" align="center">
-                <p>
-                    <span style="margin-bottom: 1px; font-size: 12px; font-weight: normal; color: #494a48; font-family: arial; line-height: 110%;">
-                        this E-mail is confirmation for reset new password.
-                    </span>
-                </p>
-
-                <p><a href="#"></a></p></tr>
-
-            </table>
-
-        <table width="604" cellpadding="1" cellspacing="0">
-            <tr>
-            <td width="288" bgcolor="#ffffff"><br />
-            <td width="294" bgcolor="#ffffff" align="right"> 
-
-            <tr>
-
-            <td style="background-color: #ffffff; border-top: 0px solid #000000; text-align: left; height: 50px;" align="center">
-            <span style="font-size: 10px; color: #575757; line-height: 120%; font-family: arial; text-decoration: none;">
-            <a href="mailto:pte.engineer@gmail.com">
-            Contact Us?</a><br>
-            Visit us on the web at <a href="http://mapdb.pte.co.th/'.$project_name.'">'.$project_name.'</a></span></td>
-
-            <td style="background-color: #ffffff; border-top: 0px solid #000000; text-align: right; height: 50px;" align="center">
-            <span style="font-size: 10px; color: #575757; line-height: 120%;
-            font-family: arial; text-decoration: none;">If you want more service <a href="http://pte.co.th">click here</a>.</span>
-        </table>
-    ';
+$new_tb .='<table class="CSSTableGenerator"  name = "xxx">';
+	$new_tb .='<thead>';
+		$new_tb .='<tr>';
+		
+			$new_tb .='<th>xxxx</th>';
+			$new_tb .='<th>xxxx</th>';
+			$new_tb .='<th>xxxx</th>';
+			$new_tb .='<th>xxxx</th>';
+			$new_tb .='<th>xxxx</th>';
+			$new_tb .='<th>xxxx</th>';
+			$new_tb .='<th>xxxx</th>';
+			$new_tb .='<th>xxxx</th>';
+			$new_tb .='<th>xxxx</th>';
+			$new_tb .='<th>xxxx</th>';
+			$new_tb .='<th>xxxx</th>';
+			$new_tb .='<th>xxxx</th>';
+			$new_tb .='<th>xxxx</th>';
+			$new_tb .='<th>xxxx</th>';
+			$new_tb .='<th>xxxx</th>';
+		$new_tb .='</tr>';
+	$new_tb .='</thead>';
+	$new_tb .='<tbody>';
+		$new_tb .='<tr>';
+			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
+			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
+			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
+			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
+			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
+			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
+			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
+			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
+			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
+			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
+			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
+			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
+			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
+			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
+			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
+			
+		$new_tb .='</tr>';
+	$new_tb .='</tbody>';
+$new_tb .='</table>';
 //-----------------------------------------------------------------------------------------
 $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 try {
@@ -114,7 +115,11 @@ try {
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();
-    echo 'Message has been sent';
+	
+    $result["success"] = true;
+	echo json_encode($result);
+	
 } catch (Exception $e) {
-    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+	$result["success"] = false;
+	echo json_encode($result);
 }

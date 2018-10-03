@@ -40,6 +40,16 @@ header('Content-type: application/json');
 				echo $rs;
 				
 			break;
+			case "get_order_all" :
+				$rs = array();
+				$rs["success"] = false;
+
+				
+				$rs = $obj->getOrderAll ();
+				
+				echo $rs;
+				
+			break;
 		}
 	}
 

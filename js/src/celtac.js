@@ -527,7 +527,7 @@
 								
 								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m);
 								if(!rs){
-									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 30 minute.');
 									$('#modal_notice_customer').modal('show');
 									
 								}
@@ -541,7 +541,7 @@
 								
 								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m);
 								if(!rs){
-									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 30 minute.');
 									$('#modal_notice_customer').modal('show');
 									
 
@@ -567,7 +567,7 @@
 								var timestamp_daliverly_date 		= obj_daliverly_date.getTime();
 								var minli_different_time_daliverly	= timestamp_daliverly_date - current_timestamp;
 								var min_different_time_daliverly	= (minli_different_time_daliverly / 1000)/60; //change to minute.
-								if (min_different_time_daliverly < 300){
+								if (min_different_time_daliverly < 1440){
 									console.log("not avalible order in your time specify");
 									return false;
 								} else {
@@ -761,7 +761,7 @@
 							var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m);
 							
 							if(!rs){
-								$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+								$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 30 minute.');
 								$('#modal_notice_customer').modal('show');
 								
 								sta_validate = false;
@@ -1023,7 +1023,7 @@
 							var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m);
 							
 							if(!rs){
-								$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+								$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 30 minute.');
 								$('#modal_notice_customer').modal('show');
 								
 								sta_validate = false;
@@ -1390,7 +1390,7 @@
 								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m);
 								
 								if(!rs){
-									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 30 minute.');
 									$('#modal_notice_customer').modal('show');
 									
 								}
@@ -1405,7 +1405,7 @@
 								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m);
 								
 								if(!rs){
-									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 30 minute.');
 									$('#modal_notice_customer').modal('show');
 									
 
@@ -1414,8 +1414,53 @@
 							});
 						}
 						break;					
-					case "xxx":
-						//--..yourcode.
+					case "send_mail":
+						$('#loading_modal').modal('show');
+						$.ajax({
+							url: "sendOrder.php",
+							dataType: 'text', // Notice! JSONP <-- P (lowercase)
+							method : 'POST',
+							data: { 
+								"q"              					: "xxx"
+							},
+							type: "GET",
+							success:function(response){
+								$('#loading_modal').modal('hide');
+								//console.debug('response : ',response);
+								//debugger;
+								//console.log(response);
+								var obj_response = jQuery.parseJSON(response);
+								//debugger;
+								//console.debug('respont : ',respont);
+								if (obj_response.success) {
+									
+									//--> notic confirm sended email.
+									$.ajax({
+										url: "sendOrderConfirmUser.php",
+										dataType: 'text', // Notice! JSONP <-- P (lowercase)
+										method : 'POST',
+										data: { 
+											"q"              					: "xxx"
+										},
+										type: "GET",
+										success:function(response){
+											$('#loading_modal').modal('hide');
+											location.reload();
+										},
+										error:function(response){
+											$('#loading_modal').modal('hide');
+											console.debug(response);
+										}
+									});
+								} else {
+									console.log('error sum email');
+								}
+							},
+							error:function(response){
+								$('#loading_modal').modal('hide');
+								console.debug(response);
+							}
+						});
 						break;
 				}
 			}
@@ -1553,7 +1598,7 @@
 						var timestamp_daliverly_date 		= obj_daliverly_date.getTime();
 						var minli_different_time_daliverly	= timestamp_daliverly_date - current_timestamp;
 						var min_different_time_daliverly	= (minli_different_time_daliverly / 1000)/60; //change to minute.
-						if (min_different_time_daliverly < 300){
+						if (min_different_time_daliverly < 30){
 							console.log("not avalible order in your time specify");
 							return false;
 						} else {

@@ -366,15 +366,16 @@ class Order extends DBConnection
         }
     }
     //-----------------------------------------------------------------
-    public function getAllOrder ()
+    public function getOrderAll ()
     {
         $sql ="
             select 
 				*
             from order_product
 			where 1=1
-
+			and delivery_date_time >= now()
         ";
+		//now()::date
         //echo "<pre>", $sql; exit;
         $sth = $this->db->prepare($sql);  //sql2
         $result = array();

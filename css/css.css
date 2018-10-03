@@ -1,6 +1,12 @@
+
 .text {
     display: block;
 
     overflow: hidden;
     text-overflow: ellipsis;
+	
+}
+.rut_color {
+	color:#969494;
+
 }
