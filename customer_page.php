@@ -191,7 +191,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 									</div>
 									
 									<div class="col-8">
-										<input type="text" class="form-control" id="package_type_view" placeholder="total of cel">
+										<input type="text" class="form-control" id="package_type_view" placeholder="package_type">
 									</div>
 								</div>
 							</div>
@@ -407,11 +407,11 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<div>
 								<div class="row">
 									<div class="col-4">
-										<label for="package_edit">package</label>
+										<label for="package_type_edit">package</label>
 									</div>
 									
 									<div class="col-8">
-										<select class="custom-select d-block w-100" id="package_edit" required>
+										<select class="custom-select d-block w-100" id="package_type_edit" required>
 											<option value="ID">ID</option>
 											<option value="IV">IV</option>
 										</select>

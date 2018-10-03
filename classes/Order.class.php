@@ -183,6 +183,7 @@ class Order extends DBConnection
         return json_encode($result);
     }
     public function updateOrder($post){
+		$user_id			= isset($_SESSION['owner_id']) ? $_SESSION['owner_id']	: 'null';
 		//echo "                                   Hed "; exit;
 		//echo trim("                                   Hed "); exit;
 		
@@ -229,7 +230,6 @@ class Order extends DBConnection
 		$receiver			= isset($post['receiver_edit']) 				? "'".$post['receiver_edit']."'" 											: 'null';
 		$dealer_person		= isset($post['dealer_person_edit']) 			? "'".$post['dealer_person_edit']."'" 										: 'null';
 		$dealer_company		= isset($post['dealer_company_edit']) 			? "'".$post['dealer_company_edit']."'" 										: 'null';
-		$user_id			= isset($_SESSION['owner_id_edit']) 			? $_SESSION['owner_id_edit']												: 'null';
 		//$last_update_date 	= isset($post['last_update_date']) 	? $post['last_update_date'] : '';
 		$price_rate			= isset($post['price_rate_edit']) 				? "'".$post['price_rate_edit']."'"											: 'null';
 		$comment_else		= isset($post['comment_else_edit']) 			? "'".$post['comment_else_edit' ]."'"										: 'null';
@@ -250,14 +250,16 @@ class Order extends DBConnection
 				,dealer_person 			= {$dealer_person}
 				,dealer_company 		= {$dealer_company}
 				,user_id 				= {$user_id}
-				,order_date 			= {$order_date}
+
 				,last_update_date 		= NOW()
 				,price_rate 			= {$price_rate}
 				,comment_else 			= {$comment_else}
 			WHERE id = {$order_id_edit}
         ";
-echo '<pre>';
-echo $sql; exit;
+		//				,order_date 			= {$order_date}
+		//var_dump($_SESSION['owner_id']);exit;
+//echo '<pre>';
+//echo $sql; exit;
         try {
             $sth = $this->db->prepare($sql);
 			

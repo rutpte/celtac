@@ -823,7 +823,7 @@
 
 						break;	
 					case "edit_order":
-						if(true){
+						if(true){ 
 							
 							var order_id_edit			= $('#order_id_edit').val();
 							var order_code				= $('#order_code_edit').val();
@@ -844,8 +844,26 @@
 							var price_rate				= $('#price_rate_edit').val();
 							var comment_else			= $('#comment_else_edit').val();
 
+							console.log('order_id_edit  :  '+order_id_edit);
+							console.log('order_code  :  '+order_code);
+							console.log('customer_name  :  '+customer_name);
+							console.log('product_type  :  '+product_type);
+							console.log('quantity  :  '+quantity);
+							console.log('vial  :  '+vial);
+							console.log('total_cel  :  '+total_cel);
+							console.log('package_type  :  '+package_type);
+							console.log('delivery_date  :  '+delivery_date);
+							console.log('delivery_time_hour  :  '+delivery_time_hour);
+							console.log('delivery_time_minute  :  '+delivery_time_minute);
+							console.log('giveaway  :  '+giveaway);
+							console.log('sender  :  '+sender);
+							console.log('receiver  :  '+receiver);
+							console.log('dealer_person  :  '+dealer_person);
+							console.log('dealer_company  :  '+dealer_company);
+							console.log('price_rate  :  '+price_rate);
+							console.log('comment_else  :  '+comment_else);
 							
-
+							//debugger;
 							var arr_dom_id = new Array();
 							arr_dom_id.push('customer_name_edit');
 							arr_dom_id.push('product_type_edit');
@@ -938,23 +956,24 @@
 							} 
 							//--
 							if (package_type == ""){
-								if($('#product_type').val() == "cell"){
+								if($('#product_type_edit').val() == "cell"){
 									celtac.g_func.notice_div_error(true,"package_type_edit");
 									sta_validate = false;
 								}
 							}else {
-								if($('#product_type').val() == "cell"){
+								if($('#product_type_edit').val() == "cell"){
 									celtac.g_func.notice_div_error(false,"package_type_edit");
 								}
 							} 
 							//--
+							//debugger;
 							if(total_cel == ""){
-								if($('#product_type').val() == "cell"){
+								if($('#product_type_edit').val() == "cell"){
 									celtac.g_func.notice_div_error(true,"total_cel_edit");
 									sta_validate = false;
 								}
 							} else {
-								if($('#product_type').val() == "cell"){
+								if($('#product_type_edit').val() == "cell"){
 									celtac.g_func.notice_div_error(false,"total_cel_edit");
 								}
 							} 
@@ -967,12 +986,12 @@
 							}
 							//--
 							if (quantity == ""){
-								if($('#product_type').val() == "cell"){
+								if($('#product_type_edit').val() == "cell"){
 									celtac.g_func.notice_div_error(true,"quantity_edit");
 									sta_validate = false;
 								}
 							} else {
-								if($('#product_type').val() == "cell"){
+								if($('#product_type_edit').val() == "cell"){
 									celtac.g_func.notice_div_error(false,"quantity_edit");
 								}
 							} 
@@ -1061,7 +1080,9 @@
 									}
 								});
 								
-							}//end if false.
+							}else{
+								alert('test alert');
+							}
 						}
 
 
