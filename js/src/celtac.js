@@ -1176,6 +1176,7 @@
 							$('#modal_delete_confirm').modal('show');
 							var cilck_ok = false;
 							$('#modal_delete_confirm').find('#del_ok').click(function() {
+								$('#loading_modal').modal('show');
 								$.ajax({
 									url: "order.php",
 									dataType: 'text', // Notice! JSONP <-- P (lowercase)
@@ -1200,6 +1201,7 @@
 										} else {
 
 										}
+										$('#loading_modal').modal('hide');
 									},
 									error:function(response){
 										console.debug(response);

@@ -127,7 +127,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<div>
 								<div class="row">
 									<div class="col-4">
-										<label for="customer_name_view">customer name</label>
+										<label for="customer_name_view">customer</label>
 									</div>
 									
 									<div class="col-8">
@@ -293,7 +293,8 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							</div>
 							<hr class="mb-4">
 							<!-- <button class="btn btn-primary btn-lg btn-block" id="bt_save_edit_order" type="button" onclick="celtac.g_func.order('edit_order',"+obj_all_order[25].id+")">Save</button> -->
-							<div class="col-1"><a href="#" onclick="celtac.g_func.order('edit_order_model')"><span class="ui-icon ui-icon-pencil"></span></p></a></div>
+							<!-- <div class="col-1"><a href="#" onclick="celtac.g_func.order('edit_order_model')"><span class="ui-icon ui-icon-pencil"></span></p></a></div> -->
+							<button class="btn btn-lg btn-block" type="button" onclick="celtac.g_func.order('edit_order_model')"><span class="ui-icon ui-icon-pencil"></button>
 							<input id="order_id_view" type="hidden" value="">
 						  </form>
 						  
@@ -338,7 +339,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<div>
 								<div class="row">
 									<div class="col-4">
-										<label for="customer_name_edit">customer name</label>
+										<label for="customer_name_edit">customer</label>
 									</div>
 									
 									<div class="col-8">
@@ -615,7 +616,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<div>
 								<div class="row">
 									<div class="col-4">
-										<label for="customer_name">customer name</label>
+										<label for="customer_name">customer</label>
 									</div>
 									
 									<div class="col-8">
@@ -975,15 +976,14 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 ?>
 				
 				<div class="row"  style="background-color:<?php echo $color; ?>">
-				<div class="col-2"><div><?php echo $value['order_code']?></div></div>
-				<div class="col-2"><div><?php echo $value['customer_name']?></div></div>
-				<div class="col-2"><div><?php echo $value['product_type']?></div></div>
-				<div class="col-4"><div><?php echo $value['delivery_date_time']?></div></div>
-				<div class="col-1"><a href="#" onclick="celtac.g_func.order('view_order',<?php echo $value['id']?>)"><span class="ui-icon ui-icon-search"></span></p></a></div>
-				<div class="col-1"><a href="#" onclick="celtac.g_func.order('delete_order',<?php echo $value['id']?>)"><span class="ui-icon ui-icon-trash"></span></p></a></div>
-				<!--<div class="col-2"><a href="#" onclick="celtac.g_func.order('edit_order_model',<?php //echo $value['id']?>)">&#9998;</a></div>-->
-				<!--<div class="col-1"><a href="#" onclick="celtac.g_func.order('delete_order',<?php //echo $value['id']?>)">&#9764;</a></div> -->
+					<div class="col-2"><div><?php echo $value['order_code']?></div></div>
+					<div class="col-2"><div><?php echo $value['customer_name']?></div></div>
+					<div class="col-2"><div><?php echo $value['product_type']?></div></div>
+					<div class="col-4"><div><?php echo $value['delivery_date_time']?></div></div>
+					<div class="col-1"><a href="#" onclick="celtac.g_func.order('view_order',<?php echo $value['id']?>)"><span class="ui-icon ui-icon-search"></span></p></a></div>
+					<div class="col-1"><a href="#" onclick="celtac.g_func.order('delete_order',<?php echo $value['id']?>)"><span class="ui-icon ui-icon-trash"></span></p></a></div>
 				</div>
+				<hr class="mb-1">
 				
 <?php 
 	}
