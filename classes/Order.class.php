@@ -352,15 +352,18 @@ class Order extends DBConnection
             print_r($sth->errorInfo());
         } else {
 			$get_num_row = $sth->rowCount();
-            //var_dump($sth->rowCount());
+            //var_dump($sth->rowCount()); exit;
             //$result = $sth->fetchObject();
 			if($get_num_row > 0){
-				$result = $sth->fetchAll(PDO::FETCH_ASSOC);
+				$rs = $sth->fetchAll(PDO::FETCH_ASSOC);
 				
-				//$result["success"] = true;
+				$result["success"] = true;
+				$result["data"] = $rs;
 				return ($result);
 			} else {
+				//echo 'xxxxxxxxxxxx'; exit;
 				$result["success"] = false;
+				//echo $result; exit;
 				return ($result);
 			}
         }
@@ -387,9 +390,9 @@ class Order extends DBConnection
             //var_dump($sth->rowCount());
             //$result = $sth->fetchObject();
 			if($get_num_row > 0){
-				$result = $sth->fetchAll(PDO::FETCH_ASSOC);
-				
-				//$result["success"] = true;
+				$rs = $sth->fetchAll(PDO::FETCH_ASSOC);
+				$result["success"] = true;
+				$result["data"] = $rs;
 				return ($result);
 			} else {
 				$result["success"] = false;

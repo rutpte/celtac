@@ -1,8 +1,13 @@
 <?php
 require dirname(__FILE__) . '/includes/init.inc.php';
+//header('Content-Type: text/html; charset=utf-8');
  if (isset($_SESSION['email'])) {
 	$obj 	= new Order($pdo);
 	$rs_arr = $obj->getOrderAll();
+	$data = array();
+	if($rs_arr['success']){
+		$data = $rs_arr['data'];
+	}
 	// var_dump($rs_arr);
 	// foreach ($rs_arr as &$value) {
 		// echo $value['id'];
@@ -29,7 +34,7 @@ require 'libs/PHPMailer/src/SMTP.php';
 //--> loop data for create content html and set it to $html_mail.
 
 $from_email 		= 'celtac.order@gmail.com';
-$from_email_pass  	= 'celtac123';
+$from_email_pass  	= 'celtac1234';
 //$mailTo 			= array("yupa.pangtum@gmail.com", "thongjet@hotmail.com", "my_name_is_ken@live.com", "iloveubon@gmail.com", "zerokung_2011@hotmail.com");
 $mailTo 			= array("iloveubon@gmail.com");
 
@@ -56,7 +61,7 @@ $tb_rut .='<table class="table table-bordered table-hover"';
 		$tb_rut .='</tr>';
 	$tb_rut .='</thead>';
 	$tb_rut .='<tbody>';
-	foreach ($rs_arr as &$value) {
+	foreach ($data as &$value) {
 		
 		$tb_rut .='<tr>';
 			$tb_rut .='<td id = "delivery_date_time">'.$value['delivery_date_time'].'</td>';
@@ -84,11 +89,13 @@ $tb_rut .='</table>';
 $new_tb="";
 $new_tb .='<html>';
 $new_tb .='   <head>';
+$new_tb .='		<meta charset="tis-620">';
 $new_tb .='      <style>';
 $new_tb .=' 
 		h2 {
-		  text-align: center;
-		  padding: 20px 0;
+		  text-align: left;
+		  padding: 10px 0;
+		  color:#878787;
 		}
 
 		.table-bordered {
@@ -123,6 +130,7 @@ $new_tb .='
 $new_tb .='      </style>';
 $new_tb .='   </head>';
 $new_tb .='   <body>';
+$new_tb .='   <h2> Hi Celtac laboratory team, you have new order cell or new update ,check your new order here.</br></h2>';
 //----------------------------------------------------------
 $new_tb .= $tb_rut;
 //----------------------------------------------------------
@@ -138,6 +146,7 @@ $html_mail = $new_tb;
 $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 try {
     //Server settings
+	$mail->CharSet = 'UTF-8';
     $mail->SMTPDebug = 2;                                 // Enable verbose debug output
     $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = 'smtp.gmail.com';  					  // Specify main and backup SMTP servers
@@ -167,9 +176,9 @@ try {
 
     //Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'Here is the subject';
+    $mail->Subject = 'Order-Cell.';
     $mail->Body    = $html_mail;
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    $mail->AltBody = 'Order-Cell';
 
     $mail->send();
 	

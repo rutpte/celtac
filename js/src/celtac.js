@@ -1416,6 +1416,7 @@
 						break;					
 					case "send_mail":
 						$('#loading_modal').modal('show');
+						
 						$.ajax({
 							url: "sendOrder.php",
 							dataType: 'text', // Notice! JSONP <-- P (lowercase)
@@ -1432,6 +1433,7 @@
 								var obj_response = jQuery.parseJSON(response);
 								//debugger;
 								//console.debug('respont : ',respont);
+								
 								if (obj_response.success) {
 									
 									//--> notic confirm sended email.

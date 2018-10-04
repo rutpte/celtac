@@ -12,10 +12,17 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 	// }
 	// exit;
 	//---------------------
-	$arr_key = array();
-	foreach ($rs_arr as &$value) {
-		$arr_key[$value['id']] = $value;
+	$data = array();
+	if($rs_arr['success']){
+		$data = $rs_arr['data'];
 	}
+	$arr_key = array();
+	if($rs_arr['success']){
+		foreach ($data as &$value) {
+			$arr_key[$value['id']] = $value;
+		}
+	}
+
 	
 	// echo '<pre>';
 	// print_r($arr_key);
@@ -948,7 +955,8 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 	$pre_code = '';
 	//$swichted = false;
 	$index_color = 0;
-	foreach ($rs_arr as &$value) {
+
+	foreach ($data as &$value) {
 
 		if($pre_code != ''){
 			

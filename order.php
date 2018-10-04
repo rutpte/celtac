@@ -37,7 +37,7 @@ header('Content-type: application/json');
 				
 				$rs = $obj->getOrder ();
 				
-				echo $rs;
+				echo $rs; 
 				
 			break;
 			case "get_order_all" :
