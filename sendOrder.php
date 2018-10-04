@@ -35,8 +35,8 @@ require 'libs/PHPMailer/src/SMTP.php';
 
 $from_email 		= 'celtac.order@gmail.com';
 $from_email_pass  	= 'celtac1234';
-//$mailTo 			= array("yupa.pangtum@gmail.com", "thongjet@hotmail.com", "my_name_is_ken@live.com", "iloveubon@gmail.com", "zerokung_2011@hotmail.com");
-$mailTo 			= array("iloveubon@gmail.com");
+$mailTo 			= array("yupa.pangtum@gmail.com", "thongjet@hotmail.com", "my_name_is_ken@live.com", "iloveubon@gmail.com");
+//$mailTo 			= array("iloveubon@gmail.com");
 
 
 //-----------------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ $tb_rut .='<table class="table table-bordered table-hover"';
 			$tb_rut .='<th>receiver</th>';
 			$tb_rut .='<th>dealer person</th>';
 			$tb_rut .='<th>dealer company</th>';
-			$tb_rut .='<th>price tate</th>';
+			$tb_rut .='<th>price rate</th>';
 			$tb_rut .='<th>note</th>';
 		$tb_rut .='</tr>';
 	$tb_rut .='</thead>';
@@ -181,10 +181,10 @@ try {
     $mail->AltBody = 'Order-Cell';
 
     $mail->send();
-	
-    $result["success"] = true;
-	echo json_encode($result);
-	
+	//--> it will return many text.
+    // $result["success"] = true;
+	// echo json_encode($result);
+	// exit;
 } catch (Exception $e) {
 	$result["success"] = false;
 	echo json_encode($result);

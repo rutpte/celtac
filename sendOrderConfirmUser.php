@@ -138,6 +138,7 @@ $html_mail = $new_tb;
 $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 try {
     //Server settings
+	$mail->CharSet = 'UTF-8';
     $mail->SMTPDebug = 2;                                 // Enable verbose debug output
     $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = 'smtp.gmail.com';  					  // Specify main and backup SMTP servers
@@ -167,9 +168,9 @@ try {
 
     //Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'Here is the subject';
+    $mail->Subject = 'Celtac, Here is the confirm your order or update.';
     $mail->Body    = $html_mail;
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    $mail->AltBody = '';
 
     $mail->send();
 	

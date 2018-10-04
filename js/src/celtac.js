@@ -1430,11 +1430,11 @@
 								//console.debug('response : ',response);
 								//debugger;
 								//console.log(response);
-								var obj_response = jQuery.parseJSON(response);
+								//var obj_response = jQuery.parseJSON(response);
 								//debugger;
-								//console.debug('respont : ',respont);
+								//console.debug('respont : ',obj_response);
 								
-								if (obj_response.success) {
+								if (true) {
 									
 									//--> notic confirm sended email.
 									$.ajax({
@@ -1447,7 +1447,7 @@
 										type: "GET",
 										success:function(response){
 											$('#loading_modal').modal('hide');
-											location.reload();
+											//location.reload();
 										},
 										error:function(response){
 											$('#loading_modal').modal('hide');
