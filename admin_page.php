@@ -408,8 +408,8 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				<div class="row">
 				<div class="col-4"><div class="text"><?php echo $value['first_name']." ".$value['last_name']?></div></div>
 				<div class="col-5"><div class="text"><?php echo $value['email']?></div></div>
-				<div class="col-1"><a href="#" onclick="celtac.g_func.user('edit_user_model',<?php echo $value['id']?>)">&#9998;</a></div>
-				<div class="col-2"><a href="#" onclick="celtac.g_func.user('delete_user',<?php echo $value['id']?>)">&#9764;</a></div>
+				<div class="col-1"><a href="#" onclick="celtac.g_func.user('edit_user_model',<?php echo $value['id']?>)"><span class="ui-icon ui-icon-pencil"></span></a></div>
+				<div class="col-2"><a href="#" onclick="celtac.g_func.user('delete_user',<?php echo $value['id']?>)"><span class="ui-icon ui-icon-trash"></span></a></div>
 				</div>
 <?php 
 	}

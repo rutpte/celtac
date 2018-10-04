@@ -139,7 +139,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<div>
 								<div class="row">
 									<div class="col-4">
-										<label for="product_type_view">product type</label>
+										<label for="product_type_view">product</label>
 									</div>
 									
 									<div class="col-8">
@@ -199,7 +199,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<div>
 								<div class="row">
 									<div class="col-4">
-										<label for="delivery_date_view">delivery date</label>
+										<label for="delivery_date_view">delivery</label>
 									</div>
 									
 									<div class="col-8">
@@ -976,14 +976,14 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 ?>
 				
 				<div class="row"  style="background-color:<?php echo $color; ?>">
-					<div class="col-2"><div><?php echo $value['order_code']?></div></div>
-					<div class="col-2"><div><?php echo $value['customer_name']?></div></div>
-					<div class="col-2"><div><?php echo $value['product_type']?></div></div>
-					<div class="col-4"><div><?php echo $value['delivery_date_time']?></div></div>
-					<div class="col-1"><a href="#" onclick="celtac.g_func.order('view_order',<?php echo $value['id']?>)"><span class="ui-icon ui-icon-search"></span></p></a></div>
-					<div class="col-1"><a href="#" onclick="celtac.g_func.order('delete_order',<?php echo $value['id']?>)"><span class="ui-icon ui-icon-trash"></span></p></a></div>
+					<div class="col-2 text-truncate font-weight-light"><div><?php echo $value['order_code']?></div></div>
+					<div class="col-2 text-truncate font-weight-light"><div><?php echo $value['customer_name']?></div></div>
+					<div class="col-2 text-truncate font-weight-light"><div><?php echo $value['product_type']?></div></div>
+					<div class="col-4 text"><div><?php echo $value['delivery_date_time']?></div></div>
+					<div class="col-1"><a href="#" onclick="celtac.g_func.order('view_order',<?php echo $value['id']?>)"><span style="margin:5px" class="ui-icon ui-icon-search"></span></p></a></div>
+					<div class="col-1"><a href="#" onclick="celtac.g_func.order('delete_order',<?php echo $value['id']?>)"><span style="margin-top:5px" class="ui-icon ui-icon-trash"></span></p></a></div>
 				</div>
-				<hr class="mb-1">
+				<hr class="mb-0">
 				
 <?php 
 	}
