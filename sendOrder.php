@@ -3,12 +3,13 @@ require dirname(__FILE__) . '/includes/init.inc.php';
  if (isset($_SESSION['email'])) {
 	$obj 	= new Order($pdo);
 	$rs_arr = $obj->getOrderAll();
-	foreach ($rs_arr as &$value) {
-		echo $value['id'];
-		echo $value['order_code'];
-		echo ' | ';
-	}
-	exit;
+	// var_dump($rs_arr);
+	// foreach ($rs_arr as &$value) {
+		// echo $value['id'];
+		// echo $value['order_code'];
+		// echo ' | ';
+	// }
+	// exit;
 } else {
 	header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/index.php");
 } 
@@ -32,51 +33,107 @@ $from_email_pass  	= 'celtac123';
 //$mailTo 			= array("yupa.pangtum@gmail.com", "thongjet@hotmail.com", "my_name_is_ken@live.com", "iloveubon@gmail.com", "zerokung_2011@hotmail.com");
 $mailTo 			= array("iloveubon@gmail.com");
 
+
+//-----------------------------------------------------------------------------------------
+$tb_rut .='<table class="table table-bordered table-hover"';
+	$tb_rut .='<thead>';
+		$tb_rut .='<tr>';
+			$tb_rut .='<th>delivery</th>';
+			$tb_rut .='<th>order code</th>';
+			$tb_rut .='<th>customer</th>';
+			$tb_rut .='<th>product</th>';
+			$tb_rut .='<th>quantity</th>';
+			$tb_rut .='<th>vial</th>';
+			$tb_rut .='<th>total cell</th>';
+			$tb_rut .='<th>package</th>';
+			$tb_rut .='<th>giveaway</th>';
+			$tb_rut .='<th>sender</th>';
+			$tb_rut .='<th>receiver</th>';
+			$tb_rut .='<th>dealer person</th>';
+			$tb_rut .='<th>dealer company</th>';
+			$tb_rut .='<th>price tate</th>';
+			$tb_rut .='<th>note</th>';
+		$tb_rut .='</tr>';
+	$tb_rut .='</thead>';
+	$tb_rut .='<tbody>';
+	foreach ($rs_arr as &$value) {
+		
+		$tb_rut .='<tr>';
+			$tb_rut .='<td id = "delivery_date_time">'.$value['delivery_date_time'].'</td>';
+			$tb_rut .='<td id = "order_code">'.$value['order_code'].'</td>';
+			$tb_rut .='<td id = "customer_name">'.$value['customer_name'].'</td>';
+			$tb_rut .='<td id = "product_type">'.$value['product_type'].'</td>';
+			$tb_rut .='<td id = "quantity">'.$value['quantity'].'</td>';
+			$tb_rut .='<td id = "vial">'.$value['vial'].'</td>';
+			$tb_rut .='<td id = "total_cel">'.$value['total_cel'].'</td>';
+			$tb_rut .='<td id = "package_type">'.$value['package_type'].'</td>';
+			$tb_rut .='<td id = "giveaway">'.$value['giveaway'].'</td>';
+			$tb_rut .='<td id = "sender">'.$value['sender'].'</td>';
+			$tb_rut .='<td id = "receiver">'.$value['receiver'].'</td>';
+			$tb_rut .='<td id = "dealer_person">'.$value['dealer_person'].'</td>';
+			$tb_rut .='<td id = "dealer_company">'.$value['dealer_company'].'</td>';
+			$tb_rut .='<td id = "price_rate">'.$value['price_rate'].'</td>';
+			$tb_rut .='<td id = "comment_else">'.$value['comment_else'].'</td>';
+
+		$tb_rut .='</tr>';
+	}
+
+	$tb_rut .='</tbody>';
+$tb_rut .='</table>';
 //-----------------------------------------------------------------------------------------
 $new_tb="";
+$new_tb .='<html>';
+$new_tb .='   <head>';
+$new_tb .='      <style>';
+$new_tb .=' 
+		h2 {
+		  text-align: center;
+		  padding: 20px 0;
+		}
 
-$new_tb .='<table class="CSSTableGenerator"  name = "xxx">';
-	$new_tb .='<thead>';
-		$new_tb .='<tr>';
-		
-			$new_tb .='<th>xxxx</th>';
-			$new_tb .='<th>xxxx</th>';
-			$new_tb .='<th>xxxx</th>';
-			$new_tb .='<th>xxxx</th>';
-			$new_tb .='<th>xxxx</th>';
-			$new_tb .='<th>xxxx</th>';
-			$new_tb .='<th>xxxx</th>';
-			$new_tb .='<th>xxxx</th>';
-			$new_tb .='<th>xxxx</th>';
-			$new_tb .='<th>xxxx</th>';
-			$new_tb .='<th>xxxx</th>';
-			$new_tb .='<th>xxxx</th>';
-			$new_tb .='<th>xxxx</th>';
-			$new_tb .='<th>xxxx</th>';
-			$new_tb .='<th>xxxx</th>';
-		$new_tb .='</tr>';
-	$new_tb .='</thead>';
-	$new_tb .='<tbody>';
-		$new_tb .='<tr>';
-			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
-			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
-			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
-			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
-			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
-			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
-			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
-			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
-			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
-			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
-			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
-			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
-			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
-			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
-			$new_tb .='<td style="width: 6.6%;" id = "'.$xxx.'">'.$xxx.'</td>';
-			
-		$new_tb .='</tr>';
-	$new_tb .='</tbody>';
-$new_tb .='</table>';
+		.table-bordered {
+			border: 1px solid #a7a8aa !important;
+			border-collapse: collapse;
+			border-spacing: 10px;   
+		}
+		table th {
+			color:#595959;
+			background-color: #e5e6e8;
+			border-style: double;
+			border-color: #ccccce;
+		}
+		table td {
+
+		  border-style: ridge;
+		  border-radius: 3px;
+		  color : #878787;
+		}
+		@media screen and (max-width: 767px) {
+		  table caption {
+			display: none;
+		  }
+		}
+
+		.p {
+		  text-align: center;
+		  padding-top: 140px;
+		  font-size: 14px;
+		}
+	';
+$new_tb .='      </style>';
+$new_tb .='   </head>';
+$new_tb .='   <body>';
+//----------------------------------------------------------
+$new_tb .= $tb_rut;
+//----------------------------------------------------------
+$new_tb .='   </body>';
+$new_tb .='</html>';
+
+
+
+$html_mail = $new_tb;
+// echo $new_tb;
+// exit;
 //-----------------------------------------------------------------------------------------
 $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 try {
