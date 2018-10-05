@@ -34,9 +34,9 @@ require 'libs/PHPMailer/src/SMTP.php';
 //--> loop data for create content html and set it to $html_mail.
 
 $from_email 		= 'celtac.order@gmail.com';
-$from_email_pass  	= 'celtac123';
+$from_email_pass  	= 'celtac1234';
 //$mailTo 			= array("yupa.pangtum@gmail.com", "thongjet@hotmail.com", "my_name_is_ken@live.com", "iloveubon@gmail.com", "zerokung.devil@gmail.com");
-$mailTo 			= array("iloveubon@gmail.com", "zerokung.devil@gmail.com");
+$mailTo 			= array("zerokung.devil@gmail.com");
 
 
 //-----------------------------------------------------------------------------------------
@@ -156,7 +156,7 @@ try {
     $mail->Port = 587;                                    // TCP port to connect to//587
 		
 	$obj_date 		= new DateTime();
-	$timezone = new DateTimeZone("Asia/Bangkok");
+	$timezone 		= new DateTimeZone("Asia/Bangkok");
 	$obj_date->setTimezone( $timezone );
 	$date_formated 	= $obj_date->format('Y-m-d H:i:s');
 	//echo $date_formated; exit;

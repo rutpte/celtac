@@ -32,8 +32,9 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 
 ?> 
 <script>
- var obj_all_order = <?php echo json_encode($arr_key) ?>
- 
+//--> gobal variable in this page.
+ var obj_all_order = <?php echo json_encode($arr_key) ?> 
+ var items_product_arr = new Array();
 </script>
 
 <!doctype html>
@@ -107,16 +108,17 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 
 		<!-- ************************************** modal_view_order ************************************************************************ -->
 		<!-- model view order -->
-			<div class="modal fade" id="modal_view_order" tabindex="-1" role="dialog"  aria-hidden="true"   style="overflow-y: scroll">
-			  <div class="modal-dialog" role="document">
+		
+		<div class="modal fade" id="modal_view_order" tabindex="-1" role="dialog"  aria-hidden="true"   style="overflow-y: scroll">
+			<div class="modal-dialog" role="document">
 				<div class="modal-content">
-				  <div class="modal-header">
-					<h5 class="modal-title">view order</h5><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					  <span aria-hidden="true">&times;</span>
-					</button>
-				  </div>
-				  <div class="modal-body" id="modal-body-view_order">
+					<div class="modal-header">
+						<h5 class="modal-title">view order</h5><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" id="modal-body-view_order">
 						<form class="needs-validation" novalidate>
 							<!-- **************************************** -->
 							<div>
@@ -273,6 +275,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 										<input type="text" class="form-control" id="dealer_company_view" placeholder="dealer company">
 									</div>
 
+								</div>
 							</div>
 							<!-- **************************************** -->
 							<div>
@@ -303,19 +306,16 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<!-- <div class="col-1"><a href="#" onclick="celtac.g_func.order('edit_order_model')"><span class="ui-icon ui-icon-pencil"></span></p></a></div> -->
 							<button class="btn btn-lg btn-block" type="button" onclick="celtac.g_func.order('edit_order_model')"><span class="ui-icon ui-icon-pencil"></button>
 							<input id="order_id_view" type="hidden" value="">
-						  </form>
-						  
-						  
-				  </div>
-				  <div class="modal-footer">
-					
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					
-				  </div>
+						</form>
+						
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						</div>
+					</div>
 				</div>
-			  </div>
 			</div>
 		</div>
+		
 		<!-- ********************************************* modal_add_order_edit ***************************************************************** -->
 		<!-- model order edit-->
 			<div class="modal fade" id="modal_add_order_edit" tabindex="-1" role="dialog"  aria-hidden="true"   style="overflow-y: scroll">
@@ -633,81 +633,27 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 								<div id="customer_name_vlid"></div>
 								
 							</div>
-							<!-- **************************************** -->
-							<div>
-								<div class="row">
-									<div class="col-4">
-										<label for="product_type">product type</label>
-									</div>
-									
-									<div class="col-8">
-										<select class="custom-select d-block w-100" id="product_type" required>
-											
-											<option value="cell">Cell</option>
-											<option value="prp_ready">PRP Ready</option>
-											<option value="placenta">Placenta</option>
-										</select>
-									</div>
+							<div id="text_area_resizable">
+								<!-- *** -->
+								<div id="xx" class="row">
+									<div class="col-10 text-truncate font-weight-light">prp 1 vial</div>
+									<div class="col-2"><a href="#" onclick="celtac.g_func.order('delete_order',<?php echo $value['id']?>)"><span style="margin-top:5px" class="ui-icon ui-icon-trash"></span></p></a></div>
 								</div>
-								<div id="product_type_vlid"></div>
-							</div>
-							<!-- **************************************** -->
-							<div>
-								<div class="row">
-									<div class="col-4">
-										<label for="quantity">quantity</label>
-									</div>
-									
-									<div class="col-8">
-										<input type="text" class="form-control" id="quantity" placeholder="quantity">
-									</div>
+								<!-- *** -->
+								<div id="xx" class="row">
+									<div class="col-10 text-truncate font-weight-light">cell 5 m 1 vial</div>
+									<div class="col-2"><a href="#" onclick="celtac.g_func.order('delete_order',<?php echo $value['id']?>)"><span style="margin-top:5px" class="ui-icon ui-icon-trash"></span></p></a></div>
 								</div>
-								<div id="quantity_vlid"></div>
-							</div>
-							<!-- **************************************** -->
-							<div>
-								<div class="row">
-									<div class="col-4">
-										<label for="vial">vial</label>
-									</div>
-									
-									<div class="col-8">
-										<input type="text" class="form-control" id="vial" placeholder="vial">
-									</div>
+								<!-- *** -->								
+								<div id="xx" class="row">
+									<div class="col-10 text-truncate font-weight-light">cell 1 m 1 vial</div>
+									<div class="col-2"><a href="#" onclick="celtac.g_func.order('delete_order',<?php echo $value['id']?>)"><span style="margin-top:5px" class="ui-icon ui-icon-trash"></span></p></a></div>
 								</div>
-								<div id="vial_vlid"></div>
+								<!-- *** -->
+
+								<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.order('show_model_add_items_product')"><span class="ui-icon ui-icon-plus"></span></button>
+								
 							</div>
-							<!-- **************************************** -->
-							<div>
-								<div class="row">
-									<div class="col-4">
-										<label for="total_cel">total_cel</label>
-									</div>
-									
-									<div class="col-8">
-										<input type="text" class="form-control" id="total_cel" placeholder="total of cel">
-									</div>
-								</div>
-								<div id="total_cel_vlid"></div>
-							</div>
-							<!-- **************************************** -->
-							<div>
-								<div class="row">
-									<div class="col-4">
-										<label for="package_type">package</label>
-									</div>
-									
-									<div class="col-8">
-										<select class="custom-select d-block w-100" id="package_type" required>
-											<option value="ID">ID</option>
-											<option value="IV">IV</option>
-											<option value="IV">IM</option>
-										</select>
-									</div>
-								</div>
-								<div id="package_vlid"></div>
-							</div>
-							<!-- **************************************** -->
 							<div>
 								<div class="row">
 									<div class="col-4">
@@ -766,19 +712,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 								<div id="delivery_time_hour_vlid"></div>
 							</div>
 							<!-- **************************************** -->
-							<div>
-								<div class="row">
-									<div class="col-4">
-										<label for="giveaway">giveaway</label>
-									</div>
-									
-									<div class="col-8">
-										<input type="text" class="form-control" id="giveaway" placeholder="giveaway">
-									</div>
-								</div>
-								<div id="giveaway_vlid"></div>
-							</div>
-							<!-- **************************************** -->
+
 							<div>
 								<div class="row">
 									<div class="col-4">
@@ -936,6 +870,125 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 			  </div>
 			</div>
 		<!-- ************************************************************************************************************** -->
+		<!-- model add items product -->
+			<div class="modal fade" id="modal_add_items_product" tabindex="-1" role="dialog"  aria-hidden="true"  style="overflow-y: scroll">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<h5 class="modal-title">add items product</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body" id="modal-body-add_items_product"   style="overflow-y: scroll">
+						<form class="needs-validation" novalidate>
+							<!-- **************************************** -->
+							<!-- **************************************** -->
+							<div>
+								<div class="row">
+									<div class="col-4">
+										<label for="product_type">product type</label>
+									</div>
+									
+									<div class="col-8">
+										<select class="custom-select d-block w-100" id="product_type" required>
+											
+											<option value="cell">Cell</option>
+											<option value="prp_ready">PRP Ready</option>
+											<option value="placenta">Placenta</option>
+										</select>
+									</div>
+								</div>
+								<div id="product_type_vlid"></div>
+							</div>
+							<!-- **************************************** -->
+							<div>
+								<div class="row">
+									<div class="col-4">
+										<label for="quantity">quantity</label>
+									</div>
+									
+									<div class="col-8">
+										<input type="text" class="form-control" id="quantity" placeholder="quantity">
+									</div>
+								</div>
+								<div id="quantity_vlid"></div>
+							</div>
+							<!-- **************************************** -->
+							<div>
+								<div class="row">
+									<div class="col-4">
+										<label for="vial">vial</label>
+									</div>
+									
+									<div class="col-8">
+										<input type="text" class="form-control" id="vial" placeholder="vial">
+									</div>
+								</div>
+								<div id="vial_vlid"></div>
+							</div>
+							<!-- **************************************** -->
+							<div>
+								<div class="row">
+									<div class="col-4">
+										<label for="total_cel">total_cel</label>
+									</div>
+									
+									<div class="col-8">
+										<input type="text" class="form-control" id="total_cel" placeholder="total of cel">
+									</div>
+								</div>
+								<div id="total_cel_vlid"></div>
+							</div>
+							<!-- **************************************** -->
+							<div>
+								<div class="row">
+									<div class="col-4">
+										<label for="package_type">package</label>
+									</div>
+									
+									<div class="col-8">
+										<select class="custom-select d-block w-100" id="package_type" required>
+											<option value="ID">ID</option>
+											<option value="IV">IV</option>
+											<option value="IV">IM</option>
+										</select>
+									</div>
+								</div>
+								<div id="package_vlid"></div>
+							</div>
+							
+							<!-- **************************************** -->
+							<div>
+								<div class="row">
+									<div class="col-4">
+										<label for="giveaway">giveaway</label>
+									</div>
+									
+									<div class="col-8">
+										<input type="text" class="form-control" id="giveaway" placeholder="giveaway">
+									</div>
+								</div>
+								<div id="giveaway_vlid"></div>
+							</div>
+							<!-- **************************************** -->
+							<!-- **************************************** -->
+							<hr class="mb-4">
+							<button class="btn btn-primary btn-lg btn-block" id="bt_save_add_items_product" type="button" onclick="celtac.g_func.order('add_order_temp')">Save</button>
+							<!-- **************************************** -->
+						  </form>
+						  
+						  
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					
+				  </div>
+				</div>
+			  </div>
+			</div>
+		<!-- ************************************************************************************************************** -->
+		
 		<main role="main" class="container">
 
 

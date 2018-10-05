@@ -31,7 +31,7 @@ require 'libs/PHPMailer/src/SMTP.php';
 //--> loop data for create content html and set it to $html_mail.
 
 $from_email 		= 'celtac.order@gmail.com';
-$from_email_pass  	= 'celtac123';
+$from_email_pass  	= 'celtac1234';
 //$mailTo 			= array("yupa.pangtum@gmail.com", "thongjet@hotmail.com", "my_name_is_ken@live.com", "iloveubon@gmail.com", "zerokung_2011@hotmail.com");
 $mailTo 			= array($_SESSION['email']);
 
@@ -137,6 +137,11 @@ $html_mail = $new_tb;
 //-----------------------------------------------------------------------------------------
 $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 try {
+	
+	$obj_date 		= new DateTime();
+	$timezone 		= new DateTimeZone("Asia/Bangkok");
+	$obj_date->setTimezone( $timezone );
+	$date_formated 	= $obj_date->format('Y-m-d H:i:s');
     //Server settings
 	$mail->CharSet = 'UTF-8';
     $mail->SMTPDebug = 2;                                 // Enable verbose debug output
@@ -149,7 +154,7 @@ try {
     $mail->Port = 587;                                    // TCP port to connect to//587
 
     //Recipients
-    $mail->setFrom('celtac.order@gmail.com', 'Order-Cell.');
+    $mail->setFrom('celtac.order@gmail.com', 'Order-Cell : '.$date_formated);
 	
 	//--> loop add mail.Add a recipient
 	
@@ -168,7 +173,7 @@ try {
 
     //Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'Celtac, Here is the confirm your order or update.';
+    $mail->Subject = 'Celtac, Here is the confirm your order or update : '.$date_formated;
     $mail->Body    = $html_mail;
     $mail->AltBody = '';
 

@@ -57,7 +57,7 @@ class Order extends DBConnection
 		//echo $date->format('d-m-Y');
 		//echo $date_formated; exit;
 
-
+		//$array=json_decode($_POST['jsondata']);
 		$order_code			= isset($post['order_code']) 			? "'".$post['order_code']."'" 										: 'null';
 		$customer_name		= isset($post['customer_name']) 		? "'".$post['customer_name']."'"									: 'null';
 		$product_type		= isset($post['product_type']) 			? "'".$post['product_type']."'"										: 'null';
@@ -341,7 +341,7 @@ class Order extends DBConnection
 			where 1=1
 			and user_id = '{$_SESSION['owner_id']}'
 			and delivery_date_time >= now()
-			--order by order_code
+			order by delivery_date_time
         ";
 		//now()::date
         //echo "<pre>", $sql; exit;
@@ -377,6 +377,7 @@ class Order extends DBConnection
             from order_product
 			where 1=1
 			and delivery_date_time >= now()
+			order by delivery_date_time
         ";
 		//now()::date
         //echo "<pre>", $sql; exit;

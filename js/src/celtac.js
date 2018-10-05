@@ -432,14 +432,23 @@
 				
 				
 			}
-
+			,"add_items_arr" : function(arr_set_data){
+				//items_product_arr = new Array(); //--> for empty arr set.
+				items_product_arr.push(arr_set_data);
+			}
 			,"order" : function(q,obj){
 				switch (q) {
+					case "show_model_add_items_product":
+					if(true){
+						$('#modal_add_items_product').modal('show');
+					}
 					case "show_model_addorder": 
 						if(true){
 							$('#modal_add_order').modal('show');
 							$('#delivery_date').datepicker();
 							$('#delivery_date').datepicker("option", "dateFormat", "yy-mm-dd");
+							$( "#text_area_resizable" ).resizable();
+							items_product_arr = new Array(); //--> for empty items product arr set.
 							/*						
 							$(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
 								//this.value = this.value.replace(/[^0-9\.]/g,'');
@@ -581,6 +590,7 @@
 						break;
 					case "add_order":
 						if(true){
+							var items_json 				= JSON.stringify(items_product_arr);
 							var order_code				= $('#order_code').val();
 							var customer_name			= $('#customer_name').val();
 							var product_type			= $('#product_type').val();
@@ -602,7 +612,7 @@
 							var comment_else			= $('#comment_else').val();
 
 							
-
+						
 							var arr_dom_id = new Array();
 							arr_dom_id.push('customer_name');
 							arr_dom_id.push('product_type');
@@ -778,11 +788,12 @@
 										"q"              			: "add_order"
 										,"order_code"         		: order_code	
 										,"customer_name"         	: customer_name	
-										,"product_type"				: product_type		
-										,"quantity"					: quantity			
-										,"vial"						: vial				
-										,"total_cel"				: total_cel				
-										,"package_type"				: package_type			
+										,"items_json"				: items_json
+										//,"product_type"				: product_type		
+										//,"quantity"					: quantity			
+										//,"vial"						: vial				
+										//,"total_cel"				: total_cel				
+										//,"package_type"				: package_type			
 										,"delivery_date"			: delivery_date			
 										,"delivery_time_hour"		: delivery_time_hour		
 										,"delivery_time_minute"		: delivery_time_minute
@@ -1215,7 +1226,7 @@
 					case "view_order":
 						if(true){
 							var id = obj;
-							var data = obj_all_order[id];
+							var data = obj_all_order[id]; //obj_all_order from customer_page.php
 							//--> show modal view.
 							$('#modal_view_order').modal('show');
 							
@@ -1266,7 +1277,7 @@
 							$('#delivery_date_edit').datepicker();
 							$('#delivery_date_edit').datepicker("option", "dateFormat", "yy-mm-dd");
 							//--> replace exist data to form.
-							var data 				= obj_all_order[id];
+							var data 				= obj_all_order[id]; ////obj_all_order from customer_page.php
 							var arr_full_date_time 	= data.delivery_date_time.split(" ");
 							var arr_full_only_time	= arr_full_date_time[1].split(":");
 							var full_date			= arr_full_date_time[0];
@@ -1464,6 +1475,8 @@
 							}
 						});
 						break;
+						
+
 				}
 			}
 			,"init_cookie_login" : function(){
