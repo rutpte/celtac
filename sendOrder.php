@@ -34,17 +34,17 @@ require 'libs/PHPMailer/src/SMTP.php';
 //--> loop data for create content html and set it to $html_mail.
 
 $from_email 		= 'celtac.order@gmail.com';
-$from_email_pass  	= 'celtac1234';
-$mailTo 			= array("yupa.pangtum@gmail.com", "thongjet@hotmail.com", "my_name_is_ken@live.com", "iloveubon@gmail.com");
-//$mailTo 			= array("iloveubon@gmail.com");
+$from_email_pass  	= 'celtac123';
+//$mailTo 			= array("yupa.pangtum@gmail.com", "thongjet@hotmail.com", "my_name_is_ken@live.com", "iloveubon@gmail.com", "zerokung.devil@gmail.com");
+$mailTo 			= array("iloveubon@gmail.com", "zerokung.devil@gmail.com");
 
 
 //-----------------------------------------------------------------------------------------
-$tb_rut .='<table class="table table-bordered table-hover"';
+$tb_rut .='<table class="table"';
 	$tb_rut .='<thead>';
 		$tb_rut .='<tr>';
-			$tb_rut .='<th>delivery</th>';
-			$tb_rut .='<th>code</th>';
+			$tb_rut .='<th>delivery_date_time</th>';
+			$tb_rut .='<th>order_code</th>';
 			$tb_rut .='<th>customer</th>';
 			$tb_rut .='<th>product</th>';
 			$tb_rut .='<th>quantity</th>';
@@ -57,7 +57,7 @@ $tb_rut .='<table class="table table-bordered table-hover"';
 			$tb_rut .='<th>dealer_person</th>';
 			$tb_rut .='<th>dealer_company</th>';
 			$tb_rut .='<th>price_rate</th>';
-			$tb_rut .='<th>note</th>';
+			$tb_rut .='<th>..........note..........</th>';
 		$tb_rut .='</tr>';
 	$tb_rut .='</thead>';
 	$tb_rut .='<tbody>';
@@ -110,10 +110,9 @@ $new_tb .='
 			border-color: #ccccce;
 		}
 		table td {
-
-		  border-style: ridge;
-		  border-radius: 3px;
-		  color : #878787;
+			border: 1px solid #a7a8aa !important;
+			border-radius: 1px;
+			color : #878787;
 		}
 		@media screen and (max-width: 767px) {
 		  table caption {
@@ -155,9 +154,14 @@ try {
     $mail->Password = $from_email_pass;                           // SMTP password
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 587;                                    // TCP port to connect to//587
-
+		
+	$obj_date 		= new DateTime();
+	$timezone = new DateTimeZone("Asia/Bangkok");
+	$obj_date->setTimezone( $timezone );
+	$date_formated 	= $obj_date->format('Y-m-d H:i:s');
+	//echo $date_formated; exit;
     //Recipients
-    $mail->setFrom('celtac.order@gmail.com', 'Order-Cell.');
+    $mail->setFrom('celtac.order@gmail.com', 'Order-Cell : '.$date_formated.'.');
 	
 	//--> loop add mail.Add a recipient
 	
@@ -176,9 +180,9 @@ try {
 
     //Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'Order-Cell.';
+    $mail->Subject = $date_formated;
     $mail->Body    = $html_mail;
-    $mail->AltBody = 'Order-Cell';
+    $mail->AltBody = 'Order-Cell3';
 
     $mail->send();
 	//--> it will return many text.
