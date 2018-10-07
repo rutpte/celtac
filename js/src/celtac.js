@@ -432,23 +432,24 @@
 				
 				
 			}
-			,"add_items_arr" : function(arr_set_data){
-				//items_product_arr = new Array(); //--> for empty arr set.
-				items_product_arr.push(arr_set_data);
-			}
+			// ,"add_items_arr" : function(arr_set_data){
+				//--items_product_arr = new Array(); //--> for empty arr set.
+				// items_product_arr.push(arr_set_data);
+			// }
 			,"order" : function(q,obj){
 				switch (q) {
-					case "show_model_add_items_product":
-					if(true){
-						$('#modal_add_items_product').modal('show');
-					}
+
 					case "show_model_addorder": 
 						if(true){
 							$('#modal_add_order').modal('show');
 							$('#delivery_date').datepicker();
 							$('#delivery_date').datepicker("option", "dateFormat", "yy-mm-dd");
+							
 							$( "#text_area_resizable" ).resizable();
+							
+							
 							items_product_arr = new Array(); //--> for empty items product arr set.
+							$( "#div_items_order" ).empty(); //--> clear div cache.
 							/*						
 							$(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
 								//this.value = this.value.replace(/[^0-9\.]/g,'');
@@ -593,17 +594,15 @@
 							var items_json 				= JSON.stringify(items_product_arr);
 							var order_code				= $('#order_code').val();
 							var customer_name			= $('#customer_name').val();
-							var product_type			= $('#product_type').val();
-							var quantity				= $('#quantity').val();
-							var vial					= $('#vial').val();
-							var total_cel				= $('#total_cel').val();
-							var package_type			= $('#package_type').val();
-							//var delivery_date			= $('#delivery_date').val();
-							//var delivery_date			= $('#delivery_date').datepicker({ dateFormat: 'dd-mm-yy' }).val();
+							// var product_type			= $('#product_type').val();
+							// var quantity				= $('#quantity').val();
+							// var vial					= $('#vial').val();
+							// var total_cel				= $('#total_cel').val();
+							// var package_type			= $('#package_type').val();
 							var delivery_date			= $('#delivery_date').datepicker("option", "dateFormat", "dd-mm-yy" ).val();
 							var delivery_time_hour		= $('#delivery_time_hour').val();
 							var delivery_time_minute	= $('#delivery_time_minute').val();
-							var giveaway				= $('#giveaway').val();
+							//var giveaway				= $('#giveaway').val();
 							var sender					= $('#sender').val();
 							var receiver				= $('#receiver').val();
 							var dealer_person			= $('#dealer_person').val();
@@ -1475,8 +1474,161 @@
 							}
 						});
 						break;
-						
+					case "show_model_add_items_product":
+					if(true){
+						$('#bt_save_add_items_product').prop('disabled', false);
+						$('#modal_add_items_product').modal('show');
+					}
+					break;
+					case "add_order_temp": //1.
+						if(true){
+							$('#bt_save_add_items_product').prop('disabled', true);
+							//debugger;
+							//$('#loading_modal').modal('show'); //--> not show  at here i don't know why?
+							var product_type			= $('#product_type').val();
+							var quantity				= $('#quantity').val();
+							var vial					= $('#vial').val();
+							var total_cel				= $('#total_cel').val();
+							var package_type			= $('#package_type').val();
+							var giveaway				= $('#giveaway').val();
 
+							
+						
+							var arr_dom_id = new Array();
+							arr_dom_id.push('product_type');
+							arr_dom_id.push('quantity');
+							arr_dom_id.push('vial');
+							arr_dom_id.push('package_type');
+							arr_dom_id.push('giveaway');
+	
+							
+
+							
+							var sta_validate = true;
+
+							// if (giveaway == ""){
+								// celtac.g_func.notice_div_error(true,"giveaway");
+								// sta_validate = false;
+							
+							// }else {
+								// celtac.g_func.notice_div_error(false,"giveaway");
+							// }
+
+							//--
+							if (package_type == ""){
+								if($('#product_type').val() == "cell"){
+									celtac.g_func.notice_div_error(true,"package_type");
+									sta_validate = false;
+								}
+							}else {
+								if($('#product_type').val() == "cell"){
+									celtac.g_func.notice_div_error(false,"package_type");
+								}
+							} 
+							//--
+							if (vial == ""){
+								celtac.g_func.notice_div_error(true,"vial");
+								sta_validate = false;
+							}else {
+								celtac.g_func.notice_div_error(false,"vial");
+							}
+							//--
+							if (quantity == ""){
+								if($('#product_type').val() == "cell"){
+									celtac.g_func.notice_div_error(true,"quantity");
+									sta_validate = false;
+								}
+							} else {
+								if($('#product_type').val() == "cell"){
+									celtac.g_func.notice_div_error(false,"quantity");
+								}
+							} 
+							//--
+							if (product_type == ""){
+								celtac.g_func.notice_div_error(true,"product_type");
+								sta_validate = false;
+							}else {
+								celtac.g_func.notice_div_error(false,"product_type");
+							}
+
+							//---------------------------------------------------------
+							if(sta_validate){
+								var obj_set_data = {};
+								obj_set_data.product_type 	= product_type;
+								obj_set_data.quantity 		= quantity;
+								obj_set_data.vial			= vial;
+								obj_set_data.total_cel 		= total_cel;
+								if(package_type == null){
+									package_type = "";
+								}
+								obj_set_data.package_type	= package_type;
+								obj_set_data.giveaway		= giveaway;
+
+								//celtac.g_func.add_items_arr(obj_set_data);
+								celtac.g_func.order("add_items_arr",obj_set_data);
+								celtac.g_func.order('update_items_product');
+								$('#modal_add_items_product').modal('hide');
+							} else {
+								//alert('data not complete.');
+								$('#loading_modal').modal('hide');
+							}
+							//----------------------------------------------------------
+							
+						}
+					break;
+					
+					case "update_items_product":
+						if(true){
+							
+							$('#div_items_order').empty();
+							
+							//loop items_product_arr
+							var i;
+							for (i = 0; i < items_product_arr.length; i++) { 
+								var item = items_product_arr[i];
+								if(typeof(item) != 'undefined'){
+									//debugger;
+									var str_items = "";
+									
+									str_items += "			<div id=\"xx\" class=\"row\">";
+									str_items += "				<div class=\"col-10 text-truncate font-weight-light\">";
+									str_items += 								item.product_type + " | ";
+									str_items += 								item.quantity + " | ";
+									str_items += 								item.vial + " | ";
+									str_items += 								item.total_cel + " | ";
+									str_items += 								item.package_type + " | ";
+									str_items += 								item.giveaway + " | ";
+									str_items += "				</div>";
+									str_items += "				<div class=\"col-2\">";
+									str_items += "					<a href=\"#\" onclick=\"celtac.g_func.order('delete_items_product',"+i+")\">";
+									str_items += "						<span style=\"margin-top:5px\" class=\"ui-icon ui-icon-trash\"></span>";
+									str_items += "					</a>";
+									str_items += "				</div>";
+									str_items += "			</div>";
+									
+									$( "#div_items_order" ).append(str_items);
+								}
+
+							}
+							//debugger;
+							//$('#loading_modal').modal('hide');
+						}
+					break;
+					
+					case "add_items_arr":
+						var arr_set_data = obj;
+						if(true){
+							items_product_arr.push(arr_set_data);
+						}
+					break;
+					case "delete_items_product":
+						var id = obj;
+						if(true){
+							//$('#loading_modal').modal('show');
+							delete items_product_arr[id];
+							celtac.g_func.order('update_items_product');
+						}
+					break;
 				}
 			}
 			,"init_cookie_login" : function(){

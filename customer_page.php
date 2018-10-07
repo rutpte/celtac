@@ -634,22 +634,10 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 								
 							</div>
 							<div id="text_area_resizable">
-								<!-- *** -->
-								<div id="xx" class="row">
-									<div class="col-10 text-truncate font-weight-light">prp 1 vial</div>
-									<div class="col-2"><a href="#" onclick="celtac.g_func.order('delete_order',<?php echo $value['id']?>)"><span style="margin-top:5px" class="ui-icon ui-icon-trash"></span></p></a></div>
+								<div id="div_items_order">
+									<!-- div for items product -->
+
 								</div>
-								<!-- *** -->
-								<div id="xx" class="row">
-									<div class="col-10 text-truncate font-weight-light">cell 5 m 1 vial</div>
-									<div class="col-2"><a href="#" onclick="celtac.g_func.order('delete_order',<?php echo $value['id']?>)"><span style="margin-top:5px" class="ui-icon ui-icon-trash"></span></p></a></div>
-								</div>
-								<!-- *** -->								
-								<div id="xx" class="row">
-									<div class="col-10 text-truncate font-weight-light">cell 1 m 1 vial</div>
-									<div class="col-2"><a href="#" onclick="celtac.g_func.order('delete_order',<?php echo $value['id']?>)"><span style="margin-top:5px" class="ui-icon ui-icon-trash"></span></p></a></div>
-								</div>
-								<!-- *** -->
 
 								<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.order('show_model_add_items_product')"><span class="ui-icon ui-icon-plus"></span></button>
 								
