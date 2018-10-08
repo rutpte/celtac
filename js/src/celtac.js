@@ -614,14 +614,14 @@
 						
 							var arr_dom_id = new Array();
 							arr_dom_id.push('customer_name');
-							arr_dom_id.push('product_type');
-							arr_dom_id.push('quantity');
-							arr_dom_id.push('vial');
-							arr_dom_id.push('package_type');
+							// arr_dom_id.push('product_type');
+							// arr_dom_id.push('quantity');
+							// arr_dom_id.push('vial');
+							// arr_dom_id.push('package_type');
 							arr_dom_id.push('delivery_date');
 							arr_dom_id.push('delivery_time_hour');
 							arr_dom_id.push('delivery_time_minute');
-							arr_dom_id.push('giveaway');
+							//arr_dom_id.push('giveaway');
 							arr_dom_id.push('sender');
 							arr_dom_id.push('receiver');
 							arr_dom_id.push('dealer_person');
@@ -671,13 +671,13 @@
 								celtac.g_func.notice_div_error(false,"sender");
 							}
 							//--
-							if (giveaway == ""){
-								celtac.g_func.notice_div_error(true,"giveaway");
-								sta_validate = false;
+							// if (giveaway == ""){
+								// celtac.g_func.notice_div_error(true,"giveaway");
+								// sta_validate = false;
 							
-							}else {
-								celtac.g_func.notice_div_error(false,"giveaway");
-							}
+							// }else {
+								// celtac.g_func.notice_div_error(false,"giveaway");
+							// }
 							//--
 							if (delivery_time_minute == ""){
 								celtac.g_func.notice_div_error(true,"delivery_time_minute");
@@ -703,7 +703,7 @@
 								celtac.g_func.notice_div_error(false,"delivery_date");
 							} 
 							//--
-							if (package_type == ""){
+				/* 			if (package_type == ""){
 								if($('#product_type').val() == "cell"){
 									celtac.g_func.notice_div_error(true,"package_type");
 									sta_validate = false;
@@ -748,7 +748,7 @@
 								sta_validate = false;
 							}else {
 								celtac.g_func.notice_div_error(false,"product_type");
-							}
+							} */
 							//--
 							if (customer_name == ""){
 								celtac.g_func.notice_div_error(true,"customer_name");
@@ -773,6 +773,12 @@
 								$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 30 minute.');
 								$('#modal_notice_customer').modal('show');
 								
+								sta_validate = false;
+							}
+							
+							//----------------------
+							if(items_product_arr.length <= 0){
+								celtac.g_func.notice_div_error(true,"div_items_order");
 								sta_validate = false;
 							}
 								
@@ -1425,55 +1431,58 @@
 						}
 						break;					
 					case "send_mail":
-						$('#loading_modal').modal('show');
-						
-						$.ajax({
-							url: "sendOrder.php",
-							dataType: 'text', // Notice! JSONP <-- P (lowercase)
-							method : 'POST',
-							data: { 
-								"q"              					: "xxx"
-							},
-							type: "GET",
-							success:function(response){
-								$('#loading_modal').modal('hide');
-								//console.debug('response : ',response);
-								//debugger;
-								//console.log(response);
-								//var obj_response = jQuery.parseJSON(response);
-								//debugger;
-								//console.debug('respont : ',obj_response);
-								
-								if (true) {
+						if(true){
+							$('#loading_modal').modal('show');
+							
+							$.ajax({
+								url: "sendOrder.php",
+								dataType: 'text', // Notice! JSONP <-- P (lowercase)
+								method : 'POST',
+								data: { 
+									"q"              					: "xxx"
+								},
+								type: "GET",
+								success:function(response){
+									$('#loading_modal').modal('hide');
+									//console.debug('response : ',response);
+									//debugger;
+									//console.log(response);
+									//var obj_response = jQuery.parseJSON(response);
+									//debugger;
+									//console.debug('respont : ',obj_response);
 									
-									//--> notic confirm sended email.
-									$.ajax({
-										url: "sendOrderConfirmUser.php",
-										dataType: 'text', // Notice! JSONP <-- P (lowercase)
-										method : 'POST',
-										data: { 
-											"q"              					: "xxx"
-										},
-										type: "GET",
-										success:function(response){
-											$('#loading_modal').modal('hide');
-											//location.reload();
-										},
-										error:function(response){
-											$('#loading_modal').modal('hide');
-											console.debug(response);
-										}
-									});
-								} else {
-									console.log('error sum email');
+									if (true) {
+										
+										//--> notic confirm sended email.
+										$.ajax({
+											url: "sendOrderConfirmUser.php",
+											dataType: 'text', // Notice! JSONP <-- P (lowercase)
+											method : 'POST',
+											data: { 
+												"q"              					: "xxx"
+											},
+											type: "GET",
+											success:function(response){
+												$('#loading_modal').modal('hide');
+												//location.reload();
+											},
+											error:function(response){
+												$('#loading_modal').modal('hide');
+												console.debug(response);
+											}
+										});
+									} else {
+										console.log('error sum email');
+									}
+								},
+								error:function(response){
+									$('#loading_modal').modal('hide');
+									console.debug(response);
 								}
-							},
-							error:function(response){
-								$('#loading_modal').modal('hide');
-								console.debug(response);
-							}
-						});
-						break;
+							});
+							
+						}
+					break;
 					case "show_model_add_items_product":
 					if(true){
 						$('#bt_save_add_items_product').prop('disabled', false);
@@ -1571,6 +1580,7 @@
 							} else {
 								//alert('data not complete.');
 								$('#loading_modal').modal('hide');
+								$('#bt_save_add_items_product').prop('disabled', false);
 							}
 							//----------------------------------------------------------
 							
@@ -1592,12 +1602,20 @@
 									
 									str_items += "			<div id=\"xx\" class=\"row\">";
 									str_items += "				<div class=\"col-10 text-truncate font-weight-light\">";
+
 									str_items += 								item.product_type + " | ";
-									str_items += 								item.quantity + " | ";
-									str_items += 								item.vial + " | ";
-									str_items += 								item.total_cel + " | ";
-									str_items += 								item.package_type + " | ";
-									str_items += 								item.giveaway + " | ";
+									str_items += 								item.vial + " vial | ";
+									if(item.product_type == "cell"){
+										str_items += 								item.quantity + " m | ";
+										str_items += 								item.total_cel + " m | ";
+										str_items += 								item.package_type + " | ";
+									}
+									if(item.giveaway == ""){
+										str_items += 								"-";
+									} else {
+										str_items += 								item.giveaway + " ";
+									}
+									
 									str_items += "				</div>";
 									str_items += "				<div class=\"col-2\">";
 									str_items += "					<a href=\"#\" onclick=\"celtac.g_func.order('delete_items_product',"+i+")\">";

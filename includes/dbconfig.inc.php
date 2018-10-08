@@ -14,14 +14,14 @@ if ($_SERVER['HTTP_HOST'] == 'xxxxx') {
 	
 
 
-}else if ($_SERVER['HTTP_HOST'] == 'xxxx') {
+}else if ($_SERVER['HTTP_HOST'] == 'localhost') {
     
     // Database host
     define("DB_HOST", '127.0.0.1');
     // Port
-    define("PORT", '5432');
+    define("PORT", '5434');
     // Database password
-    define("DB_PASS", 'xxx');
+    define("DB_PASS", 'pgpteadmin');
 
 
 } else {

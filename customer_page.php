@@ -301,17 +301,17 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 									</div>
 								</div>
 							</div>
-							<hr class="mb-4">
+							<hr class="mb-4"/>
 							<!-- <button class="btn btn-primary btn-lg btn-block" id="bt_save_edit_order" type="button" onclick="celtac.g_func.order('edit_order',"+obj_all_order[25].id+")">Save</button> -->
 							<!-- <div class="col-1"><a href="#" onclick="celtac.g_func.order('edit_order_model')"><span class="ui-icon ui-icon-pencil"></span></p></a></div> -->
-							<button class="btn btn-lg btn-block" type="button" onclick="celtac.g_func.order('edit_order_model')"><span class="ui-icon ui-icon-pencil"></button>
-							<input id="order_id_view" type="hidden" value="">
+							<button class="btn btn-lg btn-block" type="button" onclick="celtac.g_func.order('edit_order_model')"><span class="ui-icon ui-icon-pencil"></span></button>
+							<input id="order_id_view" type="hidden" value=""/>
 						</form>
-						
+						<!-- end form -->
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 						</div>
-					</div>
+					</div><!-- **main -->
 				</div>
 			</div>
 		</div>
@@ -962,7 +962,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<!-- **************************************** -->
 							<!-- **************************************** -->
 							<hr class="mb-4">
-							<button class="btn btn-primary btn-lg btn-block" id="bt_save_add_items_product" type="button" onclick="celtac.g_func.order('add_order_temp')">Save</button>
+							<button class="btn btn-lg btn-block" id="bt_save_add_items_product" type="button" onclick="celtac.g_func.order('add_order_temp')">Add product</button>
 							<!-- **************************************** -->
 						  </form>
 						  
