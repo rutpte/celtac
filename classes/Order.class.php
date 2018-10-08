@@ -61,7 +61,7 @@ class Order extends DBConnection
 		//var_dump($array_product);
 		//echo 'testing';
 		
-		$str_value = "";
+		$str_value_raw = "";
 		foreach ($array_product as &$value) {
 			
 			// echo 'product_type : '.$value['product_type'];
@@ -93,7 +93,7 @@ class Order extends DBConnection
 			$comment_else		= isset($post['comment_else']) 			? "'".$post['comment_else' ]."'"									: 'null';
 			
 			//---------------------------------------------------------------------------------------------------------------------------------------
-			$str_value .= "
+			$str_value_raw .= "
 				(
 				{$order_code}
 				, {$customer_name}
@@ -113,14 +113,14 @@ class Order extends DBConnection
 				, NOW()
 				, {$price_rate}
 				, {$comment_else}
-				)
-			";
+				),";
 
 		} //end loop value.
-		$xx = substr($str_value, 0, -1);
+		//echo $str_value_raw;
+		$rs_value = substr($str_value_raw, 0, -1);
 		//$xx = rtrim($str_value, ',');
-		echo $xx;
-		exit;
+		// echo $rs_value;
+		// exit;
 		//json_decode($jsondata, true);
 
 
@@ -145,7 +145,7 @@ class Order extends DBConnection
 				,price_rate 
 				,comment_else 
             )
-            VALUES {$str_value};
+            VALUES {$rs_value}
         ";
 //echo '<pre>';
 //echo $sql; exit;
