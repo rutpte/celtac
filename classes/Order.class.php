@@ -57,25 +57,72 @@ class Order extends DBConnection
 		//echo $date->format('d-m-Y');
 		//echo $date_formated; exit;
 
-		//$array=json_decode($_POST['jsondata']);
-		$order_code			= isset($post['order_code']) 			? "'".$post['order_code']."'" 										: 'null';
-		$customer_name		= isset($post['customer_name']) 		? "'".$post['customer_name']."'"									: 'null';
-		$product_type		= isset($post['product_type']) 			? "'".$post['product_type']."'"										: 'null';
-		$quantity			= isset($post['quantity']) 			&& $post['quantity'] != "" ? $post['quantity'] 							: 'null';
-		$vial				= isset($post['vial']) 					? $post['vial'] 													: 'null';
-		$total_cel			= isset($post['total_cel']) 		&& $post['total_cel'] != "" ? $post['total_cel'] 						: 'null';
-		$package_type		= isset($post['package_type']) 		&& $post['package_type'] != "" ? "'".$post['package_type']."'" 			: 'null';
-		//$delivery_time		= isset($post['delivery_date']) 	? strtotime($post['delivery_date']) 	: '';
-		$delivery_date_time	= isset($post['delivery_date']) 		? "'".$date_formated."'" 													: 'null';
-		$giveaway			= isset($post['giveaway']) 				? "'".$post['giveaway']."'" 										: 'null';
-		$sender				= isset($post['sender']) 				? "'".$post['sender']."'" 											: 'null';
-		$receiver			= isset($post['receiver']) 				? "'".$post['receiver']."'" 										: 'null';
-		$dealer_person		= isset($post['dealer_person']) 		? "'".$post['dealer_person']."'" 									: 'null';
-		$dealer_company		= isset($post['dealer_company']) 		? "'".$post['dealer_company']."'" 									: 'null';
-		$user_id			= isset($_SESSION['owner_id']) 			? $_SESSION['owner_id']												: 'null';
-		//$last_update_date 	= isset($post['last_update_date']) 	? $post['last_update_date'] : '';
-		$price_rate			= isset($post['price_rate']) 			? "'".$post['price_rate']."'"										: 'null';
-		$comment_else		= isset($post['comment_else']) 			? "'".$post['comment_else' ]."'"									: 'null';
+		$array_product = json_decode($_POST['items_json'],true);
+		//var_dump($array_product);
+		//echo 'testing';
+		
+		$str_value = "";
+		foreach ($array_product as &$value) {
+			
+			// echo 'product_type : '.$value['product_type'];
+			// echo 'quantity : '.$value['quantity'];
+			// echo 'vial : '.$value['vial'];
+			// echo 'total_cel : '.$value['total_cel'];
+			// echo 'package_type : '.$value['package_type'];
+			// echo 'giveaway : '.$value['giveaway'];
+			// echo '--------------------';
+
+			$order_code			= isset($post['order_code']) 			? "'".$post['order_code']."'" 										: 'null';
+			$customer_name		= isset($post['customer_name']) 		? "'".$post['customer_name']."'"									: 'null';
+			$product_type		= $value['product_type'] 	!= "" ? "'".$value['product_type']."'"											: 'null';
+			$quantity			= $value['quantity'] 		!= "" ? $value['quantity']														: 'null';
+			$vial				= $value['vial'] 			!= "" ? $value['vial']															: 'null';
+			$total_cel			= $value['total_cel'] 		!= "" ? $value['total_cel']														: 'null';
+			$package_type		= $value['package_type'] 	!= "" ? "'".$value['package_type']."'"											: 'null';
+			$giveaway			= $value['giveaway'] 		!= "" ? "'".$value['giveaway']."'"												: 'null';
+			//$delivery_time		= isset($post['delivery_date']) 	? strtotime($post['delivery_date']) 	: '';
+			$delivery_date_time	= isset($post['delivery_date']) 		? "'".$date_formated."'" 											: 'null';
+
+			$sender				= isset($post['sender']) 				? "'".$post['sender']."'" 											: 'null';
+			$receiver			= isset($post['receiver']) 				? "'".$post['receiver']."'" 										: 'null';
+			$dealer_person		= isset($post['dealer_person']) 		? "'".$post['dealer_person']."'" 									: 'null';
+			$dealer_company		= isset($post['dealer_company']) 		? "'".$post['dealer_company']."'" 									: 'null';
+			$user_id			= isset($_SESSION['owner_id']) 			? $_SESSION['owner_id']												: 'null';
+			//$last_update_date 	= isset($post['last_update_date']) 	? $post['last_update_date'] : '';
+			$price_rate			= isset($post['price_rate']) 			? "'".$post['price_rate']."'"										: 'null';
+			$comment_else		= isset($post['comment_else']) 			? "'".$post['comment_else' ]."'"									: 'null';
+			
+			//---------------------------------------------------------------------------------------------------------------------------------------
+			$str_value .= "
+				(
+				{$order_code}
+				, {$customer_name}
+				, {$product_type}
+				, {$quantity}
+				, {$vial}
+				, {$total_cel}
+				, {$package_type}
+				, {$delivery_date_time}
+				, {$giveaway}
+				, {$sender}
+				, {$receiver}
+				, {$dealer_person}
+				, {$dealer_company}
+				, {$user_id}
+				, NOW()
+				, NOW()
+				, {$price_rate}
+				, {$comment_else}
+				)
+			";
+
+		} //end loop value.
+		$xx = substr($str_value, 0, -1);
+		//$xx = rtrim($str_value, ',');
+		echo $xx;
+		exit;
+		//json_decode($jsondata, true);
+
 
         $sql = "
             INSERT INTO order_product (
@@ -98,27 +145,7 @@ class Order extends DBConnection
 				,price_rate 
 				,comment_else 
             )
-            VALUES (
-				{$order_code}
-				, {$customer_name}
-				, {$product_type}
-				, {$quantity}
-				, {$vial}
-				, {$total_cel}
-				, {$package_type}
-				, {$delivery_date_time}
-				, {$giveaway}
-				, {$sender}
-				, {$receiver}
-				, {$dealer_person}
-				, {$dealer_company}
-				, {$user_id}
-				, NOW()
-				, NOW()
-				, {$price_rate}
-				, {$comment_else}
-
-			);
+            VALUES {$str_value};
         ";
 //echo '<pre>';
 //echo $sql; exit;
