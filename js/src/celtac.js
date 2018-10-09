@@ -1281,6 +1281,7 @@
 							$('#modal_add_order_edit').modal('show');
 							$('#delivery_date_edit').datepicker();
 							$('#delivery_date_edit').datepicker("option", "dateFormat", "yy-mm-dd");
+							debugger;
 							//--> replace exist data to form.
 							var data 				= obj_all_order[id]; ////obj_all_order from customer_page.php
 							var arr_full_date_time 	= data.delivery_date_time.split(" ");
