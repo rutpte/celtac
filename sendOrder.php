@@ -36,14 +36,15 @@ require 'libs/PHPMailer/src/SMTP.php';
 $from_email 		= 'celtac.order@gmail.com';
 $from_email_pass  	= 'celtac1234';
 //$mailTo 			= array("yupa.pangtum@gmail.com", "thongjet@hotmail.com", "my_name_is_ken@live.com", "iloveubon@gmail.com", "zerokung.devil@gmail.com");
-$mailTo 			= array("zerokung.devil@gmail.com");
+$mailTo 			= array("zerokung.devil@gmail.com", "iloveubon@gmail.com");
 
 
 //-----------------------------------------------------------------------------------------
 $tb_rut .='<table class="table"';
 	$tb_rut .='<thead>';
 		$tb_rut .='<tr>';
-			$tb_rut .='<th>delivery_date_time</th>';
+			$tb_rut .='<th>delivery_date</th>';
+			$tb_rut .='<th>delivery_time</th>';
 			$tb_rut .='<th>order_code</th>';
 			$tb_rut .='<th>customer</th>';
 			$tb_rut .='<th>product</th>';
@@ -63,8 +64,14 @@ $tb_rut .='<table class="table"';
 	$tb_rut .='<tbody>';
 	foreach ($data as &$value) {
 		
+		$obj_date 		= new DateTime($value['delivery_date_time']);;
+		$daliv_date 	= $obj_date->format('d-m-Y');
+		$daliv_time 	= $obj_date->format('H:i:s');
+		
+		
 		$tb_rut .='<tr>';
-			$tb_rut .='<td id = "delivery_date_time">'.$value['delivery_date_time'].'</td>';
+			$tb_rut .='<td id = "delivery_date">'.$daliv_date.'</td>';
+			$tb_rut .='<td id = "delivery_time">'.$daliv_time.'</td>';
 			$tb_rut .='<td id = "order_code">'.$value['order_code'].'</td>';
 			$tb_rut .='<td id = "customer_name">'.$value['customer_name'].'</td>';
 			$tb_rut .='<td id = "product_type">'.$value['product_type'].'</td>';
