@@ -1607,7 +1607,7 @@
 									str_items += 								item.vial + " vial | ";
 									if(item.product_type == "cell"){
 										str_items += 								item.quantity + " m | ";
-										str_items += 								item.total_cel + " m | ";
+										//--str_items += 								item.total_cel + " m | ";
 										str_items += 								item.package_type + " | ";
 									}
 									if(item.giveaway == ""){
