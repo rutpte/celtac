@@ -36,32 +36,38 @@ $from_email_pass  	= 'celtac1234';
 $mailTo 			= array($_SESSION['email']);
 
 //-----------------------------------------------------------------------------------------
-
-$tb_rut .='<table class="table table-bordered table-hover"';
+$tb_rut .='<table class="table"';
 	$tb_rut .='<thead>';
 		$tb_rut .='<tr>';
-			$tb_rut .='<th>delivery</th>';
-			$tb_rut .='<th>order code</th>';
+			$tb_rut .='<th>delivery_date</th>';
+			$tb_rut .='<th>delivery_time</th>';
+			$tb_rut .='<th>order_code</th>';
 			$tb_rut .='<th>customer</th>';
 			$tb_rut .='<th>product</th>';
 			$tb_rut .='<th>quantity</th>';
 			$tb_rut .='<th>vial</th>';
-			$tb_rut .='<th>total cell</th>';
+			$tb_rut .='<th>total</th>';
 			$tb_rut .='<th>package</th>';
 			$tb_rut .='<th>giveaway</th>';
 			$tb_rut .='<th>sender</th>';
 			$tb_rut .='<th>receiver</th>';
-			$tb_rut .='<th>dealer person</th>';
-			$tb_rut .='<th>dealer company</th>';
-			$tb_rut .='<th>price tate</th>';
-			$tb_rut .='<th>note</th>';
+			$tb_rut .='<th>dealer_person</th>';
+			$tb_rut .='<th>dealer_company</th>';
+			$tb_rut .='<th>price_rate</th>';
+			$tb_rut .='<th>..........note..........</th>';
 		$tb_rut .='</tr>';
 	$tb_rut .='</thead>';
 	$tb_rut .='<tbody>';
 	foreach ($data as &$value) {
 		
+		$obj_date 		= new DateTime($value['delivery_date_time']);;
+		$daliv_date 	= $obj_date->format('d-m-Y');
+		$daliv_time 	= $obj_date->format('H:i:s');
+		
+		
 		$tb_rut .='<tr>';
-			$tb_rut .='<td id = "delivery_date_time">'.$value['delivery_date_time'].'</td>';
+			$tb_rut .='<td id = "delivery_date">'.$daliv_date.'</td>';
+			$tb_rut .='<td id = "delivery_time">'.$daliv_time.'</td>';
 			$tb_rut .='<td id = "order_code">'.$value['order_code'].'</td>';
 			$tb_rut .='<td id = "customer_name">'.$value['customer_name'].'</td>';
 			$tb_rut .='<td id = "product_type">'.$value['product_type'].'</td>';
@@ -86,11 +92,13 @@ $tb_rut .='</table>';
 $new_tb="";
 $new_tb .='<html>';
 $new_tb .='   <head>';
+$new_tb .='		<meta charset="tis-620">';
 $new_tb .='      <style>';
 $new_tb .=' 
 		h2 {
-		  text-align: center;
-		  padding: 20px 0;
+		  text-align: left;
+		  padding: 10px 0;
+		  color:#878787;
 		}
 
 		.table-bordered {
@@ -105,10 +113,9 @@ $new_tb .='
 			border-color: #ccccce;
 		}
 		table td {
-
-		  border-style: ridge;
-		  border-radius: 3px;
-		  color : #878787;
+			border: 1px solid #a7a8aa !important;
+			border-radius: 1px;
+			color : #878787;
 		}
 		@media screen and (max-width: 767px) {
 		  table caption {
@@ -125,12 +132,12 @@ $new_tb .='
 $new_tb .='      </style>';
 $new_tb .='   </head>';
 $new_tb .='   <body>';
+$new_tb .='   <h2> Hi Celtac laboratory team, you have new order cell or new update ,check your new order here.</br></h2>';
 //----------------------------------------------------------
 $new_tb .= $tb_rut;
 //----------------------------------------------------------
 $new_tb .='   </body>';
 $new_tb .='</html>';
-
 
 
 $html_mail = $new_tb;
