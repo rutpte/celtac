@@ -607,7 +607,7 @@
 							var receiver				= $('#receiver').val();
 							var dealer_person			= $('#dealer_person').val();
 							var dealer_company			= $('#dealer_company').val();
-							var price_rate				= $('#price_rate').val();
+							//var price_rate				= $('#price_rate').val();
 							var comment_else			= $('#comment_else').val();
 
 							
@@ -626,19 +626,20 @@
 							arr_dom_id.push('receiver');
 							arr_dom_id.push('dealer_person');
 							arr_dom_id.push('dealer_company');
-							arr_dom_id.push('price_rate');
+							//arr_dom_id.push('price_rate');
 							arr_dom_id.push('comment_else');
 							
 
 							
 							var sta_validate = true;
-							if (price_rate == ""){
-								celtac.g_func.notice_div_error(true,"price_rate");
-								sta_validate = false;
 							
-							}else {
-								celtac.g_func.notice_div_error(false,"price_rate");
-							}
+							// if (price_rate == ""){
+								// celtac.g_func.notice_div_error(true,"price_rate");
+								// sta_validate = false;
+							
+							// }else {
+								// celtac.g_func.notice_div_error(false,"price_rate");
+							// }
 							//--
 							if (dealer_company == ""){
 								celtac.g_func.notice_div_error(true,"dealer_company");
@@ -802,12 +803,12 @@
 										,"delivery_date"			: delivery_date			
 										,"delivery_time_hour"		: delivery_time_hour		
 										,"delivery_time_minute"		: delivery_time_minute
-										,"giveaway"					: giveaway
+										//,"giveaway"					: giveaway
 										,"sender"					: sender									
 										,"receiver"					: receiver				
 										,"dealer_person"			: dealer_person		
 										,"dealer_company"			: dealer_company			
-										,"price_rate"				: price_rate				
+										//,"price_rate"				: price_rate				
 										,"comment_else"				: comment_else
 										
 									},
@@ -1501,6 +1502,7 @@
 							var total_cel				= $('#total_cel').val();
 							var package_type			= $('#package_type').val();
 							var giveaway				= $('#giveaway').val();
+							var price_rate				= $('#price_rate').val();
 
 							
 						
@@ -1510,6 +1512,7 @@
 							arr_dom_id.push('vial');
 							arr_dom_id.push('package_type');
 							arr_dom_id.push('giveaway');
+							arr_dom_id.push('price_rate');
 	
 							
 
@@ -1568,11 +1571,13 @@
 								obj_set_data.quantity 		= quantity;
 								obj_set_data.vial			= vial;
 								obj_set_data.total_cel 		= total_cel;
+
 								if(package_type == null){
 									package_type = "";
 								}
 								obj_set_data.package_type	= package_type;
 								obj_set_data.giveaway		= giveaway;
+								obj_set_data.price_rate 	= price_rate;
 
 								//celtac.g_func.add_items_arr(obj_set_data);
 								celtac.g_func.order("add_items_arr",obj_set_data);
@@ -1614,9 +1619,9 @@
 									if(item.giveaway == ""){
 										str_items += 								"-";
 									} else {
-										str_items += 								item.giveaway + " ";
+										str_items += 								item.giveaway + " | ";
 									}
-									
+									str_items += 								item.price_rate + " ";
 									str_items += "				</div>";
 									str_items += "				<div class=\"col-2\">";
 									str_items += "					<a href=\"#\" onclick=\"celtac.g_func.order('delete_items_product',"+i+")\">";

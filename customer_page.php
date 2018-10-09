@@ -592,6 +592,71 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				</div>
 			  </div>
 			</div>
+
+		
+		<!-- ************************************************************************************************************** -->
+			<div class="modal fade" id="modal_delete_confirm" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"   style="overflow-y: scroll">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<p class="modal-title" id="modalLabel">Confirmation.</p><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body" id="modal-body-contact">
+					<h3 style="color:red">warning.</h3>
+					<p class="lead">Are you sure to delete this data?</p>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" id="del_ok" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+					<button type="button" id="" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					
+				  </div>
+				</div>
+			  </div>
+			</div>
+		<!-- ************************************************************************************************************** -->
+			<div class="modal fade" id="loading_modal" tabindex="-1" role="dialog" aria-hidden="true"   style="overflow-y: scroll">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<p class="modal-title" id="modalLabel">info</p><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body" id="modal-body-contact">
+					<h3>waitting a minute.</h3>
+					<p class="lead" id="msg_modal_notice_customer">
+					<img class="irc_mi" src="image/loading.gif" alt="loading" width="50" height="50">
+					</p>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		<!-- ************************************************************************************************************** -->
+			<div class="modal fade" id="modal_notice_customer" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="false"   style="overflow-y: scroll">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<p class="modal-title" id="modalLabel">notice.</p><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body" id="modal-body-contact">
+					<h3 style="color:red">notice.</h3>
+					<p class="lead" id="msg_modal_notice_customer">-</p>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" id="" class="btn btn-secondary" data-dismiss="modal"> ok </button>
+					
+				  </div>
+				</div>
+			  </div>
+			</div>
+		<!-- ************************************************************************************************************** -->
 		<!-- ************************************** modal_add_order ************************************************************************ -->
 		<!-- model order -->
 			<div class="modal fade" id="modal_add_order" tabindex="-1" role="dialog"  aria-hidden="true"  style="overflow-y: scroll">
@@ -752,19 +817,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 								</div>
 								<div id="dealer_company_vlid"></div>
 							</div>
-							<!-- **************************************** -->
-							<div>
-								<div class="row">
-									<div class="col-4">
-										<label for="price_rate">price_rate</label>
-									</div>
-									
-									<div class="col-8">
-										<input type="text" class="form-control" id="price_rate" placeholder="price rate">
-									</div>
-								</div>
-								<div id="price_rate_vlid"></div>
-							</div>
+
 							<!-- **************************************** -->
 							<div>
 								<div class="row">
@@ -794,70 +847,6 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				</div>
 			  </div>
 			</div>
-		
-		<!-- ************************************************************************************************************** -->
-			<div class="modal fade" id="modal_delete_confirm" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"   style="overflow-y: scroll">
-			  <div class="modal-dialog" role="document">
-				<div class="modal-content">
-				  <div class="modal-header">
-					<p class="modal-title" id="modalLabel">Confirmation.</p><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					  <span aria-hidden="true">&times;</span>
-					</button>
-				  </div>
-				  <div class="modal-body" id="modal-body-contact">
-					<h3 style="color:red">warning.</h3>
-					<p class="lead">Are you sure to delete this data?</p>
-				  </div>
-				  <div class="modal-footer">
-					<button type="button" id="del_ok" class="btn btn-secondary" data-dismiss="modal">Ok</button>
-					<button type="button" id="" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-					
-				  </div>
-				</div>
-			  </div>
-			</div>
-		<!-- ************************************************************************************************************** -->
-			<div class="modal fade" id="loading_modal" tabindex="-1" role="dialog" aria-hidden="true"   style="overflow-y: scroll">
-			  <div class="modal-dialog" role="document">
-				<div class="modal-content">
-				  <div class="modal-header">
-					<p class="modal-title" id="modalLabel">info</p><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					  <span aria-hidden="true">&times;</span>
-					</button>
-				  </div>
-				  <div class="modal-body" id="modal-body-contact">
-					<h3>waitting a minute.</h3>
-					<p class="lead" id="msg_modal_notice_customer">
-					<img class="irc_mi" src="image/loading.gif" alt="loading" width="50" height="50">
-					</p>
-				  </div>
-				</div>
-			  </div>
-			</div>
-		<!-- ************************************************************************************************************** -->
-			<div class="modal fade" id="modal_notice_customer" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="false"   style="overflow-y: scroll">
-			  <div class="modal-dialog" role="document">
-				<div class="modal-content">
-				  <div class="modal-header">
-					<p class="modal-title" id="modalLabel">notice.</p><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					  <span aria-hidden="true">&times;</span>
-					</button>
-				  </div>
-				  <div class="modal-body" id="modal-body-contact">
-					<h3 style="color:red">notice.</h3>
-					<p class="lead" id="msg_modal_notice_customer">-</p>
-				  </div>
-				  <div class="modal-footer">
-					<button type="button" id="" class="btn btn-secondary" data-dismiss="modal"> ok </button>
-					
-				  </div>
-				</div>
-			  </div>
-			</div>
-		<!-- ************************************************************************************************************** -->
 		<!-- model add items product -->
 			<div class="modal fade" id="modal_add_items_product" tabindex="-1" role="dialog"  aria-hidden="true"  style="overflow-y: scroll">
 			  <div class="modal-dialog" role="document">
@@ -960,6 +949,25 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 								<div id="giveaway_vlid"></div>
 							</div>
 							<!-- **************************************** -->
+							<div>
+								<div class="row">
+									<div class="col-4">
+										<label for="price_rate">price_rate</label>
+									</div>
+									
+									<div class="col-8">
+										
+										<select class="custom-select d-block w-100" id="price_rate" required>
+											<option value="free">free</option>
+											<option value="premium">premium</option>
+											<option value="shareholder">shareholder</option>
+											<option value="wholesale">wholesale</option>
+											<option value="clinic">clinic</option>
+										</select>
+									</div>
+								</div>
+								<div id="price_rate_vlid"></div>
+							</div>
 							<!-- **************************************** -->
 							<hr class="mb-4">
 							<button class="btn btn-lg btn-block" id="bt_save_add_items_product" type="button" onclick="celtac.g_func.order('add_order_temp')">Add product</button>
@@ -975,6 +983,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				</div>
 			  </div>
 			</div>
+		
 		<!-- ************************************************************************************************************** -->
 		
 		<main role="main" class="container">

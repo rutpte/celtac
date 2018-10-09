@@ -1,8 +1,8 @@
 <?php
 require dirname(__FILE__) . '/includes/init.inc.php';
- if (isset($_SESSION['email'])) {
+ if (isset($_SESSION['is_staff'])) {
 	$obj 	= new Order($pdo);
-	$rs_arr = $obj->getOrder();
+	$rs_arr = $obj->getOrderAll();
 	//print_r($rs); exit;
 	//print_r($value['name']);exit;
 	

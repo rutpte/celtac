@@ -80,6 +80,7 @@ class Order extends DBConnection
 			$total_cel			= $value['total_cel'] 		!= "" ? $value['total_cel']														: 'null';
 			$package_type		= $value['package_type'] 	!= "" ? "'".$value['package_type']."'"											: 'null';
 			$giveaway			= $value['giveaway'] 		!= "" ? "'".$value['giveaway']."'"												: 'null';
+			$price_rate			= $value['price_rate'] 		!= "" ? "'".$value['price_rate']."'"											: 'null';
 			//$delivery_time		= isset($post['delivery_date']) 	? strtotime($post['delivery_date']) 	: '';
 			$delivery_date_time	= isset($post['delivery_date']) 		? "'".$date_formated."'" 											: 'null';
 
@@ -89,7 +90,7 @@ class Order extends DBConnection
 			$dealer_company		= isset($post['dealer_company']) 		? "'".$post['dealer_company']."'" 									: 'null';
 			$user_id			= isset($_SESSION['owner_id']) 			? $_SESSION['owner_id']												: 'null';
 			//$last_update_date 	= isset($post['last_update_date']) 	? $post['last_update_date'] : '';
-			$price_rate			= isset($post['price_rate']) 			? "'".$post['price_rate']."'"										: 'null';
+			//$price_rate			= isset($post['price_rate']) 			? "'".$post['price_rate']."'"										: 'null';
 			$comment_else		= isset($post['comment_else']) 			? "'".$post['comment_else' ]."'"									: 'null';
 			
 			//---------------------------------------------------------------------------------------------------------------------------------------
