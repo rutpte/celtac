@@ -628,6 +628,7 @@
 							arr_dom_id.push('dealer_company');
 							//arr_dom_id.push('price_rate');
 							arr_dom_id.push('comment_else');
+							arr_dom_id.push('div_items_order');
 							
 
 							
@@ -781,6 +782,8 @@
 							if(items_product_arr.length <= 0){
 								celtac.g_func.notice_div_error(true,"div_items_order");
 								sta_validate = false;
+							} else {
+								celtac.g_func.notice_div_error(false,"div_items_order");
 							}
 								
 							if(sta_validate){

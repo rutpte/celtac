@@ -616,47 +616,6 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				</div>
 			  </div>
 			</div>
-		<!-- ************************************************************************************************************** -->
-			<div class="modal fade" id="loading_modal" tabindex="-1" role="dialog" aria-hidden="true"   style="overflow-y: scroll">
-			  <div class="modal-dialog" role="document">
-				<div class="modal-content">
-				  <div class="modal-header">
-					<p class="modal-title" id="modalLabel">info</p><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					  <span aria-hidden="true">&times;</span>
-					</button>
-				  </div>
-				  <div class="modal-body" id="modal-body-contact">
-					<h3>waitting a minute.</h3>
-					<p class="lead" id="msg_modal_notice_customer">
-					<img class="irc_mi" src="image/loading.gif" alt="loading" width="50" height="50">
-					</p>
-				  </div>
-				</div>
-			  </div>
-			</div>
-		<!-- ************************************************************************************************************** -->
-			<div class="modal fade" id="modal_notice_customer" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="false"   style="overflow-y: scroll">
-			  <div class="modal-dialog" role="document">
-				<div class="modal-content">
-				  <div class="modal-header">
-					<p class="modal-title" id="modalLabel">notice.</p><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					  <span aria-hidden="true">&times;</span>
-					</button>
-				  </div>
-				  <div class="modal-body" id="modal-body-contact">
-					<h3 style="color:red">notice.</h3>
-					<p class="lead" id="msg_modal_notice_customer">-</p>
-				  </div>
-				  <div class="modal-footer">
-					<button type="button" id="" class="btn btn-secondary" data-dismiss="modal"> ok </button>
-					
-				  </div>
-				</div>
-			  </div>
-			</div>
-		<!-- ************************************************************************************************************** -->
 		<!-- ************************************** modal_add_order ************************************************************************ -->
 		<!-- model order -->
 			<div class="modal fade" id="modal_add_order" tabindex="-1" role="dialog"  aria-hidden="true"  style="overflow-y: scroll">
@@ -983,7 +942,48 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				</div>
 			  </div>
 			</div>
-		
+		<!-- ************************************************************************************************************** -->
+			<div class="modal fade" id="modal_notice_customer" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="false"   style="overflow-y: scroll">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<p class="modal-title" id="modalLabel">notice.</p><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body" id="modal-body-contact">
+					<h3 style="color:red">notice.</h3>
+					<p class="lead" id="msg_modal_notice_customer">-</p>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" id="" class="btn btn-secondary" data-dismiss="modal"> ok </button>
+					
+				  </div>
+				</div>
+			  </div>
+			</div>
+		<!-- ************************************************************************************************************** -->
+		<!-- ************************************************************************************************************** -->
+			<div class="modal fade" id="loading_modal" tabindex="-1" role="dialog" aria-hidden="true"   style="overflow-y: scroll">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<p class="modal-title" id="modalLabel">info</p><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body" id="modal-body-contact">
+					<h3>waitting a minute.</h3>
+					<p class="lead" id="msg_modal_notice_customer">
+					<img class="irc_mi" src="image/loading.gif" alt="loading" width="50" height="50">
+					</p>
+				  </div>
+				</div>
+			  </div>
+			</div>
+
 		<!-- ************************************************************************************************************** -->
 		
 		<main role="main" class="container">
