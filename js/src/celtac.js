@@ -875,7 +875,7 @@
 							console.log('delivery_date  :  '+delivery_date);
 							console.log('delivery_time_hour  :  '+delivery_time_hour);
 							console.log('delivery_time_minute  :  '+delivery_time_minute);
-							console.log('giveaway  :  '+giveaway);
+							//console.log('giveaway  :  '+giveaway);
 							console.log('sender  :  '+sender);
 							console.log('receiver  :  '+receiver);
 							console.log('dealer_person  :  '+dealer_person);
@@ -943,13 +943,13 @@
 								celtac.g_func.notice_div_error(false,"sender_edit");
 							}
 							//--
-							if (giveaway == ""){
-								celtac.g_func.notice_div_error(true,"giveaway_edit");
-								sta_validate = false;
+							// if (giveaway == ""){
+								// celtac.g_func.notice_div_error(true,"giveaway_edit");
+								// sta_validate = false;
 							
-							}else {
-								celtac.g_func.notice_div_error(false,"giveaway_edit");
-							}
+							// }else {
+								// celtac.g_func.notice_div_error(false,"giveaway_edit");
+							// }
 							//--
 							if (delivery_time_minute == ""){
 								celtac.g_func.notice_div_error(true,"delivery_time_minute_edit");
@@ -1285,7 +1285,7 @@
 							$('#modal_add_order_edit').modal('show');
 							$('#delivery_date_edit').datepicker();
 							$('#delivery_date_edit').datepicker("option", "dateFormat", "yy-mm-dd");
-							//debugger;
+							debugger;
 							//--> replace exist data to form.
 							var data 				= obj_all_order[id]; ////obj_all_order from customer_page.php
 							var arr_full_date_time 	= data.delivery_date_time.split(" ");
