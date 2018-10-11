@@ -1440,7 +1440,7 @@
 							$('#loading_modal').modal('show');
 							
 							$.ajax({
-								url: "line/send_line.php",
+								url: "send_line.php",
 								dataType: 'text', // Notice! JSONP <-- P (lowercase)
 								method : 'POST',
 								data: { 
