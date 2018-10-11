@@ -41,8 +41,8 @@ $mailTo 			= array("yupa.pangtum@gmail.com", "thongjet@hotmail.com", "my_name_is
 
 //-----------------------------------------------------------------------------------------
 $tb_rut .='<table class="table"';
-	$tb_rut .='<thead>';
-		//$tb_rut .='<tr>';
+	//$tb_rut .='<tr>';
+		$tb_rut .='<tr>';
 			$tb_rut .='<td>delivery_date</td>';
 			$tb_rut .='<td>delivery_time</td>';
 			$tb_rut .='<td>order_code</td>';
@@ -59,9 +59,9 @@ $tb_rut .='<table class="table"';
 			$tb_rut .='<td>dealer_company</td>';
 			$tb_rut .='<td>price_rate</td>';
 			$tb_rut .='<td>..........note..........</td>';
-		//$tb_rut .='</tr>';
-	$tb_rut .='</thead>';
-	$tb_rut .='<tbody>';
+		$tb_rut .='</tr>';
+	//$tb_rut .='</tr>';
+	//$tb_rut .='<tbody>';
 	foreach ($data as &$value) {
 		
 		$obj_date 		= new DateTime($value['delivery_date_time']);;
@@ -90,7 +90,7 @@ $tb_rut .='<table class="table"';
 		$tb_rut .='</tr>';
 	}
 
-	$tb_rut .='</tbody>';
+	//$tb_rut .='</tbody>';
 $tb_rut .='</table>';
 //-----------------------------------------------------------------------------------------
 $new_tb="";

@@ -1,4 +1,23 @@
 <?php
+require dirname(__FILE__) . '/includes/init.inc.php';
+ if (isset($_SESSION['email'])) {
+	$obj 	= new Order($pdo);
+	$rs_arr = $obj->getOrderAll();
+	$data = array();
+	if($rs_arr['success']){
+		$data = $rs_arr['data'];
+	}
+	// var_dump($rs_arr);
+	// foreach ($rs_arr as &$value) {
+		// echo $value['id'];
+		// echo $value['order_code'];
+		// echo ' | ';
+	// }
+	// exit;
+} else {
+	header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/index.php");
+} 
+
 $Token = 'CxlMmXRcLg458GiyTx9kINPOKQjyLReSUnGLSyGdFwA';
 $message = isset($_POST["message"])? $_POST["message"] : 'help!' ;
 
