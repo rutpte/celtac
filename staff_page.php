@@ -20,6 +20,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 	$time_end         = isset($_POST['id']) ? $_POST['id'] : $end;
 	
 	var_dump($time_start);
+	echo '</br>';
 	var_dump($time_end);
 	exit;
 	
