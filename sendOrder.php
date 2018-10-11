@@ -42,6 +42,7 @@ $mailTo 			= array("yupa.pangtum@gmail.com", "thongjet@hotmail.com", "my_name_is
 //-----------------------------------------------------------------------------------------
 $tb_rut .='<table class="table"';
 	//$tb_rut .='<tr>';
+	/*
 		$tb_rut .='<tr>';
 			$tb_rut .='<td>delivery_date</td>';
 			$tb_rut .='<td>delivery_time</td>';
@@ -60,6 +61,7 @@ $tb_rut .='<table class="table"';
 			$tb_rut .='<td>price_rate</td>';
 			$tb_rut .='<td>..........note..........</td>';
 		$tb_rut .='</tr>';
+		*/
 	//$tb_rut .='</tr>';
 	//$tb_rut .='<tbody>';
 	foreach ($data as &$value) {
