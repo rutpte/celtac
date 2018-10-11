@@ -5,7 +5,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 	$obj_date 		= new DateTime();
 	$timezone 		= new DateTimeZone("Asia/Bangkok");
 	$obj_date->setTimezone( $timezone );
-	$date_formated 	= $obj_date->format('Y-m-d H:i:s');
+	//$date_formated 	= $obj_date->format('Y-m-d H:i:s');
 	//-------------------------------------------
 	$start	 		= $obj_date->modify('-10 year');
 	$end	 		= $obj_date->modify('+10 year');
@@ -22,7 +22,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 	var_dump($time_start);
 	echo '</br>';
 	var_dump($time_end);
-	exit;
+	//exit;
 	
 	$obj 	= new Order($pdo);
 	$rs_arr = $obj->getOrderAll();

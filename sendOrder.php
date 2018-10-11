@@ -159,8 +159,13 @@ try {
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
     $mail->Username = $from_email;                 // SMTP username
     $mail->Password = $from_email_pass;                           // SMTP password
-    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-    $mail->Port = 465;                                    // TCP port to connect to//587
+    //$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted//tls
+    //$mail->Port = 587;   
+    $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted//tls
+    $mail->Port = 465; 
+	// TCP port to connect to//587
+	//$mail->SMTPAuth = false;
+	//$mail->SMTPSecure = false;
 		
 	$obj_date 		= new DateTime();
 	$timezone 		= new DateTimeZone("Asia/Bangkok");
