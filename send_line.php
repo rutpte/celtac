@@ -14,7 +14,8 @@
 	} 
 
 	$Token = 'CxlMmXRcLg458GiyTx9kINPOKQjyLReSUnGLSyGdFwA';
-
+	$message = isset($_POST["message"])? $_POST["message"] : 'help!' ;
+	
 	$str_msg = "";
 	foreach ($data as &$value) {
 		$obj_date 		= new DateTime($value['delivery_date_time']);;
@@ -37,9 +38,10 @@
 		$str_msg .= " dealer_company : ".$value['dealer_company']." | ";
 		$str_msg .= " price_rate : ".$value['price_rate']." | ";
 		$str_msg .= " comment_else : ".$value['comment_else']." | ";
+		
 	}
-	$message = isset($_POST["message"])? $_POST["message"] : 'help!' ;
-
+	
+	$message = $str_msg;
 	//---------------------------------------
 
 	function line_notify($Token, $message)
