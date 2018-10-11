@@ -12,7 +12,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 	//-------------------------------------------
 	// $obj_date_end 		= new DateTime($str_date_end);
 	// $end	 			= $obj_date_end->format('Y-m-d H:i:s');
-	-------------------------------------------
+	//-------------------------------------------
 	// $obj_date_now 		= new DateTime();
 	// $now	 			= $obj_date_now->format('Y-m-d H:i:s');
 	//-------------------------------------------
