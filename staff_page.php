@@ -1,6 +1,28 @@
 <?php
 require dirname(__FILE__) . '/includes/init.inc.php';
  if (isset($_SESSION['is_staff'])) {
+	
+	$obj_date 		= new DateTime();
+	$timezone 		= new DateTimeZone("Asia/Bangkok");
+	$obj_date->setTimezone( $timezone );
+	$date_formated 	= $obj_date->format('Y-m-d H:i:s');
+	//-------------------------------------------
+	$start	 		= $obj_date->modify('-10 year');
+	$end	 		= $obj_date->modify('+10 year');
+	//-------------------------------------------
+	// $obj_date_end 		= new DateTime($str_date_end);
+	// $end	 			= $obj_date_end->format('Y-m-d H:i:s');
+	-------------------------------------------
+	// $obj_date_now 		= new DateTime();
+	// $now	 			= $obj_date_now->format('Y-m-d H:i:s');
+	//-------------------------------------------
+	$time_start       = isset($_POST['id']) ? $_POST['id'] : $start;
+	$time_end         = isset($_POST['id']) ? $_POST['id'] : $end;
+	
+	var_dump($time_start);
+	var_dump($time_end);
+	exit;
+	
 	$obj 	= new Order($pdo);
 	$rs_arr = $obj->getOrderAll();
 	//print_r($rs); exit;

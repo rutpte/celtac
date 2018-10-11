@@ -160,7 +160,7 @@ try {
     $mail->Username = $from_email;                 // SMTP username
     $mail->Password = $from_email_pass;                           // SMTP password
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-    $mail->Port = 587;                                    // TCP port to connect to//587
+    $mail->Port = 465;                                    // TCP port to connect to//587
 		
 	$obj_date 		= new DateTime();
 	$timezone 		= new DateTimeZone("Asia/Bangkok");
