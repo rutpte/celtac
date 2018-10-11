@@ -1434,11 +1434,37 @@
 								
 							});
 						}
-						break;					
-					case "send_mail":
+						break;	
+					case "send_line":
 						if(true){
 							$('#loading_modal').modal('show');
 							
+							$.ajax({
+								url: "line/send_line.php",
+								dataType: 'text', // Notice! JSONP <-- P (lowercase)
+								method : 'POST',
+								data: { 
+									"q"              					: "xxx"
+									, "message"							: "เจตๆๆๆๆๆๆๆๆ"
+								},
+								type: "GET",
+								success:function(response){
+									$('#loading_modal').modal('hide');
+									//debugger;
+
+								},
+								error:function(response){
+									$('#loading_modal').modal('hide');
+									console.debug(response);
+								}
+							});
+							
+						}
+					break;						
+					case "send_mail":
+						if(true){
+							$('#loading_modal').modal('show');
+							celtac.g_func.order("send_line");
 							$.ajax({
 								url: "sendOrder.php",
 								dataType: 'text', // Notice! JSONP <-- P (lowercase)
