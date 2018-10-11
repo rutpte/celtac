@@ -17,6 +17,7 @@
 	$message = isset($_POST["message"])? $_POST["message"] : 'help!' ;
 	
 	$str_msg = "";
+	/*
 	foreach ($data as &$value) {
 		$obj_date 		= new DateTime($value['delivery_date_time']);;
 		$daliv_date 	= $obj_date->format('d-m-Y');
@@ -40,7 +41,8 @@
 		$str_msg .= " comment_else : ".$value['comment_else']." | ";
 		
 	}
-	
+	*/
+
 	$message = $str_msg;
 	//---------------------------------------
 
