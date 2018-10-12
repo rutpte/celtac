@@ -16,9 +16,10 @@
 	$Token = 'CxlMmXRcLg458GiyTx9kINPOKQjyLReSUnGLSyGdFwA';
 	$message = isset($_POST["message"])? $_POST["message"] : 'help!' ;
 	
-	$str_msg = "";
+	
 	
 	foreach ($data as &$value) {
+		$str_msg = "";
 		$obj_date 		= new DateTime($value['delivery_date_time']);;
 		$daliv_date 	= $obj_date->format('d-m-Y');
 		$daliv_time 	= $obj_date->format('H:i:s');
