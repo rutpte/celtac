@@ -33,7 +33,12 @@
 		if($rs_arr['success']){
 			$data = $rs_arr['data'];
 		}
-
+		// foreach($data as $key => $value)
+		// {
+			// var_dump($value['order_code']);
+		// }
+		// exit;
+		
 	} else {
 		header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/index.php");
 	} 
@@ -97,19 +102,24 @@
 		$col++;
 	}
 	//--------------------------------------------------------------------------------------------
+	//echo '<pre>';
+	//var_dump($data); exit;
+	//--------------------------------------------------------------------------------------------
 	//--> add data.
 	$row_data = 3;
-	foreach($query as $data)
+	foreach($data as $key => $value)
 	{
+		//var_dump($value['order_code']);
 		$col = 0;
 		foreach ($arr_col as &$key) 
 		{
-			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $row_data, $data[$key]);
+			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $row_data, $value[$key]);
 			$col++;
 		}
 
 		$row_data++;
 	}
+
 	//--------------------------------------------------------------------------------------------
 
 

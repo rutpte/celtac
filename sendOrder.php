@@ -197,7 +197,7 @@ try {
     $mail->Subject = $date_formated;
     $mail->Body    = $html_mail;
     $mail->AltBody = 'Order-Cell3';
-
+	$mail->AddAttachment('excel_output/order_cell.xls', "order.xls");
     $mail->send();
 	//--> it will return many text.
     // $result["success"] = true;

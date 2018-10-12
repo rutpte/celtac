@@ -1440,24 +1440,43 @@
 							$('#loading_modal').modal('show');
 							
 							$.ajax({
-								url: "send_line.php",
+								url: "export_excel_order.php",
 								dataType: 'text', // Notice! JSONP <-- P (lowercase)
 								method : 'POST',
 								data: { 
 									"q"              					: "xxx"
-									, "message"							: "เจตๆๆๆๆๆๆๆๆ  งานเข้าแล้ว มี order ด่วนมากๆๆๆๆๆๆๆ"
+
 								},
 								type: "GET",
 								success:function(response){
-									$('#loading_modal').modal('hide');
-									//debugger;
+									//--------------------------------------------------
+									$.ajax({
+										url: "send_line.php",
+										dataType: 'text', // Notice! JSONP <-- P (lowercase)
+										method : 'POST',
+										data: { 
+											"q"              					: "xxx"
+											, "message"							: "เจตๆๆๆๆๆๆๆๆ  งานเข้าแล้ว มี order ด่วนมากๆๆๆๆๆๆๆ"
+										},
+										type: "GET",
+										success:function(response){
+											$('#loading_modal').modal('hide');
+											//debugger;
 
+										},
+										error:function(response){
+											$('#loading_modal').modal('hide');
+											console.debug(response);
+										}
+									});
+									//---------------------------------------------------
 								},
 								error:function(response){
 									$('#loading_modal').modal('hide');
 									console.debug(response);
 								}
 							});
+
 							
 						}
 					break;						
