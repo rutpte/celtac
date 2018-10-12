@@ -106,14 +106,42 @@
 	//var_dump($data); exit;
 	//--------------------------------------------------------------------------------------------
 	//--> add data.
+	$pre_code = '';
 	$row_data = 3;
 	foreach($data as $key => $value)
 	{
 		//var_dump($value['order_code']);
+			if($pre_code != ''){
+				
+				if($value['order_code'] == $pre_code){
+					if(($index_color%2)==0){
+						$color = 'fcfcfc';
+					} else {
+						$color = 'c6c6c6';
+					}
+					$pre_code = $value['order_code'];
+				}else{
+					$index_color++;
+					if($color == 'c6c6c6'){
+						$color = 'fcfcfc';
+					} else {
+						$color = 'c6c6c6';
+					}
+					$pre_code = $value['order_code'];
+				}
+			} else {
+				//--> init_config.
+				$color = 'fcfcfc';
+				$pre_code = $value['order_code'];
+			}
+			//-----------
 		$col = 0;
 		foreach ($arr_col as &$key) 
 		{
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $row_data, $value[$key]);
+			$columnLetter = PHPExcel_Cell::stringFromColumnIndex($col);
+			
+			cellColor($columnLetter.$row_data,$color);
 			$col++;
 		}
 
@@ -121,8 +149,29 @@
 	}
 
 	//--------------------------------------------------------------------------------------------
+	//--> set auto width.
+	$sheet = $objPHPExcel->getActiveSheet();
+    $cellIterator = $sheet->getRowIterator()->current()->getCellIterator();
+    $cellIterator->setIterateOnlyExistingCells(true);
+    /** @var PHPExcel_Cell $cell */
+    foreach ($cellIterator as $cell) {
+        $sheet->getColumnDimension($cell->getColumn())->setAutoSize(true);
+    }
+	//--------------------------------------------------------------------------------------------
+	//--> set color.
+	cellColor('A2:R2', 'adad85');
+	//--------------------------------------------------------------------------------------------
+	function cellColor($cells,$color){
+		global $objPHPExcel;
 
-
+		$objPHPExcel->getActiveSheet()->getStyle($cells)->getFill()->applyFromArray(array(
+			'type' => PHPExcel_Style_Fill::FILL_SOLID,
+			'startcolor' => array(
+				 'rgb' => $color
+			)
+		));
+	}
+	//--------------------------------------------------------------------------------------------
 	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
 	$objWriter->save('./excel_output/order_cell.xls');
 
