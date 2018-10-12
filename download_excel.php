@@ -48,7 +48,7 @@ if (PHP_SAPI == 'cli')
 	die('This example should only be run from a Web Browser');
 
 /** Include PHPExcel */
-require_once 'PHPExcel-1.8/Classes/PHPExcel.php';
+require_once 'libs/PHPExcel/Classes/PHPExcel.php';
 
 
 // Create new PHPExcel object

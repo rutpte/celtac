@@ -52,7 +52,7 @@
 	date_default_timezone_set('Asia/Bangkok');
 
 	/** Include PHPExcel */
-	require_once 'PHPExcel-1.8/Classes/PHPExcel.php';
+	require_once 'libs/PHPExcel/Classes/PHPExcel.php';
 
 
 	$arr_col = array(
