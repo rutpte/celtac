@@ -77,12 +77,12 @@
 		//$str_msg .= " ชนิดสินค้า : ".$value['product_type']." ";
 		
 		if($value['product_type'] == "cell"){
-			$str_msg .= $value['quantity']." ล้าน  ";
-			$str_msg .= $value['vial']."หลอด ";
+			$str_msg .= $value['product_type'].' '.$value['quantity']." ล้าน  ";
+			$str_msg .= $value['vial']." หลอด ";
 
 			$str_msg .= $value['package_type']."\n";
 		} else {
-			$str_msg .= " จำนวนหลอด : ".$value['vial']."\n";
+			$str_msg .= $value['product_type'].' '." ".$value['vial']." หลอด\n";
 		}
 
 		$str_msg .= $value['giveaway']."\n";
