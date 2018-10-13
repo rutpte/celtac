@@ -33,11 +33,11 @@
 		if($rs_arr['success']){
 			$data = $rs_arr['data'];
 		}
-		// foreach($data as $key => $value)
-		// {
-			// var_dump($value['order_code']);
-		// }
-		// exit;
+		foreach($data as $key => $value)
+		{
+			var_dump($value['order_code']);
+		}
+		exit;
 		
 	} else {
 		header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/index.php");
