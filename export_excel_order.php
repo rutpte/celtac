@@ -33,19 +33,19 @@
 		if($rs_arr['success']){
 			$data = $rs_arr['data'];
 		}
-		foreach($data as $key => $value)
-		{
-			var_dump($value['order_code']);
-		}
-		exit;
+		//----> debug.
+		// foreach($data as $key => $value)
+		// {
+			// var_dump($value['order_code']);
+		// }
+		// exit;
+		//------
 		
 	} else {
 		header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/index.php");
 	} 
 	//-------------------------------------------------
-	$obj_date 		= new DateTime($value['delivery_date_time']);;
-	$daliv_date 	= $obj_date->format('d-m-Y');
-	$daliv_time 	= $obj_date->format('H:i:s');
+
 	
 	set_time_limit(0);
 	//header('Content-Type: text/html; charset=UTF-8');
@@ -56,14 +56,14 @@
 
 
 	$arr_col = array(
-		"order_code"
+		"delivery_date_time"
+		,"order_code"
 		,"customer_name"
 		,"product_type"
 		,"quantity"
 		,"vial"
 		,"total_cel"
 		,"package_type"
-		,"delivery_date_time"
 		,"giveaway"
 		,"sender"
 		,"receiver"
@@ -96,7 +96,7 @@
 	$rowofcol = 2;
 	
 	//--> add column.
-	foreach ($arr_col as &$value) 
+	foreach ($arr_col as $value) 
 	{
 		$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $rowofcol, $value);
 		$col++;
@@ -110,6 +110,10 @@
 	$row_data = 3;
 	foreach($data as $key => $value)
 	{
+		$obj_date 		= new DateTime($value['delivery_date_time']);;
+		$daliv_date 	= $obj_date->format('d-m-Y');
+		$daliv_time 	= $obj_date->format('H:i:s');
+		//------------------------------------------
 		//var_dump($value['order_code']);
 			if($pre_code != ''){
 				
@@ -136,8 +140,9 @@
 			}
 			//-----------
 		$col = 0;
-		foreach ($arr_col as &$key) 
+		foreach ($arr_col as $key) 
 		{
+			//echo $value[$key];
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $row_data, $value[$key]);
 			$columnLetter = PHPExcel_Cell::stringFromColumnIndex($col);
 			

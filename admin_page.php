@@ -14,7 +14,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 	// exit;
 	//---------------------
 	$arr_key = array();
-	foreach ($rs_arr as &$value) {
+	foreach ($rs_arr as $value) {
 		$arr_key[$value['id']] = $value;
 	}
 	
@@ -401,7 +401,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				</div>
 				
 <?php 
-	foreach ($rs_arr as &$value) {
+	foreach ($rs_arr as $value) {
 
 ?>
 				
