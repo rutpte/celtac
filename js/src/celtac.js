@@ -465,12 +465,21 @@
 									event.preventDefault();
 								}
 							});
+							$("#set").on("keypress keyup blur",function (event) {   
+								$(this).val($(this).val().replace(/[^\d].+/, ""));
+								if ((event.which < 48 || event.which > 57)) {
+									event.preventDefault();
+								}
+							});
 							$("#vial").on("keypress keyup blur",function (event) {   
 								$(this).val($(this).val().replace(/[^\d].+/, ""));
 								if ((event.which < 48 || event.which > 57)) {
 									event.preventDefault();
 								}
 							});
+							
+							//---------------------------------------------
+							$('#set').prop('disabled', true);
 							
 							$('#product_type').on('change', function() {
 								if(this.value == "cell"){
@@ -485,6 +494,8 @@
 									
 									$('#total_cel').val(total_cel);
 									$('#package_type').val('ID');
+									
+									$('#set').prop('disabled', true);
 								} else {
 									//$('#quantity').hide();
 									//$('#vial').hide();
@@ -497,6 +508,8 @@
 									$('#total_cel').val('');
 									$('#quantity').val('');
 									$('#package_type').val('');
+									
+									$('#set').prop('disabled', false);
 								
 								}
 							});
@@ -850,6 +863,7 @@
 							var customer_name			= $('#customer_name_edit').val();
 							var product_type			= $('#product_type_edit').val();
 							var quantity				= $('#quantity_edit').val();
+							var set						= $('#set_edit').val();
 							var vial					= $('#vial_edit').val();
 							var total_cel				= $('#total_cel_edit').val();
 							var package_type			= $('#package_type_edit').val();
@@ -888,6 +902,7 @@
 							arr_dom_id.push('customer_name_edit');
 							arr_dom_id.push('product_type_edit');
 							arr_dom_id.push('quantity_edit');
+							arr_dom_id.push('set_edit');
 							arr_dom_id.push('vial_edit');
 							arr_dom_id.push('package_type_edit');
 							arr_dom_id.push('delivery_date_edit');
@@ -1003,6 +1018,12 @@
 								sta_validate = false;
 							}else {
 								celtac.g_func.notice_div_error(false,"vial_edit");
+							}
+							if (set == ""){
+								celtac.g_func.notice_div_error(true,"set_edit");
+								sta_validate = false;
+							}else {
+								celtac.g_func.notice_div_error(false,"set_edit");
 							}
 							//--
 							if (quantity == ""){
@@ -1244,6 +1265,7 @@
 							$('#customer_name_view').val(data.customer_name);
 							$('#product_type_view').val(data.product_type);
 							$('#quantity_view').val(data.quantity);
+							$('#set_view').val(data.set);
 							$('#vial_view').val(data.vial);
 							$('#total_cel_view').val(data.total_cel);
 							$('#package_type_view').val(data.package_type);
@@ -1262,6 +1284,7 @@
 							$('#customer_name_view').prop('disabled', true);
 							$('#product_type_view').prop('disabled', true);
 							$('#quantity_view').prop('disabled', true);
+							$('#set_view').prop('disabled', true);
 							$('#vial_view').prop('disabled', true);
 							$('#total_cel_view').prop('disabled', true);
 							$('#package_type_view').prop('disabled', true);
@@ -1274,6 +1297,19 @@
 							$('#price_rate_view').prop('disabled', true);
 							$('#comment_else_view').prop('disabled', true);
 							
+							if(data.product_type != "cell"){
+								$('#set_view').show();
+								$('#total_cel_view').hide();
+								$('#package_type_view').hide();
+								$('#quantity_view').hide();
+								
+							} else {
+								$('#set_view').hide();
+								$('#total_cel_view').show();
+								$('#package_type_view').show();
+								$('#quantity_view').show();
+							}
+							
 						}
 
 						
@@ -1285,7 +1321,7 @@
 							$('#modal_add_order_edit').modal('show');
 							$('#delivery_date_edit').datepicker();
 							$('#delivery_date_edit').datepicker("option", "dateFormat", "yy-mm-dd");
-							debugger;
+							//debugger;
 							//--> replace exist data to form.
 							var data 				= obj_all_order[id]; ////obj_all_order from customer_page.php
 							var arr_full_date_time 	= data.delivery_date_time.split(" ");
@@ -1293,11 +1329,11 @@
 							var full_date			= arr_full_date_time[0];
 							
 							//--> init_disable for edit.
-							if(data.product_type != "cell"){
-								$('#quantity_edit').prop('disabled', true);
-								$('#total_cel_edit').prop('disabled', true);
-								$('#package_type_edit').prop('disabled', true);
-							}
+							// if(data.product_type != "cell"){
+								// $('#quantity_edit').prop('disabled', true);
+								// $('#total_cel_edit').prop('disabled', true);
+								// $('#package_type_edit').prop('disabled', true);
+							// }
 							//debugger;
 							//--> add data from js_data.
 							$('#order_code_edit').val(data.order_code);
@@ -1343,7 +1379,12 @@
 									event.preventDefault();
 								}
 							});
-							
+							$("#set_edit").on("keypress keyup blur",function (event) {   
+								$(this).val($(this).val().replace(/[^\d].+/, ""));
+								if ((event.which < 48 || event.which > 57)) {
+									event.preventDefault();
+								}
+							});
 							$('#product_type_edit').on('change', function() {
 								if(this.value == "cell"){
 									var quantity = $('#quantity_edit').val();
@@ -1394,6 +1435,7 @@
 								}
 
 							});
+							
 							//-------------------------------------------------------
 							//alert( new Date().getTimezoneOffset() );
 							//Date.parse('2012-01-26T13:51:50.417-07:00');
@@ -1433,6 +1475,21 @@
 								}
 								
 							});
+							//----------------------------------------------------------------------------------------
+							$('#product_type_edit').prop('disabled', true);
+							
+							if($('#product_type_edit').val() != "cell"){
+								$('#set_edit').show();
+								$('#quantity_edit').hide();
+								$('#total_cel_edit').hide();
+								$('#package_type_edit').prop('disabled', true);
+
+							} else {
+								$('#quantity_edit').show();
+								$('#total_cel_edit').show();
+								$('#package_type_edit').prop('disabled', false);
+								$('#set_edit').hide();
+							}
 						}
 						break;	
 					case "send_line":
@@ -1546,7 +1603,17 @@
 							//$('#loading_modal').modal('show'); //--> not show  at here i don't know why?
 							var product_type			= $('#product_type').val();
 							var quantity				= $('#quantity').val();
-							var vial					= $('#vial').val();
+							if($('#vial').val()== ""){
+								var vial = 0;
+							} else {
+								var vial = $('#vial').val();
+							};
+							if($('#set').val()== ""){
+								var set = 0;
+							} else {
+								var set = $('#set').val();
+							};
+							//var set						= $('#set').val();
 							var total_cel				= $('#total_cel').val();
 							var package_type			= $('#package_type').val();
 							var giveaway				= $('#giveaway').val();
@@ -1587,11 +1654,13 @@
 								}
 							} 
 							//--
-							if (vial == ""){
+							if (vial == "" && set ==""){
 								celtac.g_func.notice_div_error(true,"vial");
+								celtac.g_func.notice_div_error(true,"set");
 								sta_validate = false;
 							}else {
 								celtac.g_func.notice_div_error(false,"vial");
+								celtac.g_func.notice_div_error(false,"set");
 							}
 							//--
 							if (quantity == ""){
@@ -1617,6 +1686,7 @@
 								var obj_set_data = {};
 								obj_set_data.product_type 	= product_type;
 								obj_set_data.quantity 		= quantity;
+								obj_set_data.set 			= set;
 								obj_set_data.vial			= vial;
 								obj_set_data.total_cel 		= total_cel;
 
@@ -1626,6 +1696,7 @@
 								obj_set_data.package_type	= package_type;
 								obj_set_data.giveaway		= giveaway;
 								obj_set_data.price_rate 	= price_rate;
+								
 
 								//celtac.g_func.add_items_arr(obj_set_data);
 								celtac.g_func.order("add_items_arr",obj_set_data);
@@ -1658,17 +1729,27 @@
 									str_items += "				<div class=\"col-10 text-truncate font-weight-light\">";
 
 									str_items += 								item.product_type + " | ";
-									str_items += 								item.vial + " vial | ";
+									//----------------------------------------------------------------------
 									if(item.product_type == "cell"){
 										str_items += 								item.quantity + " m | ";
 										//--str_items += 								item.total_cel + " m | ";
+										//str_items += 								item.package_type + " | ";
+									} else {
+										str_items += 								item.set + " set | ";
+									}
+									//----------------------------------------------------------------------
+									str_items += 								item.vial + " vial | ";
+									//----------------------------------------------------------------------
+									if(item.product_type == "cell"){
 										str_items += 								item.package_type + " | ";
 									}
+									//----------------------------------------------------------------------
 									if(item.giveaway == ""){
 										str_items += 								"-";
 									} else {
 										str_items += 								item.giveaway + " | ";
 									}
+									//----------------------------------------------------------------------
 									str_items += 								item.price_rate + " ";
 									str_items += "				</div>";
 									str_items += "				<div class=\"col-2\">";

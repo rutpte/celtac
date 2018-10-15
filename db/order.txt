@@ -1,18 +1,19 @@
--- Table: order_product
+-- Table: public.order_product
 
--- DROP TABLE order_product;
+-- DROP TABLE public.order_product;
 
-CREATE TABLE order_product
+CREATE TABLE public.order_product
 (
-  id serial NOT NULL,
+  id integer NOT NULL DEFAULT nextval('order_product_id_seq'::regclass),
   order_code character varying(100),
   customer_name character varying(200) NOT NULL,
   product_type character varying(200) NOT NULL,
-  quantity integer NOT NULL,
+  quantity integer,
+  set integer,
   vial integer,
   total_cel integer,
   package_type character varying(50),
-  delivery_time timestamp without time zone,
+  delivery_date_time timestamp without time zone,
   giveaway character varying(200),
   sender character varying(200) NOT NULL,
   receiver character varying(200) NOT NULL,
@@ -23,10 +24,11 @@ CREATE TABLE order_product
   last_update_date timestamp without time zone,
   price_rate character varying(200) NOT NULL,
   comment_else character varying(500),
+  is_active boolean NOT NULL,
   CONSTRAINT order_product_pkey PRIMARY KEY (id)
 )
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE order_product
+ALTER TABLE public.order_product
   OWNER TO postgres;

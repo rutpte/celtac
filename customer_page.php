@@ -164,7 +164,19 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 									</div>
 									
 									<div class="col-8">
-										<input type="text" class="form-control" id="quantity_view" placeholder="quantity">
+										<input type="text" class="form-control" id="quantity_view" placeholder="">
+									</div>
+								</div>
+							</div>
+							<!-- **************************************** -->
+							<div>
+								<div class="row">
+									<div class="col-4">
+										<label for="set_view">set</label>
+									</div>
+									
+									<div class="col-8">
+										<input type="text" class="form-control" id="set_view" placeholder="0">
 									</div>
 								</div>
 							</div>
@@ -176,7 +188,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 									</div>
 									
 									<div class="col-8">
-										<input type="text" class="form-control" id="vial_view" placeholder="vial">
+										<input type="text" class="form-control" id="vial_view" placeholder="0">
 									</div>
 								</div>
 							</div>
@@ -188,7 +200,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 									</div>
 									
 									<div class="col-8">
-										<input type="text" class="form-control" id="total_cel_view" placeholder="total of cel">
+										<input type="text" class="form-control" id="total_cel_view" placeholder="">
 									</div>
 								</div>
 							</div>
@@ -200,7 +212,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 									</div>
 									
 									<div class="col-8">
-										<input type="text" class="form-control" id="package_type_view" placeholder="package_type">
+										<input type="text" class="form-control" id="package_type_view" placeholder="">
 									</div>
 								</div>
 							</div>
@@ -367,6 +379,8 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 											<option value="cell">Cell</option>
 											<option value="prp_ready">PRP Ready</option>
 											<option value="placenta">Placenta</option>
+											<option value="PRFM_SET">PRFM SET</option>
+											<option value="PRFM_TUEE">PRFM TUEE</option>
 										</select>
 									</div>
 								</div>
@@ -384,6 +398,19 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 									</div>
 								</div>
 								<div id="quantity_vlid_edit"></div>
+							</div>
+							<!-- **************************************** -->
+							<div>
+								<div class="row">
+									<div class="col-4">
+										<label for="set_edit">set</label>
+									</div>
+									
+									<div class="col-8">
+										<input type="text" class="form-control" id="set_edit" placeholder="set">
+									</div>
+								</div>
+								<div id="vial_vlid"></div>
 							</div>
 							<!-- **************************************** -->
 							<div>
@@ -422,6 +449,8 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 										<select class="custom-select d-block w-100" id="package_type_edit" required>
 											<option value="ID">ID</option>
 											<option value="IV">IV</option>
+											<option value="IM">IM</option>
+											<option value="IR">IR</option>
 										</select>
 									</div>
 								</div>
@@ -832,6 +861,8 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 											<option value="cell">Cell</option>
 											<option value="prp_ready">PRP Ready</option>
 											<option value="placenta">Placenta</option>
+											<option value="PRFM_SET">PRFM SET</option>
+											<option value="PRFM_TUEE">PRFM TUEE</option>
 										</select>
 									</div>
 								</div>
@@ -849,6 +880,19 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 									</div>
 								</div>
 								<div id="quantity_vlid"></div>
+							</div>
+							<!-- **************************************** -->
+							<div>
+								<div class="row">
+									<div class="col-4">
+										<label for="set">set</label>
+									</div>
+									
+									<div class="col-8">
+										<input type="text" class="form-control" id="set" placeholder="set">
+									</div>
+								</div>
+								<div id="set_vlid"></div>
 							</div>
 							<!-- **************************************** -->
 							<div>
@@ -887,7 +931,8 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 										<select class="custom-select d-block w-100" id="package_type" required>
 											<option value="ID">ID</option>
 											<option value="IV">IV</option>
-											<option value="IV">IM</option>
+											<option value="IM">IM</option>
+											<option value="IR">IR</option>
 										</select>
 									</div>
 								</div>

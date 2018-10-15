@@ -76,6 +76,7 @@ class Order extends DBConnection
 			$customer_name		= isset($post['customer_name']) 		? "'".$post['customer_name']."'"									: 'null';
 			$product_type		= $value['product_type'] 	!= "" ? "'".$value['product_type']."'"											: 'null';
 			$quantity			= $value['quantity'] 		!= "" ? $value['quantity']														: 'null';
+			$set				= $value['set'] 			!= "" ? $value['set']															: 'null';
 			$vial				= $value['vial'] 			!= "" ? $value['vial']															: 'null';
 			$total_cel			= $value['total_cel'] 		!= "" ? $value['total_cel']														: 'null';
 			$package_type		= $value['package_type'] 	!= "" ? "'".$value['package_type']."'"											: 'null';
@@ -100,6 +101,7 @@ class Order extends DBConnection
 				, {$customer_name}
 				, {$product_type}
 				, {$quantity}
+				, {$set}
 				, {$vial}
 				, {$total_cel}
 				, {$package_type}
@@ -131,6 +133,7 @@ class Order extends DBConnection
 				,customer_name 
 				,product_type 
 				,quantity  
+				,set
 				,vial 
 				,total_cel 
 				,package_type 
@@ -248,6 +251,7 @@ class Order extends DBConnection
 		$customer_name		= isset($post['customer_name_edit']) 			? "'".$post['customer_name_edit']."'"										: 'null';
 		$product_type		= isset($post['product_type_edit']) 			? "'".$post['product_type_edit']."'"										: 'null';
 		$quantity			= isset($post['quantity_edit']) 			&& $post['quantity_edit'] != "" ? $post['quantity_edit'] 						: 'null';
+		$set				= isset($post['set_edit']) 					? $post['set_edit'] 														    : 'null';
 		$vial				= isset($post['vial_edit']) 					? $post['vial_edit'] 														: 'null';
 		$total_cel			= isset($post['total_cel_edit']) 			&& $post['total_cel_edit'] != "" ? $post['total_cel_edit'] 						: 'null';
 		$package_type		= isset($post['package_type_edit']) 		&& $post['package_type_edit'] != "" ? "'".$post['package_type_edit']."'" 		: 'null';
@@ -268,6 +272,7 @@ class Order extends DBConnection
 				,customer_name 			= {$customer_name}
 				,product_type 			= {$product_type}
 				,quantity 				= {$quantity}
+				,set 					= {$set}
 				,vial 					= {$vial}
 				,total_cel 				= {$total_cel}
 				,package_type 			= {$package_type}
