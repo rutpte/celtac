@@ -4,11 +4,11 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 	$obj 	= new Order($pdo);
 	$rs_arr = $obj->getOrder();
 	//print_r($rs); exit;
-	//print_r($value['name']);exit;
+	//print_r($val_data['name']);exit;
 	
 	 // echo '<pre>';
-	// foreach ($rs_arr as &$value) {
-		// print_r($value);
+	// foreach ($rs_arr as &$val_data) {
+		// print_r($val_data);
 	// }
 	// exit;
 	//---------------------
@@ -622,7 +622,28 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 			  </div>
 			</div>
 
-		
+		<!-- ************************************************************************************************************** -->
+			<div class="modal fade" id="modal_confirm" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"   style="overflow-y: scroll">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<p class="modal-title" id="modalLabel">Confirmation.</p><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body" id="modal-body-contact">
+					<h3 style="color:red">warning.</h3>
+					<p class="lead">Are you sure?</p>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" id="modal_confirm_ok" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+					<button type="button" id="" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					
+				  </div>
+				</div>
+			  </div>
+			</div>
 		<!-- ************************************************************************************************************** -->
 			<div class="modal fade" id="modal_delete_confirm" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"   style="overflow-y: scroll">
 			  <div class="modal-dialog" role="document">
@@ -1050,18 +1071,55 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 	$pre_code = '';
 	//$swichted = false;
 	$index_color = 0;
+	$color_deactive = "";
+/*
+		$length = count($data);
+		for ($x = 0; $x < $length; $x++) {
+			//echo "The data is: {$data[$x]['is_active']} <br>";
+			var_dump($data[$x]);
+			echo "------------------------------------------";
+		} 
+		exit;
+*/
+/*
+	//$data = [1,2,3,4,5,6,7,8,9,10];
+	$length = count($data);
+	//var_dump($length);exit;
+	for ($x = 0; $x <$length; $x++) {
+		//----------------------------
+		//echo "nub".$x."| ";
+		$value = $data[$x]['customer_name'];
+		var_dump($value);
+		//$value = $data[$x];
+		//var_dump($value['customer_name']);
+		//var_dump($value['is_active']);
+	}
+	exit;
+	*/
+	//----------------------------------
+	$length = count($data);
+	for ($x = 0; $x < $length; $x++) {
+		//----------------------------
+		//var_dump($x);
+		$val_data = $data[$x];
 
-	foreach ($data as &$value) {
-
+		if($val_data['is_active']){
+			$color_deactive = "";
+		} else {
+			//--> false.
+			$color_deactive = "#9e3f45";
+		}
+		
+		//----------------------------
 		if($pre_code != ''){
 			
-			if($value['order_code'] == $pre_code){
+			if($val_data['order_code'] == $pre_code){
 				if(($index_color%2)==0){
 					$color = '#fcfcfc';
 				} else {
 					$color = '#c6c6c6';
 				}
-				$pre_code = $value['order_code'];
+				$pre_code = $val_data['order_code'];
 			}else{
 				$index_color++;
 				if($color == '#c6c6c6'){
@@ -1069,22 +1127,22 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				} else {
 					$color = '#c6c6c6';
 				}
-				$pre_code = $value['order_code'];
+				$pre_code = $val_data['order_code'];
 			}
 		} else {
 			//--> init_config.
 			$color = '#fcfcfc';
-			$pre_code = $value['order_code'];
+			$pre_code = $val_data['order_code'];
 		}
 ?>
 				
 				<div class="row"  style="background-color:<?php echo $color; ?>">
-					<div class="col-2 text-truncate font-weight-light"><div><?php echo $value['order_code']?></div></div>
-					<div class="col-2 text-truncate font-weight-light"><div><?php echo $value['customer_name']?></div></div>
-					<div class="col-2 text-truncate font-weight-light"><div><?php echo $value['product_type']?></div></div>
-					<div class="col-4 text"><div><?php echo $value['delivery_date_time']?></div></div>
-					<div class="col-1"><a href="#" onclick="celtac.g_func.order('view_order',<?php echo $value['id']?>)"><span style="margin:5px" class="ui-icon ui-icon-search"></span></p></a></div>
-					<div class="col-1"><a href="#" onclick="celtac.g_func.order('delete_order',<?php echo $value['id']?>)"><span style="margin-top:5px" class="ui-icon ui-icon-trash"></span></p></a></div>
+					<div class="col-2 text-truncate font-weight-light" style="color:<?php echo $color_deactive; ?>"><div><?php echo $val_data['order_code']?></div></div>
+					<div class="col-2 text-truncate font-weight-light" style="color:<?php echo $color_deactive; ?>"><div><?php echo $val_data['customer_name']?></div></div>
+					<div class="col-2 text-truncate font-weight-light" style="color:<?php echo $color_deactive; ?>"><div><?php echo $val_data['product_type']?></div></div>
+					<div class="col-4 text" style="color:<?php echo $color_deactive; ?>"><div><?php echo $val_data['delivery_date_time']?></div></div>
+					<div class="col-1"><a href="#" onclick="celtac.g_func.order('view_order',<?php echo $val_data['id']?>)"><span style="margin:5px" class="ui-icon ui-icon-search"></span></p></a></div>
+					<div class="col-1"><a href="#" onclick="celtac.g_func.order('delete_order',<?php echo $val_data['id']?>)"><span style="margin-top:5px" class="ui-icon ui-icon-trash"></span></p></a></div>
 				</div>
 				<hr class="mb-0">
 				

@@ -62,7 +62,7 @@ class Order extends DBConnection
 		//echo 'testing';
 		
 		$str_value_raw = "";
-		foreach ($array_product as &$value) {
+		foreach ($array_product as $value) {
 			
 			// echo 'product_type : '.$value['product_type'];
 			// echo 'quantity : '.$value['quantity'];
@@ -82,6 +82,8 @@ class Order extends DBConnection
 			$package_type		= $value['package_type'] 	!= "" ? "'".$value['package_type']."'"											: 'null';
 			$giveaway			= $value['giveaway'] 		!= "" ? "'".$value['giveaway']."'"												: 'null';
 			$price_rate			= $value['price_rate'] 		!= "" ? "'".$value['price_rate']."'"											: 'null';
+			$is_active			= $value['is_active'] ? 'true' : 'false';
+			//var_dump($is_active); exit;
 			//$delivery_time		= isset($post['delivery_date']) 	? strtotime($post['delivery_date']) 	: '';
 			$delivery_date_time	= isset($post['delivery_date']) 		? "'".$date_formated."'" 											: 'null';
 
@@ -116,6 +118,7 @@ class Order extends DBConnection
 				, NOW()
 				, {$price_rate}
 				, {$comment_else}
+				, {$is_active}
 				),";
 
 		} //end loop value.
@@ -135,7 +138,7 @@ class Order extends DBConnection
 				,quantity  
 				,set
 				,vial 
-				,total_cel 
+				,total_cell 
 				,package_type 
 				,delivery_date_time
 				,giveaway 
@@ -148,6 +151,7 @@ class Order extends DBConnection
 				,last_update_date 
 				,price_rate 
 				,comment_else 
+				,is_active 
             )
             VALUES {$rs_value}
         ";

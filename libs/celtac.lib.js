@@ -94,7 +94,7 @@
 	];
 
 	//--> write js lib file.
-	while (jsFiles.length) {//debugger;
+	while (jsFiles.length) {//debugger; //splice
 		scriptTags += "<script type='text/javascript' src='" + host + jsFiles.shift() + "'></script>";
 	}
 	document.write(scriptTags);

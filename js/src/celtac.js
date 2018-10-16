@@ -519,6 +519,9 @@
 								if(check_data == 'cell'){
 									var quantity = $('#quantity').val();
 									var vial = $('#vial').val();
+									if(vial == "" || vial == ""){
+										vial = 1;
+									}
 									var total_cel = parseInt(quantity*vial);
 									$('#total_cel').val(total_cel);
 								} 
@@ -528,7 +531,10 @@
 								var check_data = $('#product_type').val();
 								if(check_data == 'cell'){
 									var quantity = $('#quantity').val();
-									var vial = $('#vial').val();
+									var vial = $('#vial').val();//parseInt($('#vial').val()) == 0 ? 1 : parseInt($('#vial').val());
+									if(vial == "" || vial == ""){
+										vial = 1;
+									}
 									var total_cel = parseInt(quantity*vial);
 									$('#total_cel').val(total_cel);
 								}
@@ -548,9 +554,9 @@
 								var h 							= $('#delivery_time_hour').val();
 								var m 							= $('#delivery_time_minute').val();
 								
-								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m);
+								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 300);
 								if(!rs){
-									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 30 minute.');
+									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
 									$('#modal_notice_customer').modal('show');
 									
 								}
@@ -562,9 +568,9 @@
 								var h 							= $('#delivery_time_hour').val();
 								var m 							= $('#delivery_time_minute').val();
 								
-								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m);
+								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 300);
 								if(!rs){
-									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 30 minute.');
+									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
 									$('#modal_notice_customer').modal('show');
 									
 
@@ -574,7 +580,7 @@
 						}
 						
 						break;
-					case "check_avalible_time_order":
+					case "check_avalible_time_order_xxx":
 						//--> not use. 
 						if(true){
 							var validate_date_daliverly = function(){
@@ -602,9 +608,20 @@
 						}
 
 						break;
+					case "check_cell_order":
+						//--> not use. 
+						if(true){
+							var validate_date_daliverly = function(){
+								return false;
+							}
+							var rs = validate_date_daliverly();
+							return rs;
+						}
+
+						break;
 					case "add_order":
 						if(true){
-							var items_json 				= JSON.stringify(items_product_arr);
+							
 							var order_code				= $('#order_code').val();
 							var customer_name			= $('#customer_name').val();
 							// var product_type			= $('#product_type').val();
@@ -778,19 +795,40 @@
 								sta_validate = false;
 							}*/
 							
+							var time_validate = true;
 							var str_daliverly_date 			= $('#delivery_date').datepicker("option", "dateFormat", "yy-mm-dd" ).val();
 							var h 							= $('#delivery_time_hour').val();
 							var m 							= $('#delivery_time_minute').val();
 							
-							var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m);
+							var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 300);
 							
 							if(!rs){
-								$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 30 minute.');
+								//$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour. \n please connectd admistrator for aprove your order.');
+								//$('#modal_notice_customer').modal('show');
+								
+								//--time_validate = false;
+							}
+							//----------------------
+							if(time_validate == false){
+								//loop items_product_arr
+								var i;
+								for (i = 0; i < items_product_arr.length; i++) {
+									if(items_product_arr[i].product_type == "cell"){
+										items_product_arr[i].is_active = false;
+									}
+								}
+							}
+							//----------------------
+							var check_30 = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 5);
+							
+							if(!check_30){
+								$('#modal_notice_customer').find('#msg_modal_notice_customer').html('can not save data because time less than 5 minute. </br> please connect admistrator for buy your order.');
 								$('#modal_notice_customer').modal('show');
 								
 								sta_validate = false;
 							}
-							
+							//----------------------
+							var items_json 				= JSON.stringify(items_product_arr);
 							//----------------------
 							if(items_product_arr.length <= 0){
 								celtac.g_func.notice_div_error(true,"div_items_order");
@@ -798,59 +836,71 @@
 							} else {
 								celtac.g_func.notice_div_error(false,"div_items_order");
 							}
-								
-							if(sta_validate){
-								$('#bt_save_add_order').prop('disabled', true);
-								$('#loading_modal').modal('show');
-								$.ajax({
-									url: "order.php",
-									dataType: 'text', // Notice! JSONP <-- P (lowercase)
-									method : 'POST',
-									data: { 
-										"q"              			: "add_order"
-										,"order_code"         		: order_code	
-										,"customer_name"         	: customer_name	
-										,"items_json"				: items_json
-										//,"product_type"				: product_type		
-										//,"quantity"					: quantity			
-										//,"vial"						: vial				
-										//,"total_cel"				: total_cel				
-										//,"package_type"				: package_type			
-										,"delivery_date"			: delivery_date			
-										,"delivery_time_hour"		: delivery_time_hour		
-										,"delivery_time_minute"		: delivery_time_minute
-										//,"giveaway"					: giveaway
-										,"sender"					: sender									
-										,"receiver"					: receiver				
-										,"dealer_person"			: dealer_person		
-										,"dealer_company"			: dealer_company			
-										//,"price_rate"				: price_rate				
-										,"comment_else"				: comment_else
-										
-									},
-									type: "GET",
-									success:function(response){
-										$('#loading_modal').modal('hide');
-										//console.debug('response : ',response);
-										//debugger;
-										//console.log(response);
-										var obj_response = jQuery.parseJSON(response);
-										//debugger;
-										//console.debug('respont : ',respont);
-										if (obj_response.success) {
-											//alert("complete.");
-											location.reload();
-										} else {
+							var save_data = function(){
+								if(sta_validate){
+									$('#bt_save_add_order').prop('disabled', true);
+									$('#loading_modal').modal('show');
+									$.ajax({
+										url: "order.php",
+										dataType: 'text', // Notice! JSONP <-- P (lowercase)
+										method : 'POST',
+										data: { 
+											"q"              			: "add_order"
+											,"order_code"         		: order_code	
+											,"customer_name"         	: customer_name	
+											,"items_json"				: items_json
+											//,"product_type"				: product_type		
+											//,"quantity"					: quantity			
+											//,"vial"						: vial				
+											//,"total_cel"				: total_cel				
+											//,"package_type"				: package_type			
+											,"delivery_date"			: delivery_date			
+											,"delivery_time_hour"		: delivery_time_hour		
+											,"delivery_time_minute"		: delivery_time_minute
+											//,"giveaway"					: giveaway
+											,"sender"					: sender									
+											,"receiver"					: receiver				
+											,"dealer_person"			: dealer_person		
+											,"dealer_company"			: dealer_company			
+											//,"price_rate"				: price_rate				
+											,"comment_else"				: comment_else
+											
+										},
+										type: "GET",
+										success:function(response){
+											$('#loading_modal').modal('hide');
+											//console.debug('response : ',response);
+											//debugger;
+											//console.log(response);
+											var obj_response = jQuery.parseJSON(response);
+											//debugger;
+											//console.debug('respont : ',respont);
+											if (obj_response.success) {
+												//alert("complete.");
+												location.reload();
+											} else {
 
+											}
+										},
+										error:function(response){
+											$('#loading_modal').modal('hide');
+											console.debug(response);
 										}
-									},
-									error:function(response){
-										$('#loading_modal').modal('hide');
-										console.debug(response);
-									}
+									});
+									
+								}//end if false.
+							}
+							
+							//---------------------
+							if(time_validate == false){
+								$('#modal_confirm').modal('show');
+								$('#modal_confirm').find('#modal_confirm_ok').click(function() {
+									save_data();
 								});
-								
-							}//end if false.
+							} else {
+								save_data();
+							}
+						
 						}
 						
 
@@ -1061,10 +1111,10 @@
 							var h 							= $('#delivery_time_hour_edit').val();
 							var m 							= $('#delivery_time_minute_edit').val();
 							
-							var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m);
+							var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 300);
 							
 							if(!rs){
-								$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 30 minute.');
+								$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
 								$('#modal_notice_customer').modal('show');
 								
 								sta_validate = false;
@@ -1267,7 +1317,7 @@
 							$('#quantity_view').val(data.quantity);
 							$('#set_view').val(data.set);
 							$('#vial_view').val(data.vial);
-							$('#total_cel_view').val(data.total_cel);
+							$('#total_cel_view').val(data.total_cell);
 							$('#package_type_view').val(data.package_type);
 							$('#delivery_date_view').val(data.delivery_date_time);
 							$('#giveaway_view').val(data.giveaway);
@@ -1450,10 +1500,10 @@
 								var h 							= $('#delivery_time_hour_edit').val();
 								var m 							= $('#delivery_time_minute_edit').val();
 								
-								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m);
+								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 300);
 								
 								if(!rs){
-									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 30 minute.');
+									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
 									$('#modal_notice_customer').modal('show');
 									
 								}
@@ -1465,10 +1515,10 @@
 								var h 							= $('#delivery_time_hour_edit').val();
 								var m 							= $('#delivery_time_minute_edit').val();
 								
-								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m);
+								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 300);
 								
 								if(!rs){
-									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 30 minute.');
+									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
 									$('#modal_notice_customer').modal('show');
 									
 
@@ -1603,21 +1653,30 @@
 							//$('#loading_modal').modal('show'); //--> not show  at here i don't know why?
 							var product_type			= $('#product_type').val();
 							var quantity				= $('#quantity').val();
-							if($('#vial').val()== ""){
-								var vial = 0;
-							} else {
-								var vial = $('#vial').val();
-							};
+							//----------
 							if($('#set').val()== ""){
 								var set = 0;
 							} else {
 								var set = $('#set').val();
 							};
+							//----------
+							if($('#vial').val()== ""){
+								if(product_type == "cell"){
+									var vial = 1;
+								} else {
+									var vial = 0;
+								}
+								
+							} else {
+								var vial = $('#vial').val();
+							};
+
 							//var set						= $('#set').val();
-							var total_cel				= $('#total_cel').val();
+							var total_cel				= parseInt( $('#total_cel').val());
 							var package_type			= $('#package_type').val();
 							var giveaway				= $('#giveaway').val();
 							var price_rate				= $('#price_rate').val();
+							
 
 							
 						
@@ -1654,16 +1713,16 @@
 								}
 							} 
 							//--
-							if (vial == "" && set ==""){
-								celtac.g_func.notice_div_error(true,"vial");
-								celtac.g_func.notice_div_error(true,"set");
-								sta_validate = false;
-							}else {
-								celtac.g_func.notice_div_error(false,"vial");
-								celtac.g_func.notice_div_error(false,"set");
-							}
+							// if (vial == "" && set ==""){
+								// celtac.g_func.notice_div_error(true,"vial");
+								// celtac.g_func.notice_div_error(true,"set");
+								// sta_validate = false;
+							// }else {
+								// celtac.g_func.notice_div_error(false,"vial");
+								// celtac.g_func.notice_div_error(false,"set");
+							// }
 							//--
-							if (quantity == ""){
+							if (quantity == "" || quantity == "0"){
 								if($('#product_type').val() == "cell"){
 									celtac.g_func.notice_div_error(true,"quantity");
 									sta_validate = false;
@@ -1674,13 +1733,40 @@
 								}
 							} 
 							//--
+							if (set == "" || set == "0"){
+								set = 0;
+							}
+							//--
+							if (vial == "" || vial == "0"){
+								if($('#product_type').val() == "cell"){
+									celtac.g_func.notice_div_error(true,"vial");
+									sta_validate = false;
+								}
+							} else {
+								if($('#product_type').val() == "cell"){
+									celtac.g_func.notice_div_error(false,"vial");
+								}
+							} 
+							//--
 							if (product_type == ""){
 								celtac.g_func.notice_div_error(true,"product_type");
 								sta_validate = false;
 							}else {
 								celtac.g_func.notice_div_error(false,"product_type");
 							}
-
+							//--------
+							if($('#product_type').val() != "cell"){
+								if (vial == 0 && set == 0){
+									celtac.g_func.notice_div_error(true,"vial");
+									celtac.g_func.notice_div_error(true,"set");
+									sta_validate = false;
+								}else {
+									celtac.g_func.notice_div_error(false,"vial");
+									celtac.g_func.notice_div_error(false,"set");
+									sta_validate = true;
+								}
+								
+							}
 							//---------------------------------------------------------
 							if(sta_validate){
 								var obj_set_data = {};
@@ -1696,6 +1782,39 @@
 								obj_set_data.package_type	= package_type;
 								obj_set_data.giveaway		= giveaway;
 								obj_set_data.price_rate 	= price_rate;
+								//-------------------------------------------------------
+								//--> set limit cell per sale.
+								//loop items_product_arr , stand by sum cell.
+								if(false){
+									var i;
+									var total_cell = 0;
+									for (i = 0; i < items_product_arr.length; i++) {
+										var total_cell_current = items_product_arr[i].total_cel;
+										if(total_cell_current != ""){
+											total_cell = total_cell + total_cell_current;
+										}
+										
+									}
+									//--> m.
+									if(total_cell > 30){
+										obj_set_data.is_active 	    = false;
+									} else {
+										obj_set_data.is_active 	    = true;
+									}
+								}
+								//------------------------------------------------------
+								//--> set is_active each item.
+									if(total_cel >  10){
+										obj_set_data.is_active 	    = false;
+									} else {
+										obj_set_data.is_active 	    = true;
+									}
+								//------------------------------------------------------
+								if(obj_set_data.is_active == false){
+									$('#modal_notice_customer').find('#msg_modal_notice_customer').html('your order cell greater than 10 m. </br> please connect admistrator for approve your order.</br> tel. 080-000-0000 (sead)');
+									$('#modal_notice_customer').modal('show');
+								}
+								//------------------------------------------------------
 								
 
 								//celtac.g_func.add_items_arr(obj_set_data);
@@ -1719,14 +1838,19 @@
 							
 							//loop items_product_arr
 							var i;
-							for (i = 0; i < items_product_arr.length; i++) { 
+							for (i = 0; i < items_product_arr.length; i++) {
 								var item = items_product_arr[i];
 								if(typeof(item) != 'undefined'){
 									//debugger;
+									if(item.is_active == false){
+										$color = "red";
+									} else {
+										$color="";
+									}
 									var str_items = "";
-									
+
 									str_items += "			<div id=\"xx\" class=\"row\">";
-									str_items += "				<div class=\"col-10 text-truncate font-weight-light\">";
+									str_items +=' 				<div class="col-10 text-truncate font-weight-light" style="color:'+$color+'">';
 
 									str_items += 								item.product_type + " | ";
 									//----------------------------------------------------------------------
@@ -1778,7 +1902,8 @@
 						var id = obj;
 						if(true){
 							//$('#loading_modal').modal('show');
-							delete items_product_arr[id];
+							items_product_arr.splice(id, 1);
+							//delete items_product_arr[id];
 							celtac.g_func.order('update_items_product');
 						}
 					break;
@@ -1903,7 +2028,7 @@
 					text: "http://google.com"
 				});
 			}
-			,check_avalible_time_order : function(str_daliverly_date, h, m){
+			,check_avalible_time_order : function(str_daliverly_date, h, m, minute){
 				if(true){
 					var validate_date_daliverly = function(){
 						var date 				= new Date();
@@ -1918,7 +2043,7 @@
 						var timestamp_daliverly_date 		= obj_daliverly_date.getTime();
 						var minli_different_time_daliverly	= timestamp_daliverly_date - current_timestamp;
 						var min_different_time_daliverly	= (minli_different_time_daliverly / 1000)/60; //change to minute.
-						if (min_different_time_daliverly < 30){
+						if (min_different_time_daliverly < minute){//300
 							console.log("not avalible order in your time specify");
 							return false;
 						} else {
