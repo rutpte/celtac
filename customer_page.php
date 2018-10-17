@@ -609,6 +609,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<hr class="mb-4">
 							<button class="btn btn-primary btn-lg btn-block" id="bt_save_update_order"  type="button" onclick="celtac.g_func.order('edit_order')">update</button>
 							<input id="order_id_edit" type="hidden" value="">
+							<input id="is_active_edit" type="hidden" value="">
 							<!-- **************************************** -->
 						  </form>
 						  

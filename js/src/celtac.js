@@ -904,6 +904,187 @@
 						}
 						
 
+						break;
+					case "edit_order_model": 
+						if(true){
+							var id = $('#order_id_view').val();
+							//debugger;
+							$('#modal_add_order_edit').modal('show');
+							$('#delivery_date_edit').datepicker();
+							$('#delivery_date_edit').datepicker("option", "dateFormat", "yy-mm-dd");
+							//debugger;
+							//--> replace exist data to form.
+							var data 				= obj_all_order[id]; ////obj_all_order from customer_page.php
+							var arr_full_date_time 	= data.delivery_date_time.split(" ");
+							var arr_full_only_time	= arr_full_date_time[1].split(":");
+							var full_date			= arr_full_date_time[0];
+							
+							//--> init_disable for edit.
+							// if(data.product_type != "cell"){
+								// $('#quantity_edit').prop('disabled', true);
+								// $('#total_cel_edit').prop('disabled', true);
+								// $('#package_type_edit').prop('disabled', true);
+							// }
+							//debugger;
+							//--> add data from js_data.
+							$('#order_code_edit').val(data.order_code);
+							$('#customer_name_edit').val(data.customer_name);
+							$('#product_type_edit').val(data.product_type);
+							$('#quantity_edit').val(data.quantity);
+							$('#set_edit').val(data.set);
+							$('#vial_edit').val(data.vial);
+							$('#total_cel_edit').val(data.total_cell);
+							$('#package_type_edit').val(data.package_type);
+							
+							$('#delivery_date_edit').val(full_date);
+							$('#delivery_time_hour_edit').val(parseInt(arr_full_only_time[0]));
+							$('#delivery_time_minute_edit').val(parseInt(arr_full_only_time[1]));
+							
+							$('#giveaway_edit').val(data.giveaway);
+							$('#sender_edit').val(data.sender);
+							$('#receiver_edit').val(data.receiver);
+							$('#dealer_person_edit').val(data.dealer_person);
+							$('#dealer_company_edit').val(data.dealer_company);
+							$('#price_rate_edit').val(data.price_rate);
+							$('#comment_else_edit').val(data.comment_else);
+							$('#order_id_edit').val(data.id);
+							$('#is_active_edit').val(data.is_active);
+							//---------------------------------------------
+
+							/*						
+							$(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
+								//this.value = this.value.replace(/[^0-9\.]/g,'');
+								$(this).val($(this).val().replace(/[^0-9\.]/g,''));
+								if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+									event.preventDefault();
+								}
+							});
+							*/
+							$("#quantity_edit").on("keypress keyup blur",function (event) {   
+								$(this).val($(this).val().replace(/[^\d].+/, ""));
+								if ((event.which < 48 || event.which > 57)) {
+									event.preventDefault();
+								}
+							});
+							$("#vial_edit").on("keypress keyup blur",function (event) {   
+								$(this).val($(this).val().replace(/[^\d].+/, ""));
+								if ((event.which < 48 || event.which > 57)) {
+									event.preventDefault();
+								}
+							});
+							$("#set_edit").on("keypress keyup blur",function (event) {   
+								$(this).val($(this).val().replace(/[^\d].+/, ""));
+								if ((event.which < 48 || event.which > 57)) {
+									event.preventDefault();
+								}
+							});
+							$('#product_type_edit').on('change', function() {
+								if(this.value == "cell"){
+									var quantity = $('#quantity_edit').val();
+									var vial = $('#vial_edit').val();
+									var total_cel = parseInt(quantity*vial);
+									
+									
+									$('#quantity_edit').prop('disabled', false);
+									$('#total_cel_edit').prop('disabled', false);
+									$('#package_type_edit').prop('disabled', false);
+									
+									$('#total_cel_edit').val(total_cel);
+									$('#package_type_edit').val('ID');
+								} else {
+									//$('#quantity').hide();
+									//$('#vial').hide();
+									//$("#quantity").prop('disabled', true);
+									//$("#vial").prop('disabled', true);
+									$('#total_cel_edit').prop('disabled', true);
+									$('#quantity_edit').prop('disabled', true);
+									$('#package_type_edit').prop('disabled', true);
+									
+									$('#total_cel_edit').val('');
+									$('#quantity_edit').val('');
+									$('#package_type_edit').val('');
+								
+								}
+							});
+							
+							//--> cal auto.
+							$('#quantity_edit').on('keyup', function(){
+								var check_data = $('#product_type_edit').val();
+								if(check_data == 'cell'){
+									var quantity = $('#quantity_edit').val();
+									var vial = $('#vial_edit').val();
+									var total_cel = parseInt(quantity*vial);
+									$('#total_cel_edit').val(total_cel);
+								} 
+
+							});
+							$('#vial_edit').on('keyup', function(){
+								var check_data = $('#product_type_edit').val();
+								if(check_data == 'cell'){
+									var quantity = $('#quantity_edit').val();
+									var vial = $('#vial_edit').val();
+									var total_cel = parseInt(quantity*vial);
+									$('#total_cel_edit').val(total_cel);
+								}
+
+							});
+							
+							//-------------------------------------------------------
+							//alert( new Date().getTimezoneOffset() );
+							//Date.parse('2012-01-26T13:51:50.417-07:00');
+							
+							//date = new Date('2018-09-30 03:00:02');
+							//date.getTime();
+							//celtac.g_func.pad();
+
+							//-----> check delay date time.1
+							$('#delivery_time_hour_edit').on('change', function() {
+								var str_daliverly_date 			= $('#delivery_date_edit').datepicker().val();
+								var h 							= $('#delivery_time_hour_edit').val();
+								var m 							= $('#delivery_time_minute_edit').val();
+								
+								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 300);
+								
+								if(!rs){
+									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+									$('#modal_notice_customer').modal('show');
+									
+								}
+								
+							});
+							//-----> check delay date time.2
+							$('#delivery_time_minute_edit').on('change', function() {
+								var str_daliverly_date 			= $('#delivery_date_edit').datepicker().val();
+								var h 							= $('#delivery_time_hour_edit').val();
+								var m 							= $('#delivery_time_minute_edit').val();
+								
+								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 300);
+								
+								if(!rs){
+									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+									$('#modal_notice_customer').modal('show');
+									
+
+								}
+								
+							});
+							//----------------------------------------------------------------------------------------
+							$('#product_type_edit').prop('disabled', true);
+							
+							if($('#product_type_edit').val() != "cell"){
+								$('#set_edit').show();
+								$('#quantity_edit').hide();
+								$('#total_cel_edit').hide();
+								$('#package_type_edit').prop('disabled', true);
+
+							} else {
+								$('#quantity_edit').show();
+								$('#total_cel_edit').show();
+								$('#total_cel_edit').prop('disabled', true);
+								$('#package_type_edit').prop('disabled', false);
+								$('#set_edit').hide();
+							}
+						}
 						break;	
 					case "edit_order":
 						if(true){ 
@@ -927,6 +1108,8 @@
 							var dealer_company			= $('#dealer_company_edit').val();
 							var price_rate				= $('#price_rate_edit').val();
 							var comment_else			= $('#comment_else_edit').val();
+							var comment_else			= $('#comment_else_edit').val();
+							var is_active				= $('#is_active_edit').val();
 
 							console.log('order_id_edit  :  '+order_id_edit);
 							console.log('order_code  :  '+order_code);
@@ -966,9 +1149,16 @@
 							arr_dom_id.push('price_rate_edit');
 							arr_dom_id.push('comment_else_edit');
 							
-
+							//debugger;
 							
 							var sta_validate = true;
+							if (customer_name == ""){
+								celtac.g_func.notice_div_error(true,"customer_name_edit");
+								sta_validate = false;
+							} else {
+								celtac.g_func.notice_div_error(false,"customer_name_edit");
+							}
+							//--
 							if (price_rate == ""){
 								celtac.g_func.notice_div_error(true,"price_rate_edit");
 								sta_validate = false;
@@ -1040,66 +1230,85 @@
 								celtac.g_func.notice_div_error(false,"delivery_date_edit");
 							} 
 							//--
-							if (package_type == ""){
-								if($('#product_type_edit').val() == "cell"){
-									celtac.g_func.notice_div_error(true,"package_type_edit");
-									sta_validate = false;
-								}
-							}else {
-								if($('#product_type_edit').val() == "cell"){
-									celtac.g_func.notice_div_error(false,"package_type_edit");
-								}
-							} 
+
 							//--
 							//debugger;
-							if(total_cel == ""){
-								if($('#product_type_edit').val() == "cell"){
-									celtac.g_func.notice_div_error(true,"total_cel_edit");
+
+							//--
+							if (product_type == "cell"){
+								if (quantity == "" || quantity == "0"){
+									if($('#product_type_edit').val() == "cell"){
+										celtac.g_func.notice_div_error(true,"quantity_edit");
+										sta_validate = false;
+									}
+								} else {
+									if($('#product_type_edit').val() == "cell"){
+										celtac.g_func.notice_div_error(false,"quantity_edit");
+									}
+								} 
+								//--
+								if (vial == "" || vial == "0"){
+									celtac.g_func.notice_div_error(true,"vial_edit");
 									sta_validate = false;
-								}
-							} else {
-								if($('#product_type_edit').val() == "cell"){
-									celtac.g_func.notice_div_error(false,"total_cel_edit");
-								}
-							} 
-							//--
-							if (vial == ""){
-								celtac.g_func.notice_div_error(true,"vial_edit");
-								sta_validate = false;
-							}else {
-								celtac.g_func.notice_div_error(false,"vial_edit");
+								}else {
+									celtac.g_func.notice_div_error(false,"vial_edit");
+								}	
+								//--
+								if(total_cel == ""){
+									if($('#product_type_edit').val() == "cell"){
+										celtac.g_func.notice_div_error(true,"total_cel_edit");
+										sta_validate = false;
+									}
+								} else {
+									if($('#product_type_edit').val() == "cell"){
+										celtac.g_func.notice_div_error(false,"total_cel_edit");
+									}
+								} 
+								//--
+								// if (package_type == ""){
+									// if($('#product_type_edit').val() == "cell"){
+										// celtac.g_func.notice_div_error(true,"package_type_edit");
+										// sta_validate = false;
+									// }
+								// }else {
+									// if($('#product_type_edit').val() == "cell"){
+										// celtac.g_func.notice_div_error(false,"package_type_edit");
+									// }
+								// } 
 							}
-							if (set == ""){
-								celtac.g_func.notice_div_error(true,"set_edit");
-								sta_validate = false;
-							}else {
-								celtac.g_func.notice_div_error(false,"set_edit");
-							}
+
 							//--
-							if (quantity == ""){
-								if($('#product_type_edit').val() == "cell"){
-									celtac.g_func.notice_div_error(true,"quantity_edit");
+
+							//--
+							if (product_type != "cell"){
+								if (set == ""){
+									celtac.g_func.notice_div_error(true,"set_edit");
 									sta_validate = false;
+								}else {
+									celtac.g_func.notice_div_error(false,"set_edit");
 								}
-							} else {
-								if($('#product_type_edit').val() == "cell"){
-									celtac.g_func.notice_div_error(false,"quantity_edit");
+								//--
+								if (set == "0" && vial=="0" ){
+									celtac.g_func.notice_div_error(true,"set_edit");
+									celtac.g_func.notice_div_error(true,"vial_edit");
+									sta_validate = false;
+								}else {
+									celtac.g_func.notice_div_error(false,"set_edit");
+									celtac.g_func.notice_div_error(false,"vial_edit");
 								}
-							} 
-							//--
-							if (product_type == ""){
-								celtac.g_func.notice_div_error(true,"product_type_edit");
-								sta_validate = false;
-							}else {
-								celtac.g_func.notice_div_error(false,"product_type_edit");
 							}
+
 							//--
-							if (customer_name == ""){
-								celtac.g_func.notice_div_error(true,"customer_name_edit");
-								sta_validate = false;
-							} else {
-								celtac.g_func.notice_div_error(false,"customer_name_edit");
-							}
+
+							//--
+							// if (product_type == ""){
+								// celtac.g_func.notice_div_error(true,"product_type_edit");
+								// sta_validate = false;
+							// }else {
+								// celtac.g_func.notice_div_error(false,"product_type_edit");
+							// }
+							//--
+
 
 							/*
 							if (comment_else == ""){
@@ -1107,19 +1316,36 @@
 								sta_validate = false;
 							}*/
 							
+							//-------------- check time ------------------------------------------
+							
 							var str_daliverly_date 			= $('#delivery_date_edit').datepicker("option", "dateFormat", "yy-mm-dd" ).val();
 							var h 							= $('#delivery_time_hour_edit').val();
 							var m 							= $('#delivery_time_minute_edit').val();
 							
-							var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 300);
+							var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 5);
+							
 							
 							if(!rs){
-								$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+								$('#modal_notice_customer').find('#msg_modal_notice_customer').html('can not save data because time less than 5 minute. </br> please connect admistrator for buy your order.');
 								$('#modal_notice_customer').modal('show');
 								
 								sta_validate = false;
 							}
-								
+							//debugger;
+							if($('#product_type_edit').val() == "cell"){
+								var check_5h = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 300);
+								if((!check_5h) && (total_cel > 10)){
+									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order (cell) time less than 5 hour.');
+									$('#modal_notice_customer').modal('show');
+									
+									//sta_validate = false;
+									is_active = false;
+								} else {
+									is_active = true;
+								}
+							}
+
+							//------------------------------------------------------------------							
 							if(sta_validate){
 								$('#bt_save_update_order').prop('disabled', true);
 								$('#loading_modal').modal('show');
@@ -1129,11 +1355,13 @@
 									method : 'POST',
 									data: { 
 										"q"              					: "edit_order"
+										,"is_active"						: is_active
 										,"order_id_edit"					: order_id_edit
 										,"order_code_edit"         			: order_code	
 										,"customer_name_edit"         		: customer_name	
 										,"product_type_edit"				: product_type		
-										,"quantity_edit"					: quantity			
+										,"quantity_edit"					: quantity		
+										,"set_edit"							: set														
 										,"vial_edit"						: vial				
 										,"total_cel_edit"					: total_cel				
 										,"package_type_edit"				: package_type			
@@ -1172,7 +1400,7 @@
 								});
 								
 							}else{
-								alert('test alert');
+								//alert('test alert');
 							}
 						}
 
@@ -1364,184 +1592,7 @@
 
 						
 						break;					
-					case "edit_order_model": 
-						if(true){
-							var id = $('#order_id_view').val();
-							//debugger;
-							$('#modal_add_order_edit').modal('show');
-							$('#delivery_date_edit').datepicker();
-							$('#delivery_date_edit').datepicker("option", "dateFormat", "yy-mm-dd");
-							//debugger;
-							//--> replace exist data to form.
-							var data 				= obj_all_order[id]; ////obj_all_order from customer_page.php
-							var arr_full_date_time 	= data.delivery_date_time.split(" ");
-							var arr_full_only_time	= arr_full_date_time[1].split(":");
-							var full_date			= arr_full_date_time[0];
-							
-							//--> init_disable for edit.
-							// if(data.product_type != "cell"){
-								// $('#quantity_edit').prop('disabled', true);
-								// $('#total_cel_edit').prop('disabled', true);
-								// $('#package_type_edit').prop('disabled', true);
-							// }
-							//debugger;
-							//--> add data from js_data.
-							$('#order_code_edit').val(data.order_code);
-							$('#customer_name_edit').val(data.customer_name);
-							$('#product_type_edit').val(data.product_type);
-							$('#quantity_edit').val(data.quantity);
-							$('#vial_edit').val(data.vial);
-							$('#total_cel_edit').val(data.total_cel);
-							$('#package_type_edit').val(data.package_type);
-							
-							$('#delivery_date_edit').val(full_date);
-							$('#delivery_time_hour_edit').val(parseInt(arr_full_only_time[0]));
-							$('#delivery_time_minute_edit').val(parseInt(arr_full_only_time[1]));
-							
-							$('#giveaway_edit').val(data.giveaway);
-							$('#sender_edit').val(data.sender);
-							$('#receiver_edit').val(data.receiver);
-							$('#dealer_person_edit').val(data.dealer_person);
-							$('#dealer_company_edit').val(data.dealer_company);
-							$('#price_rate_edit').val(data.price_rate);
-							$('#comment_else_edit').val(data.comment_else);
-							$('#order_id_edit').val(data.id);
-							//---------------------------------------------
 
-							/*						
-							$(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
-								//this.value = this.value.replace(/[^0-9\.]/g,'');
-								$(this).val($(this).val().replace(/[^0-9\.]/g,''));
-								if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
-									event.preventDefault();
-								}
-							});
-							*/
-							$("#quantity_edit").on("keypress keyup blur",function (event) {   
-								$(this).val($(this).val().replace(/[^\d].+/, ""));
-								if ((event.which < 48 || event.which > 57)) {
-									event.preventDefault();
-								}
-							});
-							$("#vial_edit").on("keypress keyup blur",function (event) {   
-								$(this).val($(this).val().replace(/[^\d].+/, ""));
-								if ((event.which < 48 || event.which > 57)) {
-									event.preventDefault();
-								}
-							});
-							$("#set_edit").on("keypress keyup blur",function (event) {   
-								$(this).val($(this).val().replace(/[^\d].+/, ""));
-								if ((event.which < 48 || event.which > 57)) {
-									event.preventDefault();
-								}
-							});
-							$('#product_type_edit').on('change', function() {
-								if(this.value == "cell"){
-									var quantity = $('#quantity_edit').val();
-									var vial = $('#vial_edit').val();
-									var total_cel = parseInt(quantity*vial);
-									
-									
-									$('#quantity_edit').prop('disabled', false);
-									$('#total_cel_edit').prop('disabled', false);
-									$('#package_type_edit').prop('disabled', false);
-									
-									$('#total_cel_edit').val(total_cel);
-									$('#package_type_edit').val('ID');
-								} else {
-									//$('#quantity').hide();
-									//$('#vial').hide();
-									//$("#quantity").prop('disabled', true);
-									//$("#vial").prop('disabled', true);
-									$('#total_cel_edit').prop('disabled', true);
-									$('#quantity_edit').prop('disabled', true);
-									$('#package_type_edit').prop('disabled', true);
-									
-									$('#total_cel_edit').val('');
-									$('#quantity_edit').val('');
-									$('#package_type_edit').val('');
-								
-								}
-							});
-							
-							//--> cal auto.
-							$('#quantity_edit').on('keyup', function(){
-								var check_data = $('#product_type_edit').val();
-								if(check_data == 'cell'){
-									var quantity = $('#quantity_edit').val();
-									var vial = $('#vial_edit').val();
-									var total_cel = parseInt(quantity*vial);
-									$('#total_cel_edit').val(total_cel);
-								} 
-
-							});
-							$('#vial_edit').on('keyup', function(){
-								var check_data = $('#product_type_edit').val();
-								if(check_data == 'cell'){
-									var quantity = $('#quantity_edit').val();
-									var vial = $('#vial_edit').val();
-									var total_cel = parseInt(quantity*vial);
-									$('#total_cel_edit').val(total_cel);
-								}
-
-							});
-							
-							//-------------------------------------------------------
-							//alert( new Date().getTimezoneOffset() );
-							//Date.parse('2012-01-26T13:51:50.417-07:00');
-							
-							//date = new Date('2018-09-30 03:00:02');
-							//date.getTime();
-							//celtac.g_func.pad();
-
-							//-----> check delay date time.1
-							$('#delivery_time_hour_edit').on('change', function() {
-								var str_daliverly_date 			= $('#delivery_date_edit').datepicker().val();
-								var h 							= $('#delivery_time_hour_edit').val();
-								var m 							= $('#delivery_time_minute_edit').val();
-								
-								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 300);
-								
-								if(!rs){
-									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
-									$('#modal_notice_customer').modal('show');
-									
-								}
-								
-							});
-							//-----> check delay date time.2
-							$('#delivery_time_minute_edit').on('change', function() {
-								var str_daliverly_date 			= $('#delivery_date_edit').datepicker().val();
-								var h 							= $('#delivery_time_hour_edit').val();
-								var m 							= $('#delivery_time_minute_edit').val();
-								
-								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 300);
-								
-								if(!rs){
-									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
-									$('#modal_notice_customer').modal('show');
-									
-
-								}
-								
-							});
-							//----------------------------------------------------------------------------------------
-							$('#product_type_edit').prop('disabled', true);
-							
-							if($('#product_type_edit').val() != "cell"){
-								$('#set_edit').show();
-								$('#quantity_edit').hide();
-								$('#total_cel_edit').hide();
-								$('#package_type_edit').prop('disabled', true);
-
-							} else {
-								$('#quantity_edit').show();
-								$('#total_cel_edit').show();
-								$('#package_type_edit').prop('disabled', false);
-								$('#set_edit').hide();
-							}
-						}
-						break;	
 					case "send_line":
 						if(true){
 							$('#loading_modal').modal('show');

@@ -250,15 +250,16 @@ class Order extends DBConnection
 		//echo $date_formated; exit;
 
 
+			
 		$order_id_edit		= isset($post['order_id_edit']) 				? "'".$post['order_id_edit']."'" 											: 'null';
 		$order_code			= isset($post['order_code_edit']) 				? "'".$post['order_code_edit']."'" 											: 'null';
 		$customer_name		= isset($post['customer_name_edit']) 			? "'".$post['customer_name_edit']."'"										: 'null';
 		$product_type		= isset($post['product_type_edit']) 			? "'".$post['product_type_edit']."'"										: 'null';
-		$quantity			= isset($post['quantity_edit']) 			&& $post['quantity_edit'] != "" ? $post['quantity_edit'] 						: 'null';
-		$set				= isset($post['set_edit']) 					? $post['set_edit'] 														    : 'null';
-		$vial				= isset($post['vial_edit']) 					? $post['vial_edit'] 														: 'null';
-		$total_cel			= isset($post['total_cel_edit']) 			&& $post['total_cel_edit'] != "" ? $post['total_cel_edit'] 						: 'null';
-		$package_type		= isset($post['package_type_edit']) 		&& $post['package_type_edit'] != "" ? "'".$post['package_type_edit']."'" 		: 'null';
+		$quantity			= isset($post['quantity_edit']) 			&& $post['quantity_edit'] 		!= "" ? $post['quantity_edit'] 					: 'null';
+		$set				= isset($post['set_edit']) 					&& $post['set_edit'] 			!= "" ? $post['set_edit'] 						: 'null';
+		$vial				= isset($post['vial_edit']) 				&& $post['vial_edit'] 			!= "" ? $post['vial_edit'] 						: 'null';
+		$total_cell			= isset($post['total_cel_edit']) 			&& $post['total_cel_edit'] 		!= "" ? $post['total_cel_edit'] 				: 'null';
+		$package_type		= isset($post['package_type_edit']) 		&& $post['package_type_edit'] 	!= "" ? "'".$post['package_type_edit']."'" 		: 'null';
 		//$delivery_time		= isset($post['delivery_date']) 	? strtotime($post['delivery_date']) 	: '';
 		$delivery_date_time	= isset($post['delivery_date_edit']) 			? "'".$date_formated."'" 													: 'null';
 		$giveaway			= isset($post['giveaway_edit']) 				? "'".$post['giveaway_edit']."'" 											: 'null';
@@ -269,6 +270,7 @@ class Order extends DBConnection
 		//$last_update_date 	= isset($post['last_update_date']) 	? $post['last_update_date'] : '';
 		$price_rate			= isset($post['price_rate_edit']) 				? "'".$post['price_rate_edit']."'"											: 'null';
 		$comment_else		= isset($post['comment_else_edit']) 			? "'".$post['comment_else_edit' ]."'"										: 'null';
+		$is_active			= isset($post['is_active']) 					&& $post['is_active'] 		!= "" ? $post['is_active'] 						: 'null';
 
         $sql = "
             UPDATE order_product SET 
@@ -278,7 +280,7 @@ class Order extends DBConnection
 				,quantity 				= {$quantity}
 				,set 					= {$set}
 				,vial 					= {$vial}
-				,total_cel 				= {$total_cel}
+				,total_cell 			= {$total_cell}
 				,package_type 			= {$package_type}
 				,delivery_date_time 	= {$delivery_date_time}
 				,giveaway 				= {$giveaway}
@@ -291,6 +293,7 @@ class Order extends DBConnection
 				,last_update_date 		= NOW()
 				,price_rate 			= {$price_rate}
 				,comment_else 			= {$comment_else}
+				,is_active 				= {$is_active}
 			WHERE id = {$order_id_edit}
         ";
 		//				,order_date 			= {$order_date}
@@ -377,9 +380,10 @@ class Order extends DBConnection
             from order_product
 			where 1=1
 			and user_id = '{$_SESSION['owner_id']}'
-			and delivery_date_time >= now()
+			and delivery_date_time >= now()::date
 			order by delivery_date_time
         ";
+		//and delivery_date_time >= now()
 		//now()::date
         //echo "<pre>", $sql; exit;
         $sth = $this->db->prepare($sql);  //sql2
@@ -413,9 +417,10 @@ class Order extends DBConnection
 				*
             from order_product
 			where 1=1
-			and delivery_date_time >= now()
+			and delivery_date_time >= now()::date
 			order by delivery_date_time
         ";
+		//and delivery_date_time >= now()
 		//now()::date
         //echo "<pre>", $sql; exit;
         $sth = $this->db->prepare($sql);  //sql2
