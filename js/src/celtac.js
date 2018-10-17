@@ -2105,6 +2105,15 @@
 					return rs;
 				}
 			}
+			,modal_export : function(){
+				$('#exp_start_delivery_date').datepicker();
+				$('#exp_start_delivery_date').datepicker("option", "dateFormat", "yy-mm-dd");
+				
+				$('#exp_end_delivery_date').datepicker();
+				$('#exp_end_delivery_date').datepicker("option", "dateFormat", "yy-mm-dd");
+				
+				$('#modal_export').modal('show');
+			}
 		};
 		this.g_var = {
 			"var1" : "var1"

@@ -2,7 +2,12 @@
 require dirname(__FILE__) . '/includes/init.inc.php';
  if (isset($_SESSION['email'])) {
 	$obj 	= new Order($pdo);
-	$rs_arr = $obj->getOrder();
+	if (isset($_SESSION['is_staff'])) {
+		$rs_arr = $obj->getOrderAll();
+	} else {
+		$rs_arr = $obj->getOrder();
+	}
+	
 	//print_r($rs); exit;
 	//print_r($val_data['name']);exit;
 	
@@ -75,7 +80,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 
 			  </li>  
 			</ul>
-
+			<a class="nav-link" style="color:#bcbcbc" id="export_excel" href="#" onclick="celtac.g_func.modal_export()">export</a>
 			<button class="btn btn-outline-success my-2 my-sm-0" type="button" id="logout">logout</button>
 			<!--<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.modal_user()">user</button>-->
 			
@@ -1051,6 +1056,153 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 			  </div>
 			</div>
 
+		<!-- ************************************************************************************************************** -->
+		<div class="modal fade" id="modal_export" tabindex="-1" role="dialog"  aria-hidden="true"  style="overflow-y: scroll">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<h5 class="modal-title">Export.</h5><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body" id="modal-body-export"   style="overflow-y: scroll">
+						<form class="needs-validation" novalidate>
+							<!-- **************************************** -->
+							<div>
+								<div class="row">
+									<div class="col-4">
+										<label for="exp_start_delivery_date">start</label>
+									</div>
+									
+									<div class="col-8">
+										<input type="text" class="form-control" id="exp_start_delivery_date" placeholder="date">
+									</div>
+								</div>
+								<div id="delivery_date_vlid"></div>
+							</div>
+							<!-- ********************************************************************************************* -->
+							<div>
+								<div class="row">
+									<div class="col-4">
+										<label>-</label>
+									</div>
+									
+									<div class="col-8">
+										<div class="row">
+											<div class="col-6">
+												<select class="custom-select" id="exp_start_delivery_time_hour" required>
+													
+													<?php 
+														$h = 0;
+														while ($h<=23) {
+
+													?>
+															<option value=<?php echo $h?>><?php echo $h ?></option>
+													<?php 
+															$h = $h+1;
+														}
+
+													?>
+												</select>
+											</div>
+											<div class="col-6">
+												<select class="custom-select" id="exp_start_delivery_time_minute" required>
+													<?php 
+														$min = 0;
+														while ($min<=59) {
+
+													?>
+															<option value=<?php echo $min?>><?php echo $min?></option>
+													<?php 
+															$min = $min+1;
+														}
+
+													?>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="delivery_time_hour_vlid"></div>
+							</div>
+							<!-- *************************************************************************************************** -->
+							<hr class="mb-4">
+							<!-- *************************************************************************************************** -->
+							<!-- **************************************** -->
+							<div>
+								<div class="row">
+									<div class="col-4">
+										<label for="exp_end_delivery_date">end</label>
+									</div>
+									
+									<div class="col-8">
+										<input type="text" class="form-control" id="exp_end_delivery_date" placeholder="date">
+									</div>
+								</div>
+								<div id="delivery_date_vlid"></div>
+							</div>
+							<!-- ********************************************************************************************* -->
+							<div>
+								<div class="row">
+									<div class="col-4">
+										<label>-</label>
+									</div>
+									
+									<div class="col-8">
+										<div class="row">
+											<div class="col-6">
+												<select class="custom-select" id="exp_end_delivery_time_hour" required>
+													
+													<?php 
+														$h = 0;
+														while ($h<=23) {
+
+													?>
+															<option value=<?php echo $h?>><?php echo $h ?></option>
+													<?php 
+															$h = $h+1;
+														}
+
+													?>
+												</select>
+											</div>
+											<div class="col-6">
+												<select class="custom-select" id="exp_end_delivery_time_minute" required>
+													<?php 
+														$min = 0;
+														while ($min<=59) {
+
+													?>
+															<option value=<?php echo $min?>><?php echo $min?></option>
+													<?php 
+															$min = $min+1;
+														}
+
+													?>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="delivery_time_hour_vlid"></div>
+							</div>
+							<!-- *************************************************************************************************** -->
+
+
+						  </form>
+						  
+						  
+				  </div>
+				  <div class="modal-footer">
+					<button class="btn btn-primary btn-lg btn-block" id="bt_export" type="button" onclick="celtac.g_func.export">Export</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					
+				  </div>
+				</div>
+			  </div>
+			</div>
+		
 		<!-- ************************************************************************************************************** -->
 		
 		<main role="main" class="container">

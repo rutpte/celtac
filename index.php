@@ -5,10 +5,6 @@ if($_SESSION['email']){
 
 		header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/admin_page.php");
 
-	} else if($_SESSION['is_staff']){
-
-		header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/staff_page.php");
-
 	} else {
 
 		header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/customer_page.php");
