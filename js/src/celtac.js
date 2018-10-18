@@ -2115,7 +2115,77 @@
 				$('#modal_export').modal('show');
 			}
 			,export_excel : function(){
-				//xxx
+				$('#loading_modal').modal('show');
+				
+				var date_raw_start 	= $('#exp_start_delivery_date').val();
+				var hour_start 		= $('#exp_start_delivery_time_hour').val();
+				var minute_start 	= $('#exp_start_delivery_time_minute').val();
+				
+				var date_raw_end 	= $('#exp_end_delivery_date').val();
+				var hour_end 		= $('#exp_end_delivery_time_hour').val();
+				var minute_end		= $('#exp_end_delivery_time_minute').val();
+				
+				var str_date_start		= date_raw_start+' '+hour_start+':'+minute_start+':00'; //27-09-2018 14:0:00
+				var str_date_end		= date_raw_end+' '+hour_end+':'+minute_end+':00'; //27-09-2018 14:0:00
+				
+				console.log("str_date_start : "+str_date_start);
+				//debugger;
+				//echo $str_date; exit;
+				//$date_full 		= new DateTime($str_date);
+				//--$obj_date 		= new DateTime($str_date);;
+				//--$date_formated 	= $obj_date->format('Y-m-d H:i:s');
+				//window.open('export_excel_download.php', '_blank');
+				//-------------------------------------------------
+				
+				var mapForm = document.createElement("form");
+				mapForm.target = "Map";
+				mapForm.method = "POST"; // or "post" if appropriate
+				mapForm.action = "export_excel_download.php";
+
+				var mapInput = document.createElement("input");
+				mapInput.type = "text";
+				mapInput.name = "str_date_start";
+				mapInput.value = str_date_start;
+				mapForm.appendChild(mapInput);
+				
+				var mapInput2 = document.createElement("input");
+				mapInput2.type = "text";
+				mapInput2.name = "str_date_end";
+				mapInput2.value = str_date_end;
+				mapForm.appendChild(mapInput2);
+
+				document.body.appendChild(mapForm);
+
+				map = window.open("", "Map", "status=0,title=0,height=600,width=800,scrollbars=1");
+
+				if (map) {
+					mapForm.submit();
+				} else {
+					alert('You must allow popups for this map to work.');
+				}
+				//-------------------------------------------------
+				/*
+				$.ajax({
+					//url: "export_excel_download.php",
+					url: "download_excel_test.php",
+					dataType: 'text', // Notice! JSONP <-- P (lowercase)
+					method : 'POST',
+					data: { 
+						"q"              	: "xxx"
+						,"str_date_start"	: str_date_start
+						,"str_date_end" 	: str_date_end
+
+					},
+					type: "GET",
+					success:function(response){
+						$('#loading_modal').modal('hide');
+					},
+					error:function(response){
+						$('#loading_modal').modal('hide');
+						console.debug(response);
+					}
+				});
+				*/
 			}
 		};
 		this.g_var = {

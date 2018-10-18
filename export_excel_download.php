@@ -24,10 +24,18 @@
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt	LGPL
  * @version    ##VERSION##, ##DATE##
  */
+ 
+
+ 
 	require dirname(__FILE__) . '/includes/init.inc.php';
+	
+	 $str_date_start      	= isset($_POST['str_date_start']) ? $_POST['str_date_start'] : '';
+	 $str_date_end       	= isset($_POST['str_date_end']) ? $_POST['str_date_end'] : '';
+	// var_dump($str_date_start); exit;
+	 
 	if (isset($_SESSION['email'])) {
 		$obj 	= new Order($pdo);
-		$rs_arr = $obj->getOrderAll();
+		$rs_arr = $obj->getOrderExport($str_date_start, $str_date_end);
 		$data = array();
 	
 		if($rs_arr['success']){
@@ -176,10 +184,28 @@
 			)
 		));
 	}
+	
 	//--------------------------------------------------------------------------------------------
-	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-	$objWriter->save('./excel_output/order_cell.xls');
+	$file_name = "order";
+	// Redirect output to a client’s web browser (Excel2007)
+	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+	header('Content-Disposition: attachment;filename="'.$file_name.'.xlsx"');
+	header('Cache-Control: max-age=0');
+	// If you're serving to IE 9, then the following may be needed
+	header('Cache-Control: max-age=1');
+
+	// If you're serving to IE over SSL, then the following may be needed
+	header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+	header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+	header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+	header ('Pragma: public'); // HTTP/1.0
+	//--------------------------------------------------------------------------------------------
+	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+	//$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+	//$objWriter->save('./excel_output/order_cell.xls');
+	$objWriter->save('php://output');
 
 	
 //$objWriter->save('./outputExcel/server/'.$pro_name.'/'.$file_name.'.xls');
-echo 'export successfully .<br />'."\n";
+
+exit;
