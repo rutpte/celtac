@@ -2114,6 +2114,9 @@
 				
 				$('#modal_export').modal('show');
 			}
+			,export_excel : function(){
+				//xxx
+			}
 		};
 		this.g_var = {
 			"var1" : "var1"

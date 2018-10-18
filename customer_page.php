@@ -1195,7 +1195,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 						  
 				  </div>
 				  <div class="modal-footer">
-					<button class="btn btn-primary btn-lg btn-block" id="bt_export" type="button" onclick="celtac.g_func.export">Export</button>
+					<button class="btn btn-primary btn-lg btn-block" id="bt_export" type="button" onclick="celtac.g_func.export_excel">Export</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					
 				  </div>
