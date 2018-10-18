@@ -29,11 +29,11 @@
  
 	require dirname(__FILE__) . '/includes/init.inc.php';
 	
-	 $str_date_start      	= isset($_POST['str_date_start']) ? $_POST['str_date_start'] : '';
-	 $str_date_end       	= isset($_POST['str_date_end']) ? $_POST['str_date_end'] : '';
-	// var_dump($str_date_start); exit;
+	 $str_date_start      	= isset($_GET['str_date_start']) ? $_GET['str_date_start'] : '';
+	 $str_date_end       	= isset($_GET['str_date_end']) ? $_GET['str_date_end'] : '';
+	 //var_dump($_SESSION['email']); exit;
 	 
-	if (isset($_SESSION['email'])) {
+	if (isset($_SESSION['email'])) {//email,is_staff
 		$obj 	= new Order($pdo);
 		$rs_arr = $obj->getOrderExport($str_date_start, $str_date_end);
 		$data = array();
@@ -70,7 +70,7 @@
 		,"product_type"
 		,"quantity"
 		,"vial"
-		,"total_cel"
+		,"total_cell"
 		,"package_type"
 		,"giveaway"
 		,"sender"

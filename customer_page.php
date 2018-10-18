@@ -2,7 +2,7 @@
 require dirname(__FILE__) . '/includes/init.inc.php';
  if (isset($_SESSION['email'])) {
 	$obj 	= new Order($pdo);
-	if (isset($_SESSION['is_staff'])) {
+	if ($_SESSION['is_staff']) {
 		$rs_arr = $obj->getOrderAll();
 	} else {
 		$rs_arr = $obj->getOrder();

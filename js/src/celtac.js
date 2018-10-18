@@ -2115,7 +2115,7 @@
 				$('#modal_export').modal('show');
 			}
 			,export_excel : function(){
-				$('#loading_modal').modal('show');
+				//$('#loading_modal').modal('show');
 				
 				var date_raw_start 	= $('#exp_start_delivery_date').val();
 				var hour_start 		= $('#exp_start_delivery_time_hour').val();
@@ -2134,9 +2134,9 @@
 				//$date_full 		= new DateTime($str_date);
 				//--$obj_date 		= new DateTime($str_date);;
 				//--$date_formated 	= $obj_date->format('Y-m-d H:i:s');
-				//window.open('export_excel_download.php', '_blank');
+				window.open('export_excel_download.php?str_date_start='+str_date_start+'&str_date_end='+str_date_end, '_blank');
 				//-------------------------------------------------
-				
+				/*
 				var mapForm = document.createElement("form");
 				mapForm.target = "Map";
 				mapForm.method = "POST"; // or "post" if appropriate
@@ -2145,12 +2145,14 @@
 				var mapInput = document.createElement("input");
 				mapInput.type = "text";
 				mapInput.name = "str_date_start";
+				mapInput.id   = "str_date_start";
 				mapInput.value = str_date_start;
 				mapForm.appendChild(mapInput);
 				
 				var mapInput2 = document.createElement("input");
 				mapInput2.type = "text";
 				mapInput2.name = "str_date_end";
+				mapInput2.id   = "str_date_end";
 				mapInput2.value = str_date_end;
 				mapForm.appendChild(mapInput2);
 
@@ -2163,6 +2165,10 @@
 				} else {
 					alert('You must allow popups for this map to work.');
 				}
+				
+				//$('#str_date_start').hide();
+				//$('#str_date_end').hide();
+				*/
 				//-------------------------------------------------
 				/*
 				$.ajax({

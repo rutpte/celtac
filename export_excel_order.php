@@ -62,7 +62,7 @@
 		,"product_type"
 		,"quantity"
 		,"vial"
-		,"total_cel"
+		,"total_cell"
 		,"package_type"
 		,"giveaway"
 		,"sender"
