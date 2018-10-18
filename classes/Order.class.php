@@ -184,9 +184,16 @@ class Order extends DBConnection
 
         return json_encode($result);
     }
-    public function deleteOrder($id, $isAdmin=null)
+    public function deleteOrder($id)
     {
-
+		$sta_allow = $this->check_diff_time($id, 300); //--> 300 minute == 5 hours.
+		//--var_dump($sta_allow); exit;
+		if($sta_allow == 1){
+			echo "ok in";
+		}else{
+			echo "waitting admin";
+		}
+		exit;
 		//-------------------------------
 		/*
         $sql = "
@@ -383,6 +390,7 @@ class Order extends DBConnection
 			and delivery_date_time >= now()::date
 			order by delivery_date_time
         ";
+		//--and is_active IS true
 		//and delivery_date_time >= now()
 		//now()::date
         //echo "<pre>", $sql; exit;
@@ -418,6 +426,7 @@ class Order extends DBConnection
             from order_product
 			where 1=1
 			and delivery_date_time >= now()::date
+			and is_active IS true
 			order by delivery_date_time
         ";
 		//and delivery_date_time >= now()
@@ -489,6 +498,39 @@ class Order extends DBConnection
         }
     }
     //---------------------------------------------------------
+	public function check_diff_time($id_product, $diff_minute){
+
+		$sql = "
+			select
+			CASE
+			  WHEN ((now() + interval '{$diff_minute} minutes') < (select delivery_date_time from order_product WHERE id = {$id_product})::timestamp ) THEN 1
+			  ELSE 0
+			 END AS sta_allow
+		";
+ 
+		
+		//--hours
+		//select (now() + interval '5 minutes')as x
+		//select '2018-10-18 16:40:00'::timestamp  - interval '5 minutes'
+		//-------------------------------------------------------------------------------------------------------------------
+		//echo "<pre>", $sql; exit;
+		$sp = $this->db->prepare($sql);
+		$sp->execute();
+        if (!$sp->execute()) {
+            echo '<pre>'.$sql;
+            print_r($sp->errorInfo());
+        } else {
+			$get_num_row = $sp->rowCount();
+			if($get_num_row > 0){
+				$rs = $sp->fetchAll(PDO::FETCH_ASSOC);
+				//var_dump($rs[0]['sta_allow']);
+				return $rs[0]['sta_allow'];
+
+			} else {
+				echo "555 error.";
+			}
+        }
+	}
     /**
      * __destruct
      * 

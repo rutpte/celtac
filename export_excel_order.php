@@ -56,7 +56,8 @@
 
 
 	$arr_col = array(
-		"delivery_date_time"
+		"date"
+		,"time"
 		,"order_code"
 		,"customer_name"
 		,"product_type"
@@ -142,11 +143,20 @@
 		$col = 0;
 		foreach ($arr_col as $key) 
 		{
-			//echo $value[$key];
+			if($key == "date"){
+				$rs_data = $daliv_date;
+			} else if ($key == "time"){
+				$rs_data = $daliv_time;
+			} else {
+				$rs_data = $value[$key];
+			}
+			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $row_data, $rs_data);
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $row_data, $value[$key]);
 			$columnLetter = PHPExcel_Cell::stringFromColumnIndex($col);
 			
 			cellColor($columnLetter.$row_data,$color);
+			
+			$objPHPExcel->getActiveSheet()->getStyle($row_data+':'+$col)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 			$col++;
 		}
 
@@ -169,13 +179,27 @@
 	function cellColor($cells,$color){
 		global $objPHPExcel;
 
+		$objPHPExcel->getActiveSheet()->getStyle($cells)->applyFromArray(array(
+			'alignment' => array(
+				'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+			)
+		));
+		//--
 		$objPHPExcel->getActiveSheet()->getStyle($cells)->getFill()->applyFromArray(array(
 			'type' => PHPExcel_Style_Fill::FILL_SOLID,
 			'startcolor' => array(
 				 'rgb' => $color
 			)
-		));
+		));		
 	}
+	//--------------------------------------------------------------------------------------------
+	//--> set center.
+	$objPHPExcel->getActiveSheet()->getDefaultStyle()->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+	//$objPHPExcel->getDefaultStyle()->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+	//---
+	//$style = array( 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER); 
+	//$sheet = $objPHPExcel->getActiveSheet();
+   // $sheet->getDefaultStyle()->applyFromArray($style);
 	//--------------------------------------------------------------------------------------------
 	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
 	$objWriter->save('./excel_output/order_cell.xls');

@@ -1496,6 +1496,7 @@
 							var cilck_ok = false;
 							$('#modal_delete_confirm').find('#del_ok').click(function() {
 								$('#loading_modal').modal('show');
+								//debugger;
 								$.ajax({
 									url: "order.php",
 									dataType: 'text', // Notice! JSONP <-- P (lowercase)
