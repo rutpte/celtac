@@ -1519,7 +1519,9 @@
 											//window.location = window.location.hostname+"/"+celtac.pjName+"/admin_page.php";
 											//header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/admin_page.php");
 										} else {
-
+											$('#modal_notice_customer').find('#msg_modal_notice_customer').html('no permission allow to delete. </br> please connect admistrator for approve your order.</br> tel. 080-000-0000 (sead)');
+											$('#modal_notice_customer').modal('show');
+											location.reload();
 										}
 										$('#loading_modal').modal('hide');
 									},

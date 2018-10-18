@@ -189,40 +189,42 @@ class Order extends DBConnection
 		$sta_allow = $this->check_diff_time($id, 300); //--> 300 minute == 5 hours.
 		//--var_dump($sta_allow); exit;
 		if($sta_allow == 1){
-			echo "ok in";
-		}else{
-			echo "waitting admin";
+			//-------------------------------
+			/*
+			$sql = "
+				UPDATE order_product SET
+					is_active = false
+				WHERE id = {$id}
+			";
+			*/
+			$sql = "
+				DELETE FROM order_product
+				WHERE id = {$id}
+			";
+			try {
+				$sth = $this->db->prepare($sql);
+
+				$sth->execute();
+	//             var_dump($sth, $this->db->errorInfo());
+	//             $sth->debugDumpParams();
+				$result = array();
+				if ($sth->rowCount() > 0) {
+					$result['success'] = true;
+				} else {
+					$result['success'] = false;
+				}
+			} catch (PDOException $e) {
+				echo 'Error: ' . $e->getMessage();
+			}
+
+			return json_encode($result);
+			//---------------------------------------------
+		}else{ //$sta_allow == 0
+			$result['success'] = false;
+			return json_encode($result);
 		}
 		exit;
-		//-------------------------------
-		/*
-        $sql = "
-            UPDATE order_product SET
-                is_active = false
-            WHERE id = {$id}
-        ";
-		*/
-        $sql = "
-            DELETE FROM order_product
-            WHERE id = {$id}
-        ";
-        try {
-            $sth = $this->db->prepare($sql);
 
-            $sth->execute();
-//             var_dump($sth, $this->db->errorInfo());
-//             $sth->debugDumpParams();
-            $result = array();
-            if ($sth->rowCount() > 0) {
-                $result['success'] = true;
-            } else {
-                $result['success'] = false;
-            }
-        } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
-        }
-
-        return json_encode($result);
     }
     public function updateOrder($post){
 		$user_id			= isset($_SESSION['owner_id']) ? $_SESSION['owner_id']	: 'null';
