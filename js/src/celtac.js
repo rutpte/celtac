@@ -795,6 +795,10 @@
 								sta_validate = false;
 							}*/
 							
+							
+							//--> disable set is_active on javascript.
+							//-------------------------------------------------------------------------------------
+							/*
 							var time_validate = true;
 							var str_daliverly_date 			= $('#delivery_date').datepicker("option", "dateFormat", "yy-mm-dd" ).val();
 							var h 							= $('#delivery_time_hour').val();
@@ -818,10 +822,28 @@
 									}
 								}
 							}
-							//----------------------
-							var check_30 = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 5);
+							*/
+							//---------------------------------------------------------------------------------
+							var time_validate = true;
+							var str_daliverly_date 			= $('#delivery_date').datepicker("option", "dateFormat", "yy-mm-dd" ).val();
+							var h 							= $('#delivery_time_hour').val();
+							var m 							= $('#delivery_time_minute').val();
+
+							var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 300);
 							
-							if(!check_30){
+							if(rs){
+								//--> can save. time_validate still is true.
+							} else {
+								//--> set for open dialog confirm.
+								time_validate = false;
+							}
+							//-------------------------------------------------------------------------------------
+							var str_daliverly_date 			= $('#delivery_date').datepicker("option", "dateFormat", "yy-mm-dd" ).val();
+							var h 							= $('#delivery_time_hour').val();
+							var m 
+							var check_5 = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 5);
+							
+							if(!check_5){
 								$('#modal_notice_customer').find('#msg_modal_notice_customer').html('can not save data because time less than 5 minute. </br> please connect admistrator for buy your order.');
 								$('#modal_notice_customer').modal('show');
 								
@@ -893,6 +915,7 @@
 							
 							//---------------------
 							if(time_validate == false){
+								$('#modal_confirm').find('#msg_modal_notice_customer').html('your order time less than 5 hour.</br> your order will waiting for approve. </br> please connect admistrator. </br> tel-088-000-0000');
 								$('#modal_confirm').modal('show');
 								$('#modal_confirm').find('#modal_confirm_ok').click(function() {
 									save_data();
@@ -948,6 +971,10 @@
 							$('#price_rate_edit').val(data.price_rate);
 							$('#comment_else_edit').val(data.comment_else);
 							$('#order_id_edit').val(data.id);
+							
+							
+							//--$('#is_active_edit').prop('checked', data.is_active);
+							
 							$('#is_active_edit').val(data.is_active);
 							//---------------------------------------------
 
@@ -1089,7 +1116,7 @@
 					case "edit_order":
 						if(true){ 
 							
-							var order_id_edit			= $('#order_id_edit').val();
+							var order_id			= $('#order_id_edit').val();
 							var order_code				= $('#order_code_edit').val();
 							var customer_name			= $('#customer_name_edit').val();
 							var product_type			= $('#product_type_edit').val();
@@ -1110,25 +1137,12 @@
 							var comment_else			= $('#comment_else_edit').val();
 							var comment_else			= $('#comment_else_edit').val();
 							var is_active				= $('#is_active_edit').val();
-
-							console.log('order_id_edit  :  '+order_id_edit);
-							console.log('order_code  :  '+order_code);
-							console.log('customer_name  :  '+customer_name);
-							console.log('product_type  :  '+product_type);
-							console.log('quantity  :  '+quantity);
-							console.log('vial  :  '+vial);
-							console.log('total_cel  :  '+total_cel);
-							console.log('package_type  :  '+package_type);
-							console.log('delivery_date  :  '+delivery_date);
-							console.log('delivery_time_hour  :  '+delivery_time_hour);
-							console.log('delivery_time_minute  :  '+delivery_time_minute);
-							//console.log('giveaway  :  '+giveaway);
-							console.log('sender  :  '+sender);
-							console.log('receiver  :  '+receiver);
-							console.log('dealer_person  :  '+dealer_person);
-							console.log('dealer_company  :  '+dealer_company);
-							console.log('price_rate  :  '+price_rate);
-							console.log('comment_else  :  '+comment_else);
+							// if($('#is_active_edit').length == 1){
+								// var is_active = $('#is_active_edit').is(":checked");
+							// }
+							
+							//var is_active				= $('#is_active_edit').val();
+							
 							
 							//debugger;
 							var arr_dom_id = new Array();
@@ -1332,19 +1346,42 @@
 								sta_validate = false;
 							}
 							//debugger;
+							/*
+							if($('#is_active_edit').length == 1){
+								var is_active = $('#is_active_edit').is(":checked");
+							}
+							//---
+							if($('#is_active_edit').length == 0){
+								if($('#product_type_edit').val() == "cell"){
+									var check_5h = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 300);
+									if((check_5h) && (total_cel <= 10)){
+										//sta_validate = false;
+										is_active = true;
+									} else {
+										//$('#modal_notice_customer').find('#msg_modal_notice_customer').html('your order (cell) time less than 5 hour or total cell over 10 m. </br> please connect admistrator for approve your order.');
+										//$('#modal_notice_customer').modal('show');
+										alert('your order (cell) time less than 5 hour or total cell over 10 m. please connect admistrator for approve your order.');
+										is_active = false;
+									}
+								}
+							}else{ //$('#is_active_edit').length == 1
+								//is_active = is_active;
+							}
+							*/
+
 							if($('#product_type_edit').val() == "cell"){
 								var check_5h = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 300);
-								if((!check_5h) && (total_cel > 10)){
-									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order (cell) time less than 5 hour.');
-									$('#modal_notice_customer').modal('show');
-									
+								if((check_5h) && (total_cel <= 10)){
 									//sta_validate = false;
-									is_active = false;
-								} else {
 									is_active = true;
+								} else {
+									//$('#modal_notice_customer').find('#msg_modal_notice_customer').html('your order (cell) time less than 5 hour or total cell over 10 m. </br> please connect admistrator for approve your order.');
+									//$('#modal_notice_customer').modal('show');
+									alert('your order (cell) time less than 5 hour or total cell over 10 m. please connect admistrator for approve your order.');
+									is_active = false;
 								}
 							}
-
+							
 							//------------------------------------------------------------------							
 							if(sta_validate){
 								$('#bt_save_update_order').prop('disabled', true);
@@ -1355,8 +1392,8 @@
 									method : 'POST',
 									data: { 
 										"q"              					: "edit_order"
-										,"is_active"						: is_active
-										,"order_id_edit"					: order_id_edit
+										,"is_active_edit"					: is_active //just send but not use in php.
+										,"order_id_edit"					: order_id
 										,"order_code_edit"         			: order_code	
 										,"customer_name_edit"         		: customer_name	
 										,"product_type_edit"				: product_type		
@@ -1561,6 +1598,7 @@
 							$('#price_rate_view').val(data.price_rate);
 							$('#comment_else_view').val(data.comment_else);
 							$('#order_id_view').val(data.id);
+							$('#is_active_view').val(data.is_active);
 
 							//--> disable view input.
 							$('#order_code_view').prop('disabled', true);
@@ -1753,7 +1791,7 @@
 							};
 
 							//var set						= $('#set').val();
-							var total_cel				= parseInt( $('#total_cel').val());
+							var total_cell				= parseInt( $('#total_cel').val());//total_cel != total_cell
 							var package_type			= $('#package_type').val();
 							var giveaway				= $('#giveaway').val();
 							var price_rate				= $('#price_rate').val();
@@ -1855,7 +1893,7 @@
 								obj_set_data.quantity 		= quantity;
 								obj_set_data.set 			= set;
 								obj_set_data.vial			= vial;
-								obj_set_data.total_cel 		= total_cel;
+								obj_set_data.total_cell 	= total_cell;
 
 								if(package_type == null){
 									package_type = "";
@@ -1866,6 +1904,7 @@
 								//-------------------------------------------------------
 								//--> set limit cell per sale.
 								//loop items_product_arr , stand by sum cell.
+								/*
 								if(false){
 									var i;
 									var total_cell = 0;
@@ -1876,16 +1915,17 @@
 										}
 										
 									}
-									//--> m.
-									if(total_cell > 30){
+									
+									if(total_cell > 10){
 										obj_set_data.is_active 	    = false;
 									} else {
 										obj_set_data.is_active 	    = true;
 									}
 								}
+								*/
 								//------------------------------------------------------
-								//--> set is_active each item.
-									if(total_cel >  10){
+								//--> set is_active each item.//--> not use. but still send togater witch json.
+									if(total_cell >  10){
 										obj_set_data.is_active 	    = false;
 									} else {
 										obj_set_data.is_active 	    = true;

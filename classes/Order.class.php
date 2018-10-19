@@ -78,11 +78,13 @@ class Order extends DBConnection
 			$quantity			= $value['quantity'] 		!= "" ? $value['quantity']														: 'null';
 			$set				= $value['set'] 			!= "" ? $value['set']															: 'null';
 			$vial				= $value['vial'] 			!= "" ? $value['vial']															: 'null';
-			$total_cel			= $value['total_cel'] 		!= "" ? $value['total_cel']														: 'null';
+			$total_cell			= $value['total_cell'] 		!= "" ? $value['total_cell']													: 'null';
 			$package_type		= $value['package_type'] 	!= "" ? "'".$value['package_type']."'"											: 'null';
 			$giveaway			= $value['giveaway'] 		!= "" ? "'".$value['giveaway']."'"												: 'null';
 			$price_rate			= $value['price_rate'] 		!= "" ? "'".$value['price_rate']."'"											: 'null';
-			$is_active			= $value['is_active'] ? 'true' : 'false';
+			
+			//--> not use is_active from json.
+			//$is_active			= $value['is_active'] ? 'true' : 'false';
 			//var_dump($is_active); exit;
 			//$delivery_time		= isset($post['delivery_date']) 	? strtotime($post['delivery_date']) 	: '';
 			$delivery_date_time	= isset($post['delivery_date']) 		? "'".$date_formated."'" 											: 'null';
@@ -96,6 +98,14 @@ class Order extends DBConnection
 			//$price_rate			= isset($post['price_rate']) 			? "'".$post['price_rate']."'"										: 'null';
 			$comment_else		= isset($post['comment_else']) 			? "'".$post['comment_else' ]."'"									: 'null';
 			
+			$sta_allow_time_deliv = $this->check_diff_time_by_strtime($delivery_date_time, 300);
+			//check time deliv and cell number. or is_staff can be access.
+			if(($sta_allow_time_deliv == 1) && ($total_cell <= 10)){
+				$is_active = 'true';
+			} else {
+				$is_active = 'false';
+			}
+			//var_dump($is_active); exit;
 			//---------------------------------------------------------------------------------------------------------------------------------------
 			$str_value_raw .= "
 				(
@@ -105,7 +115,7 @@ class Order extends DBConnection
 				, {$quantity}
 				, {$set}
 				, {$vial}
-				, {$total_cel}
+				, {$total_cell}
 				, {$package_type}
 				, {$delivery_date_time}
 				, {$giveaway}
@@ -186,7 +196,7 @@ class Order extends DBConnection
     }
     public function deleteOrder($id)
     {
-		$sta_allow = $this->check_diff_time($id, 300); //--> 300 minute == 5 hours.
+		$sta_allow = $this->check_diff_time_by_id($id, 300); //--> 300 minute == 5 hours.
 		//--var_dump($sta_allow); exit;
 		if($sta_allow == 1 || $_SESSION['is_staff']){
 			//-------------------------------
@@ -227,7 +237,7 @@ class Order extends DBConnection
 
     }
     public function updateOrder($post){
-		$sta_allow = $this->check_diff_time($id, 300); //--> 300 minute == 5 hours.
+		$sta_allow = $this->check_diff_time_by_id($post['order_id_edit'], 300); //--> 300 minute == 5 hours.
 		//--var_dump($sta_allow); exit;
 		if($sta_allow == 1 || $_SESSION['is_staff']){
 				//---------------------------------------------
@@ -284,8 +294,17 @@ class Order extends DBConnection
 			//$last_update_date 	= isset($post['last_update_date']) 	? $post['last_update_date'] : '';
 			$price_rate			= isset($post['price_rate_edit']) 				? "'".$post['price_rate_edit']."'"											: 'null';
 			$comment_else		= isset($post['comment_else_edit']) 			? "'".$post['comment_else_edit' ]."'"										: 'null';
-			$is_active			= isset($post['is_active']) 					&& $post['is_active'] 		!= "" ? $post['is_active'] 						: 'null';
-
+			//$is_active			= isset($post['is_active_edit']) 					&& $post['is_active_edit'] 		!= "" ? $post['is_active_edit'] 		: 'null';
+			
+			//------------------------------------------------------
+			$sta_allow_time_deliv = $this->check_diff_time_by_strtime($delivery_date_time, 300);
+			//check time deliv and cell number. or is_staff can be access.
+			if(($sta_allow_time_deliv == 1 && $total_cell <= 10)){
+				$is_active = true;
+			} else {
+				$is_active = false;
+			}
+			//------------------------------------------------------
 			$sql = "
 				UPDATE order_product SET 
 					order_code 				= {$order_code}
@@ -314,19 +333,10 @@ class Order extends DBConnection
 			//var_dump($_SESSION['owner_id']);exit;
 	//echo '<pre>';
 	//echo $sql; exit;
+
+
 			try {
 				$sth = $this->db->prepare($sql);
-				
-				/*
-				$sth->bindValue(':company', $post['company']);
-				$sth->bindValue(':passwd', $post['passwd']);
-				$sth->bindValue(':first_name', $post['firstName']);
-				$sth->bindValue(':last_name', $post['lastName']);
-				$sth->bindValue(':email', $post['email']);
-				$sth->bindValue(':phone_no', $post['phone_no']);
-				*/
-
-
 				$sth->execute();
 
 				$result = array();
@@ -466,6 +476,42 @@ class Order extends DBConnection
     }
     //---------------------------------------------------------
     //-----------------------------------------------------------------
+    public function getOrderStaff ()
+    {
+        $sql ="
+            select 
+				*
+            from order_product
+			where 1=1
+			and delivery_date_time >= now()::date
+			order by delivery_date_time
+        ";
+		//and is_active IS true
+		//and delivery_date_time >= now()
+		//now()::date
+        //echo "<pre>", $sql; exit;
+        $sth = $this->db->prepare($sql);  //sql2
+        $result = array();
+        if (!$sth->execute()) {
+            echo '<pre>'.$sql;
+            print_r($sth->errorInfo());
+        } else {
+			$get_num_row = $sth->rowCount();
+            //var_dump($sth->rowCount());
+            //$result = $sth->fetchObject();
+			if($get_num_row > 0){
+				$rs = $sth->fetchAll(PDO::FETCH_ASSOC);
+				$result["success"] = true;
+				$result["data"] = $rs;
+				return ($result);
+			} else {
+				$result["success"] = false;
+				return ($result);
+			}
+        }
+    }
+    //---------------------------------------------------------
+    //-----------------------------------------------------------------
     public function getOrderExport ($str_date_start, $str_date_end)
     {
         $sql ="
@@ -510,7 +556,41 @@ class Order extends DBConnection
         }
     }
     //---------------------------------------------------------
-	public function check_diff_time($id_product, $diff_minute){
+	public function check_diff_time_by_strtime($str_time, $diff_minute){
+
+		$sql = "
+			select
+			CASE
+			  WHEN ((now() + interval '{$diff_minute} minutes') < ({$str_time})::timestamp ) THEN 1
+			  ELSE 0
+			 END AS sta_allow
+		";
+ 
+		
+		//--hours
+		//select (now() + interval '5 minutes')as x
+		//select '2018-10-18 16:40:00'::timestamp  - interval '5 minutes'
+		//-------------------------------------------------------------------------------------------------------------------
+		//echo "<pre>", $sql; exit;
+		$sp = $this->db->prepare($sql);
+		$sp->execute();
+        if (!$sp->execute()) {
+            echo '<pre>'.$sql;
+            print_r($sp->errorInfo());
+        } else {
+			$get_num_row = $sp->rowCount();
+			if($get_num_row > 0){
+				$rs = $sp->fetchAll(PDO::FETCH_ASSOC);
+				//var_dump($rs[0]['sta_allow']);
+				return $rs[0]['sta_allow'];
+
+			} else {
+				echo "555 error.";
+			}
+        }
+	}
+	//---------------------------------------------------------
+	public function check_diff_time_by_id($id_product, $diff_minute){
 
 		$sql = "
 			select

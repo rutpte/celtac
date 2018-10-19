@@ -3,7 +3,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
  if (isset($_SESSION['email'])) {
 	$obj 	= new Order($pdo);
 	if ($_SESSION['is_staff']) {
-		$rs_arr = $obj->getOrderAll();
+		$rs_arr = $obj->getOrderStaff();
 	} else {
 		$rs_arr = $obj->getOrder();
 	}
@@ -65,7 +65,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 
 		<!--- **************************** nav bar *************************************** -->
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-		  <a class="navbar-brand" href="#">Celtac</a>
+		  <a class="navbar-brand" href="#">HI : <?=$_SESSION['first_name']?></a>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		  </button>
@@ -323,6 +323,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<!-- <div class="col-1"><a href="#" onclick="celtac.g_func.order('edit_order_model')"><span class="ui-icon ui-icon-pencil"></span></p></a></div> -->
 							<button class="btn btn-lg btn-block" type="button" onclick="celtac.g_func.order('edit_order_model')"><span class="ui-icon ui-icon-pencil"></span></button>
 							<input id="order_id_view" type="hidden" value=""/>
+							<!--<input id="is_active_view" type="hidden" value=""/> not use.-->
 						</form>
 						<!-- end form -->
 						<div class="modal-footer">
@@ -611,10 +612,21 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 								<div id="comment_else_vlid_edit"></div>
 							</div>
 							<!-- **************************************** -->
+
+							<input id="order_id_edit" type="hidden" value="">
+							
+							<!-- ****************** show/hide check box ********************** -->
+							<?php if(false){ /*if ($_SESSION['is_staff']) {*/?>
+								<hr class="mb-4">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input" id="is_active_edit">
+									<label class="custom-control-label" for="is_active_edit">to be active</label>
+								</div>
+							<?php } ?>
+								
+							<!-- **************************************** -->
 							<hr class="mb-4">
 							<button class="btn btn-primary btn-lg btn-block" id="bt_save_update_order"  type="button" onclick="celtac.g_func.order('edit_order')">update</button>
-							<input id="order_id_edit" type="hidden" value="">
-							<input id="is_active_edit" type="hidden" value="">
 							<!-- **************************************** -->
 						  </form>
 						  
@@ -628,28 +640,6 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 			  </div>
 			</div>
 
-		<!-- ************************************************************************************************************** -->
-			<div class="modal fade" id="modal_confirm" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"   style="overflow-y: scroll">
-			  <div class="modal-dialog" role="document">
-				<div class="modal-content">
-				  <div class="modal-header">
-					<p class="modal-title" id="modalLabel">Confirmation.</p><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					  <span aria-hidden="true">&times;</span>
-					</button>
-				  </div>
-				  <div class="modal-body" id="modal-body-contact">
-					<h3 style="color:red">warning.</h3>
-					<p class="lead">Are you sure?</p>
-				  </div>
-				  <div class="modal-footer">
-					<button type="button" id="modal_confirm_ok" class="btn btn-secondary" data-dismiss="modal">Ok</button>
-					<button type="button" id="" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-					
-				  </div>
-				</div>
-			  </div>
-			</div>
 		<!-- ************************************************************************************************************** -->
 			<div class="modal fade" id="modal_delete_confirm" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"   style="overflow-y: scroll">
 			  <div class="modal-dialog" role="document">
@@ -1205,6 +1195,28 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 		
 		<!-- ************************************************************************************************************** -->
 		
+			<div class="modal fade" id="modal_confirm" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"   style="overflow-y: scroll">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<p class="modal-title" id="modalLabel">Confirmation.</p><!--  $('#exampleModalLabel').text("aaaaaaaaaaa"); -->
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body" id="modal-body-contact">
+					<h3 style="color:red">warning.</h3>
+					<p class="lead" id="msg_modal_notice_customer">-</p>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" id="modal_confirm_ok" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+					<button type="button" id="" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					
+				  </div>
+				</div>
+			  </div>
+			</div>
+		<!-- ************************************************************************************************************** -->
 		<main role="main" class="container">
 
 
