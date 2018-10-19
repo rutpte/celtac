@@ -25,7 +25,7 @@
  * @version    ##VERSION##, ##DATE##
  */
 	require dirname(__FILE__) . '/includes/init.inc.php';
-	if (isset($_SESSION['email'])) {
+	// if (isset($_SESSION['email'])) {
 		$obj 	= new Order($pdo);
 		$rs_arr = $obj->getOrderAll();
 		$data = array();
@@ -34,9 +34,9 @@
 			$data = $rs_arr['data'];
 		}
 		
-	} else {
-		header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/index.php");
-	} 
+	// } else {
+		// header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/index.php");
+	// } 
 	//-------------------------------------------------
 
 	

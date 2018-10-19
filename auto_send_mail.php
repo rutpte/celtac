@@ -1,13 +1,41 @@
 <?php
-require dirname(__FILE__) . '/includes/init.inc.php';
+//require dirname(__FILE__) . '/includes/init.inc.php';
+include 'export_excel_order_auto.php';
+/*
+function export_excel2(){
+	//----------------
+	$ch = curl_init(); 
+	curl_setopt( $ch, CURLOPT_URL, "./export_excel_order_test.php"); 
+	// SSL USE 
+	curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, 0); 
+	curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, 0); 
+	//POST 
+	curl_setopt( $ch, CURLOPT_POST, 1); 
+	curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1); 
 
+	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1); 
+	$result = curl_exec( $ch ); 
+	curl_close($ch);
+}
+//------------------------------------------------------
+function export_excel(){
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, "export_excel_order_test.php");
+	curl_setopt($ch, CURLOPT_HEADER, 0);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-	$obj 	= new Order($pdo);
-	$rs_arr = $obj->getOrderAll();
-	$data = array();
-	if($rs_arr['success']){
-		$data = $rs_arr['data'];
-	}
+	$output = curl_exec($ch);
+	curl_close($ch);
+
+}
+*/
+//----------------------------------------------------
+$obj 	= new Order($pdo);
+$rs_arr = $obj->getOrderAll();
+$data = array();
+if($rs_arr['success']){
+	$data = $rs_arr['data'];
+}
 
 // Import PHPMailer classes into the global namespace
 // These must be at the top of your script, not inside a function
@@ -189,6 +217,11 @@ try {
     $mail->Body    = $html_mail;
     $mail->AltBody = 'Order-Cell3';
 	$mail->AddAttachment('excel_output/order_cell.xls', "order.xls");
+	
+	//--> run function export excel.
+	//export_excel();
+	
+	//--> then send mail.
     $mail->send();
 	//--> it will return many text.
     // $result["success"] = true;
