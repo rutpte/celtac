@@ -188,7 +188,7 @@ class Order extends DBConnection
     {
 		$sta_allow = $this->check_diff_time($id, 300); //--> 300 minute == 5 hours.
 		//--var_dump($sta_allow); exit;
-		if($sta_allow == 1){
+		if($sta_allow == 1 || $_SESSION['is_staff']){
 			//-------------------------------
 			/*
 			$sql = "
@@ -223,118 +223,128 @@ class Order extends DBConnection
 			$result['success'] = false;
 			return json_encode($result);
 		}
-		exit;
+		
 
     }
     public function updateOrder($post){
-		$user_id			= isset($_SESSION['owner_id']) ? $_SESSION['owner_id']	: 'null';
-		//echo "                                   Hed "; exit;
-		//echo trim("                                   Hed "); exit;
-		
-		//var_dump($post);exit;
-		//$timestamp = strtotime("26-09-2018");
-		//var_dump($timestamp);exit;
-		//var_dump($post);exit;
-		//var_dump($_SESSION['owner_id']);exit;
-		
-		$hour			= $post['delivery_time_hour_edit'];
-		$minute			= $post['delivery_time_minute_edit'];
-		$date_raw 		= $post['delivery_date_edit'];
-		//2015-03-26 11:39:59
-		$str_date		= $date_raw.' '.$hour.':'.$minute.':00'; //27-09-2018 14:0:00
-		//echo $str_date; exit;
-		//$date_full 		= new DateTime($str_date);
-		$obj_date 		= new DateTime($str_date);;
-		$date_formated 	= $obj_date->format('Y-m-d H:i:s');
-		//$date_timestamp = strtotime($date_formated);
-		//echo strtotime($date_formated); exit;
-		//echo date('Y-m-d H:i:s', strtotime($test)); exit;
-		//echo $str_date;
-		//echo  '</br>';
-		//echo strtotime($str_date);exit;
-		//echo date('Y-m-d', strtotime($str_date)); exit;
-		//--$date_formated 	= $date_full->format('d-m-Y H:i:s');
-		//$date_formated 	= $date_full;
-		//echo $date->format('d-m-Y');
-		//echo $date_formated; exit;
+		$sta_allow = $this->check_diff_time($id, 300); //--> 300 minute == 5 hours.
+		//--var_dump($sta_allow); exit;
+		if($sta_allow == 1 || $_SESSION['is_staff']){
+				//---------------------------------------------
 
-
+			$user_id			= isset($_SESSION['owner_id']) ? $_SESSION['owner_id']	: 'null';
+			//echo "                                   Hed "; exit;
+			//echo trim("                                   Hed "); exit;
 			
-		$order_id_edit		= isset($post['order_id_edit']) 				? "'".$post['order_id_edit']."'" 											: 'null';
-		$order_code			= isset($post['order_code_edit']) 				? "'".$post['order_code_edit']."'" 											: 'null';
-		$customer_name		= isset($post['customer_name_edit']) 			? "'".$post['customer_name_edit']."'"										: 'null';
-		$product_type		= isset($post['product_type_edit']) 			? "'".$post['product_type_edit']."'"										: 'null';
-		$quantity			= isset($post['quantity_edit']) 			&& $post['quantity_edit'] 		!= "" ? $post['quantity_edit'] 					: 'null';
-		$set				= isset($post['set_edit']) 					&& $post['set_edit'] 			!= "" ? $post['set_edit'] 						: 'null';
-		$vial				= isset($post['vial_edit']) 				&& $post['vial_edit'] 			!= "" ? $post['vial_edit'] 						: 'null';
-		$total_cell			= isset($post['total_cel_edit']) 			&& $post['total_cel_edit'] 		!= "" ? $post['total_cel_edit'] 				: 'null';
-		$package_type		= isset($post['package_type_edit']) 		&& $post['package_type_edit'] 	!= "" ? "'".$post['package_type_edit']."'" 		: 'null';
-		//$delivery_time		= isset($post['delivery_date']) 	? strtotime($post['delivery_date']) 	: '';
-		$delivery_date_time	= isset($post['delivery_date_edit']) 			? "'".$date_formated."'" 													: 'null';
-		$giveaway			= isset($post['giveaway_edit']) 				? "'".$post['giveaway_edit']."'" 											: 'null';
-		$sender				= isset($post['sender_edit']) 					? "'".$post['sender_edit']."'" 												: 'null';
-		$receiver			= isset($post['receiver_edit']) 				? "'".$post['receiver_edit']."'" 											: 'null';
-		$dealer_person		= isset($post['dealer_person_edit']) 			? "'".$post['dealer_person_edit']."'" 										: 'null';
-		$dealer_company		= isset($post['dealer_company_edit']) 			? "'".$post['dealer_company_edit']."'" 										: 'null';
-		//$last_update_date 	= isset($post['last_update_date']) 	? $post['last_update_date'] : '';
-		$price_rate			= isset($post['price_rate_edit']) 				? "'".$post['price_rate_edit']."'"											: 'null';
-		$comment_else		= isset($post['comment_else_edit']) 			? "'".$post['comment_else_edit' ]."'"										: 'null';
-		$is_active			= isset($post['is_active']) 					&& $post['is_active'] 		!= "" ? $post['is_active'] 						: 'null';
-
-        $sql = "
-            UPDATE order_product SET 
-				order_code 				= {$order_code}
-				,customer_name 			= {$customer_name}
-				,product_type 			= {$product_type}
-				,quantity 				= {$quantity}
-				,set 					= {$set}
-				,vial 					= {$vial}
-				,total_cell 			= {$total_cell}
-				,package_type 			= {$package_type}
-				,delivery_date_time 	= {$delivery_date_time}
-				,giveaway 				= {$giveaway}
-				,sender 				= {$sender}
-				,receiver 				= {$receiver}
-				,dealer_person 			= {$dealer_person}
-				,dealer_company 		= {$dealer_company}
-				,user_id 				= {$user_id}
-
-				,last_update_date 		= NOW()
-				,price_rate 			= {$price_rate}
-				,comment_else 			= {$comment_else}
-				,is_active 				= {$is_active}
-			WHERE id = {$order_id_edit}
-        ";
-		//				,order_date 			= {$order_date}
-		//var_dump($_SESSION['owner_id']);exit;
-//echo '<pre>';
-//echo $sql; exit;
-        try {
-            $sth = $this->db->prepare($sql);
+			//var_dump($post);exit;
+			//$timestamp = strtotime("26-09-2018");
+			//var_dump($timestamp);exit;
+			//var_dump($post);exit;
+			//var_dump($_SESSION['owner_id']);exit;
 			
-			/*
-            $sth->bindValue(':company', $post['company']);
-            $sth->bindValue(':passwd', $post['passwd']);
-            $sth->bindValue(':first_name', $post['firstName']);
-            $sth->bindValue(':last_name', $post['lastName']);
-            $sth->bindValue(':email', $post['email']);
-            $sth->bindValue(':phone_no', $post['phone_no']);
-			*/
+			$hour			= $post['delivery_time_hour_edit'];
+			$minute			= $post['delivery_time_minute_edit'];
+			$date_raw 		= $post['delivery_date_edit'];
+			//2015-03-26 11:39:59
+			$str_date		= $date_raw.' '.$hour.':'.$minute.':00'; //27-09-2018 14:0:00
+			//echo $str_date; exit;
+			//$date_full 		= new DateTime($str_date);
+			$obj_date 		= new DateTime($str_date);;
+			$date_formated 	= $obj_date->format('Y-m-d H:i:s');
+			//$date_timestamp = strtotime($date_formated);
+			//echo strtotime($date_formated); exit;
+			//echo date('Y-m-d H:i:s', strtotime($test)); exit;
+			//echo $str_date;
+			//echo  '</br>';
+			//echo strtotime($str_date);exit;
+			//echo date('Y-m-d', strtotime($str_date)); exit;
+			//--$date_formated 	= $date_full->format('d-m-Y H:i:s');
+			//$date_formated 	= $date_full;
+			//echo $date->format('d-m-Y');
+			//echo $date_formated; exit;
 
 
-            $sth->execute();
+				
+			$order_id_edit		= isset($post['order_id_edit']) 				? "'".$post['order_id_edit']."'" 											: 'null';
+			$order_code			= isset($post['order_code_edit']) 				? "'".$post['order_code_edit']."'" 											: 'null';
+			$customer_name		= isset($post['customer_name_edit']) 			? "'".$post['customer_name_edit']."'"										: 'null';
+			$product_type		= isset($post['product_type_edit']) 			? "'".$post['product_type_edit']."'"										: 'null';
+			$quantity			= isset($post['quantity_edit']) 			&& $post['quantity_edit'] 		!= "" ? $post['quantity_edit'] 					: 'null';
+			$set				= isset($post['set_edit']) 					&& $post['set_edit'] 			!= "" ? $post['set_edit'] 						: 'null';
+			$vial				= isset($post['vial_edit']) 				&& $post['vial_edit'] 			!= "" ? $post['vial_edit'] 						: 'null';
+			$total_cell			= isset($post['total_cel_edit']) 			&& $post['total_cel_edit'] 		!= "" ? $post['total_cel_edit'] 				: 'null';
+			$package_type		= isset($post['package_type_edit']) 		&& $post['package_type_edit'] 	!= "" ? "'".$post['package_type_edit']."'" 		: 'null';
+			//$delivery_time		= isset($post['delivery_date']) 	? strtotime($post['delivery_date']) 	: '';
+			$delivery_date_time	= isset($post['delivery_date_edit']) 			? "'".$date_formated."'" 													: 'null';
+			$giveaway			= isset($post['giveaway_edit']) 				? "'".$post['giveaway_edit']."'" 											: 'null';
+			$sender				= isset($post['sender_edit']) 					? "'".$post['sender_edit']."'" 												: 'null';
+			$receiver			= isset($post['receiver_edit']) 				? "'".$post['receiver_edit']."'" 											: 'null';
+			$dealer_person		= isset($post['dealer_person_edit']) 			? "'".$post['dealer_person_edit']."'" 										: 'null';
+			$dealer_company		= isset($post['dealer_company_edit']) 			? "'".$post['dealer_company_edit']."'" 										: 'null';
+			//$last_update_date 	= isset($post['last_update_date']) 	? $post['last_update_date'] : '';
+			$price_rate			= isset($post['price_rate_edit']) 				? "'".$post['price_rate_edit']."'"											: 'null';
+			$comment_else		= isset($post['comment_else_edit']) 			? "'".$post['comment_else_edit' ]."'"										: 'null';
+			$is_active			= isset($post['is_active']) 					&& $post['is_active'] 		!= "" ? $post['is_active'] 						: 'null';
 
-            $result = array();
-            if ($sth->rowCount() > 0) {
-                $result['success'] = true;
-            } else {
-                $result['success'] = false;
-            }
-        } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
-        }
+			$sql = "
+				UPDATE order_product SET 
+					order_code 				= {$order_code}
+					,customer_name 			= {$customer_name}
+					,product_type 			= {$product_type}
+					,quantity 				= {$quantity}
+					,set 					= {$set}
+					,vial 					= {$vial}
+					,total_cell 			= {$total_cell}
+					,package_type 			= {$package_type}
+					,delivery_date_time 	= {$delivery_date_time}
+					,giveaway 				= {$giveaway}
+					,sender 				= {$sender}
+					,receiver 				= {$receiver}
+					,dealer_person 			= {$dealer_person}
+					,dealer_company 		= {$dealer_company}
+					,user_id 				= {$user_id}
 
-        return json_encode($result);
+					,last_update_date 		= NOW()
+					,price_rate 			= {$price_rate}
+					,comment_else 			= {$comment_else}
+					,is_active 				= {$is_active}
+				WHERE id = {$order_id_edit}
+			";
+			//				,order_date 			= {$order_date}
+			//var_dump($_SESSION['owner_id']);exit;
+	//echo '<pre>';
+	//echo $sql; exit;
+			try {
+				$sth = $this->db->prepare($sql);
+				
+				/*
+				$sth->bindValue(':company', $post['company']);
+				$sth->bindValue(':passwd', $post['passwd']);
+				$sth->bindValue(':first_name', $post['firstName']);
+				$sth->bindValue(':last_name', $post['lastName']);
+				$sth->bindValue(':email', $post['email']);
+				$sth->bindValue(':phone_no', $post['phone_no']);
+				*/
+
+
+				$sth->execute();
+
+				$result = array();
+				if ($sth->rowCount() > 0) {
+					$result['success'] = true;
+				} else {
+					$result['success'] = false;
+				}
+			} catch (PDOException $e) {
+				echo 'Error: ' . $e->getMessage();
+			}
+
+			return json_encode($result);
+			//---------------------------------------------
+		}else{ //$sta_allow == 0
+			$result['success'] = false;
+			return json_encode($result);
+		}
     }
 	//---------------------------------------------------------------------------------------------------------------------------------
 	public function updateOrder_bc($post)
