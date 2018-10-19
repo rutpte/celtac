@@ -18,7 +18,7 @@ CREATE TABLE staff
   phone_no character varying,
   address character varying,
   CONSTRAINT staff_pkey PRIMARY KEY (id),
-  CONSTRAINT staff_username_key UNIQUE (company)
+  CONSTRAINT staff_username_key UNIQUE (email)
 )
 WITH (
   OIDS=FALSE
