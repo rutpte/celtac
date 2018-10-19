@@ -623,7 +623,53 @@ class Order extends DBConnection
 			}
         }
 	}
-    /**
+    
+	public function changeActive($id)
+    {
+		$sta_allow = $this->check_diff_time_by_id($id, 300); //--> 300 minute == 5 hours.
+		//--var_dump($sta_allow); exit;
+		if($sta_allow == 1 || $_SESSION['is_staff']){
+			//-------------------------------
+			/*
+			$sql = "
+				UPDATE order_product SET
+					is_active = false
+				WHERE id = {$id}
+			";
+			*/
+			$sql = "
+				UPDATE order_product SET 
+					is_active 				= NOT is_active
+				WHERE id = {$id}
+			";
+			try {
+				$sth = $this->db->prepare($sql);
+
+				$sth->execute();
+	//             var_dump($sth, $this->db->errorInfo());
+	//             $sth->debugDumpParams();
+				$result = array();
+				if ($sth->rowCount() > 0) {
+					$result['success'] = true;
+				} else {
+					$result['success'] = false;
+				}
+			} catch (PDOException $e) {
+				echo 'Error: ' . $e->getMessage();
+			}
+
+			return json_encode($result);
+			//---------------------------------------------
+		}else{ //$sta_allow == 0
+			$result['success'] = false;
+			return json_encode($result);
+		}
+		
+
+    }
+	
+	
+	/**
      * __destruct
      * 
      * @return No value is returned.

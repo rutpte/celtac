@@ -17,19 +17,22 @@ header('Content-type: application/json');
 		$q   = isset($_POST['q']) ? $_POST['q'] : '';
 		$obj = new Order($pdo);
 		switch ($q) {
-			case "add_order" : //--> still not use on this case from js.
+			//--------------------------------------------
+			case "add_order" :
 				echo $obj->addOrder($_POST);
 				//json_encode
 			break;	
-			case "edit_order" : //--> still not use on this case from js.
+			//--------------------------------------------
+			case "edit_order" :
 				echo $obj->updateOrder($_POST);
 				//json_encode
 			break;
-			case "delete_order" : //--> still not use on this case from js.
+			//--------------------------------------------
+			case "delete_order" :
 				$id       = isset($_POST['id']) ? intval($_POST['id']) : '';
 				echo $obj->deleteOrder($id);
 			break;
-			
+			//--------------------------------------------
 			case "get_order" :
 				$rs = array();
 				$rs["success"] = false;
@@ -40,6 +43,7 @@ header('Content-type: application/json');
 				echo $rs; 
 				
 			break;
+			//--------------------------------------------
 			case "get_order_all" :
 				$rs = array();
 				$rs["success"] = false;
@@ -50,6 +54,12 @@ header('Content-type: application/json');
 				echo $rs;
 				
 			break;
+			//--------------------------------------------
+			case "change_active" :
+				$id       = isset($_POST['id']) ? intval($_POST['id']) : '';
+				echo $obj->changeActive($id);
+			break;
+			//--------------------------------------------
 		}
 	}
 

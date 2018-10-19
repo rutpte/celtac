@@ -2028,6 +2028,51 @@
 							celtac.g_func.order('update_items_product');
 						}
 					break;
+					case "change_active":
+						if(true){
+							var id = obj;
+							$('#modal_delete_confirm').modal('show');
+							var cilck_ok = false;
+							$('#modal_delete_confirm').find('#del_ok').click(function() {
+								$('#loading_modal').modal('show');
+								//debugger;
+								$.ajax({
+									url: "order.php",
+									dataType: 'text', // Notice! JSONP <-- P (lowercase)
+									method : 'POST',
+									data: { 
+										"q" : "change_active"
+										,"id" : id
+									},
+									type: "GET",
+									success:function(response){
+										//console.debug('response : ',response);
+										//debugger;
+										//console.log(response);
+										var obj_response = jQuery.parseJSON(response);
+										
+										//console.debug('respont : ',respont);
+										if (obj_response.success) {
+											console.log(obj_response);
+											location.reload();
+											//window.location = window.location.hostname+"/"+celtac.pjName+"/admin_page.php";
+											//header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/admin_page.php");
+										} else {
+											$('#modal_notice_customer').find('#msg_modal_notice_customer').html('no permission allow to change. </br> please connect admistrator for delete your order.</br> tel. 080-000-0000 (sead)');
+											$('#modal_notice_customer').modal('show');
+											location.reload();
+										}
+										$('#loading_modal').modal('hide');
+									},
+									error:function(response){
+										console.debug(response);
+									}
+								});
+							});
+
+						}
+						
+						break;	
 				}
 			}
 			,"init_cookie_login" : function(){
