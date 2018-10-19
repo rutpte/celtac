@@ -1390,7 +1390,9 @@
 											//alert("complete.");
 											location.reload();
 										} else {
-
+											$('#modal_notice_customer').find('#msg_modal_notice_customer').html('no permission allow to update. </br> please connect admistrator for update your order.</br> tel. 080-000-0000 (sead)');
+											$('#modal_notice_customer').modal('show');
+											location.reload();
 										}
 									},
 									error:function(response){
@@ -1519,7 +1521,7 @@
 											//window.location = window.location.hostname+"/"+celtac.pjName+"/admin_page.php";
 											//header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/admin_page.php");
 										} else {
-											$('#modal_notice_customer').find('#msg_modal_notice_customer').html('no permission allow to delete. </br> please connect admistrator for approve your order.</br> tel. 080-000-0000 (sead)');
+											$('#modal_notice_customer').find('#msg_modal_notice_customer').html('no permission allow to delete. </br> please connect admistrator for delete your order.</br> tel. 080-000-0000 (sead)');
 											$('#modal_notice_customer').modal('show');
 											location.reload();
 										}
@@ -1640,11 +1642,36 @@
 
 							
 						}
+					break;				
+					case "send_line_logistic":
+						if(true){
+							$('#loading_modal').modal('show');
+							$.ajax({
+								url: "send_line_logistic.php",
+								dataType: 'text', // Notice! JSONP <-- P (lowercase)
+								method : 'POST',
+								data: { 
+									"q"              					: "xxx"
+									, "message"							: "เจตๆๆๆๆๆๆๆๆ  งานเข้าแล้ว มี order ด่วนมากๆๆๆๆๆๆๆ"
+								},
+								type: "GET",
+								success:function(response){
+									$('#loading_modal').modal('hide');
+									//debugger;
+
+								},
+								error:function(response){
+									$('#loading_modal').modal('hide');
+									console.debug(response);
+								}
+							});
+						}
 					break;						
 					case "send_mail":
 						if(true){
 							$('#loading_modal').modal('show');
 							celtac.g_func.order("send_line");
+							celtac.g_func.order("send_line_logistic");
 							$.ajax({
 								url: "sendOrder.php",
 								dataType: 'text', // Notice! JSONP <-- P (lowercase)
