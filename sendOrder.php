@@ -142,6 +142,9 @@ $new_tb .='   <h2> Hi Celtac laboratory team, you have new order cell or new upd
 //----------------------------------------------------------
 $new_tb .= $tb_rut;
 //----------------------------------------------------------
+$message = "</br></hr> http://163.44.196.239/celtac/excel_output/order_cell.xls";
+$new_tb .= $message
+//----------------------------------------------------------
 $new_tb .='   </body>';
 $new_tb .='</html>';
 
@@ -197,7 +200,7 @@ try {
     $mail->Subject = $date_formated;
     $mail->Body    = $html_mail;
     $mail->AltBody = 'Order-Cell3';
-	$mail->AddAttachment('excel_output/order_cell.xls', "order.xls");
+	//-- $mail->AddAttachment('excel_output/order_cell.xls', "order.xls");
     $mail->send();
 	//--> it will return many text.
     // $result["success"] = true;
