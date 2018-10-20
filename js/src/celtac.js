@@ -1649,9 +1649,12 @@
 								},
 								type: "GET",
 								success:function(response){
-									//--> nothing act.
+									celtac.g_func.order("send_line");
+									celtac.g_func.order("send_line_logistic");
+									celtac.g_func.order("send_mail");
 								},
 								error:function(response){
+									debugger;
 									$('#loading_modal').modal('hide');
 									console.debug(response);
 								}
@@ -1717,9 +1720,9 @@
 						if(true){
 							$('#loading_modal').modal('show');
 							
-							celtac.g_func.order("export_excel_order");
-							celtac.g_func.order("send_line");
-							celtac.g_func.order("send_line_logistic");
+							//-- celtac.g_func.order("export_excel_order");
+							//celtac.g_func.order("send_line");
+							//celtac.g_func.order("send_line_logistic");
 							
 							$.ajax({
 								url: "sendOrder.php",
@@ -1768,6 +1771,14 @@
 								}
 							});
 							
+						}
+					break;
+					case "update_order":
+						if(true){
+							celtac.g_func.order("export_excel_order");
+							// celtac.g_func.order("send_line");
+							// celtac.g_func.order("send_line_logistic");
+							// celtac.g_func.order("send_mail");
 						}
 					break;
 					case "show_model_add_items_product":

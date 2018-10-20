@@ -217,8 +217,10 @@
 
 	//--------------------------------------------------------------------------------------------
 	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');//Excel2007,Excel5
-	$objWriter->save('./excel_output/order_cell.xls');
-
-	
-//$objWriter->save('./outputExcel/server/'.$pro_name.'/'.$file_name.'.xls');
-echo 'export successfully .<br />'."\n";
+	try {
+		$objWriter->save('./excel_output/order_cell.xls');
+		echo "File successfully saved";
+	} catch (Exception $e) {
+		echo 'ERROR: ', $e->getMessage();
+		die();
+	}

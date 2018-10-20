@@ -63,7 +63,7 @@
 		$obj_date 		= new DateTime($value['delivery_date_time']);;
 		$daliv_date 	= $obj_date->format('d-m-Y');
 		$daliv_time 	= $obj_date->format('H:i:s');
-		$message .= "\n http://163.44.196.239/celtac/excel_output/order_cell.xls?a=".$daliv_date.'_'.$daliv_time ;
+		//-- $message .= "\n http://163.44.196.239/celtac/excel_output/order_cell.xls?a=".$daliv_date.'_'.$daliv_time ;
 		line_notify($Token, $message);
 	//---------------------------------------------------------------------------------------------------------------
 	/* stand by

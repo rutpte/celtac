@@ -1321,7 +1321,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 ?>
 
 				<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.order('show_model_addorder')"><span class="ui-icon ui-icon-plus"></span></button>
-				<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.order('send_mail')"><span class="ui-icon ui-icon-check"></span></button>
+				<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.order('update_order')"><span class="ui-icon ui-icon-check"></span></button>
 				
 		  </div>
 
