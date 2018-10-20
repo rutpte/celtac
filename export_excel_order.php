@@ -209,7 +209,7 @@
 	header ('Pragma: public'); // HTTP/1.0
 
 	//--------------------------------------------------------------------------------------------
-	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 	$objWriter->save('./excel_output/order_cell.xls');
 
 	
