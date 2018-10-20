@@ -196,6 +196,7 @@
    // $sheet->getDefaultStyle()->applyFromArray($style);
    
 	//--------------------------------------------------------------------------------------------
+	/*
 	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 	header('Content-Disposition: attachment;filename="'xxx'.xlsx"');
 	header('Cache-Control: max-age=0');
@@ -207,6 +208,7 @@
 	header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
 	header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
 	header ('Pragma: public'); // HTTP/1.0
+	*/
 
 	//--------------------------------------------------------------------------------------------
 	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
