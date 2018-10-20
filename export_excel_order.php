@@ -91,12 +91,12 @@
 	$rowofcol = 2;
 	
 	//--> add column.
-	/*
-	foreach ($arr_col as $value) 
+	
+	foreach ($arr_col as $valuex) 
 	{
-		$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $rowofcol, $value);
+		$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $rowofcol, $valuex);
 		$col++;
-	}*/
+	}
 	//--------------------------------------------------------------------------------------------
 	//echo '<pre>';
 	//var_dump($data); exit;
