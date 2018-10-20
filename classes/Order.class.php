@@ -300,9 +300,9 @@ class Order extends DBConnection
 			$sta_allow_time_deliv = $this->check_diff_time_by_strtime($delivery_date_time, 300);
 			//check time deliv and cell number. or is_staff can be access.
 			if(($sta_allow_time_deliv == 1 && $total_cell <= 10)){
-				$is_active = true;
+				$is_active = 'true';
 			} else {
-				$is_active = false;
+				$is_active = 'false';
 			}
 			//------------------------------------------------------
 			$sql = "
@@ -484,7 +484,7 @@ class Order extends DBConnection
             from order_product
 			where 1=1
 			and delivery_date_time >= now()::date
-			order by delivery_date_time
+			order by delivery_date_time, id, order_code
         ";
 		//and is_active IS true
 		//and delivery_date_time >= now()
@@ -626,9 +626,9 @@ class Order extends DBConnection
     
 	public function changeActive($id)
     {
-		$sta_allow = $this->check_diff_time_by_id($id, 300); //--> 300 minute == 5 hours.
+		//$sta_allow = $this->check_diff_time_by_id($id, 300); //--> 300 minute == 5 hours.
 		//--var_dump($sta_allow); exit;
-		if($sta_allow == 1 || $_SESSION['is_staff']){
+		if($_SESSION['is_staff']){
 			//-------------------------------
 			/*
 			$sql = "

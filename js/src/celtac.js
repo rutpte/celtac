@@ -2031,16 +2031,16 @@
 					case "change_active":
 						if(true){
 							var id = obj;
-							$('#modal_delete_confirm').modal('show');
-							var cilck_ok = false;
-							$('#modal_delete_confirm').find('#del_ok').click(function() {
+							$('#modal_confirm').find('#msg_modal_notice_customer').html('are you sure to swich active order.');
+							$('#modal_confirm').modal('show');
+							$('#modal_confirm').find('#modal_confirm_ok').click(function() {
 								$('#loading_modal').modal('show');
 								//debugger;
 								$.ajax({
 									url: "order.php",
 									dataType: 'text', // Notice! JSONP <-- P (lowercase)
 									method : 'POST',
-									data: { 
+									data: {
 										"q" : "change_active"
 										,"id" : id
 									},
@@ -2069,9 +2069,7 @@
 									}
 								});
 							});
-
 						}
-						
 						break;	
 				}
 			}
