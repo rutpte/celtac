@@ -2,7 +2,7 @@
 session_start();
 require_once dirname(__FILE__) . '/includes/init.inc.php';
 header('Content-type: application/json');
- if (isset($_SESSION['email'])) {
+if (isset($_SESSION['email'])) {
 	if ($_SERVER["REQUEST_METHOD"] == "GET") {
 		$q = isset($_GET['q']) ? $_GET['q'] : '';
 		switch ($q)
@@ -63,7 +63,7 @@ header('Content-type: application/json');
 		}
 	}
 
- } else {
+} else {
 	$result['success'] = false;
 	echo json_encode($result);
- }
+}
