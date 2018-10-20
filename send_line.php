@@ -1,7 +1,7 @@
 <?php
 	require dirname(__FILE__) . '/includes/init.inc.php';
 	if (isset($_SESSION['email'])) {
-		/* stand by
+		//stand by
 		$obj 	= new Order($pdo);
 		$rs_arr = $obj->getOrderAll();
 		$data = array();
@@ -9,7 +9,7 @@
 		if($rs_arr['success']){
 			$data = $rs_arr['data'];
 		}
-		*/
+		
 
 	} else {
 		header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/index.php");
@@ -18,6 +18,7 @@
 	$Token = 'CxlMmXRcLg458GiyTx9kINPOKQjyLReSUnGLSyGdFwA';
 	$message = isset($_POST["message"])? $_POST["message"] : 'help!' ;
 	//--------------------------------------------
+	
 	function line_notify($Token, $message)
 	{
 		//$msg = $message ."'http://163.44.196.239/celtac/excel_output/order_cell.xls'";
@@ -60,13 +61,15 @@
 		curl_close( $chOne );   
 	}
 	//--------------------------------------------
-		$obj_date 		= new DateTime($value['delivery_date_time']);;
-		$daliv_date 	= $obj_date->format('d-m-Y');
-		$daliv_time 	= $obj_date->format('H:i:s');
-		//-- $message .= "\n http://163.44.196.239/celtac/excel_output/order_cell.xls?a=".$daliv_date.'_'.$daliv_time ;
-		line_notify($Token, $message);
+	/* stand by.
+	$obj_date 		= new DateTime($value['delivery_date_time']);;
+	$daliv_date 	= $obj_date->format('d-m-Y');
+	$daliv_time 	= $obj_date->format('H:i:s');
+	//-- $message .= "\n http://163.44.196.239/celtac/excel_output/order_cell.xls?a=".$daliv_date.'_'.$daliv_time ;
+	line_notify($Token, $message);
+	*/
 	//---------------------------------------------------------------------------------------------------------------
-	/* stand by
+	/* backup.
 	foreach ($data as &$value) {
 		$str_msg = "";
 		$obj_date 		= new DateTime($value['delivery_date_time']);;
@@ -107,10 +110,68 @@
 		$str_msg .= "\n\n\n";
 		
 		//--> send line.
-		$message = $str_msg;
-		line_notify($Token, $message);
+		$message .= $str_msg;
+		//--line_notify($Token, $message);
+	}	*/
+	
+	foreach ($data as &$value) {
+		$str_msg = "";
+		$obj_date 		= new DateTime($value['delivery_date_time']);;
+		$daliv_date 	= $obj_date->format('d-m-Y');
+		$daliv_time 	= $obj_date->format('H:i');
+		
+		//--$str_msg .= $value['order_code']." \n\n ";
+		
+		$str_msg .= "  ".$daliv_date." ";
+		$str_msg .= ", ".$daliv_time." ";
+		
+		$str_msg .= " : ".$value['customer_name']." ";
+		//$str_msg .= " ชนิดสินค้า : ".$value['product_type']." ";
+		
+		//--------------------------
+		$set = 0;
+		$vial = 0;
+		if($value['set'] !== NULL) {
+			$set = $value['set'];
+		}
+		if($value['vial'] !== NULL) {
+			$vial = $value['vial'];
+		}
+		
+		if($value['product_type'] == "cell"){
+			$str_msg .= $value['product_type'].' '.$value['quantity']." m";
+			$str_msg .= $vial." vial ";
+
+			$str_msg .= $value['package_type']." \n";
+		} else {
+			$str_msg .= $value['product_type'].' '." ";
+			$str_msg .= $set." set ";
+			$str_msg .= $vial." vial \n";
+		}
+
+		//--$str_msg .= $value['giveaway']."\n";
+		
+		//$str_msg .= " ผู้ส่ง  : ".$value['sender']." ";
+		//$str_msg .= " ผู้รับ  : ".$value['receiver']."\n";
+		//$str_msg .= " ผู้ติดต่อ : ".$value['dealer_person']." ";
+		//$str_msg .= " ขายผ่าน  : ".$value['dealer_company']."\n";
+		//$str_msg .= " ประเภทราคา : ".$value['price_rate']." ";
+		//--$str_msg .= " อื่นๆ : ".$value['comment_else']."\n";
+		//$str_msg .= " *----* \n";
+		
+		$str_msg .= " *  ผู้ส่ง  : ".$value['sender']."\n";
+		
+		//$str_msg .= " *----* \n";
+
+		//$str_msg .= "http://163.44.196.239/celtac/excel_output/order_cell.xls";
+		$str_msg .= "";
+		
+		//--> send line.
+		$message .= $str_msg;
+		//--line_notify($Token, $message);
 	}
-	*/
+	
+	line_notify($Token, $message);
 	//---------------------------------------------------------------------------------------------------------------
 	/*
 	if(false){ //backup.

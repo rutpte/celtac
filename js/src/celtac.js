@@ -554,9 +554,9 @@
 								var h 							= $('#delivery_time_hour').val();
 								var m 							= $('#delivery_time_minute').val();
 								
-								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 300);
+								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 720);
 								if(!rs){
-									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 12 hour.');
 									$('#modal_notice_customer').modal('show');
 									
 								}
@@ -568,9 +568,9 @@
 								var h 							= $('#delivery_time_hour').val();
 								var m 							= $('#delivery_time_minute').val();
 								
-								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 300);
+								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 720);
 								if(!rs){
-									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 12 hour.');
 									$('#modal_notice_customer').modal('show');
 									
 
@@ -829,7 +829,7 @@
 							var h 							= $('#delivery_time_hour').val();
 							var m 							= $('#delivery_time_minute').val();
 
-							var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 300);
+							var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 720);
 							
 							if(rs){
 								//--> can save. time_validate still is true.
@@ -915,7 +915,7 @@
 							
 							//---------------------
 							if(time_validate == false){
-								$('#modal_confirm').find('#msg_modal_notice_customer').html('your order time less than 5 hour.</br> your order will waiting for approve. </br> please connect admistrator. </br> tel-088-000-0000');
+								$('#modal_confirm').find('#msg_modal_notice_customer').html('your order time less than 12 hour.</br> your order will waiting for approve. </br> please connect admistrator. </br> tel-088-000-0000');
 								$('#modal_confirm').modal('show');
 								$('#modal_confirm').find('#modal_confirm_ok').click(function() {
 									save_data();
@@ -1070,10 +1070,10 @@
 								var h 							= $('#delivery_time_hour_edit').val();
 								var m 							= $('#delivery_time_minute_edit').val();
 								
-								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 300);
+								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 720);
 								
 								if(!rs){
-									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 12 hour.');
 									$('#modal_notice_customer').modal('show');
 									
 								}
@@ -1085,10 +1085,10 @@
 								var h 							= $('#delivery_time_hour_edit').val();
 								var m 							= $('#delivery_time_minute_edit').val();
 								
-								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 300);
+								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 720);
 								
 								if(!rs){
-									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 5 hour.');
+									$('#modal_notice_customer').find('#msg_modal_notice_customer').text('your order time less than 12 hour.');
 									$('#modal_notice_customer').modal('show');
 									
 
@@ -1370,14 +1370,14 @@
 							*/
 
 							if($('#product_type_edit').val() == "cell"){
-								var check_5h = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 300);
-								if((check_5h) && (total_cel <= 10)){
+								var check_12h = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 720);
+								if((check_12h) && (total_cel <= 10)){
 									//sta_validate = false;
 									is_active = true;
 								} else {
 									//$('#modal_notice_customer').find('#msg_modal_notice_customer').html('your order (cell) time less than 5 hour or total cell over 10 m. </br> please connect admistrator for approve your order.');
 									//$('#modal_notice_customer').modal('show');
-									alert('your order (cell) time less than 5 hour or total cell over 10 m. please connect admistrator for approve your order.');
+									alert('your order (cell) time less than 12 hour or total cell over 10 m. please connect admistrator for approve your order.');
 									is_active = false;
 								}
 							}
@@ -1674,7 +1674,7 @@
 								method : 'POST',
 								data: { 
 									"q"              					: "xxx"
-									, "message"							: "เจตๆๆๆๆๆๆๆๆ  งานเข้าแล้ว มี order ด่วนมากๆๆๆๆๆๆๆ"
+									, "message"							: "\n" //เจตๆๆๆๆๆๆๆๆ  งานเข้าแล้ว มี order ด่วนมากๆๆๆๆๆๆๆ2
 								},
 								type: "GET",
 								success:function(response){

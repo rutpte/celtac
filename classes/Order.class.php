@@ -98,7 +98,7 @@ class Order extends DBConnection
 			//$price_rate			= isset($post['price_rate']) 			? "'".$post['price_rate']."'"										: 'null';
 			$comment_else		= isset($post['comment_else']) 			? "'".$post['comment_else' ]."'"									: 'null';
 			
-			$sta_allow_time_deliv = $this->check_diff_time_by_strtime($delivery_date_time, 300);
+			$sta_allow_time_deliv = $this->check_diff_time_by_strtime($delivery_date_time, 720);
 			//check time deliv and cell number. or is_staff can be access.
 			if(($sta_allow_time_deliv == 1) && ($total_cell <= 10)){
 				$is_active = 'true';
@@ -196,7 +196,7 @@ class Order extends DBConnection
     }
     public function deleteOrder($id)
     {
-		$sta_allow = $this->check_diff_time_by_id($id, 300); //--> 300 minute == 5 hours.
+		$sta_allow = $this->check_diff_time_by_id($id, 120); //--> 300 minute == 5 hours.
 		//--var_dump($sta_allow); exit;
 		if($sta_allow == 1 || $_SESSION['is_staff']){
 			//-------------------------------
@@ -237,7 +237,7 @@ class Order extends DBConnection
 
     }
     public function updateOrder($post){
-		$sta_allow = $this->check_diff_time_by_id($post['order_id_edit'], 300); //--> 300 minute == 5 hours.
+		$sta_allow = $this->check_diff_time_by_id($post['order_id_edit'], 120); //--> 300 minute == 5 hours.
 		//--var_dump($sta_allow); exit;
 		if($sta_allow == 1 || $_SESSION['is_staff']){
 				//---------------------------------------------
