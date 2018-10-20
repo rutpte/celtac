@@ -103,7 +103,7 @@
 	//--------------------------------------------------------------------------------------------
 	//--> add data.
 	$pre_code = '';
-	$row_data = 1;
+	$row_data = 3;
 	foreach($data as $key => $value)
 	{
 		$obj_date 		= new DateTime($value['delivery_date_time']);;
