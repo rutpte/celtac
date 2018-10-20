@@ -24,8 +24,16 @@
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt	LGPL
  * @version    ##VERSION##, ##DATE##
  */
+ 
+
+ 
 	require dirname(__FILE__) . '/includes/init.inc.php';
-	if (isset($_SESSION['email'])) {
+	
+	 $str_date_start      	= isset($_GET['str_date_start']) ? $_GET['str_date_start'] : '';
+	 $str_date_end       	= isset($_GET['str_date_end']) ? $_GET['str_date_end'] : '';
+	 //var_dump($_SESSION['email']); exit;
+	 
+	if (isset($_SESSION['email'])) {//email,is_staff
 		$obj 	= new Order($pdo);
 		$rs_arr = $obj->getOrderAll();
 		$data = array();
@@ -33,6 +41,13 @@
 		if($rs_arr['success']){
 			$data = $rs_arr['data'];
 		}
+		//----> debug.
+		// foreach($data as $key => $value)
+		// {
+			// var_dump($value['order_code']);
+		// }
+		// exit;
+		//------
 		
 	} else {
 		header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/index.php");
@@ -108,7 +123,7 @@
 		$daliv_date 	= $obj_date->format('d-m-Y');
 		$daliv_time 	= $obj_date->format('H:i:s');
 		//------------------------------------------
-		//var_dump($daliv_date); exit;
+		//var_dump($value['order_code']);
 			if($pre_code != ''){
 				
 				if($value['order_code'] == $pre_code){
@@ -136,7 +151,7 @@
 		$col = 0;
 		foreach ($arr_col as $key) 
 		{
-
+			//echo $value[$key];
 			if($key == "date"){
 				$rs_data = $daliv_date;
 			} else if ($key == "time"){
@@ -148,8 +163,6 @@
 			$columnLetter = PHPExcel_Cell::stringFromColumnIndex($col);
 			
 			cellColor($columnLetter.$row_data,$color);
-			
-			$objPHPExcel->getActiveSheet()->getStyle($row_data+':'+$col)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 			$col++;
 		}
 
@@ -184,18 +197,35 @@
 				 'rgb' => $color
 			)
 		));		
+		//--------------------------------------------------
+		/*
+		$objPHPExcel->getActiveSheet()->getStyle($cells)->getFill()->applyFromArray(array(
+			'type' => PHPExcel_Style_Fill::FILL_SOLID,
+			'startcolor' => array(
+				 'rgb' => $color
+			)
+			,'alignment' => array(
+				'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+			)
+		));
+		*/
 	}
+	
 	//--------------------------------------------------------------------------------------------
 	//--> set center.
-	$objPHPExcel->getActiveSheet()->getDefaultStyle()->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+	//$objPHPExcel->getActiveSheet()->getDefaultStyle()->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 	//$objPHPExcel->getDefaultStyle()->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 	//---
-	//$style = array( 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER); 
-	//$sheet = $objPHPExcel->getActiveSheet();
-	
-   // $sheet->getDefaultStyle()->applyFromArray($style);
-   
+    // $style = array(
+        // 'alignment' => array(
+            // 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+        // )
+    // );
+
+    // $sheet->getDefaultStyle()->applyFromArray($style);
 	//--------------------------------------------------------------------------------------------
+	$file_name = "order";
+	// Redirect output to a client’s web browser (Excel2007)
 	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 	header('Content-Disposition: attachment;filename="'.$file_name.'.xlsx"');
 	header('Cache-Control: max-age=0');
@@ -207,11 +237,13 @@
 	header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
 	header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
 	header ('Pragma: public'); // HTTP/1.0
-
 	//--------------------------------------------------------------------------------------------
 	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-	$objWriter->save('./excel_output/order_cell.xls');
+	//$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+	//$objWriter->save('./excel_output/order_cell.xls');
+	$objWriter->save('php://output');
 
 	
 //$objWriter->save('./outputExcel/server/'.$pro_name.'/'.$file_name.'.xls');
-echo 'export successfully .<br />'."\n";
+
+exit;
