@@ -197,7 +197,7 @@
    
 	//--------------------------------------------------------------------------------------------
 	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-	header('Content-Disposition: attachment;filename="'.$file_name.'.xlsx"');
+	header('Content-Disposition: attachment;filename="'xxx'.xlsx"');
 	header('Cache-Control: max-age=0');
 	// If you're serving to IE 9, then the following may be needed
 	header('Cache-Control: max-age=1');
@@ -209,7 +209,7 @@
 	header ('Pragma: public'); // HTTP/1.0
 
 	//--------------------------------------------------------------------------------------------
-	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
 	$objWriter->save('./excel_output/order_cell.xls');
 
 	
