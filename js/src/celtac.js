@@ -1635,8 +1635,7 @@
 
 						
 						break;					
-
-					case "send_line":
+					case "export_excel_order":
 						if(true){
 							$('#loading_modal').modal('show');
 							
@@ -1650,27 +1649,7 @@
 								},
 								type: "GET",
 								success:function(response){
-									//--------------------------------------------------
-									$.ajax({
-										url: "send_line.php",
-										dataType: 'text', // Notice! JSONP <-- P (lowercase)
-										method : 'POST',
-										data: { 
-											"q"              					: "xxx"
-											, "message"							: "เจตๆๆๆๆๆๆๆๆ  งานเข้าแล้ว มี order ด่วนมากๆๆๆๆๆๆๆ"
-										},
-										type: "GET",
-										success:function(response){
-											$('#loading_modal').modal('hide');
-											//debugger;
-
-										},
-										error:function(response){
-											$('#loading_modal').modal('hide');
-											console.debug(response);
-										}
-									});
-									//---------------------------------------------------
+									//--> nothing act.
 								},
 								error:function(response){
 									$('#loading_modal').modal('hide');
@@ -1680,12 +1659,14 @@
 
 							
 						}
-					break;				
-					case "send_line_logistic":
+					break;	
+					case "send_line":
 						if(true){
 							$('#loading_modal').modal('show');
+							
+							//--------------------------------------------------
 							$.ajax({
-								url: "send_line_logistic.php",
+								url: "send_line.php",
 								dataType: 'text', // Notice! JSONP <-- P (lowercase)
 								method : 'POST',
 								data: { 
@@ -1703,13 +1684,43 @@
 									console.debug(response);
 								}
 							});
+							//---------------------------------------------------
+
+							
+						}
+					break;				
+					case "send_line_logistic":
+						if(true){
+							$('#loading_modal').modal('show');
+							$.ajax({
+								url: "send_line_logistic.php",
+								dataType: 'text', // Notice! JSONP <-- P (lowercase)
+								method : 'POST',
+								data: { 
+									"q"              					: "xxx"
+									, "message"							: "มีอัปเดปออร์เด้อใหม่ค่ะ"
+								},
+								type: "GET",
+								success:function(response){
+									$('#loading_modal').modal('hide');
+									//debugger;
+
+								},
+								error:function(response){
+									$('#loading_modal').modal('hide');
+									console.debug(response);
+								}
+							});
 						}
 					break;						
 					case "send_mail":
 						if(true){
 							$('#loading_modal').modal('show');
+							
+							celtac.g_func.order("export_excel_order");
 							celtac.g_func.order("send_line");
 							celtac.g_func.order("send_line_logistic");
+							
 							$.ajax({
 								url: "sendOrder.php",
 								dataType: 'text', // Notice! JSONP <-- P (lowercase)
