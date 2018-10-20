@@ -82,9 +82,9 @@
 	$objPHPExcel->getActiveSheet()->setTitle("order cell");
 
 	//--> set head excel.
-	$objPHPExcel->getActiveSheet()->mergeCells('A1:O1')->getStyle('A1:O1')->getFont()->setSize(15)->setBold(true);
-	$objPHPExcel->getActiveSheet()->getStyle('A1:O1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-	$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, 1, "order cell : ".$daliv_date." ".$daliv_time);
+	//$objPHPExcel->getActiveSheet()->mergeCells('A1:O1')->getStyle('A1:O1')->getFont()->setSize(15)->setBold(true);
+	//$objPHPExcel->getActiveSheet()->getStyle('A1:O1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+	//$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, 1, "order cell : ".$daliv_date." ".$daliv_time);
 	
 	//--------------------------------------------------------------------------------------------
 	$col = 0;
@@ -169,7 +169,7 @@
     }
 	//--------------------------------------------------------------------------------------------
 	//--> set color.
-	cellColor('A2:R2', 'adad85');
+	//--cellColor('A2:R2', 'adad85');
 	//--------------------------------------------------------------------------------------------
 	function cellColor($cells,$color){
 		global $objPHPExcel;
