@@ -161,13 +161,15 @@
 
 	//--------------------------------------------------------------------------------------------
 	//--> set auto width.
+	/*
 	$sheet = $objPHPExcel->getActiveSheet();
     $cellIterator = $sheet->getRowIterator()->current()->getCellIterator();
     $cellIterator->setIterateOnlyExistingCells(true);
-    /** @var PHPExcel_Cell $cell */
+    ///@var PHPExcel_Cell $cell
     foreach ($cellIterator as $cell) {
         $sheet->getColumnDimension($cell->getColumn())->setAutoSize(true);
     }
+	*/
 	//--------------------------------------------------------------------------------------------
 	//--> set color.
 	//--cellColor('A2:R2', 'adad85');
