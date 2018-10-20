@@ -224,7 +224,6 @@
 
     // $sheet->getDefaultStyle()->applyFromArray($style);
 	//--------------------------------------------------------------------------------------------
-	/*
 	$file_name = "order";
 	// Redirect output to a client’s web browser (Excel2007)
 	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -238,12 +237,11 @@
 	header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
 	header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
 	header ('Pragma: public'); // HTTP/1.0
-	*/
 	//--------------------------------------------------------------------------------------------
 	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 	//$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-	$objWriter->save('./excel_output/order_cell.xls');
-	//--$objWriter->save('php://output');
+	//$objWriter->save('./excel_output/order_cell.xls');
+	$objWriter->save('php://output');
 
 	
 //$objWriter->save('./outputExcel/server/'.$pro_name.'/'.$file_name.'.xls');
