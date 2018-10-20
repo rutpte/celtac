@@ -213,7 +213,7 @@
 	*/
 
 	//--------------------------------------------------------------------------------------------
-	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');//Excel2007,Excel5
+	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');//Excel2007,Excel5
 	$objWriter->save('./excel_output/order_cell.xls');
 
 	
