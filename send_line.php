@@ -164,7 +164,7 @@
 		//$str_msg .= " *----* \n";
 
 		//$str_msg .= "http://163.44.196.239/celtac/excel_output/order_cell.xls";
-		$str_msg .= "";
+		$str_msg .= " ";
 		
 		//--> send line.
 		$message .= $str_msg;
