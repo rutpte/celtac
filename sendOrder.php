@@ -142,7 +142,7 @@ $new_tb .='   <h2> Hi Celtac laboratory team, you have new order cell or new upd
 //----------------------------------------------------------
 $new_tb .= $tb_rut;
 //----------------------------------------------------------
-$message = "</br></hr> <a herf='http://163.44.196.239/celtac/excel_output/order_cell.xls'>xxx</a>";
+$message = "</br></hr> <a href='http://163.44.196.239/celtac/excel_output/order_cell.xls'> check original excel file.</a>";
 $new_tb .= $message;
 //----------------------------------------------------------
 $new_tb .='   </body>';
