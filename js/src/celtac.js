@@ -2031,7 +2031,7 @@
 					case "change_active":
 						if(true){
 							var id = obj;
-							$('#modal_confirm').find('#msg_modal_notice_customer').html('are you sure to swich active order.');
+							$('#modal_confirm').find('#msg_modal_notice_customer').html('are you sure to switch active order.');
 							$('#modal_confirm').modal('show');
 							$('#modal_confirm').find('#modal_confirm_ok').click(function() {
 								$('#loading_modal').modal('show');
