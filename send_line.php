@@ -113,7 +113,7 @@
 		$message .= $str_msg;
 		//--line_notify($Token, $message);
 	}	*/
-	
+	$message .= $_SESSION['first_name']."\n";
 	foreach ($data as &$value) {
 		$str_msg = "";
 		$obj_date 		= new DateTime($value['delivery_date_time']);;
@@ -170,6 +170,7 @@
 		$message .= $str_msg;
 		//--line_notify($Token, $message);
 	}
+	
 	
 	line_notify($Token, $message);
 	//---------------------------------------------------------------------------------------------------------------

@@ -1674,7 +1674,7 @@
 								method : 'POST',
 								data: { 
 									"q"              					: "xxx"
-									, "message"							: "\n" //เจตๆๆๆๆๆๆๆๆ  งานเข้าแล้ว มี order ด่วนมากๆๆๆๆๆๆๆ2
+									, "message"							: "" //เจตๆๆๆๆๆๆๆๆ  งานเข้าแล้ว มี order ด่วนมากๆๆๆๆๆๆๆ2
 								},
 								type: "GET",
 								success:function(response){
