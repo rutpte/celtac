@@ -878,8 +878,8 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 											<option value="cell">Cell</option>
 											<option value="prp_ready">PRP Ready</option>
 											<option value="placenta">Placenta</option>
-											<option value="PRFM_SET">PRFM SET</option>
-											<option value="PRFM_TUEE">PRFM TUEE</option>
+											<option value="prfm_set">PRFM SET</option>
+											<option value="prfm_tuee">PRFM TUEE</option>
 										</select>
 									</div>
 								</div>

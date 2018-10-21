@@ -2276,7 +2276,7 @@
 				//$date_full 		= new DateTime($str_date);
 				//--$obj_date 		= new DateTime($str_date);;
 				//--$date_formated 	= $obj_date->format('Y-m-d H:i:s');
-				if(){
+				if(true){
 					window.open('export_excel_download.php?str_date_start='+str_date_start+'&str_date_end='+str_date_end, '_blank');
 				}
 				
