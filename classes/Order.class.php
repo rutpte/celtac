@@ -563,6 +563,111 @@ class Order extends DBConnection
 			exit;
 		}
 
+    }    
+	//-----------------------------------------------------------------
+    public function getOrderExportReport ($str_date_start, $str_date_end)
+    {
+
+		$sql_cell ="
+			//----------------------------
+			select staff.first_name,user_id,SUM(total_cell) from  order_product
+			inner join staff on staff.id = order_product.user_id
+			WHERE 1=1
+			AND product_type = 'cell'
+			AND 	
+				delivery_date_time 
+				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
+			GROUP BY user_id,staff.first_name
+		";
+			//-----------------------------
+		$sql_prp_ready ="
+			select staff.first_name,user_id,SUM(set) as set,SUM(vial)as vial from  order_product
+			inner join staff on staff.id = order_product.user_id
+			WHERE 1=1
+			AND product_type = 'prp_ready'
+			AND 	
+				delivery_date_time 
+				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
+			GROUP BY user_id,staff.first_name
+		";
+			//-----------------------------
+		$sql_placenta ="
+			select staff.first_name,user_id,SUM(set) as set,SUM(vial)as vial from  order_product
+			inner join staff on staff.id = order_product.user_id
+			WHERE 1=1
+			AND product_type = 'placenta'
+			AND 	
+				delivery_date_time 
+				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
+			GROUP BY user_id,staff.first_name
+		";
+			//-----------------------------
+		$sql_prfm_set ="
+			select staff.first_name,user_id,SUM(set) as set,SUM(vial)as vial from  order_product
+			inner join staff on staff.id = order_product.user_id
+			WHERE 1=1
+			AND product_type = 'prfm_set'
+			AND 	
+				delivery_date_time 
+				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
+			GROUP BY user_id,staff.first_name
+		";
+			//-----------------------------
+		$sql_prfm_tuee ="
+			select staff.first_name,user_id,SUM(set) as set,SUM(vial)as vial from  order_product
+			inner join staff on staff.id = order_product.user_id
+			WHERE 1=1
+			AND product_type = 'prfm_tuee'
+			AND 	
+				delivery_date_time 
+				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
+			GROUP BY user_id,staff.first_name
+		";
+		//--------------------------------------------------------------------------------------------
+
+		if($_SESSION['is_staff']){
+
+			//echo "<pre>", $sql; exit;
+			$sth1 = $this->db->prepare($sql_cell); 
+			$sth2 = $this->db->prepare($sql_prp_ready); 
+			$sth3 = $this->db->prepare($sql_placenta); 
+			$sth4 = $this->db->prepare($sql_prfm_set); 
+			$sth5 = $this->db->prepare($sql_prfm_tuee); 
+			$result = array();
+			
+			try{
+				if (
+				!$sth1->execute()
+				&& !$sth2->execute()
+				&& !$sth3->execute()
+				&& !$sth4->execute()
+				&& !$sth5->execute()
+
+				) {
+					
+					echo '<pre>'.$sql;
+					print_r($sth->errorInfo());
+				} else {
+					$get_num_row = $sth->rowCount();
+					//var_dump($sth->rowCount());
+					//$result = $sth->fetchObject();
+					if($get_num_row > 0){
+						$rs = $sth->fetchAll(PDO::FETCH_ASSOC);
+						$result["success"] = true;
+						$result["data"] = $rs;
+						return ($result);
+					} else {
+						$result["success"] = false;
+						return ($result);
+					}
+				}
+			}catch(Exception $e){
+				echo "error. cannot expotr excel file.";
+				exit;
+			}
+		}
+
+
     }
     //---------------------------------------------------------
 	public function check_diff_time_by_strtime($str_time, $diff_minute){
