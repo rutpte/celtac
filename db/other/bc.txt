@@ -1,0 +1,26 @@
+select * from  order_product
+----------------------------
+select user_id,SUM(total_cell) from  order_product
+WHERE 1=1
+AND product_type = 'cell'
+GROUP BY user_id
+-----------------------------
+select user_id,SUM(set) as set,SUM(vial)as vial from  order_product
+WHERE 1=1
+AND product_type = 'prp_ready'
+GROUP BY user_id
+-----------------------------
+select user_id,SUM(set) as set,SUM(vial)as vial from  order_product
+WHERE 1=1
+AND product_type = 'placenta'
+GROUP BY user_id
+-----------------------------
+select user_id,SUM(set) as set,SUM(vial)as vial from  order_product
+WHERE 1=1
+AND product_type = 'prfm_set'
+GROUP BY user_id
+-----------------------------
+select user_id,SUM(set) as set,SUM(vial)as vial from  order_product
+WHERE 1=1
+AND product_type = 'prfm_tuee'
+GROUP BY user_id
