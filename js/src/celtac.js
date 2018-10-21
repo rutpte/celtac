@@ -697,7 +697,7 @@
 							//--
 							if (sender == ""){
 								celtac.g_func.notice_div_error(true,"sender");
-								sta_validate = false;
+								//--sta_validate = false;
 							
 							}else {
 								celtac.g_func.notice_div_error(false,"sender");
@@ -1206,7 +1206,7 @@
 							//--
 							if (sender == ""){
 								celtac.g_func.notice_div_error(true,"sender_edit");
-								sta_validate = false;
+								//--sta_validate = false;
 							
 							}else {
 								celtac.g_func.notice_div_error(false,"sender_edit");
@@ -1701,7 +1701,7 @@
 								method : 'POST',
 								data: { 
 									"q"              					: "xxx"
-									, "message"							: "มีอัปเดปออร์เด้อใหม่ค่ะ"
+									, "message"							: "มีอัปเดปใหม่ค่ะ"
 								},
 								type: "GET",
 								success:function(response){
@@ -2259,7 +2259,14 @@
 				var date_raw_end 	= $('#exp_end_delivery_date').val();
 				var hour_end 		= $('#exp_end_delivery_time_hour').val();
 				var minute_end		= $('#exp_end_delivery_time_minute').val();
+				//debugger;
+				if(date_raw_start == ""){
+					date_raw_start = '2010-10-19'
+				}
 				
+				if(date_raw_end == ""){
+					date_raw_end = '2041-10-19'
+				}
 				var str_date_start		= date_raw_start+' '+hour_start+':'+minute_start+':00'; //27-09-2018 14:0:00
 				var str_date_end		= date_raw_end+' '+hour_end+':'+minute_end+':00'; //27-09-2018 14:0:00
 				
@@ -2269,7 +2276,10 @@
 				//$date_full 		= new DateTime($str_date);
 				//--$obj_date 		= new DateTime($str_date);;
 				//--$date_formated 	= $obj_date->format('Y-m-d H:i:s');
-				window.open('export_excel_download.php?str_date_start='+str_date_start+'&str_date_end='+str_date_end, '_blank');
+				if(){
+					window.open('export_excel_download.php?str_date_start='+str_date_start+'&str_date_end='+str_date_end, '_blank');
+				}
+				
 				//-------------------------------------------------
 				/*
 				var mapForm = document.createElement("form");

@@ -113,7 +113,7 @@
 		$message .= $str_msg;
 		//--line_notify($Token, $message);
 	}	*/
-	$message .= $_SESSION['first_name']."\n";
+	$message .= isset($_SESSION['first_name'])? $_SESSION['first_name'] : 'auto update'."\n";
 	foreach ($data as &$value) {
 		$str_msg = "";
 		$obj_date 		= new DateTime($value['delivery_date_time']);;
@@ -122,7 +122,7 @@
 		
 		//--$str_msg .= $value['order_code']." \n\n ";
 		
-		$str_msg .= "  ".$daliv_date." ";
+		$str_msg .= "*  ".$daliv_date." ";
 		$str_msg .= ", ".$daliv_time." ";
 		
 		$str_msg .= " : ".$value['customer_name']." ";
@@ -139,14 +139,14 @@
 		}
 		
 		if($value['product_type'] == "cell"){
-			$str_msg .= $value['product_type'].' '.$value['quantity']." m";
+			$str_msg .= $value['product_type'].' '.$value['quantity']." m ";
 			$str_msg .= $vial." vial ";
 
-			$str_msg .= $value['package_type']." \n";
+			$str_msg .= $value['package_type']." ";
 		} else {
 			$str_msg .= $value['product_type'].' '." ";
 			$str_msg .= $set." set ";
-			$str_msg .= $vial." vial \n";
+			$str_msg .= $vial." vial ";
 		}
 
 		//--$str_msg .= $value['giveaway']."\n";
@@ -159,7 +159,7 @@
 		//--$str_msg .= " อื่นๆ : ".$value['comment_else']."\n";
 		//$str_msg .= " *----* \n";
 		
-		$str_msg .= " *  ผู้ส่ง  : ".$value['sender']."\n";
+		$str_msg .= "  ผู้ส่ง  : ".$value['sender']."\n";
 		
 		//$str_msg .= " *----* \n";
 

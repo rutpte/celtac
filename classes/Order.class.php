@@ -514,6 +514,7 @@ class Order extends DBConnection
     //-----------------------------------------------------------------
     public function getOrderExport ($str_date_start, $str_date_end)
     {
+		//var_dump($str_date_start);exit;
         $sql ="
             select 
 				*
@@ -537,23 +538,31 @@ class Order extends DBConnection
         //echo "<pre>", $sql; exit;
         $sth = $this->db->prepare($sql);  //sql2
         $result = array();
-        if (!$sth->execute()) {
-            echo '<pre>'.$sql;
-            print_r($sth->errorInfo());
-        } else {
-			$get_num_row = $sth->rowCount();
-            //var_dump($sth->rowCount());
-            //$result = $sth->fetchObject();
-			if($get_num_row > 0){
-				$rs = $sth->fetchAll(PDO::FETCH_ASSOC);
-				$result["success"] = true;
-				$result["data"] = $rs;
-				return ($result);
+		
+		try{
+			if (!$sth->execute()) {
+				
+				echo '<pre>'.$sql;
+				print_r($sth->errorInfo());
 			} else {
-				$result["success"] = false;
-				return ($result);
+				$get_num_row = $sth->rowCount();
+				//var_dump($sth->rowCount());
+				//$result = $sth->fetchObject();
+				if($get_num_row > 0){
+					$rs = $sth->fetchAll(PDO::FETCH_ASSOC);
+					$result["success"] = true;
+					$result["data"] = $rs;
+					return ($result);
+				} else {
+					$result["success"] = false;
+					return ($result);
+				}
 			}
-        }
+		}catch(Exception $e){
+			echo "error. cannot expotr excel file.";
+			exit;
+		}
+
     }
     //---------------------------------------------------------
 	public function check_diff_time_by_strtime($str_time, $diff_minute){
