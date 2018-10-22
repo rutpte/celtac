@@ -1,4 +1,6 @@
 <?php
+
+echo "ยังไม่เสร็จเลยครับ";exit;
 /**
  * PHPExcel
  *
@@ -35,18 +37,31 @@
 	 
 	if (isset($_SESSION['email'])) {//email,is_staff
 		$obj 	= new Order($pdo);
-		$rs_arr = $obj->getOrderExport($str_date_start, $str_date_end);
+		$rs_arr = $obj->getOrderExportReport($str_date_start, $str_date_end);
 		$data = array();
-	
+		if($rs_arr["cell"]){
+			echo 'true';
+		}else{
+			echo 'false';
+		}
+		exit;
+		//var_dump($rs_arr["prfm_tuee"]); exit;
 		if($rs_arr['success']){
-			$data = $rs_arr['data'];
+			if($rs_arr["prfm_tuee"] != false){
+				$data['prfm_tuee'] = $rs_arr["prfm_tuee"];
+			}
+			
+		} else {
+			echo 'false.....';
 		}
 		//----> debug.
-		// foreach($data as $key => $value)
-		// {
-			// var_dump($value['order_code']);
-		// }
-		// exit;
+		
+		echo '<pre>';
+		foreach($data as $key => $value)
+		{
+			var_dump($value);
+		}
+		exit;
 		//------
 		
 	} else {

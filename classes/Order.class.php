@@ -567,9 +567,8 @@ class Order extends DBConnection
 	//-----------------------------------------------------------------
     public function getOrderExportReport ($str_date_start, $str_date_end)
     {
-
+		
 		$sql_cell ="
-			//----------------------------
 			select staff.first_name,user_id,SUM(total_cell) from  order_product
 			inner join staff on staff.id = order_product.user_id
 			WHERE 1=1
@@ -623,48 +622,109 @@ class Order extends DBConnection
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
 			GROUP BY user_id,staff.first_name
 		";
+		
 		//--------------------------------------------------------------------------------------------
-
+		/*
+		echo '<pre>';
+		echo $sql_cell;
+		echo '--------------------------------------------------------';
+		echo $sql_prp_ready;
+		echo '--------------------------------------------------------';
+		echo $sql_placenta;
+		echo '--------------------------------------------------------';
+		echo $sql_prfm_set;
+		echo '--------------------------------------------------------';
+		echo $sql_prfm_tuee;
+		*/
+		//exit;
+		//echo $sql_prp_ready;
 		if($_SESSION['is_staff']){
 
 			//echo "<pre>", $sql; exit;
-			$sth1 = $this->db->prepare($sql_cell); 
-			$sth2 = $this->db->prepare($sql_prp_ready); 
-			$sth3 = $this->db->prepare($sql_placenta); 
-			$sth4 = $this->db->prepare($sql_prfm_set); 
-			$sth5 = $this->db->prepare($sql_prfm_tuee); 
+			// $sth1 = $this->db->prepare($sql_cell); 
+			// $sth2 = $this->db->prepare($sql_prp_ready); 
+			// $sth3 = $this->db->prepare($sql_placenta); 
+			// $sth4 = $this->db->prepare($sql_prfm_set); 
+			// $sth5 = $this->db->prepare($sql_prfm_tuee); 
+			//------------------------------------------------------
 			$result = array();
-			
-			try{
-				if (
-				!$sth1->execute()
-				&& !$sth2->execute()
-				&& !$sth3->execute()
-				&& !$sth4->execute()
-				&& !$sth5->execute()
-
-				) {
-					
-					echo '<pre>'.$sql;
-					print_r($sth->errorInfo());
-				} else {
-					$get_num_row = $sth->rowCount();
-					//var_dump($sth->rowCount());
-					//$result = $sth->fetchObject();
-					if($get_num_row > 0){
-						$rs = $sth->fetchAll(PDO::FETCH_ASSOC);
-						$result["success"] = true;
-						$result["data"] = $rs;
-						return ($result);
-					} else {
-						$result["success"] = false;
-						return ($result);
-					}
-				}
-			}catch(Exception $e){
-				echo "error. cannot expotr excel file.";
-				exit;
+			//------------------------------------------------------
+			try {
+				$rs1 = $this->db->query($sql_cell);
+			} catch (Exception $e) {
+				echo 'Caught exception: ',  $e->getMessage(), "\n";
+				echo "-------------------";
+				echo $sql_cell;
 			}
+			//------------------------------------------------------
+			try {
+				$rs2 = $this->db->query($sql_prp_ready);
+			} catch (Exception $e) {
+				echo 'Caught exception: ',  $e->getMessage(), "\n";
+				echo "-------------------";
+				echo $sql_prp_ready;
+			}
+			//------------------------------------------------------
+			try {
+				$rs3 = $this->db->query($sql_placenta);
+			} catch (Exception $e) {
+				echo 'Caught exception: ',  $e->getMessage(), "\n";
+				echo "-------------------";
+				echo $sql_placenta;
+			}
+			//------------------------------------------------------
+			try {
+				$rs4 = $this->db->query($sql_prfm_set);
+			} catch (Exception $e) {
+				echo 'Caught exception: ',  $e->getMessage(), "\n";
+				echo "-------------------";
+				echo $sql_prfm_set;
+			}
+			//------------------------------------------------------
+			try {
+				$rs5 = $this->db->query($sql_prfm_tuee);
+			} catch (Exception $e) {
+				echo 'Caught exception: ',  $e->getMessage(), "\n";
+				echo "-------------------";
+				echo $sql_prfm_tuee;
+			}
+			//------------------------------------------------------
+
+
+				if (
+					$rs1 != false 
+					&& $rs2 != false
+					&& $rs3 != false
+					&& $rs4 != false
+					&& $rs5 != false
+				) {
+					$result["success"] = true;
+					
+
+					$rs_cell 		= $rs1->fetch(PDO::FETCH_ASSOC);
+					$rs_prp 		= $rs2->fetch(PDO::FETCH_ASSOC);
+					$rs_placenta 	= $rs3->fetch(PDO::FETCH_ASSOC);
+					$rs_prfm_set 	= $rs4->fetch(PDO::FETCH_ASSOC);
+					$rs_prfm_tuee	= $rs5->fetch(PDO::FETCH_ASSOC);
+					
+					//echo '<pre> ';
+					//var_dump($rs_placenta);exit;
+					
+					$result["cell"]      = $rs_cell;
+					$result["prp_ready"] = $rs_prp_ready;
+					$result["placenta"]  = $rs_placenta;
+					$result["prfm_set"]  = $rs_prfm_set;
+					$result["prfm_tuee"] = $rs_prfm_tuee;
+					
+
+					return ($result);
+
+				} else {
+					echo '<pre>';
+					echo 'getOrderExportReport error.';
+
+				}
+
 		}
 
 

@@ -2261,7 +2261,7 @@
 					// debugger;
 					// celtac.g_func.export_excel(str_ag);
 				// });
-				$('#modal_export').find('#bt_export').attr("onclick","celtac.g_func.export_excel("+str_ag+");");
+				$('#modal_export').find('#bt_export').attr("onclick","celtac.g_func.export_excel('"+str_ag+"');");
 				
 			}
 			,export_excel : function(str_ag){ //--> button on modal call.
@@ -2297,7 +2297,8 @@
 				if(str_ag == "export_order"){
 					window.open('export_excel_download.php?str_date_start='+str_date_start+'&str_date_end='+str_date_end, '_blank');
 				} else if(str_ag == "export_report"){
-					window.open('export_excel_report_download.php?str_date_start='+str_date_start+'&str_date_end='+str_date_end, '_blank');
+					debugger;
+					window.open('export_excel_report.php?str_date_start='+str_date_start+'&str_date_end='+str_date_end, '_blank');
 				}else{
 					
 				}
