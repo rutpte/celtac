@@ -1776,6 +1776,8 @@
 					case "update_order":
 						if(true){
 							celtac.g_func.order("export_excel_order");
+							
+							//--> below code move to use in above function.
 							// celtac.g_func.order("send_line");
 							// celtac.g_func.order("send_line_logistic");
 							// celtac.g_func.order("send_mail");
@@ -2240,7 +2242,7 @@
 					return rs;
 				}
 			}
-			,modal_export : function(){
+			,modal_export : function(str_ag){ //-- menu on nav call.
 				$('#exp_start_delivery_date').datepicker();
 				$('#exp_start_delivery_date').datepicker("option", "dateFormat", "yy-mm-dd");
 				
@@ -2248,9 +2250,25 @@
 				$('#exp_end_delivery_date').datepicker("option", "dateFormat", "yy-mm-dd");
 				
 				$('#modal_export').modal('show');
+				//export_order
+				//export_report
+				//var bt = $('#modal_export').find('#bt_export')[0];
+				//bt.onclick.arguments = str_ag;
+				// console.log(str_ag);
+				// debugger;
+				// $('#modal_export').find('#bt_export').click(function() {
+					// console.log(str_ag);
+					// debugger;
+					// celtac.g_func.export_excel(str_ag);
+				// });
+				$('#modal_export').find('#bt_export').attr("onclick","celtac.g_func.export_excel("+str_ag+");");
+				
 			}
-			,export_excel : function(){
+			,export_excel : function(str_ag){ //--> button on modal call.
 				//$('#loading_modal').modal('show');
+				
+				//console.debug(str_ag);
+				//debugger;
 				
 				var date_raw_start 	= $('#exp_start_delivery_date').val();
 				var hour_start 		= $('#exp_start_delivery_time_hour').val();
@@ -2276,8 +2294,12 @@
 				//$date_full 		= new DateTime($str_date);
 				//--$obj_date 		= new DateTime($str_date);;
 				//--$date_formated 	= $obj_date->format('Y-m-d H:i:s');
-				if(true){
+				if(str_ag == "export_order"){
 					window.open('export_excel_download.php?str_date_start='+str_date_start+'&str_date_end='+str_date_end, '_blank');
+				} else if(str_ag == "export_report"){
+					window.open('export_excel_report_download.php?str_date_start='+str_date_start+'&str_date_end='+str_date_end, '_blank');
+				}else{
+					
 				}
 				
 				//-------------------------------------------------

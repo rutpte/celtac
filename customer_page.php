@@ -81,9 +81,9 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 			  </li>  
 			  <li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">menu</a>
-				<div class="dropdown-menu" aria-labelledby="dropdown01">
-				  <a class="nav-link" style="" id="export_excel" href="#" onclick="celtac.g_func.modal_export()">export</a>
-				  <a class="nav-link" style="" id="report_excel" href="#" onclick="celtac.g_func.modal_report()">report</a>
+				<div class="dropdown-menu bg-dark" aria-labelledby="dropdown01">
+				  <a class="nav-link" style="color:#abadad" id="export_excel" href="#" onclick="celtac.g_func.modal_export('export_order')">export</a>
+				  <a class="nav-link" style="color:#abadad" id="report_excel" href="#" onclick="celtac.g_func.modal_export('export_report')">report</a>
 				</div>
 			  </li>
 			</ul>
@@ -1193,7 +1193,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 						  
 				  </div>
 				  <div class="modal-footer">
-					<button class="btn btn-primary btn-lg btn-block" id="bt_export" type="button" onclick="celtac.g_func.export_excel()">Export</button>
+					<button class="btn btn-primary btn-lg btn-block" id="bt_export" type="button" onclick="">Export</button><!-- //celtac.g_func.export_excel() -->
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					
 				  </div>
