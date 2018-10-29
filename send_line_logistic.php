@@ -176,8 +176,8 @@
 		$message .= $str_msg;
 		//--line_notify($Token, $message);
 	}
-	
-	$message .= "from - ".isset($_SESSION['first_name'])? $_SESSION['first_name'] : 'auto update'."\n";
+	//--$user_first_name = isset($_SESSION['first_name'])? $_SESSION['first_name'] : 'auto update';
+	//--$message .= "from - ".$user_first_name."\n";
 	line_notify($Token, $message);
 	//---------------------------------------------------------------------------------------------------------------
 	/*
