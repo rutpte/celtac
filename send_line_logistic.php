@@ -114,6 +114,7 @@
 		//--line_notify($Token, $message);
 	}	*/
 	$message .= "\n";
+	$message .= "มีอัปเดปใหม่ค่ะ(ทดสอบ)";
 	foreach ($data as &$value) {
 		$str_msg = "";
 		$obj_date 		= new DateTime($value['delivery_date_time']);;
@@ -121,7 +122,7 @@
 		$daliv_time 	= $obj_date->format('H:i');
 		
 		//--$str_msg .= $value['order_code']." \n\n ";
-		$str_msg .= "มีอัปเดปใหม่ค่ะ(ทดสอบ)";
+		
 		$str_msg .= "\n*  คุณ  : ".$value['sender']." มีส่ง ";
 		$str_msg .= $value['product_type'];
 		$str_msg .= " วันที่ ".$daliv_date." ";
