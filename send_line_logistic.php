@@ -113,8 +113,10 @@
 		$message .= $str_msg;
 		//--line_notify($Token, $message);
 	}	*/
-	$message .= "\n";
-	$message .= "มีอัปเดปใหม่ค่ะ(ทดสอบ)";
+	$message .= isset($_SESSION['first_name'])? $_SESSION['first_name']."\n" : 'auto update'."\n";
+	$message .= " : มีอัปเดปใหม่ค่ะ(ทดสอบ)\n";
+	
+	
 	foreach ($data as &$value) {
 		$str_msg = "";
 		$obj_date 		= new DateTime($value['delivery_date_time']);;
