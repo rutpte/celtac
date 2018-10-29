@@ -113,7 +113,7 @@
 		$message .= $str_msg;
 		//--line_notify($Token, $message);
 	}	*/
-	$message .= isset($_SESSION['first_name'])? $_SESSION['first_name']."\n" : 'auto update'."\n";
+	$message .= isset($_SESSION['first_name'])? $_SESSION['first_name'] : 'auto update';
 	$message .= " : มีอัปเดปใหม่ค่ะ(ทดสอบ)\n";
 	
 	
