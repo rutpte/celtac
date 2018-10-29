@@ -15,7 +15,7 @@
 		header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/index.php");
 	} 
 
-	$Token = 'CxlMmXRcLg458GiyTx9kINPOKQjyLReSUnGLSyGdFwA';//lab: CxlMmXRcLg458GiyTx9kINPOKQjyLReSUnGLSyGdFwA //logis:n6CCafOSXXpteZoJbffm3dKPxhcU9H8rxt583aYrqmQ
+	$Token = 'n6CCafOSXXpteZoJbffm3dKPxhcU9H8rxt583aYrqmQ';//lab: CxlMmXRcLg458GiyTx9kINPOKQjyLReSUnGLSyGdFwA //logis:n6CCafOSXXpteZoJbffm3dKPxhcU9H8rxt583aYrqmQ
 	$message = isset($_POST["message"])? $_POST["message"] : 'help!' ;
 	//--------------------------------------------
 	
@@ -121,7 +121,8 @@
 		$daliv_time 	= $obj_date->format('H:i');
 		
 		//--$str_msg .= $value['order_code']." \n\n ";
-		$str_msg .= "*  คุณ  : ".$value['sender']." มีส่ง ";
+		$str_msg .= "มีอัปเดปใหม่ค่ะ(ทดสอบ)";
+		$str_msg .= "\n*  คุณ  : ".$value['sender']." มีส่ง ";
 		$str_msg .= $value['product_type'];
 		$str_msg .= " วันที่ ".$daliv_date." ";
 		$str_msg .= ", ".$daliv_time." ";
