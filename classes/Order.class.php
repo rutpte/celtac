@@ -569,58 +569,65 @@ class Order extends DBConnection
     {
 		
 		$sql_cell ="
-			select staff.first_name,user_id,SUM(total_cell) from  order_product
+			select customer_name, SUM(total_cell), staff.first_name as staff_n ,dealer_company,price_rate,user_id 
+			from  order_product
 			inner join staff on staff.id = order_product.user_id
 			WHERE 1=1
 			AND product_type = 'cell'
 			AND 	
 				delivery_date_time 
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
-			GROUP BY user_id,staff.first_name
+			GROUP BY customer_name,staff.first_name,dealer_company,price_rate,user_id
 		";
+		//echo '<pre>'.$sql_cell; exit;
 			//-----------------------------
 		$sql_prp_ready ="
-			select staff.first_name,user_id,SUM(set) as set,SUM(vial)as vial from  order_product
+			select customer_name,SUM(set) as set,SUM(vial)as vial, staff.first_name as staff_n ,dealer_company,price_rate,user_id 
+			from  order_product
 			inner join staff on staff.id = order_product.user_id
 			WHERE 1=1
 			AND product_type = 'prp_ready'
 			AND 	
 				delivery_date_time 
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
-			GROUP BY user_id,staff.first_name
+			GROUP BY customer_name,user_id,staff.first_name,dealer_company,price_rate
 		";
+		//echo '<pre>'.$sql_prp_ready; exit;
 			//-----------------------------
 		$sql_placenta ="
-			select staff.first_name,user_id,SUM(set) as set,SUM(vial)as vial from  order_product
+			select customer_name,staff.first_name as staff_n ,user_id,SUM(set) as set,SUM(vial)as vial,dealer_company,price_rate 
+			from  order_product
 			inner join staff on staff.id = order_product.user_id
 			WHERE 1=1
 			AND product_type = 'placenta'
 			AND 	
 				delivery_date_time 
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
-			GROUP BY user_id,staff.first_name
+			GROUP BY customer_name,user_id,staff.first_name,dealer_company,price_rate
 		";
 			//-----------------------------
 		$sql_prfm_set ="
-			select staff.first_name,user_id,SUM(set) as set,SUM(vial)as vial from  order_product
+			select customer_name,staff.first_name as staff_n ,user_id,SUM(set) as set,SUM(vial)as vial ,dealer_company,price_rate
+			from  order_product
 			inner join staff on staff.id = order_product.user_id
 			WHERE 1=1
 			AND product_type = 'prfm_set'
 			AND 	
 				delivery_date_time 
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
-			GROUP BY user_id,staff.first_name
+			GROUP BY customer_name,user_id,staff.first_name,dealer_company,price_rate
 		";
 			//-----------------------------
 		$sql_prfm_tuee ="
-			select staff.first_name,user_id,SUM(set) as set,SUM(vial)as vial from  order_product
+			select customer_name,staff.first_name as staff_n,user_id,SUM(set) as set,SUM(vial)as vial,dealer_company,price_rate 
+			from  order_product
 			inner join staff on staff.id = order_product.user_id
 			WHERE 1=1
 			AND product_type = 'prfm_tuee'
 			AND 	
 				delivery_date_time 
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
-			GROUP BY user_id,staff.first_name
+			GROUP BY customer_name,user_id,staff.first_name,dealer_company,price_rate
 		";
 		
 		//--------------------------------------------------------------------------------------------
@@ -701,14 +708,13 @@ class Order extends DBConnection
 					$result["success"] = true;
 					
 
-					$rs_cell 		= $rs1->fetch(PDO::FETCH_ASSOC);
-					$rs_prp 		= $rs2->fetch(PDO::FETCH_ASSOC);
-					$rs_placenta 	= $rs3->fetch(PDO::FETCH_ASSOC);
-					$rs_prfm_set 	= $rs4->fetch(PDO::FETCH_ASSOC);
-					$rs_prfm_tuee	= $rs5->fetch(PDO::FETCH_ASSOC);
+					$rs_cell 		= $rs1->fetchAll(PDO::FETCH_ASSOC);
+					$rs_prp_ready   = $rs2->fetchAll(PDO::FETCH_ASSOC);
+					$rs_placenta 	= $rs3->fetchAll(PDO::FETCH_ASSOC);
+					$rs_prfm_set 	= $rs4->fetchAll(PDO::FETCH_ASSOC);
+					$rs_prfm_tuee	= $rs5->fetchAll(PDO::FETCH_ASSOC);
 					
-					//echo '<pre> ';
-					//var_dump($rs_placenta);exit;
+
 					
 					$result["cell"]      = $rs_cell;
 					$result["prp_ready"] = $rs_prp_ready;
@@ -716,7 +722,8 @@ class Order extends DBConnection
 					$result["prfm_set"]  = $rs_prfm_set;
 					$result["prfm_tuee"] = $rs_prfm_tuee;
 					
-
+					// echo '<pre> ';
+					// var_dump($result);exit;
 					return ($result);
 
 				} else {

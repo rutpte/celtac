@@ -1,6 +1,6 @@
 <?php
 
-echo "ยังไม่เสร็จเลยครับ";exit;
+//echo "ยังไม่เสร็จเลยครับ";exit;
 /**
  * PHPExcel
  *
@@ -38,30 +38,37 @@ echo "ยังไม่เสร็จเลยครับ";exit;
 	if (isset($_SESSION['email'])) {//email,is_staff
 		$obj 	= new Order($pdo);
 		$rs_arr = $obj->getOrderExportReport($str_date_start, $str_date_end);
-		$data = array();
-		if($rs_arr["cell"]){
-			echo 'true';
-		}else{
-			echo 'false';
-		}
-		exit;
+		$data = $rs_arr;
+		
+		//---
+		//echo '<pre>';
+		//var_dump($rs_arr["cell"]);
+		
+		// if($rs_arr["cell"]){
+			// echo 'true';
+		// }else{
+			// echo 'false';
+		// }
+		// exit;
 		//var_dump($rs_arr["prfm_tuee"]); exit;
-		if($rs_arr['success']){
-			if($rs_arr["prfm_tuee"] != false){
-				$data['prfm_tuee'] = $rs_arr["prfm_tuee"];
-			}
+		// if($rs_arr['success']){
+			// if($rs_arr["prfm_tuee"] != false){
+				// $data['prfm_tuee'] = $rs_arr["prfm_tuee"];
+			// }
 			
-		} else {
-			echo 'false.....';
-		}
+		// } else {
+			// echo 'false.....';
+		// }
 		//----> debug.
 		
-		echo '<pre>';
-		foreach($data as $key => $value)
-		{
-			var_dump($value);
-		}
-		exit;
+		// echo '<pre> ';
+		// var_dump($data);exit;
+		
+		// foreach($data as $key => $value)
+		// {
+			// var_dump($value);
+		// }
+		// exit;
 		//------
 		
 	} else {
@@ -78,28 +85,24 @@ echo "ยังไม่เสร็จเลยครับ";exit;
 	require_once 'libs/PHPExcel/Classes/PHPExcel.php';
 
 
-	$arr_col = array(
-		"date"
-		,"time"
-		,"order_code"
+	$arr_col_cell = array(
+
 		,"customer_name"
-		,"product_type"
+		,"quantity"
+		,"total_cell"
+		,"staff_n"
+		,"dealer_company"
+		,"price_rate"
+	);
+	$arr_col_else = array(
+
+		,"customer_name"
 		,"quantity"
 		,"vial"
-		,"total_cell"
-		,"package_type"
-		,"giveaway"
-		,"sender"
-		,"receiver"
-		,"dealer_person"
+		,"staff_n"
 		,"dealer_company"
-		,"user_id"
-		,"order_date"
-		,"last_update_date"
 		,"price_rate"
-		,"comment_else"
 	);
-		
 	$objPHPExcel = new PHPExcel();
 	$objPHPExcel->getDefaultStyle()->getFont()->setName('Cordia New')->setSize(13);
 	$objPHPExcel->getProperties()->setTitle("order cell")->setDescription($daliv_date.' '.$daliv_time);
@@ -116,16 +119,6 @@ echo "ยังไม่เสร็จเลยครับ";exit;
 	$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, 1, "order cell : ".$daliv_date." ".$daliv_time);
 	
 	//--------------------------------------------------------------------------------------------
-	$col = 0;
-	$rowofcol = 2;
-	
-	//--> add column.
-	foreach ($arr_col as $value) 
-	{
-		$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $rowofcol, $value);
-		$col++;
-	}
-	//--------------------------------------------------------------------------------------------
 	//echo '<pre>';
 	//var_dump($data); exit;
 	//--------------------------------------------------------------------------------------------
@@ -134,6 +127,16 @@ echo "ยังไม่เสร็จเลยครับ";exit;
 	$row_data = 3;
 	foreach($data as $key => $value)
 	{
+		$col = 0;
+		$rowofcol = $row_data;
+		$row_data++;
+		//--> add column.
+		foreach ($arr_col as $value) 
+		{
+			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $rowofcol, $value);
+			$col++;
+		}
+	
 		$obj_date 		= new DateTime($value['delivery_date_time']);;
 		$daliv_date 	= $obj_date->format('d-m-Y');
 		$daliv_time 	= $obj_date->format('H:i:s');
@@ -164,24 +167,23 @@ echo "ยังไม่เสร็จเลยครับ";exit;
 			}
 			//-----------
 		$col = 0;
-		foreach ($arr_col as $key) 
+		foreach ($value as $each_val) 
 		{
-			//echo $value[$key];
-			if($key == "date"){
-				$rs_data = $daliv_date;
-			} else if ($key == "time"){
-				$rs_data = $daliv_time;
-			} else {
-				$rs_data = $value[$key];
+			foreach ($arr_col as $key) 
+			{
+
+				$rs_data = $each_val[$key];
+				
+				$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $row_data, $rs_data);
+				$columnLetter = PHPExcel_Cell::stringFromColumnIndex($col);
+				
+				cellColor($columnLetter.$row_data,$color);
+				$col++;
 			}
-			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $row_data, $rs_data);
-			$columnLetter = PHPExcel_Cell::stringFromColumnIndex($col);
-			
-			cellColor($columnLetter.$row_data,$color);
-			$col++;
+
+			$row_data++;
 		}
 
-		$row_data++;
 	}
 
 	//--------------------------------------------------------------------------------------------
