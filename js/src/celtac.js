@@ -1701,7 +1701,7 @@
 								method : 'POST',
 								data: { 
 									"q"              					: "xxx"
-									, "message"							: "มีอัปเดปใหม่ค่ะ"
+									, "message"							: ""
 								},
 								type: "GET",
 								success:function(response){
