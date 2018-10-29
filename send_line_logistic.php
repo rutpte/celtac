@@ -114,7 +114,7 @@
 		//--line_notify($Token, $message);
 	}	*/
 	$message .= isset($_SESSION['first_name'])? $_SESSION['first_name'] : 'auto update';
-	$message .= " : มีอัปเดปใหม่ค่ะ(ทดสอบ)\n";
+	$message .= " : มีอัปเดปใหม่ค่ะ\n";
 	
 	
 	foreach ($data as &$value) {
