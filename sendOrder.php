@@ -90,15 +90,15 @@ $tb_rut .='<table class="table"';
 				if(($index_color%2)==0){
 					$color = '#f4f2f2';
 				} else {
-					$color = '#7c7a7a';
+					$color = '#ffffff';
 				}
 				$pre_code = $daliv_date;
 			}else{
 				$index_color++;
-				if($color == '#7c7a7a'){
+				if($color == '#ffffff'){
 					$color = '#f4f2f2';
 				} else {
-					$color = '#7c7a7a';
+					$color = '#ffffff';
 				}
 				$pre_code = $daliv_date;
 			}
