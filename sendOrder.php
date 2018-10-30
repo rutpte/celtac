@@ -85,7 +85,7 @@ $tb_rut .='<table class="table"';
 		
 		
 		$tb_rut .='<tr>';
-			$tb_rut .='<td id = "delivery_date">'.$daliv_date.'</td>';
+			$tb_rut .='<td style="color:red" id = "delivery_date">'.$daliv_date.'</td>';
 			$tb_rut .='<td id = "delivery_time">'.$daliv_time.'</td>';
 			$tb_rut .='<td id = "order_code">'.$value['order_code'].'</td>';
 			$tb_rut .='<td id = "customer_name">'.$value['customer_name'].'</td>';
