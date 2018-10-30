@@ -34,7 +34,7 @@ require 'libs/PHPMailer/src/SMTP.php';
 //--> loop data for create content html and set it to $html_mail.
 
 $from_email 		= 'celtac.order@gmail.com';
-$from_email_pass  	= 'celtac12345678';
+$from_email_pass  	= '';
 $mailTo = array(
 "sopidakolahol@gmail.com"
  ,"chaivanida@gmail.com" 
