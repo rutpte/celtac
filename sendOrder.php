@@ -77,30 +77,54 @@ $tb_rut .='<table class="table"';
 		
 	//$tb_rut .='</tr>';
 	//$tb_rut .='<tbody>';
+	$pre_code = '';
 	foreach ($data as &$value) {
 		
 		$obj_date 		= new DateTime($value['delivery_date_time']);;
 		$daliv_date 	= $obj_date->format('d-m-Y');
 		$daliv_time 	= $obj_date->format('H:i:s');
-		
-		
+		//-------------------------------------------
+		if($pre_code != ''){
+			
+			if($daliv_date == $pre_code){
+				if(($index_color%2)==0){
+					$color = '#fcfcfc';
+				} else {
+					$color = '#c6c6c6';
+				}
+				$pre_code = $daliv_date;
+			}else{
+				$index_color++;
+				if($color == '#c6c6c6'){
+					$color = '#fcfcfc';
+				} else {
+					$color = '#c6c6c6';
+				}
+				$pre_code = $daliv_date;
+			}
+		} else {
+			//--> init_config.
+			$color = '#fcfcfc';
+			$pre_code = $daliv_date;
+		}
+		//-------------------------------------------
 		$tb_rut .='<tr>';
-			$tb_rut .='<td style="color:red" id = "delivery_date">'.$daliv_date.'</td>';
-			$tb_rut .='<td id = "delivery_time">'.$daliv_time.'</td>';
-			$tb_rut .='<td id = "order_code">'.$value['order_code'].'</td>';
-			$tb_rut .='<td id = "customer_name">'.$value['customer_name'].'</td>';
-			$tb_rut .='<td id = "product_type">'.$value['product_type'].'</td>';
-			$tb_rut .='<td id = "quantity">'.$value['quantity'].'</td>';
-			$tb_rut .='<td id = "vial">'.$value['vial'].'</td>';
-			$tb_rut .='<td id = "total_cel">'.$value['total_cel'].'</td>';
-			$tb_rut .='<td id = "package_type">'.$value['package_type'].'</td>';
-			$tb_rut .='<td id = "giveaway">'.$value['giveaway'].'</td>';
-			$tb_rut .='<td id = "sender">'.$value['sender'].'</td>';
-			$tb_rut .='<td id = "receiver">'.$value['receiver'].'</td>';
-			$tb_rut .='<td id = "dealer_person">'.$value['dealer_person'].'</td>';
-			$tb_rut .='<td id = "dealer_company">'.$value['dealer_company'].'</td>';
-			$tb_rut .='<td id = "price_rate">'.$value['price_rate'].'</td>';
-			$tb_rut .='<td id = "comment_else">'.$value['comment_else'].'</td>';
+			$tb_rut .='<td style="color:'.$color.'" id = "delivery_date">'.$daliv_date.'</td>';
+			$tb_rut .='<td style="color:'.$color.'" id = "delivery_time">'.$daliv_time.'</td>';
+			$tb_rut .='<td style="color:'.$color.'" id = "order_code">'.$value['order_code'].'</td>';
+			$tb_rut .='<td style="color:'.$color.'" id = "customer_name">'.$value['customer_name'].'</td>';
+			$tb_rut .='<td style="color:'.$color.'" id = "product_type">'.$value['product_type'].'</td>';
+			$tb_rut .='<td style="color:'.$color.'" id = "quantity">'.$value['quantity'].'</td>';
+			$tb_rut .='<td style="color:'.$color.'" id = "vial">'.$value['vial'].'</td>';
+			$tb_rut .='<td style="color:'.$color.'" id = "total_cel">'.$value['total_cel'].'</td>';
+			$tb_rut .='<td style="color:'.$color.'" id = "package_type">'.$value['package_type'].'</td>';
+			$tb_rut .='<td style="color:'.$color.'" id = "giveaway">'.$value['giveaway'].'</td>';
+			$tb_rut .='<td style="color:'.$color.'" id = "sender">'.$value['sender'].'</td>';
+			$tb_rut .='<td style="color:'.$color.'" id = "receiver">'.$value['receiver'].'</td>';
+			$tb_rut .='<td style="color:'.$color.'" id = "dealer_person">'.$value['dealer_person'].'</td>';
+			$tb_rut .='<td style="color:'.$color.'" id = "dealer_company">'.$value['dealer_company'].'</td>';
+			$tb_rut .='<td style="color:'.$color.'" id = "price_rate">'.$value['price_rate'].'</td>';
+			$tb_rut .='<td style="color:'.$color.'" id = "comment_else">'.$value['comment_else'].'</td>';
 
 		$tb_rut .='</tr>';
 	}
