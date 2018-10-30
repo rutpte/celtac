@@ -88,23 +88,23 @@ $tb_rut .='<table class="table"';
 			
 			if($daliv_date == $pre_code){
 				if(($index_color%2)==0){
-					$color = '#fcfcfc';
+					$color = '#111111';
 				} else {
-					$color = '#c6c6c6';
+					$color = '#7c7a7a';
 				}
 				$pre_code = $daliv_date;
 			}else{
 				$index_color++;
-				if($color == '#c6c6c6'){
-					$color = '#fcfcfc';
+				if($color == '#7c7a7a'){
+					$color = '#111111';
 				} else {
-					$color = '#c6c6c6';
+					$color = '#7c7a7a';
 				}
 				$pre_code = $daliv_date;
 			}
 		} else {
 			//--> init_config.
-			$color = '#fcfcfc';
+			$color = '#111111';
 			$pre_code = $daliv_date;
 		}
 		//-------------------------------------------
