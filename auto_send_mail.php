@@ -54,9 +54,21 @@ require 'libs/PHPMailer/src/SMTP.php';
 
 $from_email 		= 'celtac.order@gmail.com';
 $from_email_pass  	= 'celtac1234';
-$mailTo 			= array("yupa.pangtum@gmail.com", "thawee2507@hotmail.com","thongjet@hotmail.com", "my_name_is_ken@live.com", "iloveubon@gmail.com", "zerokung.devil@gmail.com");
+//$mailTo 			= array("yupa.pangtum@gmail.com", "thawee2507@hotmail.com","thongjet@hotmail.com", "my_name_is_ken@live.com", "iloveubon@gmail.com", "zerokung.devil@gmail.com");
 //$mailTo 			= array("zerokung.devil@gmail.com", "iloveubon@gmail.com");
-
+$mailTo = array(
+"sopidakolahol@gmail.com"
+ ,"chaivanida@gmail.com" 
+ , "yupa.pangtum@gmail.com" 
+ , "thongjet@hotmail.com" 
+ , "thawee2507@hotmail.com" 
+ , "rsubkk@hotmail.com" 
+ , "my_name_is_ken@live.com" 
+ , "celtac@live.com" 
+ , "apichat_99_pk_@hotmail.com"
+ , "iloveubon@gmail.com"
+	//, "zerokung.devil@gmail.com"
+);
 
 //-----------------------------------------------------------------------------------------
 $tb_rut .='<table class="table"';

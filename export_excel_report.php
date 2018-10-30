@@ -39,8 +39,47 @@
 		$obj 	= new Order($pdo);
 		$rs_arr = $obj->getOrderExportReport($str_date_start, $str_date_end);
 		$data = $rs_arr;
-		
-		//---
+		//-----------------------------
+		// echo '<pre>';
+		// foreach($data as $key => $value)
+		// {
+			// var_dump($value);continue;
+			// if (is_array($value) || is_object($value))
+			// {
+				// foreach ($value as $val)
+				// {
+					// echo 'xxx ; ';
+					// var_dump($val);continue;
+				// }
+			// }
+
+		// }
+		// exit;
+		//---------------------------------------------
+		/*
+		echo '<pre>';
+		foreach($data as $key => $value)
+		{
+			//echo $key;
+			// if($key == "success"){
+				// echo $key.' ont in';
+				// echo'<br>';
+				// continue;
+			// }
+			//--
+			if (is_array($value) || is_object($value))
+			{
+				foreach ($value as $val)
+				{
+					echo $key;
+					//var_dump($val);
+				}
+			}
+			
+		}
+		exit;
+		*/
+		//---------------------------------------------
 		//echo '<pre>';
 		//var_dump($rs_arr["cell"]);
 		
@@ -61,8 +100,8 @@
 		// }
 		//----> debug.
 		
-		// echo '<pre> ';
-		// var_dump($data);exit;
+		//echo '<pre> ';
+		//var_dump($data);exit;
 		
 		// foreach($data as $key => $value)
 		// {
@@ -87,21 +126,22 @@
 
 	$arr_col_cell = array(
 
-		,"customer_name"
-		,"quantity"
-		,"total_cell"
-		,"staff_n"
-		,"dealer_company"
-		,"price_rate"
+		"customer_name" 	=> "customer_name"
+		,"quantity" 		=> "quantity"
+		,"total_cell" 		=> "total_cell"
+		,"staff_n" 			=> "staff_n"
+		,"dealer_company" 	=> "dealer_company"
+		,"price_rate" 		=> "price_rate"
 	);
 	$arr_col_else = array(
 
-		,"customer_name"
-		,"quantity"
-		,"vial"
-		,"staff_n"
-		,"dealer_company"
-		,"price_rate"
+		"customer_name" 	=> "customer_name"
+		,"quantity" 		=> "quantity"
+		,"set" 				=> "set"
+		,"vial" 			=> "vial"
+		,"staff_n" 			=> "staff_n"
+		,"dealer_company" 	=> "dealer_company"
+		,"price_rate" 		=> "price_rate"
 	);
 	$objPHPExcel = new PHPExcel();
 	$objPHPExcel->getDefaultStyle()->getFont()->setName('Cordia New')->setSize(13);
@@ -114,8 +154,8 @@
 	$objPHPExcel->setActiveSheetIndex($i);
 	$objPHPExcel->getActiveSheet()->setTitle("order cell");
 
-	$objPHPExcel->getActiveSheet()->mergeCells('A1:O1')->getStyle('A1:O1')->getFont()->setSize(15)->setBold(true);
-	$objPHPExcel->getActiveSheet()->getStyle('A1:O1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+	$objPHPExcel->getActiveSheet()->mergeCells('A1:G1')->getStyle('A1:G1')->getFont()->setSize(7)->setBold(true);
+	$objPHPExcel->getActiveSheet()->getStyle('A1:G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 	$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, 1, "order cell : ".$daliv_date." ".$daliv_time);
 	
 	//--------------------------------------------------------------------------------------------
@@ -123,65 +163,84 @@
 	//var_dump($data); exit;
 	//--------------------------------------------------------------------------------------------
 	//--> add data.
-	$pre_code = '';
+	
 	$row_data = 3;
 	foreach($data as $key => $value)
 	{
+		
+		if($key == "success"){
+			continue;
+		}
+		//---
 		$col = 0;
+		$row_data+2;
 		$rowofcol = $row_data;
-		$row_data++;
+		
 		//--> add column.
-		foreach ($arr_col as $value) 
+		if($key == "cell"){
+			$arr_col = $arr_col_cell;
+		} else {
+			$arr_col = $arr_col_else;
+		}
+		foreach ($arr_col as  $key => $value) 
 		{
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $rowofcol, $value);
 			$col++;
 		}
 	
-		$obj_date 		= new DateTime($value['delivery_date_time']);;
-		$daliv_date 	= $obj_date->format('d-m-Y');
-		$daliv_time 	= $obj_date->format('H:i:s');
+		//$obj_date 		= new DateTime($value['delivery_date_time']);;
+		//$daliv_date 	= $obj_date->format('d-m-Y');
+		//$daliv_time 	= $obj_date->format('H:i:s');
 		//------------------------------------------
 		//var_dump($value['order_code']);
-			if($pre_code != ''){
-				
-				if($value['order_code'] == $pre_code){
-					if(($index_color%2)==0){
-						$color = 'fcfcfc';
-					} else {
-						$color = 'c6c6c6';
-					}
-					$pre_code = $value['order_code'];
-				}else{
-					$index_color++;
-					if($color == 'c6c6c6'){
-						$color = 'fcfcfc';
-					} else {
-						$color = 'c6c6c6';
-					}
-					$pre_code = $value['order_code'];
-				}
-			} else {
-				//--> init_config.
-				$color = 'fcfcfc';
-				$pre_code = $value['order_code'];
-			}
+
 			//-----------
-		$col = 0;
-		foreach ($value as $each_val) 
-		{
-			foreach ($arr_col as $key) 
-			{
 
-				$rs_data = $each_val[$key];
-				
-				$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $row_data, $rs_data);
-				$columnLetter = PHPExcel_Cell::stringFromColumnIndex($col);
-				
-				cellColor($columnLetter.$row_data,$color);
-				$col++;
+		$col = 0;
+		if (is_array($value) || is_object($value))
+		{
+			foreach ($value as $each_val) 
+			{
+				$pre_staff_n = '';
+				if($pre_staff_n != ''){
+					
+					if($each_val['staff_n'] == $pre_staff_n){
+						if(($index_color%2)==0){
+							$color = 'fcfcfc';
+						} else {
+							$color = 'c6c6c6';
+						}
+						$pre_staff_n = $each_val['staff_n'];
+					}else{
+						$index_color++;
+						if($color == 'c6c6c6'){
+							$color = 'fcfcfc';
+						} else {
+							$color = 'c6c6c6';
+						}
+						$pre_staff_n = $each_val['staff_n'];
+					}
+				} else {
+					//--> init_config.
+					$color = 'fcfcfc';
+					$pre_staff_n = $each_val['staff_n'];
+				}
+				//----
+				foreach ($arr_col as  $key => $value) 
+				{
+
+					$rs_data = $each_val[$key];
+					
+					$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $row_data, $rs_data);
+					$columnLetter = PHPExcel_Cell::stringFromColumnIndex($col);
+					
+					cellColor($columnLetter.$row_data,$color);
+					$col++;
+				}
+
+				$row_data++;
 			}
 
-			$row_data++;
 		}
 
 	}
@@ -197,7 +256,7 @@
     }
 	//--------------------------------------------------------------------------------------------
 	//--> set color.
-	cellColor('A2:R2', 'adad85');
+	//cellColor('A2:G2', 'adad85');
 	//--------------------------------------------------------------------------------------------
 	function cellColor($cells,$color){
 		global $objPHPExcel;
