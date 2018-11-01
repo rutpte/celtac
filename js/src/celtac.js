@@ -459,12 +459,20 @@
 								}
 							});
 							*/
-							$("#quantity").on("keypress keyup blur",function (event) {   
+							$("#quantity").on("keypress keyup blur",function (event) {  
+							  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+								event.preventDefault();
+							  }
+							});
+							/*
+							$("#quantity").on("keypress keyup blur",function (event) {  
+								console.log(event.which);
 								$(this).val($(this).val().replace(/[^\d].+/, ""));
 								if ((event.which < 48 || event.which > 57)) {
 									event.preventDefault();
 								}
 							});
+							*/
 							$("#set").on("keypress keyup blur",function (event) {   
 								$(this).val($(this).val().replace(/[^\d].+/, ""));
 								if ((event.which < 48 || event.which > 57)) {
