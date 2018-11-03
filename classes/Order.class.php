@@ -721,6 +721,7 @@ class Order extends DBConnection
 					$result["placenta"]  = $rs_placenta;
 					$result["prfm_set"]  = $rs_prfm_set;
 					$result["prfm_tuee"] = $rs_prfm_tuee;
+					$result["date_time"] = $str_date_start.' - '.$str_date_end;
 					
 					// echo '<pre> ';
 					// var_dump($result);exit;
