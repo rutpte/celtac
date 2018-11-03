@@ -201,7 +201,8 @@
 			//--echo $value_col;
 			//--echo ' -> '.$col.':'. $rowofcol;
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $rowofcol, $value_col);
-			cellColor($col.$rowofcol,'green');
+			$col_name = PHPExcel_Cell::stringFromColumnIndex($col);
+			cellColor($col_name.$rowofcol,'green');
 			$col++;
 		}
 		//--echo "</br>";
