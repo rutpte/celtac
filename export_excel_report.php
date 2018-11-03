@@ -177,6 +177,7 @@
 		$rowofcol = $row_data;
 		
 		//--> add column.-------------------------------------------------------------------------------
+		echo "</br>";
 		if($key == "cell"){
 			$arr_col = $arr_col_cell;
 		} else {
@@ -184,10 +185,12 @@
 		}
 		foreach ($arr_col as  $key => $value_col) 
 		{
-			echo "</br>column : ".$col." : ". $rowofcol." : ". $value_col."</br>";
+			//echo "column : ".$col." : ". $rowofcol." : ". $value_col;
+			echo $value_col;
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $rowofcol, $value_col);
 			$col++;
 		}
+		echo "</br>";
 		//------------------------------------------------------------------------------------------------
 		//$obj_date 		= new DateTime($value['delivery_date_time']);;
 		//$daliv_date 	= $obj_date->format('d-m-Y');
