@@ -187,7 +187,7 @@
 		{
 			//echo "column : ".$col." : ". $rowofcol." : ". $value_col;
 			echo $value_col;
-			echo $col. $rowofcol;
+			echo ' -> '.$col.':'. $rowofcol;
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $rowofcol, $value_col);
 			$col++;
 		}
