@@ -231,7 +231,7 @@
 					}
 				} else {
 					//--> init_config.
-					$color = 'red';//fcfcfc
+					$color = 'fcfcfc';//fcfcfc
 					$pre_staff_n = $each_val['staff_n'];
 				}
 				//----
