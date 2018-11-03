@@ -177,9 +177,9 @@
 		$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $rowofcol-1, $key);
 		//--$col_name = PHPExcel_Cell::stringFromColumnIndex($col);
 		if($key == "cell"){
-			$cell_head = "C".($rowofcol-1).":H".($rowofcol-1)."";
-		} else {
 			$cell_head = "C".($rowofcol-1).":G".($rowofcol-1)."";
+		} else {
+			$cell_head = "C".($rowofcol-1).":H".($rowofcol-1)."";
 		}
 		
 		//echo $cell_head;exit;
