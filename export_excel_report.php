@@ -154,7 +154,7 @@
 	$objPHPExcel->setActiveSheetIndex($i);
 	$objPHPExcel->getActiveSheet()->setTitle("order cell");
 
-	$objPHPExcel->getActiveSheet()->mergeCells('A1:G1')->getStyle('A1:G1')->getFont()->setSize(7)->setBold(true);
+	$objPHPExcel->getActiveSheet()->mergeCells('A1:G1')->getStyle('A1:G1')->getFont()->setSize(18)->setBold(true);
 	$objPHPExcel->getActiveSheet()->getStyle('A1:G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 	$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, 1, "order cell : ".$data['date_time']);
 	
