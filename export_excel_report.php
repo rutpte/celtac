@@ -173,7 +173,8 @@
 		$col = 2;
 		$row_data = $row_data+2;
 		$rowofcol = $row_data;
-		
+		//--> set topic.
+		$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $rowofcol-1, $key);
 		//--> add column.-------------------------------------------------------------------------------
 		//--echo "</br>";
 		if($key == "cell"){
@@ -187,7 +188,7 @@
 			//--echo $value_col;
 			//--echo ' -> '.$col.':'. $rowofcol;
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $rowofcol, $value_col);
-			cellColor($col.$rowofcol,'green');
+			//cellColor($col.$rowofcol,'green');
 			$col++;
 		}
 		//--echo "</br>";
@@ -230,7 +231,7 @@
 					}
 				} else {
 					//--> init_config.
-					$color = 'fcfcfc';
+					$color = 'red';//fcfcfc
 					$pre_staff_n = $each_val['staff_n'];
 				}
 				//----
