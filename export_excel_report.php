@@ -141,9 +141,11 @@
 		,"dealer_company" 	=> "dealer_company"
 		,"price_rate" 		=> "price_rate"
 	);
+	
+	//var_dump($data['date_time']);exit;
 	$objPHPExcel = new PHPExcel();
 	$objPHPExcel->getDefaultStyle()->getFont()->setName('Cordia New')->setSize(13);
-	$objPHPExcel->getProperties()->setTitle("order cell")->setDescription($daliv_date.' '.$daliv_time);
+	$objPHPExcel->getProperties()->setTitle("order cell")->setDescription($data['date_time']);
 	$objPHPExcel->removeSheetByIndex(0);//and then crate it below.
 	$i = 0;
 
@@ -154,7 +156,7 @@
 
 	$objPHPExcel->getActiveSheet()->mergeCells('A1:G1')->getStyle('A1:G1')->getFont()->setSize(7)->setBold(true);
 	$objPHPExcel->getActiveSheet()->getStyle('A1:G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-	$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, 1, "order cell : ".$daliv_date." ".$daliv_time);
+	$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, 1, "order cell : ".$data['date_time']);
 	
 	//--------------------------------------------------------------------------------------------
 	//echo '<pre>';
@@ -166,7 +168,7 @@
 	foreach($data as $key => $value)
 	{
 		
-		if($key == "success"){
+		if($key == "success" || $key == "date_time"){
 			continue;
 		}
 		//---
