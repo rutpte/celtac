@@ -237,14 +237,14 @@
 				{
 
 					$rs_data = $each_val[$key];
-					echo "data : ".$rs_data.",";
+					echo "".$rs_data.",";
 					$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $row_data, $rs_data);
 					$columnLetter = PHPExcel_Cell::stringFromColumnIndex($col);
 					
 					cellColor($columnLetter.$row_data,$color);
 					$col++;
 				}
-				
+				echo '</br>';
 
 				$row_data++;
 			}
