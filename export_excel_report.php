@@ -173,7 +173,7 @@
 		}
 		//---
 		$col = 0;
-		$row_data+2;
+		$row_data = $row_data+2;
 		$rowofcol = $row_data;
 		
 		//--> add column.-------------------------------------------------------------------------------
@@ -203,7 +203,7 @@
 		//------------------------------------------------------------------------------------------------
 		//--> add data row.
 		$col = 0;
-		$row_data+1;
+		$row_data++;
 		if (is_array($value) || is_object($value))
 		{
 			foreach ($value as $each_val) 
