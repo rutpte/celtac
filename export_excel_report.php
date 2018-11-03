@@ -127,7 +127,6 @@
 	$arr_col_cell = array(
 
 		"customer_name" 	=> "customer_name"
-		,"quantity" 		=> "quantity"
 		,"total_cell" 		=> "total_cell"
 		,"staff_n" 			=> "staff_n"
 		,"dealer_company" 	=> "dealer_company"
@@ -208,6 +207,7 @@
 		{
 			foreach ($value as $each_val) 
 			{
+				var_dump($each_val);exit;
 				$col = 0;
 				$pre_staff_n = '';
 				if($pre_staff_n != ''){
