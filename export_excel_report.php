@@ -177,7 +177,7 @@
 		$rowofcol = $row_data;
 		
 		//--> add column.-------------------------------------------------------------------------------
-		echo "</br>";
+		//--echo "</br>";
 		if($key == "cell"){
 			$arr_col = $arr_col_cell;
 		} else {
