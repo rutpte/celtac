@@ -569,7 +569,7 @@ class Order extends DBConnection
     {
 		
 		$sql_cell ="
-			select customer_name, SUM(total_cell), staff.first_name as staff_n ,dealer_company,price_rate,user_id 
+			select customer_name, SUM(total_cell)as total_cell, staff.first_name as staff_n ,dealer_company,price_rate,user_id 
 			from  order_product
 			inner join staff on staff.id = order_product.user_id
 			WHERE 1=1
