@@ -170,7 +170,7 @@
 			continue;
 		}
 		//---
-		$col = 0;
+		$col = 2;
 		$row_data = $row_data+2;
 		$rowofcol = $row_data;
 		
@@ -187,7 +187,7 @@
 			//--echo $value_col;
 			//--echo ' -> '.$col.':'. $rowofcol;
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $rowofcol, $value_col);
-			cellColor($col.$rowofcol,$color);
+			cellColor($col.$rowofcol,'green');
 			$col++;
 		}
 		//--echo "</br>";
@@ -208,7 +208,7 @@
 			foreach ($value as $each_val) 
 			{
 				//var_dump($each_val);exit;
-				$col = 0;
+				$col = 2;
 				$pre_staff_n = '';
 				if($pre_staff_n != ''){
 					
