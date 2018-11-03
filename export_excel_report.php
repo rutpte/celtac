@@ -176,10 +176,14 @@
 		//--> set topic.
 		$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $rowofcol-1, $key);
 		//--$col_name = PHPExcel_Cell::stringFromColumnIndex($col);
+		if($key == "cell"){
+			$cell_head = "C".($rowofcol-1).":H".($rowofcol-1)."";
+		} else {
+			$cell_head = "C".($rowofcol-1).":G".($rowofcol-1)."";
+		}
 		
-		$cell_head = "C".($rowofcol-1).":G".($rowofcol-1)."";
 		//echo $cell_head;exit;
-		$objPHPExcel->getActiveSheet()->mergeCells($cell_head)->getStyle($cell_head)->getFont()->setSize(7)->setBold(true);
+		$objPHPExcel->getActiveSheet()->mergeCells($cell_head)->getStyle($cell_head)->getFont()->setSize(18)->setBold(true);
 		$objPHPExcel->getActiveSheet()->getStyle($cell_head)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 		
 		//--> add column.-------------------------------------------------------------------------------
