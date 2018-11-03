@@ -135,7 +135,6 @@
 	$arr_col_else = array(
 
 		"customer_name" 	=> "customer_name"
-		,"quantity" 		=> "quantity"
 		,"set" 				=> "set"
 		,"vial" 			=> "vial"
 		,"staff_n" 			=> "staff_n"
