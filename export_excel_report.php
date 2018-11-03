@@ -186,12 +186,12 @@
 		foreach ($arr_col as  $key => $value_col) 
 		{
 			//echo "column : ".$col." : ". $rowofcol." : ". $value_col;
-			echo $value_col;
-			echo ' -> '.$col.':'. $rowofcol;
+			//--echo $value_col;
+			//--echo ' -> '.$col.':'. $rowofcol;
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $rowofcol, $value_col);
 			$col++;
 		}
-		echo "</br>";
+		//--echo "</br>";
 		//------------------------------------------------------------------------------------------------
 		//$obj_date 		= new DateTime($value['delivery_date_time']);;
 		//$daliv_date 	= $obj_date->format('d-m-Y');
@@ -238,18 +238,18 @@
 				{
 
 					$rs_data = $each_val[$key];
-					echo "".$rs_data.",";
-					echo $col.$row_data;
+					//--echo "".$rs_data.",";
+					//--echo $col.$row_data;
 					$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $row_data, $rs_data);
 					$columnLetter = PHPExcel_Cell::stringFromColumnIndex($col);
 					
 					cellColor($columnLetter.$row_data,$color);
 					$col++;
 				}
-				echo '</br>';
+				//--echo '</br>';
 
 				$row_data++;
-				echo 'on value : '.$row_data;
+				//--echo 'on value : '.$row_data;
 			}
 
 		}
@@ -311,7 +311,7 @@
 
     // $sheet->getDefaultStyle()->applyFromArray($style);
 	//--------------------------------------------------------------------------------------------
-	exit;
+	//--exit;
 	$file_name = "order";
 	// Redirect output to a client’s web browser (Excel2007)
 	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
