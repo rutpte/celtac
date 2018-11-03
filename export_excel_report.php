@@ -187,6 +187,7 @@
 		{
 			//echo "column : ".$col." : ". $rowofcol." : ". $value_col;
 			echo $value_col;
+			echo $col. $rowofcol;
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $rowofcol, $value_col);
 			$col++;
 		}
@@ -238,6 +239,7 @@
 
 					$rs_data = $each_val[$key];
 					echo "".$rs_data.",";
+					echo $col.$row_data;
 					$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $row_data, $rs_data);
 					$columnLetter = PHPExcel_Cell::stringFromColumnIndex($col);
 					
