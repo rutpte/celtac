@@ -202,12 +202,13 @@
 			
 		//------------------------------------------------------------------------------------------------
 		//--> add data row.
-		$col = 0;
+		
 		$row_data++;
 		if (is_array($value) || is_object($value))
 		{
 			foreach ($value as $each_val) 
 			{
+				$col = 0;
 				$pre_staff_n = '';
 				if($pre_staff_n != ''){
 					
