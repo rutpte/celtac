@@ -207,7 +207,7 @@
 		{
 			foreach ($value as $each_val) 
 			{
-				var_dump($each_val);exit;
+				//var_dump($each_val);exit;
 				$col = 0;
 				$pre_staff_n = '';
 				if($pre_staff_n != ''){
