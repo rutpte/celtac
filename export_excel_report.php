@@ -182,9 +182,9 @@
 		} else {
 			$arr_col = $arr_col_else;
 		}
-		foreach ($arr_col as  $key => $value) 
+		foreach ($arr_col as  $key => $value_col) 
 		{
-			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $rowofcol, $value);
+			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $rowofcol, $value_col);
 			$col++;
 		}
 	
@@ -197,6 +197,7 @@
 			//-----------
 
 		$col = 0;
+		$row_data+1;
 		if (is_array($value) || is_object($value))
 		{
 			foreach ($value as $each_val) 
@@ -226,6 +227,7 @@
 					$pre_staff_n = $each_val['staff_n'];
 				}
 				//----
+				
 				foreach ($arr_col as  $key => $value) 
 				{
 
