@@ -80,7 +80,7 @@ $tb_rut .='<table class="table"';
 	$pre_code = '';
 	foreach ($data as &$value) {
 		
-		$obj_date 		= new DateTime($value['delivery_date_time']);;
+		$obj_date 		= new DateTime($value['delivery_date_time']);
 		$daliv_date 	= $obj_date->format('d-m-Y');
 		$daliv_time 	= $obj_date->format('H:i:s');
 		//-------------------------------------------
