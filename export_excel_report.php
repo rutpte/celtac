@@ -176,7 +176,7 @@
 		$row_data+2;
 		$rowofcol = $row_data;
 		
-		//--> add column.
+		//--> add column.-------------------------------------------------------------------------------
 		if($key == "cell"){
 			$arr_col = $arr_col_cell;
 		} else {
@@ -184,18 +184,20 @@
 		}
 		foreach ($arr_col as  $key => $value_col) 
 		{
+			echo "</br>column : ".$col." : ". $rowofcol." : ". $value_col."</br>";
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $rowofcol, $value_col);
 			$col++;
 		}
-	
+		//------------------------------------------------------------------------------------------------
 		//$obj_date 		= new DateTime($value['delivery_date_time']);;
 		//$daliv_date 	= $obj_date->format('d-m-Y');
 		//$daliv_time 	= $obj_date->format('H:i:s');
 		//------------------------------------------
 		//var_dump($value['order_code']);
 
-			//-----------
-
+			
+		//------------------------------------------------------------------------------------------------
+		//--> add data row.
 		$col = 0;
 		$row_data+1;
 		if (is_array($value) || is_object($value))
@@ -232,13 +234,14 @@
 				{
 
 					$rs_data = $each_val[$key];
-					
+					echo "data : ".$rs_data.",";
 					$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $row_data, $rs_data);
 					$columnLetter = PHPExcel_Cell::stringFromColumnIndex($col);
 					
 					cellColor($columnLetter.$row_data,$color);
 					$col++;
 				}
+				
 
 				$row_data++;
 			}
@@ -319,7 +322,7 @@
 	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 	//$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
 	//$objWriter->save('./excel_output/order_cell.xls');
-	$objWriter->save('php://output');
+	//--$objWriter->save('php://output');
 
 	
 //$objWriter->save('./outputExcel/server/'.$pro_name.'/'.$file_name.'.xls');
