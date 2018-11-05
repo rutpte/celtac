@@ -56,6 +56,14 @@ class Order extends DBConnection
 		//$date_formated 	= $date_full;
 		//echo $date->format('d-m-Y');
 		//echo $date_formated; exit;
+		//---------------------------------------------------
+		$order_group_id_sql = "select nextval('order_group_id_seq'::regclass) as order_group_id";//select currval('order_group_id_seq');//select nextval('order_group_id_seq'::regclass) as order_group_id
+		$sth_order_group 	= $this->db->prepare($order_group_id_sql);
+		$sth_order_group->execute();
+		$order_group_id_arr	= $sth_order_group->fetchAll(PDO::FETCH_ASSOC);
+		$order_group_id 	= $order_group_id_arr[0]["order_group_id"];
+		//var_dump($order_group_id_arr[0]["order_group_id"]); exit;
+		//---------------------------------------------------
 
 		$array_product = json_decode($_POST['items_json'],true);
 		//var_dump($array_product);
@@ -71,8 +79,8 @@ class Order extends DBConnection
 			// echo 'package_type : '.$value['package_type'];
 			// echo 'giveaway : '.$value['giveaway'];
 			// echo '--------------------';
-
-			$order_code			= isset($post['order_code']) 			? "'".$post['order_code']."'" 										: 'null';
+			
+			$order_code			= $order_group_id;
 			$customer_name		= isset($post['customer_name']) 		? "'".$post['customer_name']."'"									: 'null';
 			$product_type		= $value['product_type'] 	!= "" ? "'".$value['product_type']."'"											: 'null';
 			$quantity			= $value['quantity'] 		!= "" ? $value['quantity']														: 'null';
