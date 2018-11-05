@@ -7,11 +7,13 @@
 			"func1" : function(){
 				console.log("usesing func1");
 			}
+			//-----------------------------------------------------------------------------------------
 			,"pad" : function(num, size){
 				var s = num+"";
 				while (s.length < size) s = "0" + s;
 				return s;
 			}
+			//-----------------------------------------------------------------------------------------
 			,"manage_page" : function(user_type){
 				//--> not use but keep for prototype.
 				if(user_type == "superuser"){
@@ -22,6 +24,7 @@
 					window.location = window.location.origin+ "/" + celtac.pjName + "/customer_page.php";
 				}
 			}
+			//-----------------------------------------------------------------------------------------
 			,"modal_contact" : function(){
 				
 				$("#modalLabel").text("contect.");
@@ -38,6 +41,7 @@
 				celtac.g_func.gen_qrcode_contact();
 				
 			}
+			//-----------------------------------------------------------------------------------------
 			,"notice_div_error" : function(status,str_current_dom_id){
 				
 				if(status){
@@ -47,6 +51,7 @@
 				}
 				
 			}
+			//-----------------------------------------------------------------------------------------
 			,"notice_div_error_BC" : function(arr_dom_id,str_current_dom_id){
 				for (i = 0; i < arr_dom_id.length; i++) {
 					if(arr_dom_id[i] == str_current_dom_id){
@@ -56,6 +61,7 @@
 					}
 				}
 			}
+			//-----------------------------------------------------------------------------------------
 			,"user" : function(q,obj){
 				switch (q) {
 					case "show_model_adduser":
@@ -436,6 +442,7 @@
 				//--items_product_arr = new Array(); //--> for empty arr set.
 				// items_product_arr.push(arr_set_data);
 			// }
+			//-----------------------------------------------------------------------------------------
 			,"order" : function(q,obj){
 				switch (q) {
 
@@ -530,8 +537,15 @@
 									if(vial == "" || vial == ""){
 										vial = 1;
 									}
-									var total_cel = parseInt(quantity*vial);
-									$('#total_cel').val(total_cel);
+									var total_cell = parseInt(quantity*vial);
+									$('#total_cel').val(total_cell);
+									
+									//--> alert sum total limit cell.
+									var loop_total_cell = celtac.g_func.check_total_cell(total_cell)
+									if(loop_total_cell > 10 || total_cell > 10){
+										$('#modal_notice_customer').find('#msg_modal_notice_customer').html('your total cell is greater than 10 m.</br> please contact administrator for complete your order.');
+										$('#modal_notice_customer').modal('show');
+									}
 								} 
 
 							});
@@ -543,8 +557,15 @@
 									if(vial == "" || vial == ""){
 										vial = 1;
 									}
-									var total_cel = parseInt(quantity*vial);
-									$('#total_cel').val(total_cel);
+									var total_cell = parseInt(quantity*vial);
+									$('#total_cel').val(total_cell);
+									
+									//--> alert sum total limit cell.
+									var loop_total_cell = celtac.g_func.check_total_cell(total_cell)
+									if(loop_total_cell > 10 || total_cell > 10){
+										$('#modal_notice_customer').find('#msg_modal_notice_customer').html('your total cell is greater than 10 m.</br> please contact administrator for complete your order.');
+										$('#modal_notice_customer').modal('show');
+									}
 								}
 
 							});
@@ -1958,12 +1979,12 @@
 								//------------------------------------------------------
 								//--> set is_active each item.//--> not use. but still send togater witch json.
 									if(total_cell >  10){
-										obj_set_data.is_active 	    = false;
+										var is_active 	    = false;
 									} else {
-										obj_set_data.is_active 	    = true;
+										var is_active 	    = true;
 									}
 								//------------------------------------------------------
-								if(obj_set_data.is_active == false){
+								if(is_active == false){
 									$('#modal_notice_customer').find('#msg_modal_notice_customer').html('your order cell greater than 10 m. </br> please connect admistrator for approve your order.</br> tel. 092-225-4956 (sopida)');
 									$('#modal_notice_customer').modal('show');
 								}
@@ -2009,7 +2030,7 @@
 									//----------------------------------------------------------------------
 									if(item.product_type == "cell"){
 										str_items += 								item.quantity + " m | ";
-										//--str_items += 								item.total_cel + " m | ";
+										//--str_items += 								item.total_cell + " m | ";
 										//str_items += 								item.package_type + " | ";
 									} else {
 										str_items += 								item.set + " set | ";
@@ -2105,6 +2126,7 @@
 						break;	
 				}
 			}
+			//-----------------------------------------------------------------------------------------
 			,"init_cookie_login" : function(){
 				
 				//--> part 1. set auto complete by cookie.
@@ -2143,6 +2165,7 @@
 					}
 				});
 			}
+			//-----------------------------------------------------------------------------------------
 			,"init_login" : function(){
 				//$("#login").submit(function() {
 				$("#sing_in").click(function() {
@@ -2186,6 +2209,7 @@
 					});
 				});
 			}
+			//-----------------------------------------------------------------------------------------
 			,"init_logout" : function(){
 
 				$("#logout").click(function() {
@@ -2215,6 +2239,7 @@
 					});
 				});
 			}
+			//-----------------------------------------------------------------------------------------
 			,"gen_qrcode_contact" : function(){
 				$("#contact_qrcode").empty();
 				$("#contact_qrcode").qrcode({
@@ -2224,6 +2249,7 @@
 					text: "http://google.com"
 				});
 			}
+			//-----------------------------------------------------------------------------------------
 			,check_avalible_time_order : function(str_daliverly_date, h, m, minute){
 				if(true){
 					var validate_date_daliverly = function(){
@@ -2250,6 +2276,7 @@
 					return rs;
 				}
 			}
+			//-----------------------------------------------------------------------------------------
 			,modal_export : function(str_ag){ //-- menu on nav call.
 				$('#exp_start_delivery_date').datepicker();
 				$('#exp_start_delivery_date').datepicker("option", "dateFormat", "yy-mm-dd");
@@ -2272,6 +2299,7 @@
 				$('#modal_export').find('#bt_export').attr("onclick","celtac.g_func.export_excel('"+str_ag+"');");
 				
 			}
+			//-----------------------------------------------------------------------------------------
 			,export_excel : function(str_ag){ //--> button on modal call.
 				//$('#loading_modal').modal('show');
 				
@@ -2368,6 +2396,24 @@
 					}
 				});
 				*/
+			}
+			//-----------------------------------------------------------------------------------------
+			,check_total_cell : function(total_cel_keyup){
+				if(true){
+					var i;
+					var total_cell_sum = total_cel_keyup;
+					
+					for (i = 0; i < items_product_arr.length; i++) {
+						var item = items_product_arr[i];
+						if(typeof(item) != 'undefined'){
+							total_cell_sum = total_cell_sum + item.total_cell;
+						}
+
+					}
+					
+					return total_cell_sum;
+					
+				}
 			}
 		};
 		this.g_var = {
