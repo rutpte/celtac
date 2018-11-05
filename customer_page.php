@@ -684,6 +684,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				  <div class="modal-body" id="modal-body-add_order"   style="overflow-y: scroll">
 						<form class="needs-validation" novalidate>
 							<!-- **************************************** -->
+							<!--
 							<div>
 								<div class="row">
 									<div class="col-4">
@@ -697,6 +698,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 								<div id="order_code_vlid"></div>
 								
 							</div>
+							-->
 							<!-- **************************************** -->
 							<div>
 								<div class="row">
@@ -1312,8 +1314,9 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 ?>
 				
 				<div class="row"  style="background-color:<?php echo $color; ?>">
-					<div class="col-2 text-truncate font-weight-light" style="color:<?php echo $color_deactive; ?>"><div><?php echo 'ID : '.$val_data['id']?></div></div>
-					<!--<div class="col-2 text-truncate font-weight-light" style="color:<?php echo $color_deactive; ?>"><div><?php echo $val_data['order_code']?></div></div>-->
+					
+					<div class="col-1 text-truncate font-weight-light" style="color:<?php echo $color_deactive; ?>"><div><?php echo $val_data['order_code']?></div></div>
+					<div class="col-1 text-truncate font-weight-light" style="color:<?php echo $color_deactive; ?>"><div><?php echo $val_data['id']?></div></div>
 					<div class="col-2 text-truncate font-weight-light" style="color:<?php echo $color_deactive; ?>"><div><?php echo $val_data['customer_name']?></div></div>
 					<div class="col-2 text-truncate font-weight-light" style="color:<?php echo $color_deactive; ?>"><div><?php echo $val_data['product_type']?></div></div>
 					<div class="col-3 text" style="color:<?php echo $color_deactive; ?>"><div><?php echo $val_data['delivery_date_time']?></div></div>
