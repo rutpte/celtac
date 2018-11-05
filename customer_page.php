@@ -938,7 +938,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<div>
 								<div class="row">
 									<div class="col-4">
-										<label for="total_cel">total_cel</label>
+										<label for="total_cel">total_cell</label>
 									</div>
 									
 									<div class="col-8">
