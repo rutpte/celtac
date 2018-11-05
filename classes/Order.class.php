@@ -66,10 +66,37 @@ class Order extends DBConnection
 		//---------------------------------------------------
 
 		$array_product = json_decode($_POST['items_json'],true);
-		//var_dump($array_product);
+		//var_dump($array_product); exit;
 		//echo 'testing';
 		
+		//----------------------------------------------------------------------
+		//--> check total cell.
+		$total_cell_sum = 0;
+		foreach ($array_product as $value) {
+			$total_cell_loop = $value['total_cell'] != "" ? $value['total_cell']: 0;
+			$total_cell_sum = $total_cell_sum + $total_cell_loop;
+		}
+		//var_dump($total_cell_sum); exit;
+		//--> check avilable time to order.
+		$delivery_date_time	= isset($post['delivery_date']) 		? "'".$date_formated."'" : 'null';
+		$sta_allow_time_deliv = $this->check_diff_time_by_strtime($delivery_date_time, 720);
+		//check time deliv and cell number. or is_staff can be access.
+		if(($sta_allow_time_deliv == 1) && ($total_cell_sum <= 10)){
+			$is_active = 'true';
+		} else {
+			$is_active = 'false';
+		}
+		//----------------------------------------------------------------------
 		$str_value_raw = "";
+		$delivery_date_time	= isset($post['delivery_date']) 		? "'".$date_formated."'" 											: 'null';
+		$sender				= isset($post['sender']) 				? "'".$post['sender']."'" 											: 'null';
+		$receiver			= isset($post['receiver']) 				? "'".$post['receiver']."'" 										: 'null';
+		$dealer_person		= isset($post['dealer_person']) 		? "'".$post['dealer_person']."'" 									: 'null';
+		$dealer_company		= isset($post['dealer_company']) 		? "'".$post['dealer_company']."'" 									: 'null';
+		$user_id			= isset($_SESSION['owner_id']) 			? $_SESSION['owner_id']												: 'null';
+		//$last_update_date 	= isset($post['last_update_date']) 	? $post['last_update_date'] : '';
+		//$price_rate			= isset($post['price_rate']) 			? "'".$post['price_rate']."'"										: 'null';
+		$comment_else		= isset($post['comment_else']) 			? "'".$post['comment_else' ]."'"									: 'null';
 		foreach ($array_product as $value) {
 			
 			// echo 'product_type : '.$value['product_type'];
@@ -95,17 +122,8 @@ class Order extends DBConnection
 			//$is_active			= $value['is_active'] ? 'true' : 'false';
 			//var_dump($is_active); exit;
 			//$delivery_time		= isset($post['delivery_date']) 	? strtotime($post['delivery_date']) 	: '';
-			$delivery_date_time	= isset($post['delivery_date']) 		? "'".$date_formated."'" 											: 'null';
 
-			$sender				= isset($post['sender']) 				? "'".$post['sender']."'" 											: 'null';
-			$receiver			= isset($post['receiver']) 				? "'".$post['receiver']."'" 										: 'null';
-			$dealer_person		= isset($post['dealer_person']) 		? "'".$post['dealer_person']."'" 									: 'null';
-			$dealer_company		= isset($post['dealer_company']) 		? "'".$post['dealer_company']."'" 									: 'null';
-			$user_id			= isset($_SESSION['owner_id']) 			? $_SESSION['owner_id']												: 'null';
-			//$last_update_date 	= isset($post['last_update_date']) 	? $post['last_update_date'] : '';
-			//$price_rate			= isset($post['price_rate']) 			? "'".$post['price_rate']."'"										: 'null';
-			$comment_else		= isset($post['comment_else']) 			? "'".$post['comment_else' ]."'"									: 'null';
-			
+			/*
 			$sta_allow_time_deliv = $this->check_diff_time_by_strtime($delivery_date_time, 720);
 			//check time deliv and cell number. or is_staff can be access.
 			if(($sta_allow_time_deliv == 1) && ($total_cell <= 10)){
@@ -113,6 +131,7 @@ class Order extends DBConnection
 			} else {
 				$is_active = 'false';
 			}
+			*/
 			//var_dump($is_active); exit;
 			//---------------------------------------------------------------------------------------------------------------------------------------
 			$str_value_raw .= "
