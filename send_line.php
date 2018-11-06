@@ -173,7 +173,7 @@
 		$message .= $str_msg;
 		//--line_notify($Token, $message);
 		$chk_mod++;
-		if(($chk_mod % 5) == 0){
+		if(($chk_mod % 10) == 0){
 			array_push($arr_message,$message);
 			$message = "";
 		}
