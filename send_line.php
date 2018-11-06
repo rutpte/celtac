@@ -25,8 +25,8 @@
 		//-----------------------------------------------------
 		$message_data = array(
 			'message' => $message
-			//,'stickerPackageId' =>1
-			//,'stickerId' =>106
+			,'stickerPackageId' =>1
+			,'stickerId' =>106
 			//--> https://devdocs.line.me/files/sticker_list.pdf
 		);
 		$http_data = http_build_query($message_data);
