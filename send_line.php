@@ -184,7 +184,7 @@
 	}
 	
 	
-	foreach ($message as &$value) {
+	foreach ($arr_message as &$value) {
 		line_notify($Token, $value);
 	}
 	
