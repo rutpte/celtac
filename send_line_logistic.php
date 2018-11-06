@@ -113,10 +113,12 @@
 		$message .= $str_msg;
 		//--line_notify($Token, $message);
 	}	*/
+	$arr_message = array();
+	$message .= "******************\n";
 	$message .= isset($_SESSION['first_name'])? $_SESSION['first_name'] : 'auto update';
 	$message .= " : มีอัปเดปใหม่ค่ะ\n";
 	
-	
+	$chk_mod = 0;
 	foreach ($data as &$value) {
 		$str_msg = "";
 		$obj_date 		= new DateTime($value['delivery_date_time']);;
@@ -175,10 +177,25 @@
 		//--> send line.
 		$message .= $str_msg;
 		//--line_notify($Token, $message);
+		$chk_mod++;
+		if(($chk_mod % 10) == 0){
+			array_push($arr_message,$message);
+			$message = "";
+		}
 	}
+	//-> push remain message.
+	if($message != ""){
+		array_push($arr_message,$message);
+	}
+	
+	
+	foreach ($arr_message as &$value) {
+		line_notify($Token, $value);
+	}
+	
 	//--$user_first_name = isset($_SESSION['first_name'])? $_SESSION['first_name'] : 'auto update';
 	//--$message .= "from - ".$user_first_name."\n";
-	line_notify($Token, $message);
+	//--line_notify($Token, $message);
 	//---------------------------------------------------------------------------------------------------------------
 	/*
 	if(false){ //backup.
