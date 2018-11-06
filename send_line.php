@@ -25,8 +25,8 @@
 		//-----------------------------------------------------
 		$message_data = array(
 			'message' => $message
-			,'stickerPackageId' =>1
-			,'stickerId' =>106
+			//,'stickerPackageId' =>1
+			//,'stickerId' =>106
 			//--> https://devdocs.line.me/files/sticker_list.pdf
 		);
 		$http_data = http_build_query($message_data);
@@ -113,7 +113,10 @@
 		$message .= $str_msg;
 		//--line_notify($Token, $message);
 	}	*/
+	
+	$arr_message = array();
 	$message .= isset($_SESSION['first_name'])? $_SESSION['first_name']."\n" : 'auto update'."\n";
+	$chk_mod = 0;
 	foreach ($data as &$value) {
 		$str_msg = "";
 		$obj_date 		= new DateTime($value['delivery_date_time']);;
@@ -169,10 +172,22 @@
 		//--> send line.
 		$message .= $str_msg;
 		//--line_notify($Token, $message);
+		$chk_mod++;
+		if(($chk_mod % 5) == 0){
+			array_push($arr_message,$message);
+			$message = "";
+		}
+	}
+	//-> push remain message.
+	if($message != ""){
+		array_push($arr_message,$message);
 	}
 	
 	
-	line_notify($Token, $message);
+	foreach ($message as &$value) {
+		line_notify($Token, $value);
+	}
+	
 	//---------------------------------------------------------------------------------------------------------------
 	/*
 	if(false){ //backup.
