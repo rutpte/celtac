@@ -1871,19 +1871,27 @@
 												$('#loading_modal').modal('hide');
 												//location.reload();
 											},
+											,error: (error) => {
+												console.log(JSON.stringify(error));
+											}
+											/*
 											error:function(response){
 												$('#loading_modal').modal('hide');
 												console.debug('ERROR...2>',response);
-											}
+											}*/
 										});
 									} else {
 										console.log('error sum email');
 									}
-								},
+								}
+							    ,error: (error) => {
+									console.log(JSON.stringify(error));
+							    }
+								/*
 								error:function(response){
 									$('#loading_modal').modal('hide');
 									console.debug('ERROR...>',response);
-								}
+								}*/
 							});
 							
 						}
