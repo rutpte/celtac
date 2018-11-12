@@ -118,7 +118,7 @@ $tb_rut .='<table class="table"';
 			$tb_rut .='<td style="background-color:'.$color.'" id = "product_type">'.$value['product_type'].'</td>';
 			$tb_rut .='<td style="background-color:'.$color.'" id = "quantity">'.$value['quantity'].'</td>';
 			$tb_rut .='<td style="background-color:'.$color.'" id = "vial">'.$value['vial'].'</td>';
-			$tb_rut .='<td style="background-color:'.$color.'" id = "total_cel">'.$value['total_cel'].'</td>';
+			$tb_rut .='<td style="background-color:'.$color.'" id = "total_cel">'.$value['total_cell'].'</td>';
 			$tb_rut .='<td style="background-color:'.$color.'" id = "package_type">'.$value['package_type'].'</td>';
 			$tb_rut .='<td style="background-color:'.$color.'" id = "giveaway">'.$value['giveaway'].'</td>';
 			$tb_rut .='<td style="background-color:'.$color.'" id = "sender">'.$value['sender'].'</td>';
