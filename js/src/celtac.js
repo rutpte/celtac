@@ -1840,7 +1840,7 @@
 							
 							$.ajax({
 								url: "sendOrder.php",
-								dataType: 'text', // Notice! JSONP <-- P (lowercase)
+								dataType: 'JSONP', // Notice! JSONP <-- P (lowercase)
 								method : 'POST',
 								data: { 
 									"q"              					: "xxx"
