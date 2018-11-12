@@ -1833,7 +1833,7 @@
 					case "send_mail":
 						if(true){
 							$('#loading_modal').modal('show');
-							
+							debugger;
 							//-- celtac.g_func.order("export_excel_order");
 							//celtac.g_func.order("send_line");
 							//celtac.g_func.order("send_line_logistic");
