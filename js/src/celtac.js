@@ -1847,6 +1847,7 @@
 								},
 								type: "GET",
 								success:function(response){
+									
 									$('#loading_modal').modal('hide');
 									//console.debug('response : ',response);
 									//debugger;
@@ -1872,7 +1873,7 @@
 											},
 											error:function(response){
 												$('#loading_modal').modal('hide');
-												console.debug(response);
+												console.debug('ERROR...2>',response);
 											}
 										});
 									} else {
@@ -1881,7 +1882,7 @@
 								},
 								error:function(response){
 									$('#loading_modal').modal('hide');
-									console.debug(response);
+									console.debug('ERROR...>',response);
 								}
 							});
 							
