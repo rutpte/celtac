@@ -500,7 +500,7 @@
 								if(this.value == "cell"){
 									var quantity = $('#quantity').val();
 									var vial = $('#vial').val();
-									var total_cel = parseInt(quantity*vial);
+									var total_cel = parseFloat(quantity*vial);
 									
 									
 									$('#quantity').prop('disabled', false);
@@ -511,6 +511,21 @@
 									$('#package_type').val('ID');
 									
 									$('#set').prop('disabled', true);
+									$("#vial").prop('disabled', false);
+								} else if(this.value == "gcsf" || this.value == "hyagan"){
+									//$('#quantity').hide();
+									//$('#vial').hide();
+									//$("#quantity").prop('disabled', true);
+									$("#set").prop('disabled', true);
+									$("#vial").prop('disabled', true);
+									$('#total_cel').prop('disabled', true);
+									$('#quantity').prop('disabled', false);
+									$('#package_type').prop('disabled', true);
+									
+									$('#total_cel').val('');
+									$('#package_type').val('');
+									
+								
 								} else {
 									//$('#quantity').hide();
 									//$('#vial').hide();
@@ -537,7 +552,7 @@
 									if(vial == "" || vial == ""){
 										vial = 1;
 									}
-									var total_cell = parseInt(quantity*vial);
+									var total_cell = parseFloat(quantity*vial);
 									$('#total_cel').val(total_cell);
 									
 									//--> alert sum total limit cell.
@@ -557,7 +572,7 @@
 									if(vial == "" || vial == ""){
 										vial = 1;
 									}
-									var total_cell = parseInt(quantity*vial);
+									var total_cell = parseFloat(quantity*vial);
 									$('#total_cel').val(total_cell);
 									
 									//--> alert sum total limit cell.
@@ -979,9 +994,11 @@
 							// }
 							//debugger;
 							//--> add data from js_data.
-							$('#order_code_edit').val(data.order_code);
+							$('#order_id_edit').val(data.id);
+							$('#order_code_edit').val(data.order_code); //group_id.
 							$('#customer_name_edit').val(data.customer_name);
 							$('#product_type_edit').val(data.product_type);
+							//debugger;
 							$('#quantity_edit').val(data.quantity);
 							$('#set_edit').val(data.set);
 							$('#vial_edit').val(data.vial);
@@ -999,7 +1016,7 @@
 							$('#dealer_company_edit').val(data.dealer_company);
 							$('#price_rate_edit').val(data.price_rate);
 							$('#comment_else_edit').val(data.comment_else);
-							$('#order_id_edit').val(data.id);
+							
 							
 							
 							//--$('#is_active_edit').prop('checked', data.is_active);
@@ -1016,12 +1033,19 @@
 								}
 							});
 							*/
+							$("#quantity_edit").on("keypress keyup blur",function (event) {  
+							  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+								event.preventDefault();
+							  }
+							});
+							/*
 							$("#quantity_edit").on("keypress keyup blur",function (event) {   
 								$(this).val($(this).val().replace(/[^\d].+/, ""));
 								if ((event.which < 48 || event.which > 57)) {
 									event.preventDefault();
 								}
 							});
+							*/
 							$("#vial_edit").on("keypress keyup blur",function (event) {   
 								$(this).val($(this).val().replace(/[^\d].+/, ""));
 								if ((event.which < 48 || event.which > 57)) {
@@ -1034,7 +1058,8 @@
 									event.preventDefault();
 								}
 							});
-							$('#product_type_edit').on('change', function() {
+							
+							/*$('#product_type_edit').on('change', function() {
 								if(this.value == "cell"){
 									var quantity = $('#quantity_edit').val();
 									var vial = $('#vial_edit').val();
@@ -1047,7 +1072,14 @@
 									
 									$('#total_cel_edit').val(total_cel);
 									$('#package_type_edit').val('ID');
-								} else {
+								}else if (this.value == "gcsf" || this.value == "hyagan"){
+									$('#total_cel_edit').prop('disabled', true);
+									$('#quantity_edit').prop('disabled', false);
+									$('#package_type_edit').prop('disabled', true);
+									$('#vial').hide();
+									$('#total_cel_edit').val('');
+									$('#package_type_edit').val('');
+								}	else {
 									//$('#quantity').hide();
 									//$('#vial').hide();
 									//$("#quantity").prop('disabled', true);
@@ -1062,14 +1094,14 @@
 								
 								}
 							});
-							
+							*/
 							//--> cal auto.
 							$('#quantity_edit').on('keyup', function(){
 								var check_data = $('#product_type_edit').val();
 								if(check_data == 'cell'){
 									var quantity = $('#quantity_edit').val();
 									var vial = $('#vial_edit').val();
-									var total_cel = parseInt(quantity*vial);
+									var total_cel = parseFloat(quantity*vial);
 									$('#total_cel_edit').val(total_cel);
 								} 
 
@@ -1079,7 +1111,7 @@
 								if(check_data == 'cell'){
 									var quantity = $('#quantity_edit').val();
 									var vial = $('#vial_edit').val();
-									var total_cel = parseInt(quantity*vial);
+									var total_cel = parseFloat(quantity*vial);
 									$('#total_cel_edit').val(total_cel);
 								}
 
@@ -1125,8 +1157,8 @@
 								
 							});
 							//----------------------------------------------------------------------------------------
-							$('#product_type_edit').prop('disabled', true);
 							
+							/*
 							if($('#product_type_edit').val() != "cell"){
 								$('#set_edit').show();
 								$('#quantity_edit').hide();
@@ -1140,6 +1172,32 @@
 								$('#package_type_edit').prop('disabled', false);
 								$('#set_edit').hide();
 							}
+							*/
+							var product_type = $('#product_type_edit').val();
+							//debugger;
+							if(product_type == "cell"){
+								$('#set_edit').hide();
+								$('#vial_edit').show();
+								$('#total_cel_edit').show();
+								$('#package_type_edit').prop('disabled', false);
+								$('#quantity_edit').show();
+								$('#total_cel_edit').prop('disabled', true);
+								
+							} else if(product_type == "gcsf" || product_type == "hyagan") {
+								$('#set_edit').hide();
+								$('#vial_edit').hide();
+								$('#total_cel_edit').hide();
+								$('#package_type_edit').prop('disabled', true);
+								$('#quantity_edit').show();
+							}else {
+								$('#set_edit').show();
+								$('#vial_edit').show();
+								$('#total_cel_edit').hide();
+								$('#package_type_edit').prop('disabled', true);
+								$('#quantity_edit').hide();
+							}
+							//--> disable product_type.
+							$('#product_type_edit').prop('disabled', true);
 						}
 						break;	
 					case "edit_order":
@@ -1323,7 +1381,12 @@
 							//--
 
 							//--
-							if (product_type != "cell"){
+							if (
+								product_type == "prp_ready"
+								|| product_type == "placenta"
+								|| product_type == "prfm_set"
+								|| product_type == "prfm_tuee"
+								){
 								if (set == ""){
 									celtac.g_func.notice_div_error(true,"set_edit");
 									sta_validate = false;
@@ -1342,7 +1405,17 @@
 							}
 
 							//--
-
+							if (
+								product_type == "gcsf"
+								|| product_type == "hyagan"
+								){
+								if (quantity == "" || quantity == "0"){
+									celtac.g_func.notice_div_error(true,"quantity_edit");
+									sta_validate = false;
+								}else {
+									celtac.g_func.notice_div_error(false,"quantity_edit");
+								}
+							}
 							//--
 							// if (product_type == ""){
 								// celtac.g_func.notice_div_error(true,"product_type_edit");
@@ -1611,6 +1684,7 @@
 							
 							//--> add data from js_data.
 							$('#order_code_view').val(data.order_code);
+							$('#order_id_view').val(data.id);
 							$('#customer_name_view').val(data.customer_name);
 							$('#product_type_view').val(data.product_type);
 							$('#quantity_view').val(data.quantity);
@@ -1629,8 +1703,10 @@
 							$('#order_id_view').val(data.id);
 							$('#is_active_view').val(data.is_active);
 
-							//--> disable view input.
+							//--> disable view input for read only mode.
+							
 							$('#order_code_view').prop('disabled', true);
+							$('#order_id_view').prop('disabled', true);
 							$('#customer_name_view').prop('disabled', true);
 							$('#product_type_view').prop('disabled', true);
 							$('#quantity_view').prop('disabled', true);
@@ -1647,17 +1723,26 @@
 							$('#price_rate_view').prop('disabled', true);
 							$('#comment_else_view').prop('disabled', true);
 							
-							if(data.product_type != "cell"){
-								$('#set_view').show();
-								$('#total_cel_view').hide();
-								$('#package_type_view').hide();
-								$('#quantity_view').hide();
-								
-							} else {
+							//--> hide and show input.
+							if(data.product_type == "cell"){
 								$('#set_view').hide();
+								$('#vial_view').show();
 								$('#total_cel_view').show();
 								$('#package_type_view').show();
 								$('#quantity_view').show();
+								
+							} else if(data.product_type == "gcsf" || data.product_type == "hyagan") {
+								$('#set_view').hide();
+								$('#vial_view').hide();
+								$('#total_cel_view').hide();
+								$('#package_type_view').hide();
+								$('#quantity_view').show();
+							}else {
+								$('#set_view').show();
+								$('#vial_view').show();
+								$('#total_cel_view').hide();
+								$('#package_type_view').hide();
+								$('#quantity_view').hide();
 							}
 							
 						}
@@ -1826,11 +1911,15 @@
 							var product_type			= $('#product_type').val();
 							var quantity				= $('#quantity').val();
 							//----------
-							if($('#set').val()== ""){
+							if($('#set').val()== "" || $('#set').val()== "0"){
 								var set = 0;
 							} else {
 								var set = $('#set').val();
 							};
+							
+							// if (set == "" || set == "0"){
+								// set = 0;
+							// }
 							//----------
 							if($('#vial').val()== ""){
 								if(product_type == "cell"){
@@ -1893,21 +1982,24 @@
 								// celtac.g_func.notice_div_error(false,"vial");
 								// celtac.g_func.notice_div_error(false,"set");
 							// }
+							
+							//else if(this.value == "gcsf" || this.value == "hyagan"){
 							//--
 							if (quantity == "" || quantity == "0"){
-								if($('#product_type').val() == "cell"){
+								if($('#product_type').val() == "cell"
+								|| $('#product_type').val() == "gcsf"
+								|| $('#product_type').val() == "hyagan" ){
 									celtac.g_func.notice_div_error(true,"quantity");
 									sta_validate = false;
 								}
 							} else {
-								if($('#product_type').val() == "cell"){
+								if($('#product_type').val() == "cell"
+								|| $('#product_type').val() == "gcsf"
+								|| $('#product_type').val() == "hyagan" ){
 									celtac.g_func.notice_div_error(false,"quantity");
 								}
 							} 
-							//--
-							if (set == "" || set == "0"){
-								set = 0;
-							}
+
 							//--
 							if (vial == "" || vial == "0"){
 								if($('#product_type').val() == "cell"){
@@ -1927,7 +2019,9 @@
 								celtac.g_func.notice_div_error(false,"product_type");
 							}
 							//--------
-							if($('#product_type').val() != "cell"){
+							if($('#product_type').val() != "cell"
+							&& $('#product_type').val() != "gcsf"
+							&& $('#product_type').val() != "hyagan"){
 								if (vial == 0 && set == 0){
 									celtac.g_func.notice_div_error(true,"vial");
 									celtac.g_func.notice_div_error(true,"set");
@@ -2028,22 +2122,27 @@
 
 									str_items += 								item.product_type + " | ";
 									//----------------------------------------------------------------------
+
 									if(item.product_type == "cell"){
 										str_items += 								item.quantity + " m | ";
+										str_items += 								item.vial + " vial | ";
 										//--str_items += 								item.total_cell + " m | ";
 										//str_items += 								item.package_type + " | ";
+									} else if(item.product_type == "gcsf" || item.product_type == "hyagan") {
+										str_items += 								item.quantity + " box | ";
 									} else {
 										str_items += 								item.set + " set | ";
+										str_items += 								item.vial + " vial | ";
 									}
 									//----------------------------------------------------------------------
-									str_items += 								item.vial + " vial | ";
+									
 									//----------------------------------------------------------------------
 									if(item.product_type == "cell"){
 										str_items += 								item.package_type + " | ";
 									}
 									//----------------------------------------------------------------------
 									if(item.giveaway == ""){
-										str_items += 								"-";
+										str_items += 								"- | ";
 									} else {
 										str_items += 								item.giveaway + " | ";
 									}
