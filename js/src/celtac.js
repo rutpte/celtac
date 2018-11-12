@@ -1870,7 +1870,7 @@
 											success:function(response){
 												$('#loading_modal').modal('hide');
 												//location.reload();
-											},
+											}
 											,error: (error) => {
 												console.log(JSON.stringify(error));
 											}
