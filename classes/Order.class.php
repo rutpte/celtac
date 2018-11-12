@@ -334,8 +334,8 @@ class Order extends DBConnection
 			//------------------------------------------------------
 			$sql = "
 				UPDATE order_product SET 
-					order_code 				= {$order_code}
-					,customer_name 			= {$customer_name}
+					
+					customer_name 			= {$customer_name}
 					,product_type 			= {$product_type}
 					,quantity 				= {$quantity}
 					,set 					= {$set}
