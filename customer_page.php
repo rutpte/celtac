@@ -149,6 +149,18 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 							<div>
 								<div class="row">
 									<div class="col-4">
+										<label for="order_id_view">id</label>
+									</div>
+									
+									<div class="col-8">
+										<input type="text" class="form-control" id="order_id_view" placeholder="">
+									</div>
+								</div>
+							</div>
+							<!-- **************************************** -->
+							<div>
+								<div class="row">
+									<div class="col-4">
 										<label for="customer_name_view">customer</label>
 									</div>
 									
@@ -355,7 +367,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				  </div>
 				  <div class="modal-body" id="modal-body-add_order_edit">
 						<form class="needs-validation" novalidate>
-							<div>
+							<!--<div>
 								<div class="row">
 									<div class="col-4">
 										<label for="order_code_edit">order_code</label>
@@ -367,7 +379,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 								</div>
 								<div id="order_code_vlid_edit"></div>
 								
-							</div>
+							</div>-->
 							<!-- **************************************** -->
 							<div>
 								<div class="row">
@@ -393,8 +405,10 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 											<option value="cell">Cell</option>
 											<option value="prp_ready">PRP Ready</option>
 											<option value="placenta">Placenta</option>
-											<option value="PRFM_SET">PRFM SET</option>
-											<option value="PRFM_TUEE">PRFM TUEE</option>
+											<option value="prfm_set">PRFM SET</option>
+											<option value="prfm_tuee">PRFM TUEE</option>
+											<option value="gcsf">GCSF</option>
+											<option value="hyagan">Hyagan</option>
 										</select>
 									</div>
 								</div>
@@ -890,6 +904,8 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 											<option value="placenta">Placenta</option>
 											<option value="prfm_set">PRFM SET</option>
 											<option value="prfm_tuee">PRFM TUEE</option>
+											<option value="gcsf">GCSF</option>
+											<option value="hyagan">Hyagan</option>
 										</select>
 									</div>
 								</div>
