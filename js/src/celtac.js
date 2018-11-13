@@ -1843,7 +1843,7 @@
 								dataType: 'JSONP', // Notice! JSONP <-- P (lowercase)
 								method : 'POST',
 								data: { 
-									"q"              					: "xxx"
+									"q"              					: new Date()
 								},
 								type: "GET",
 								success:function(response){
