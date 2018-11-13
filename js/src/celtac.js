@@ -530,7 +530,7 @@
 									//$('#quantity').hide();
 									//$('#vial').hide();
 									//$("#quantity").prop('disabled', true);
-									//$("#vial").prop('disabled', true);
+									$("#vial").prop('disabled', false);
 									$('#total_cel').prop('disabled', true);
 									$('#quantity').prop('disabled', true);
 									$('#package_type').prop('disabled', true);
