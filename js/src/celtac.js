@@ -512,6 +512,13 @@
 									
 									$('#set').prop('disabled', true);
 									$("#vial").prop('disabled', false);
+									
+									//$('#quantity').val('');
+									$('#set').val('');
+									//$('#vial').val('');
+									//$('#total_cel').val('');
+									//$('#package_type').val('');
+									
 								} else if(this.value == "gcsf" || this.value == "hyagan"){
 									//$('#quantity').hide();
 									//$('#vial').hide();
@@ -522,6 +529,9 @@
 									$('#quantity').prop('disabled', false);
 									$('#package_type').prop('disabled', true);
 									
+									//$('#quantity').val('');
+									$('#set').val('');
+									$('#vial').val('');
 									$('#total_cel').val('');
 									$('#package_type').val('');
 									
@@ -532,10 +542,11 @@
 									$('#quantity').prop('disabled', true);
 									$('#package_type').prop('disabled', true);
 									
-									$('#total_cel').val('');
 									$('#quantity').val('');
-									$('#package_type').val('');
+									//$('#set').val('');
 									$('#vial').val('');
+									$('#total_cel').val('');
+									$('#package_type').val('');
 									
 									$('#set').prop('disabled', false);
 									
@@ -549,9 +560,13 @@
 									$('#quantity').prop('disabled', true);
 									$('#package_type').prop('disabled', true);
 									
-									$('#total_cel').val('');
+									
 									$('#quantity').val('');
+									//$('#set').val('');
+									$('#vial').val('');
+									$('#total_cel').val('');
 									$('#package_type').val('');
+									
 									
 									$('#set').prop('disabled', true);
 								
