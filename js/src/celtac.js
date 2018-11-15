@@ -526,6 +526,19 @@
 									$('#package_type').val('');
 									
 								
+								} else if(this.value == "prfm_set"){
+									$("#vial").prop('disabled', true);
+									$('#total_cel').prop('disabled', true);
+									$('#quantity').prop('disabled', true);
+									$('#package_type').prop('disabled', true);
+									
+									$('#total_cel').val('');
+									$('#quantity').val('');
+									$('#package_type').val('');
+									
+									$('#set').prop('disabled', false);
+									
+								
 								} else {
 									//$('#quantity').hide();
 									//$('#vial').hide();
@@ -539,7 +552,7 @@
 									$('#quantity').val('');
 									$('#package_type').val('');
 									
-									$('#set').prop('disabled', false);
+									$('#set').prop('disabled', true);
 								
 								}
 							});
