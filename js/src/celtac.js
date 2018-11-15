@@ -535,6 +535,7 @@
 									$('#total_cel').val('');
 									$('#quantity').val('');
 									$('#package_type').val('');
+									$('#vial').val('');
 									
 									$('#set').prop('disabled', false);
 									
