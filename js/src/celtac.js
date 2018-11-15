@@ -2152,9 +2152,12 @@
 										//--str_items += 								item.total_cell + " m | ";
 										//str_items += 								item.package_type + " | ";
 									} else if(item.product_type == "gcsf" || item.product_type == "hyagan") {
+									
 										str_items += 								item.quantity + " box | ";
-									} else {
+									} else if(item.product_type == "prfm_set") {
 										str_items += 								item.set + " set | ";
+									} else {
+										//str_items += 								item.set + " set | ";
 										str_items += 								item.vial + " vial | ";
 									}
 									//----------------------------------------------------------------------
