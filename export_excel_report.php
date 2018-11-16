@@ -140,6 +140,14 @@
 		,"dealer_company" 	=> "dealer_company"
 		,"price_rate" 		=> "price_rate"
 	);
+	$arr_col_quantity = array(
+
+		"customer_name" 	=> "customer_name"
+		,"quantity" 		=> "quantity"
+		,"staff_n" 			=> "staff_n"
+		,"dealer_company" 	=> "dealer_company"
+		,"price_rate" 		=> "price_rate"
+	);
 	$arr_col_else = array(
 
 		"customer_name" 	=> "customer_name"
@@ -202,6 +210,8 @@
 			$arr_col = $arr_col_cell;
 		} else if($key == "prfm_set") {
 			$arr_col = $arr_col_set;
+		} else if($key == "gcsf" || $key == "hyagan") {
+			$arr_col = $arr_col_quantity;
 		} else {
 			$arr_col = $arr_col_else;
 		}
