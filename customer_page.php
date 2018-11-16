@@ -83,6 +83,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">menu</a>
 				<div class="dropdown-menu bg-dark" aria-labelledby="dropdown01">
 				  <a class="nav-link" style="color:#abadad" id="export_excel" href="#" onclick="celtac.g_func.modal_export('export_order')">export</a>
+				  <a class="nav-link" style="color:#abadad" id="gen_qrcode" href="#" onclick="celtac.g_func.gen_qrcode()">generate QR code</a>
 				  <?php if ($_SESSION['is_staff']) {?>
 				  <a class="nav-link" style="color:#abadad" id="report_excel" href="#" onclick="celtac.g_func.modal_export('export_report')">report</a>
 				  <?php }?>
