@@ -655,6 +655,43 @@ class Order extends DBConnection
 				delivery_date_time 
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
 			GROUP BY customer_name,user_id,staff.first_name,dealer_company,price_rate
+		";			
+		
+		//------------------------------------------------
+		$sql_gcsf ="
+			select 
+				customer_name
+				,staff.first_name as staff_n
+				,user_id
+				,SUM(quantity) as quantity
+				,dealer_company
+				,price_rate 
+			from  order_product
+			inner join staff on staff.id = order_product.user_id
+			WHERE 1=1
+			AND product_type = 'gcsf'
+			AND 	
+				delivery_date_time 
+				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
+			GROUP BY customer_name,user_id,staff.first_name,dealer_company,price_rate
+		";
+		//-----------------------------
+		$sql_hyagan ="
+			select 
+				customer_name
+				,staff.first_name as staff_n
+				,user_id
+				,SUM(quantity) as quantity
+				,dealer_company
+				,price_rate 
+			from  order_product
+			inner join staff on staff.id = order_product.user_id
+			WHERE 1=1
+			AND product_type = 'hyagan'
+			AND 	
+				delivery_date_time 
+				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
+			GROUP BY customer_name,user_id,staff.first_name,dealer_company,price_rate
 		";
 		
 		//--------------------------------------------------------------------------------------------
@@ -723,6 +760,22 @@ class Order extends DBConnection
 				echo $sql_prfm_tuee;
 			}
 			//------------------------------------------------------
+			try {
+				$rs6 = $this->db->query($sql_gcsf);
+			} catch (Exception $e) {
+				echo 'Caught exception: ',  $e->getMessage(), "\n";
+				echo "-------------------";
+				echo $sql_gcsf;
+			}
+			//------------------------------------------------------
+			try {
+				$rs7 = $this->db->query($sql_hyagan);
+			} catch (Exception $e) {
+				echo 'Caught exception: ',  $e->getMessage(), "\n";
+				echo "-------------------";
+				echo $sql_hyagan;
+			}
+			//------------------------------------------------------
 
 
 				if (
@@ -731,6 +784,8 @@ class Order extends DBConnection
 					&& $rs3 != false
 					&& $rs4 != false
 					&& $rs5 != false
+					&& $rs6 != false
+					&& $rs7 != false
 				) {
 					$result["success"] = true;
 					
@@ -740,6 +795,8 @@ class Order extends DBConnection
 					$rs_placenta 	= $rs3->fetchAll(PDO::FETCH_ASSOC);
 					$rs_prfm_set 	= $rs4->fetchAll(PDO::FETCH_ASSOC);
 					$rs_prfm_tuee	= $rs5->fetchAll(PDO::FETCH_ASSOC);
+					$rs_gcsf		= $rs6->fetchAll(PDO::FETCH_ASSOC);
+					$rs_hyagan		= $rs7->fetchAll(PDO::FETCH_ASSOC);
 					
 
 					
@@ -748,6 +805,9 @@ class Order extends DBConnection
 					$result["placenta"]  = $rs_placenta;
 					$result["prfm_set"]  = $rs_prfm_set;
 					$result["prfm_tuee"] = $rs_prfm_tuee;
+					$result["gcsf"] 	 = $rs_gcsf;
+					$result["hyagan"] 	 = $rs_hyagan;
+					
 					$result["date_time"] = $str_date_start.' - '.$str_date_end;
 					
 					// echo '<pre> ';
