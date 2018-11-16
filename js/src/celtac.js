@@ -2554,6 +2554,12 @@
 					return total_cell_sum;
 					
 				}
+			}			
+			//-----------------------------------------------------------------------------------------
+			,gen_qrcode : function(){
+				if(true){
+					window.open(window.location.origin+'/gen_qrcode', '_blank');	
+				}
 			}
 		};
 		this.g_var = {
