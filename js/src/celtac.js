@@ -1877,7 +1877,7 @@
 								},
 								type: "GET",
 								success:function(response){
-									
+									debugger;
 									$('#loading_modal').modal('hide');
 									//console.debug('response : ',response);
 									//debugger;
@@ -1915,6 +1915,7 @@
 									}
 								}
 							    ,error: (error) => {
+									debugger;
 									console.log(JSON.stringify(error));
 							    }
 								/*
