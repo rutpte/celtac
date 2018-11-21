@@ -132,7 +132,7 @@ $new_tb .='
 $new_tb .='      </style>';
 $new_tb .='   </head>';
 $new_tb .='   <body>';
-$new_tb .='   <h2> Hi Celtac laboratory team, you have new order cell or new update ,check your new order here.</br></h2>';
+$new_tb .='   <h2> This is your order.</br></h2>';
 //----------------------------------------------------------
 $new_tb .= $tb_rut;
 //----------------------------------------------------------
