@@ -1930,7 +1930,7 @@
 												//location.reload();
 											}
 											,error: (error) => {
-												console.log(JSON.stringify(error));
+												//console.log(JSON.stringify(error));
 											}
 											/*
 											error:function(response){
