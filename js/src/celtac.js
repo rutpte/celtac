@@ -1854,7 +1854,8 @@
 								},
 								error:function(response){
 									$('#loading_modal').modal('hide');
-									console.debug(response);
+									debugger;
+									console.log(JSON.stringify(response));
 								}
 							});
 						}
