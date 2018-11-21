@@ -1886,6 +1886,8 @@
 									//debugger;
 									//console.debug('respont : ',obj_response);
 									
+									
+									/*
 									if (true) {
 										
 										//--> notic confirm sended email.
@@ -1911,12 +1913,39 @@
 											}*/
 										});
 									} else {
-										console.log('error sum email');
+										console.log('close by admin.');
 									}
+									*/
 								}
 							    ,error: (error) => {
 									debugger;
-									console.log(JSON.stringify(error));
+									if (true) {
+										
+										//--> notic confirm sended email.
+										$.ajax({
+											url: "sendOrderConfirmUser.php",
+											dataType: 'text', // Notice! JSONP <-- P (lowercase)
+											method : 'POST',
+											data: { 
+												"q"              					: "xxx"
+											},
+											type: "GET",
+											success:function(response){
+												$('#loading_modal').modal('hide');
+												//location.reload();
+											}
+											,error: (error) => {
+												console.log(JSON.stringify(error));
+											}
+											/*
+											error:function(response){
+												$('#loading_modal').modal('hide');
+												console.debug('ERROR...2>',response);
+											}*/
+										});
+									} else {
+										console.log('close by admin.');
+									}
 							    }
 								/*
 								error:function(response){
