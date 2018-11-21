@@ -1906,11 +1906,6 @@
 											,error: (error) => {
 												console.log(JSON.stringify(error));
 											}
-											/*
-											error:function(response){
-												$('#loading_modal').modal('hide');
-												console.debug('ERROR...2>',response);
-											}*/
 										});
 									} else {
 										console.log('close by admin.');
