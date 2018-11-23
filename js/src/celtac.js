@@ -1778,7 +1778,7 @@
 
 						
 						break;					
-					case "export_excel_order":
+					case "export_excel_order": //--> after export excel then send line and email.
 						if(true){
 							$('#loading_modal').modal('show');
 							
@@ -1863,14 +1863,14 @@
 					case "send_mail":
 						if(true){
 							$('#loading_modal').modal('show');
-							//debugger;
+							//debugger; move to use in "export_excel_order" fn.
 							//-- celtac.g_func.order("export_excel_order");
 							//celtac.g_func.order("send_line");
 							//celtac.g_func.order("send_line_logistic");
 							
 							$.ajax({
 								url: "sendOrder.php",
-								dataType: 'text', // Notice! JSONP <-- P (lowercase)
+								dataType: 'text', // Notice! JSONP <-- P (lowercase) //--> if use JSONP it will be ERROR.
 								method : 'POST',
 								data: { 
 									"q"              					: new Date()
