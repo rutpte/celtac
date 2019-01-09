@@ -119,7 +119,7 @@
 	$message .= isset($_SESSION['first_name'])? $_SESSION['first_name']."\n" : 'auto update'."\n";
 	$chk_mod = 0;
 	foreach ($data as &$value) {
-		$str_msg = "";
+		$str_msg = "\n";
 		$obj_date 		= new DateTime($value['delivery_date_time']);;
 		$daliv_date 	= $obj_date->format('d-m-Y');
 		$daliv_time 	= $obj_date->format('H:i');
