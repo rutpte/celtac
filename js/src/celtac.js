@@ -1787,8 +1787,14 @@
 								$('#total_cel_view').hide();
 								$('#package_type_view').hide();
 								$('#quantity_view').show();
-							}else {
+							} else if(data.product_type == "prfm_set") {
 								$('#set_view').show();
+								$('#vial_view').hide();
+								$('#total_cel_view').hide();
+								$('#package_type_view').hide();
+								$('#quantity_view').hide();
+							} else {
+								$('#set_view').hide();
 								$('#vial_view').show();
 								$('#total_cel_view').hide();
 								$('#package_type_view').hide();
