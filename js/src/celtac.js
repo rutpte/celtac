@@ -1430,9 +1430,21 @@
 							if (
 								product_type == "prp_ready"   //vial
 								|| product_type == "placenta" //vial
-								|| product_type == "prfm_set" //set
 								|| product_type == "prfm_tuee"//vial
 								){
+
+								//--
+								if (vial=="0" ){
+									celtac.g_func.notice_div_error(true,"vial_edit");
+									sta_validate = false;
+									console.log("false on vial_edit");
+								}else {
+									//celtac.g_func.notice_div_error(false,"set_edit");
+									celtac.g_func.notice_div_error(false,"vial_edit");
+								}
+							}
+							//--
+							if (product_type == "prfm_set"){ //set
 								if (set == ""){
 									celtac.g_func.notice_div_error(true,"set_edit");
 									sta_validate = false;
@@ -1440,18 +1452,9 @@
 								}else {
 									celtac.g_func.notice_div_error(false,"set_edit");
 								}
-								//--
-								if (set == "0" && vial=="0" ){
-									celtac.g_func.notice_div_error(true,"vial_edit");
-									celtac.g_func.notice_div_error(true,"vial_edit");
-									sta_validate = false;
-									console.log("false on vial_edit vial_edit");
-								}else {
+							}else {
 									celtac.g_func.notice_div_error(false,"set_edit");
-									celtac.g_func.notice_div_error(false,"vial_edit");
-								}
 							}
-
 							//--
 							if (
 								product_type == "gcsf"
