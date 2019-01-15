@@ -1285,6 +1285,7 @@
 							if (customer_name == ""){
 								celtac.g_func.notice_div_error(true,"customer_name_edit");
 								sta_validate = false;
+								console.log("false on customer_name");
 							} else {
 								celtac.g_func.notice_div_error(false,"customer_name_edit");
 							}
@@ -1292,6 +1293,7 @@
 							if (price_rate == ""){
 								celtac.g_func.notice_div_error(true,"price_rate_edit");
 								sta_validate = false;
+								console.log("false on price_rate");
 							
 							}else {
 								celtac.g_func.notice_div_error(false,"price_rate_edit");
@@ -1300,6 +1302,7 @@
 							if (dealer_company == ""){
 								celtac.g_func.notice_div_error(true,"dealer_company_edit");
 								sta_validate = false;
+								console.log("false on dealer_company");
 							}else {
 								celtac.g_func.notice_div_error(false,"dealer_company_edit");
 							}
@@ -1307,6 +1310,7 @@
 							if (dealer_person == ""){
 								celtac.g_func.notice_div_error(true,"dealer_person_edit");
 								sta_validate = false;
+								console.log("false on dealer_person");
 							
 							}else {
 								celtac.g_func.notice_div_error(false,"dealer_person_edit");
@@ -1315,6 +1319,7 @@
 							if (receiver == ""){
 								celtac.g_func.notice_div_error(true,"receiver_edit");
 								sta_validate = false;
+								console.log("false on receiver");
 							
 							}else {
 								celtac.g_func.notice_div_error(false,"receiver_edit");
@@ -1339,6 +1344,7 @@
 							if (delivery_time_minute == ""){
 								celtac.g_func.notice_div_error(true,"delivery_time_minute_edit");
 								sta_validate = false;
+								console.log("false on delivery_time_minute");
 							
 							}else {
 								celtac.g_func.notice_div_error(false,"delivery_time_minute_edit");
@@ -1347,6 +1353,7 @@
 							if (delivery_time_hour == ""){
 								celtac.g_func.notice_div_error(true,"delivery_time_hour_edit");
 								sta_validate = false;
+								console.log("false on delivery_time_hour");
 							
 							}else {
 								celtac.g_func.notice_div_error(false,"delivery_time_hour_edit");
@@ -1355,6 +1362,7 @@
 							if (delivery_date == ""){
 								celtac.g_func.notice_div_error(true,"delivery_date_edit");
 								sta_validate = false;
+								console.log("false on delivery_date");
 							
 							}else {
 								celtac.g_func.notice_div_error(false,"delivery_date_edit");
@@ -1370,6 +1378,7 @@
 									if($('#product_type_edit').val() == "cell"){
 										celtac.g_func.notice_div_error(true,"quantity_edit");
 										sta_validate = false;
+										console.log("false on quantity_edit");
 									}
 								} else {
 									if($('#product_type_edit').val() == "cell"){
@@ -1380,6 +1389,7 @@
 								if (vial == "" || vial == "0"){
 									celtac.g_func.notice_div_error(true,"vial_edit");
 									sta_validate = false;
+									console.log("false on vial_edit");
 								}else {
 									celtac.g_func.notice_div_error(false,"vial_edit");
 								}	
@@ -1388,6 +1398,7 @@
 									if($('#product_type_edit').val() == "cell"){
 										celtac.g_func.notice_div_error(true,"total_cel_edit");
 										sta_validate = false;
+										console.log("false on total_cel_edit");
 									}
 								} else {
 									if($('#product_type_edit').val() == "cell"){
@@ -1419,14 +1430,16 @@
 								if (set == ""){
 									celtac.g_func.notice_div_error(true,"set_edit");
 									sta_validate = false;
+									console.log("false on set_edit");
 								}else {
 									celtac.g_func.notice_div_error(false,"set_edit");
 								}
 								//--
 								if (set == "0" && vial=="0" ){
-									celtac.g_func.notice_div_error(true,"set_edit");
+									celtac.g_func.notice_div_error(true,"vial_edit");
 									celtac.g_func.notice_div_error(true,"vial_edit");
 									sta_validate = false;
+									console.log("false on vial_edit vial_edit");
 								}else {
 									celtac.g_func.notice_div_error(false,"set_edit");
 									celtac.g_func.notice_div_error(false,"vial_edit");
@@ -1441,6 +1454,7 @@
 								if (quantity == "" || quantity == "0"){
 									celtac.g_func.notice_div_error(true,"quantity_edit");
 									sta_validate = false;
+									console.log("false on quantity_edit");
 								}else {
 									celtac.g_func.notice_div_error(false,"quantity_edit");
 								}
@@ -1475,6 +1489,7 @@
 								$('#modal_notice_customer').modal('show');
 								
 								sta_validate = false;
+								console.log("false on rs");
 							}
 							//debugger;
 							/*
