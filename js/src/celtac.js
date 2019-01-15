@@ -1021,7 +1021,7 @@
 								// $('#total_cel_edit').prop('disabled', true);
 								// $('#package_type_edit').prop('disabled', true);
 							// }
-							//debugger;
+							debugger;
 							//--> add data from js_data.
 							$('#order_id_edit').val(data.id);
 							$('#order_code_edit').val(data.order_code); //group_id.
