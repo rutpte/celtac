@@ -1218,8 +1218,14 @@
 								$('#total_cel_edit').hide();
 								$('#package_type_edit').prop('disabled', true);
 								$('#quantity_edit').show();
-							}else {
+							} else if(product_type == "prfm_set") {
 								$('#set_edit').show();
+								$('#vial_edit').hide();
+								$('#total_cel_edit').hide();
+								$('#package_type_edit').prop('disabled', true);
+								$('#quantity_edit').hide();
+							}else {
+								$('#set_edit').hide();
 								$('#vial_edit').show();
 								$('#total_cel_edit').hide();
 								$('#package_type_edit').prop('disabled', true);
@@ -1422,10 +1428,10 @@
 
 							//--
 							if (
-								product_type == "prp_ready"
-								|| product_type == "placenta"
-								|| product_type == "prfm_set"
-								|| product_type == "prfm_tuee"
+								product_type == "prp_ready"   //vial
+								|| product_type == "placenta" //vial
+								|| product_type == "prfm_set" //set
+								|| product_type == "prfm_tuee"//vial
 								){
 								if (set == ""){
 									celtac.g_func.notice_div_error(true,"set_edit");
