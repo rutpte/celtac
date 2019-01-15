@@ -1570,7 +1570,7 @@
 								});
 								
 							}else{
-								//alert('test alert');
+								console.log("sta_validate is false");
 							}
 						}
 
