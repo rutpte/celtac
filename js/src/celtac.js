@@ -904,13 +904,16 @@
 
 							var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 720);
 							
-							if(rs){
+							if(rs || gl_is_staff == "1"){
 								//--> can save. time_validate still is true.
 							} else {
 								//--> set for open dialog confirm.
 								time_validate = false;
+								$('#modal_notice_customer').find('#msg_modal_notice_customer').html('can not save data because time less than 12 Hour. </br> please connect admistrator for buy your order.');
+								$('#modal_notice_customer').modal('show');
 							}
 							//-------------------------------------------------------------------------------------
+							/*
 							var str_daliverly_date 			= $('#delivery_date').datepicker("option", "dateFormat", "yy-mm-dd" ).val();
 							var h 							= $('#delivery_time_hour').val();
 							var m 
@@ -920,8 +923,9 @@
 								$('#modal_notice_customer').find('#msg_modal_notice_customer').html('can not save data because time less than 5 minute. </br> please connect admistrator for buy your order.');
 								$('#modal_notice_customer').modal('show');
 								
-								sta_validate = false;
+								//--sta_validate = false;
 							}
+							*/
 							//----------------------
 							var items_json 				= JSON.stringify(items_product_arr);
 							//----------------------
@@ -943,7 +947,7 @@
 											"q"              			: "add_order"
 											,"order_code"         		: order_code	
 											,"customer_name"         	: customer_name	
-											,"items_json"				: items_json
+											,"items_json"				: items_json    //--> this is items data. for loop add row.
 											//,"product_type"				: product_type		
 											//,"quantity"					: quantity			
 											//,"vial"						: vial				
@@ -1485,7 +1489,7 @@
 							}*/
 							
 							//-------------- check time ------------------------------------------
-							
+							/*
 							var str_daliverly_date 			= $('#delivery_date_edit').datepicker("option", "dateFormat", "yy-mm-dd" ).val();
 							var h 							= $('#delivery_time_hour_edit').val();
 							var m 							= $('#delivery_time_minute_edit').val();
@@ -1497,9 +1501,11 @@
 								$('#modal_notice_customer').find('#msg_modal_notice_customer').html('can not save data because time less than 5 minute. </br> please connect admistrator for buy your order.');
 								$('#modal_notice_customer').modal('show');
 								
-								sta_validate = false;
+								//--sta_validate = false;
 								console.log("false on rs");
-							}
+							}*/
+							
+							//---------------------------------------------------------------- end check time 5 minute--
 							//debugger;
 							/*
 							if($('#is_active_edit').length == 1){
@@ -1526,14 +1532,32 @@
 
 							if($('#product_type_edit').val() == "cell"){
 								var check_12h = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 720);
-								if((check_12h) && (total_cel <= 10)){
-									//sta_validate = false;
-									is_active = true;
+								
+								if((check_12h) && (total_cel <= 10) || gl_is_staff == "1"){
+									//--> no action.
 								} else {
 									//$('#modal_notice_customer').find('#msg_modal_notice_customer').html('your order (cell) time less than 5 hour or total cell over 10 m. </br> please connect admistrator for approve your order.');
 									//$('#modal_notice_customer').modal('show');
 									alert('your order (cell) time less than 12 hour or total cell over 10 m. please connect admistrator for approve your order.');
 									is_active = false;
+								}
+								
+							} else { //--> not eqaul cell.
+								var str_daliverly_date 			= $('#delivery_date_edit').datepicker("option", "dateFormat", "yy-mm-dd" ).val();
+								var h 							= $('#delivery_time_hour_edit').val();
+								var m 							= $('#delivery_time_minute_edit').val();
+								
+								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 5);
+								
+								
+								if( rs  || gl_is_staff == "1"){
+									//---no act.
+								} else {
+									$('#modal_notice_customer').find('#msg_modal_notice_customer').html('can not save data because time less than 5 minute. </br> please connect admistrator for buy your order.');
+									$('#modal_notice_customer').modal('show');
+									
+									sta_validate = false;
+									console.log("false on rs");
 								}
 							}
 							
@@ -2392,7 +2416,8 @@
 							//debugger;
 							//console.debug('respont : ',respont);
 							if (obj_response.success) {
-								//debugger;
+								debugger;
+								//console.log(obj_response);
 								//celtac.g_var.user = obj_response;
 								window.location = window.location.origin+ "/" + celtac.pjName + "/index.php";
 							} else {

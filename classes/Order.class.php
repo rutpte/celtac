@@ -81,7 +81,7 @@ class Order extends DBConnection
 		$delivery_date_time	= isset($post['delivery_date']) 		? "'".$date_formated."'" : 'null';
 		$sta_allow_time_deliv = $this->check_diff_time_by_strtime($delivery_date_time, 720);
 		//check time deliv and cell number. or is_staff can be access.
-		if(($sta_allow_time_deliv == 1) && ($total_cell_sum <= 10)){
+	if(($sta_allow_time_deliv == 1) && ($total_cell_sum <= 10) || $_SESSION['is_staff']){
 			$is_active = 'true';
 		} else {
 			$is_active = 'false';
@@ -505,12 +505,15 @@ class Order extends DBConnection
     //-----------------------------------------------------------------
     public function getOrderStaff ()
     {
+
+		$pre_a_mount = date('Y-m-28',  strtotime('-1 month'));
         $sql ="
             select 
 				*
             from order_product
 			where 1=1
-			and delivery_date_time >= now()::date
+			--and delivery_date_time >= now()::date
+			and delivery_date_time >= '{$pre_a_mount}'
 			order by delivery_date_time, id, order_code
         ";
 		//and is_active IS true

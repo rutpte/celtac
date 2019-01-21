@@ -1,5 +1,6 @@
 <?php
-require dirname(__FILE__) . '/includes/init.inc.php';
+//--require dirname(__FILE__) . '/includes/init.inc.php';
+require dirname(__FILE__) . '/includes/global_js_init.php';
  if (isset($_SESSION['email'])) {
 	$obj 	= new Order($pdo);
 	if ($_SESSION['is_staff']) {

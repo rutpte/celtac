@@ -22,6 +22,9 @@ if ($_SERVER['HTTP_HOST'] == 'xxxxx') {
     define("PORT", '5434');
     // Database password
     define("DB_PASS", 'pgpteadmin');
+	define("REMOTE_HOST", '127.0.0.1');
+	define("PROJ_NAME", 'celtac');
+	
 
 
 } else {
@@ -34,6 +37,9 @@ if ($_SERVER['HTTP_HOST'] == 'xxxxx') {
     define("PORT", '5432');
     // Database password
     define("DB_PASS", 'pgceltacadmin');
+	define("REMOTE_HOST", '163.44.196.239');
+	define("PROJ_NAME", 'celtac');
+	
 
 
 }
