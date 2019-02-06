@@ -476,7 +476,7 @@ class Order extends DBConnection
 			where 1=1
 			and delivery_date_time >= now()::date
 			and is_active IS true
-			order by delivery_date_time
+			order by delivery_date_time,order_code
         ";
 		//and delivery_date_time >= now()
 		//now()::date
