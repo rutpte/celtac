@@ -8,6 +8,8 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 	if($rs_arr['success']){
 		$data = $rs_arr['data'];
 	}
+	
+	$obj->doLog("sendmail start");
 	// var_dump($rs_arr);
 	// foreach ($rs_arr as &$value) {
 		// echo $value['id'];
@@ -245,7 +247,9 @@ try {
     // $result["success"] = true;
 	// echo json_encode($result);
 	// exit;
+	$obj->doLog("sendmail complete");
 } catch (Exception $e) {
+	$obj->doLog("sendmail error : ".$e);
 	$result["success"] = false;
 	echo json_encode($result);
 }
