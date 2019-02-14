@@ -10,7 +10,7 @@
 			$data = $rs_arr['data'];
 		}
 		
-		$obj->doLog("sendLine start - ".$_SESSION['email']);
+		$obj->doLog("sendLineLogis start - ".$_SESSION['email']);
 
 	} else {
 		header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/index.php");
@@ -22,6 +22,7 @@
 	
 	function line_notify($Token, $message)
 	{
+		$obj 	= new Order($pdo);
 		//$msg = $message ."'http://163.44.196.239/celtac/excel_output/order_cell.xls'";
 		//-----------------------------------------------------
 		$message_data = array(
@@ -54,10 +55,10 @@
 		//Check error 
 		if(curl_error($chOne)){ 
 		   echo 'error:' . curl_error($chOne); 
-		   $obj->doLog("sendLine error - ".$_SESSION['email']." : ".curl_error($chOne));
+		   $obj->doLog("sendLineLogis error - ".$_SESSION['email']." : ".curl_error($chOne));
 		} else { 
 		$result_ = json_decode($result, true); 
-		$obj->doLog("sendLine complete - ".$_SESSION['email']);
+			$obj->doLog("sendLineLogis success - ".$_SESSION['email']);
 		   echo "status : ".$result_['status']; echo "message : ". $result_['message'];
 		} 
 		curl_close( $chOne );   
@@ -194,6 +195,7 @@
 	foreach ($arr_message as &$value) {
 		line_notify($Token, $value);
 	}
+	$obj->doLog("sendLineLogis complete - ".$_SESSION['email']);
 	
 	//--$user_first_name = isset($_SESSION['first_name'])? $_SESSION['first_name'] : 'auto update';
 	//--$message .= "from - ".$user_first_name."\n";

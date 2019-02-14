@@ -21,6 +21,7 @@
 	
 	function line_notify($Token, $message)
 	{
+		$obj 	= new Order($pdo);
 		//$msg = $message ."'http://163.44.196.239/celtac/excel_output/order_cell.xls'";
 		//-----------------------------------------------------
 		$message_data = array(
@@ -56,11 +57,12 @@
 		   $obj->doLog("sendLine error - ".$_SESSION['email']." : ".curl_error($chOne));
 		} else {
 		$result_ = json_decode($result, true); 
-			$obj->doLog("sendLine complete - ".$_SESSION['email']);
+			$obj->doLog("sendLine success - ".$_SESSION['email']);
 		   echo "status : ".$result_['status']; echo "message : ". $result_['message'];
 		} 
 		curl_close( $chOne );   
 	}
+	$obj->doLog("sendLine complete - ".$_SESSION['email']);
 	//--------------------------------------------
 	/* stand by.
 	$obj_date 		= new DateTime($value['delivery_date_time']);;
