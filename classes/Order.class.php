@@ -944,7 +944,7 @@ class Order extends DBConnection
     {
     //self::doLog('xxx');
     // open log file
-    $filename = "log_picture.log";
+    $filename = "log.log";
     $fh = fopen($filename, "a") or die("Could not open log file.");
     fwrite($fh, date("d-m-Y, H:i")." - ip :".$_SERVER["REMOTE_ADDR"]." "." - computer_name : ".gethostname()." - browser : ".$_SERVER["HTTP_USER_AGENT"]."\n") or die("Could not write head!");
 	fwrite($fh, " -event : $event \n") or die("Could not write event!");
