@@ -10,6 +10,7 @@
 			$data = $rs_arr['data'];
 		}
 		
+		$obj->doLog("sendLine start - ".$_SESSION['email']);
 
 	} else {
 		header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/index.php");
@@ -53,9 +54,10 @@
 		//Check error 
 		if(curl_error($chOne)){ 
 		   echo 'error:' . curl_error($chOne); 
-		   
+		   $obj->doLog("sendLine error - ".$_SESSION['email']." : ".curl_error($chOne));
 		} else { 
 		$result_ = json_decode($result, true); 
+		$obj->doLog("sendLine complete - ".$_SESSION['email']);
 		   echo "status : ".$result_['status']; echo "message : ". $result_['message'];
 		} 
 		curl_close( $chOne );   
