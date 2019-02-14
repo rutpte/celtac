@@ -9,7 +9,7 @@ require dirname(__FILE__) . '/includes/init.inc.php';
 		$data = $rs_arr['data'];
 	}
 	
-	$obj->doLog("sendmail start");
+	$obj->doLog("sendmail start - ".$_SESSION['email']);
 	// var_dump($rs_arr);
 	// foreach ($rs_arr as &$value) {
 		// echo $value['id'];
@@ -247,9 +247,9 @@ try {
     // $result["success"] = true;
 	// echo json_encode($result);
 	// exit;
-	$obj->doLog("sendmail complete");
+	$obj->doLog("sendmail complete - ".$_SESSION['email']);
 } catch (Exception $e) {
-	$obj->doLog("sendmail error : ".$e);
+	$obj->doLog("sendmail error : ".$e ." : -".$_SESSION['email']);
 	$result["success"] = false;
 	echo json_encode($result);
 }
