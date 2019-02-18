@@ -150,11 +150,13 @@
 			$str_msg .= $vial." vial ";
 
 			$str_msg .= $value['package_type']." ";
-		} else if ($value['product_type'] == "hyagan"){
+		} else if ($value['product_type'] == "hyagan" || $value['product_type'] == "gcsf"){
 			$str_msg .= $value['product_type'].' '.$value['quantity']." box ";
+		} else if ($value['product_type'] == "prfm_set"){
+			$str_msg .= $value['product_type'].' '.$value['quantity']." set ";
 		} else {
 			$str_msg .= $value['product_type'].' '." ";
-			$str_msg .= $set." set ";
+			//--$str_msg .= $set." set ";
 			$str_msg .= $vial." vial ";
 		}
 
