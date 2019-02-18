@@ -2050,9 +2050,14 @@
 							} else {
 								var vial = $('#vial').val();
 							};
+							
+							if(product_type == "cell"){
+								var total_cel = parseInt(quantity) * parseInt(vial);
+							}
 
 							//var set						= $('#set').val();
-							var total_cell				= parseInt( $('#total_cel').val());//total_cel != total_cell
+							//--var total_cell				= parseInt( $('#total_cel').val());//total_cel != total_cell
+							var total_cell				=  total_cel;
 							var package_type			= $('#package_type').val();
 							var giveaway				= $('#giveaway').val();
 							var price_rate				= $('#price_rate').val();
