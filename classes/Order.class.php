@@ -948,7 +948,7 @@ class Order extends DBConnection
 	
 		$msg_head = $msg;
 		$msg_tail = $_SERVER['REMOTE_ADDR'].' - '.$date_formated.' - '.$_SESSION['email'];
-		$fp = fopen('log.txt', 'w');
+		$fp = fopen('error.txt', 'w');
 		fwrite($fp, $msg_head.' : '.$msg_tail);
 		fclose($fp);
 	}
