@@ -952,6 +952,14 @@ class Order extends DBConnection
 		fwrite($fp, $msg_head.' : '.$msg_tail);
 		fclose($fp);
 	}
+	/*
+    public function doLog($event){
+		$filename = "log.log";
+		$fh = fopen($filename, "a") or die("Could not open log file.");
+		fwrite($fh, date("d-m-Y, H:i")." - ip :".$_SERVER["REMOTE_ADDR"]." -event : $event"." - computer_name : ".gethostname()." - browser : ".$_SERVER["HTTP_USER_AGENT"]."\n") or die("Could not write file!");
+		fclose($fh);
+    }
+	*/
 	/**
      * __destruct
      * 
