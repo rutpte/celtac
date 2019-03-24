@@ -10,7 +10,7 @@ $obj 	= new Order($pdo);
 	if($rs_arr['success']){
 		$data = $rs_arr['data'];
 	}
-	$obj->doLog("sendmail start - ".$_SESSION['email']);
+	//$obj->doLog("sendmail start - ".$_SESSION['email']);
 	// var_dump($rs_arr);
 	// foreach ($rs_arr as &$value) {
 		// echo $value['id'];
