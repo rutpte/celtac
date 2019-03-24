@@ -1,14 +1,15 @@
 <?php
 require dirname(__FILE__) . '/includes/init.inc.php';
 //header('Content-Type: text/html; charset=utf-8');
+
+$obj 	= new Order($pdo);
  if (isset($_SESSION['email'])) {
-	$obj 	= new Order($pdo);
+	
 	$rs_arr = $obj->getOrderAll();
 	$data = array();
 	if($rs_arr['success']){
 		$data = $rs_arr['data'];
 	}
-	
 	$obj->doLog("sendmail start - ".$_SESSION['email']);
 	// var_dump($rs_arr);
 	// foreach ($rs_arr as &$value) {
@@ -247,9 +248,10 @@ try {
     // $result["success"] = true;
 	// echo json_encode($result);
 	// exit;
-	$obj->doLog("sendmail complete - ".$_SESSION['email']);
 } catch (Exception $e) {
-	$obj->doLog("sendmail error : ".$e ." : -".$_SESSION['email']);
+	//write log.
+	$msg = "can not send order : ".$e;
+	$obj->write_log($msg);
 	$result["success"] = false;
 	echo json_encode($result);
 }
