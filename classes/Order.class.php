@@ -476,7 +476,7 @@ class Order extends DBConnection
 			where 1=1
 			and delivery_date_time >= now()::date
 			and is_active IS true
-			order by delivery_date_time,order_code
+			order by delivery_date_time
         ";
 		//and delivery_date_time >= now()
 		//now()::date
@@ -939,20 +939,19 @@ class Order extends DBConnection
 		
 
     }
-    //------------------------------------------------------------------------------------------------------------------------------------
-    public function doLog($event)
-    {
-    //self::doLog('xxx');
-    // open log file
-    $filename = "log.log";
-    $fh = fopen($filename, "a") or die("Could not open log file.");
-    fwrite($fh, date("d-m-Y, H:i")." - ip :".$_SERVER["REMOTE_ADDR"]." "." - computer_name : ".gethostname()." - browser : ".$_SERVER["HTTP_USER_AGENT"]."\n") or die("Could not write head!");
-	fwrite($fh, " -event : $event \n") or die("Could not write event!");
-	fwrite($fh, " ------------------------------------------------------- \n\n") or die("Could not write line!");
-    fclose($fh);
-    }
-	//---------------------------------------------------------------------------------------------------------------------------------------
 	
+	public function write_log($msg){
+		$obj_date 		= new DateTime();
+		$timezone 		= new DateTimeZone("Asia/Bangkok");
+		$obj_date->setTimezone( $timezone );
+		$date_formated 	= $obj_date->format('Y-m-d H:i:s');
+	
+		$msg_head = $msg;
+		$msg_tail = $_SERVER['REMOTE_ADDR'].' - '.$date_formated.' - '.$_SESSION['email'];
+		$fp = fopen('log.txt', 'w');
+		fwrite($fp, $msg_head.' : '.$msg_tail);
+		fclose($fp);
+	}
 	/**
      * __destruct
      * 
