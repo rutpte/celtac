@@ -1903,12 +1903,12 @@
 								type: "GET",
 								success:function(response){
 									$('#loading_modal').modal('hide');
-								debugger;
+								//debugger;
 
 								},
 								error:function(response){
 									$('#loading_modal').modal('hide');
-									debugger;
+									//debugger;
 									console.log(JSON.stringify(response));
 								}
 							});
@@ -1931,7 +1931,7 @@
 								},
 								type: "GET",
 								success:function(response){
-									debugger;
+									//debugger;
 									$('#loading_modal').modal('hide');
 									//console.debug('response : ',response);
 									//debugger;
