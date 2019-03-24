@@ -1,8 +1,9 @@
 <?php
 require dirname(__FILE__) . '/includes/init.inc.php';
+$obj 	= new Order($pdo);
  if (isset($_SESSION['email'])) {
 
-	$obj 	= new Order($pdo);
+	
 	$rs_arr = $obj->getOrder();
 	$data = array();
 	if($rs_arr['success']){
@@ -190,6 +191,8 @@ try {
 	echo json_encode($result);
 	
 } catch (Exception $e) {
+	$msg = "can not Confirm User order : ".$e;
+	$obj->write_log($msg)
 	$result["success"] = false;
 	echo json_encode($result);
 }
