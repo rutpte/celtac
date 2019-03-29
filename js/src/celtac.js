@@ -2052,7 +2052,7 @@
 							};
 							
 							if(product_type == "cell"){
-								var total_cel = parseInt(quantity) * parseInt(vial);
+								var total_cel = parseFloat(quantity) * parseInt(vial);
 							}
 
 							//var set						= $('#set').val();
