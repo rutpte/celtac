@@ -331,7 +331,7 @@ class Order extends DBConnection
 			//------------------------------------------------------
 			$sta_allow_time_deliv = $this->check_diff_time_by_strtime($delivery_date_time, 300);
 			//check time deliv and cell number. or is_staff can be access.
-			if(($sta_allow_time_deliv == 1 && $total_cell <= 10)){
+			if(($sta_allow_time_deliv == 1 && $total_cell <= 10) || $_SESSION['is_staff']){
 				$is_active = 'true';
 			} else {
 				$is_active = 'false';
@@ -969,16 +969,16 @@ class Order extends DBConnection
     public function getOrderAct ($act_type_process, $act_id)
     {
 		if($act_type_process == "add"){
-			$col = "order_code";
+			$con = " order_code = '{$act_id}'";
 		} else {
-			$col ="id";
+			$con = " id = {$act_id}";
 		}
         $sql ="
             select 
 				*
             from order_product
 			where 1=1
-			and {$col} = {$act_id}
+			and {$con}
 			and is_active IS true
 			order by delivery_date_time
         ";
@@ -987,6 +987,26 @@ class Order extends DBConnection
         //echo "<pre>", $sql; exit;
         $sth = $this->db->prepare($sql);  //sql2
         $result = array();
+		
+		//-----------------------------
+		try {
+			$sth->execute();
+			$get_num_row = $sth->rowCount();
+			if($get_num_row > 0){
+				$rs = $sth->fetchAll(PDO::FETCH_ASSOC);
+				$result["success"] = true;
+				$result["data"] = $rs;
+				return ($result);
+			} else {
+				$result["success"] = false;
+				return ($result);
+			}
+		} catch (PDOException $e) {
+			echo '<pre>'.$sql;
+			print_r($sth->errorInfo());
+		}
+		//-----------------------
+		/*
         if (!$sth->execute()) {
             echo '<pre>'.$sql;
             print_r($sth->errorInfo());
@@ -1004,6 +1024,7 @@ class Order extends DBConnection
 				return ($result);
 			}
         }
+		*/
     }
 	/**
      * __destruct
