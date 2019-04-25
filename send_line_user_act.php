@@ -7,7 +7,7 @@
 		exit();
 	} 
 
-	$Token = 'xxxx';
+	$Token = 'tzhMBh8NPaLFOUwJIWTSeHnYS1bMZJAL5rr0ejf6yPZ';
 	$message = isset($_POST["message"])? $_POST["message"] : 'help!' ;
 	$act_type_process 	= isset($_POST["act_type_process"])? $_POST["act_type_process"] : 0 ;
 	$act_id 			= isset($_POST["act_id"])? $_POST["act_id"] : 0 ;
