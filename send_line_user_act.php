@@ -70,7 +70,8 @@
 	$arr_message = array();
 	$message .= "******************\n";
 	$message .= "action : ".$act_type_process."\n";
-	$message .= "user : ".isset($_SESSION['first_name'])? $_SESSION['first_name']."\n" : 'auto update'."\n"; 
+	$message .=" user  : ";
+	$message .= isset($_SESSION['first_name'])? $_SESSION['first_name']."\n" : 'auto update'."\n"; 
 	$chk_mod = 0;
 	foreach ($data as &$value) {
 		$str_msg = "\n";
