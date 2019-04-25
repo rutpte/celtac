@@ -973,7 +973,7 @@
 											//console.log(response);
 											var obj_response = jQuery.parseJSON(response);
 											
-											//debugger;
+											debugger;
 											//console.debug('respont : ',respont);
 											
 											if (obj_response.success) {
@@ -1534,6 +1534,10 @@
 							*/
 
 							if($('#product_type_edit').val() == "cell"){
+								debugger;
+								var str_daliverly_date 			= $('#delivery_date_edit').datepicker("option", "dateFormat", "yy-mm-dd" ).val();
+								var h 							= $('#delivery_time_hour_edit').val();
+								var m 							= $('#delivery_time_minute_edit').val();
 								var check_12h = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 720);
 								
 								if((check_12h) && (total_cel <= 10) || gl_is_staff == "1"){
@@ -1542,7 +1546,7 @@
 									//$('#modal_notice_customer').find('#msg_modal_notice_customer').html('your order (cell) time less than 5 hour or total cell over 10 m. </br> please connect admistrator for approve your order.');
 									//$('#modal_notice_customer').modal('show');
 									alert('your order (cell) time less than 12 hour or total cell over 10 m. please connect admistrator for approve your order.');
-									is_active = false;
+									is_active = false;//--> is_active not use.
 								}
 								
 							} else { //--> not eqaul cell.
@@ -1607,6 +1611,7 @@
 										//console.debug('respont : ',respont);
 										if (obj_response.success) {
 											//alert("complete.");
+											debugger;
 											celtac.g_func.order("send_line_user_act",obj_response);
 											location.reload();
 										} else {
@@ -2514,6 +2519,7 @@
 			//-----------------------------------------------------------------------------------------
 			,check_avalible_time_order : function(str_daliverly_date, h, m, minute){
 				if(true){
+					debugger;
 					var validate_date_daliverly = function(){
 						var date 				= new Date();
 						var current_timestamp 	= date.getTime();
