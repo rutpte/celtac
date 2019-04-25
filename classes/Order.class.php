@@ -212,6 +212,9 @@ class Order extends DBConnection
             $result = array();
             if ($sth->rowCount() > 0) {
                 $result['success'] = true;
+				$result['id'] = $order_group_id;
+				$result['type_process'] = "add";
+				
             } else {
                 $result['success'] = false;
             }
@@ -247,6 +250,8 @@ class Order extends DBConnection
 				$result = array();
 				if ($sth->rowCount() > 0) {
 					$result['success'] = true;
+					$result['id'] = $id;
+					$result['type_process'] = "delete";
 				} else {
 					$result['success'] = false;
 				}
@@ -369,6 +374,8 @@ class Order extends DBConnection
 				$result = array();
 				if ($sth->rowCount() > 0) {
 					$result['success'] = true;
+					$result['id'] = $order_id_edit;
+					$result['type_process'] = "edit";
 				} else {
 					$result['success'] = false;
 				}
@@ -959,7 +966,45 @@ class Order extends DBConnection
 		fwrite($fh, date("d-m-Y, H:i")." - ip :".$_SERVER["REMOTE_ADDR"]." -event : $event"." - computer_name : ".gethostname()." - browser : ".$_SERVER["HTTP_USER_AGENT"]."\n") or die("Could not write file!");
 		fclose($fh);
     }
-	
+    public function getOrderAct ($act_type_process, $act_id)
+    {
+		if($act_type_process == "add"){
+			$col = "order_code";
+		} else {
+			$col ="id";
+		}
+        $sql ="
+            select 
+				*
+            from order_product
+			where 1=1
+			and {$col} = {$act_id}
+			and is_active IS true
+			order by delivery_date_time
+        ";
+		//and delivery_date_time >= now()
+		//now()::date
+        //echo "<pre>", $sql; exit;
+        $sth = $this->db->prepare($sql);  //sql2
+        $result = array();
+        if (!$sth->execute()) {
+            echo '<pre>'.$sql;
+            print_r($sth->errorInfo());
+        } else {
+			$get_num_row = $sth->rowCount();
+            //var_dump($sth->rowCount());
+            //$result = $sth->fetchObject();
+			if($get_num_row > 0){
+				$rs = $sth->fetchAll(PDO::FETCH_ASSOC);
+				$result["success"] = true;
+				$result["data"] = $rs;
+				return ($result);
+			} else {
+				$result["success"] = false;
+				return ($result);
+			}
+        }
+    }
 	/**
      * __destruct
      * 
