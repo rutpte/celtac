@@ -692,7 +692,7 @@
 						}
 
 						break;
-					case "add_order":
+					case "add_order": //--> add sql.
 						if(true){
 							
 							var order_code				= $('#order_code').val();
@@ -972,10 +972,13 @@
 											//debugger;
 											//console.log(response);
 											var obj_response = jQuery.parseJSON(response);
+											
 											//debugger;
 											//console.debug('respont : ',respont);
+											
 											if (obj_response.success) {
 												//alert("complete.");
+												celtac.g_func.order("send_line_user_act",obj_response);
 												location.reload();
 											} else {
 
@@ -1239,7 +1242,7 @@
 							$('#product_type_edit').prop('disabled', true);
 						}
 						break;	
-					case "edit_order":
+					case "edit_order": //--> update sql.
 						if(true){ 
 							
 							var order_id			= $('#order_id_edit').val();
@@ -1604,6 +1607,7 @@
 										//console.debug('respont : ',respont);
 										if (obj_response.success) {
 											//alert("complete.");
+											celtac.g_func.order("send_line_user_act",obj_response);
 											location.reload();
 										} else {
 											$('#modal_notice_customer').find('#msg_modal_notice_customer').html('no permission allow to update. </br> please connect admistrator for update your order.</br> tel. 080-000-0000 (sead)');
@@ -1707,7 +1711,7 @@
 							}//end if false.
 						}
 						break;										
-					case "delete_order":
+					case "delete_order": //--> delete sql.
 						if(true){
 							var id = obj;
 							$('#modal_delete_confirm').modal('show');
@@ -1733,6 +1737,7 @@
 										//console.debug('respont : ',respont);
 										if (obj_response.success) {
 											console.log(obj_response);
+											celtac.g_func.order("send_line_user_act",obj_response);
 											location.reload();
 											//window.location = window.location.hostname+"/"+celtac.pjName+"/admin_page.php";
 											//header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/admin_page.php");
@@ -1913,6 +1918,36 @@
 								}
 							});
 						}
+					break;	
+					case "send_line_user_act":
+						//celtac.g_func.order("send_line_user_act");
+						if(true){
+							var obj_response = obj;
+							$('#loading_modal').modal('show');
+							$.ajax({
+								url: "send_line_user_act.php",
+								dataType: 'text', // Notice! JSONP <-- P (lowercase)
+								method : 'POST',
+								data: { 
+									"q"              					: "xxx"
+									, "message"							: ""
+									, "act_id"							: obj_response.id
+									, "act_type_process"				: obj_response.type_process
+									
+								},
+								type: "GET",
+								success:function(response){
+									$('#loading_modal').modal('hide');
+								//debugger;
+
+								},
+								error:function(response){
+									$('#loading_modal').modal('hide');
+									//debugger;
+									console.log(JSON.stringify(response));
+								}
+							});
+						}
 					break;						
 					case "send_mail":
 						if(true){
@@ -2006,7 +2041,7 @@
 							
 						}
 					break;
-					case "update_order":
+					case "update_order": //--> update mean send data for update lap staff.
 						if(true){
 							celtac.g_func.order("export_excel_order");
 							
