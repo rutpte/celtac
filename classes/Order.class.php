@@ -228,6 +228,14 @@ class Order extends DBConnection
     {
 		$sta_allow = $this->check_diff_time_by_id($id, 120); //--> 300 minute == 5 hours.
 		//--var_dump($sta_allow); exit;
+		
+		// if($_SESSION['is_staff']){
+			// echo "xxxxx true xxxxx";
+			// exit;
+		// } else {
+			// echo "xxxxx false xxxxx";
+			// exit;
+		// }
 		if($sta_allow == 1 || $_SESSION['is_staff']){
 			//-------------------------------
 			/*
@@ -237,24 +245,48 @@ class Order extends DBConnection
 				WHERE id = {$id}
 			";
 			*/
+			$sql_data = "
+				select * FROM order_product
+				WHERE id = {$id}
+			";
+			
+			//-----------------------------
 			$sql = "
 				DELETE FROM order_product
 				WHERE id = {$id}
 			";
+			
+				$result = array();
+				//------------------------------------
+				$sth_data_del = $this->db->prepare($sql_data);
+
+				if (!$sth_data_del->execute()) {
+					echo '<pre>'.$sql_data;
+					print_r($sth_data_del->errorInfo());
+				} else {
+					$get_num_row = $sth_data_del->rowCount();
+					if($get_num_row > 0){
+						$rs = $sth_data_del->fetchAll(PDO::FETCH_ASSOC);
+						$result["data"] = $rs;
+					}
+				}
+				//var_dump($result["data"]); exit;
+				//----------------------------------
 			try {
 				$sth = $this->db->prepare($sql);
-
 				$sth->execute();
 	//             var_dump($sth, $this->db->errorInfo());
 	//             $sth->debugDumpParams();
-				$result = array();
-				if ($sth->rowCount() > 0) {
+				
+				if (!$sth->execute()) {
+					echo '<pre>'.$sql;
+					print_r($sth->errorInfo());
+				} else {
 					$result['success'] = true;
 					$result['id'] = $id;
 					$result['type_process'] = "delete";
-				} else {
-					$result['success'] = false;
 				}
+				//$result['success'] = false;
 			} catch (PDOException $e) {
 				echo 'Error: ' . $e->getMessage();
 			}
