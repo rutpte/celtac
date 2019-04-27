@@ -1738,7 +1738,7 @@
 										//debugger;
 										//console.log(response);
 										var obj_response = jQuery.parseJSON(response);
-										
+										debugger;
 										//console.debug('respont : ',respont);
 										if (obj_response.success) {
 											console.log(obj_response);
@@ -1749,7 +1749,7 @@
 										} else {
 											$('#modal_notice_customer').find('#msg_modal_notice_customer').html('no permission allow to delete. </br> please connect admistrator for delete your order.</br> tel. 080-000-0000 (sead)');
 											$('#modal_notice_customer').modal('show');
-											location.reload();
+											//-- location.reload();
 										}
 										$('#loading_modal').modal('hide');
 									},
@@ -1927,7 +1927,14 @@
 					case "send_line_user_act":
 						//celtac.g_func.order("send_line_user_act");
 						if(true){
+							debugger;
 							var obj_response = obj;
+							if(typeof(obj_response.data) != "undefined"){
+								var arr_data_del = obj_response.data;
+							} else {
+								var arr_data_del = [];
+							}
+							
 							$('#loading_modal').modal('show');
 							$.ajax({
 								url: "send_line_user_act.php",
@@ -1938,6 +1945,7 @@
 									, "message"							: ""
 									, "act_id"							: obj_response.id
 									, "act_type_process"				: obj_response.type_process
+									, "arr_data_del"				    : arr_data_del
 									
 								},
 								type: "GET",
@@ -1948,7 +1956,7 @@
 								},
 								error:function(response){
 									$('#loading_modal').modal('hide');
-									//debugger;
+									debugger;
 									console.log(JSON.stringify(response));
 								}
 							});
