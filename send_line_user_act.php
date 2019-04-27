@@ -11,15 +11,34 @@
 	$message = isset($_POST["message"])? $_POST["message"] : 'help!' ;
 	$act_type_process 	= isset($_POST["act_type_process"])? $_POST["act_type_process"] : 0 ;
 	$act_id 			= isset($_POST["act_id"])? $_POST["act_id"] : 0 ;
-	//------------------------------------------
+	//$arr_data_del 			= ($_POST["arr_data_del"]!="")? $_POST["arr_data_del"] : 0 ;
+	$arr_data_del 			= $_POST["arr_data_del"];
+	//-------------------------------------------
+	$data = array();
 	$obj 	= new Order($pdo);
 	$rs_arr = $obj->getOrderAct($act_type_process, $act_id);
-	$data = array();
-
-	if($rs_arr['success']){
-		$data = $rs_arr['data'];
+	
+	if($arr_data_del){
+		$data = $arr_data_del;
+	} else {
+		if($rs_arr['success']){
+			$data = $rs_arr['data'];
+		}
 	}
-	$obj->doLog("sendLine start - ".$_SESSION['email']);
+	// echo "xxxxxxxxxxxxxxxxxx";
+	// echo $arr_data_del;
+	// echo "bbbbbbbbb";
+	// var_dump($arr_data_del);
+	// exit;
+	//------------------------------------------
+	// $obj 	= new Order($pdo);
+	// $rs_arr = $obj->getOrderAct($act_type_process, $act_id);
+	// $data = array();
+
+	// if($rs_arr['success']){
+		// $data = $rs_arr['data'];
+	// }
+	$obj->doLog("sendLine user act start - ".$_SESSION['email']);
 	//--------------------------------------------
 	
 	function line_notify($Token, $message)
@@ -65,7 +84,7 @@
 		} 
 		curl_close( $chOne );   
 	}
-	$obj->doLog("sendLine complete - ".$_SESSION['email']);
+	$obj->doLog("sendLine user act complete - ".$_SESSION['email']);
 	//--------------------------------------------
 	$arr_message = array();
 	$message .= "******************\n";
@@ -73,6 +92,7 @@
 	$message .=" user  : ";
 	$message .= isset($_SESSION['first_name'])? $_SESSION['first_name']."\n" : 'auto update'."\n"; 
 	$chk_mod = 0;
+	//---------------------------------------------
 	foreach ($data as &$value) {
 		$str_msg = "\n";
 		$obj_date 		= new DateTime($value['delivery_date_time']);;
@@ -128,11 +148,12 @@
 			$message = "";
 		}
 	}
+	//--------------------------------------------------
 	//-> push remain message.
 	if($message != ""){
 		array_push($arr_message,$message);
 	}
-	
+	//---------------------------------------------------
 	
 	foreach ($arr_message as &$value) {
 		line_notify($Token, $value);
