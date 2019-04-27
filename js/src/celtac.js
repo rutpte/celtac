@@ -1749,7 +1749,7 @@
 										} else {
 											$('#modal_notice_customer').find('#msg_modal_notice_customer').html('no permission allow to delete. </br> please connect admistrator for delete your order.</br> tel. 080-000-0000 (sead)');
 											$('#modal_notice_customer').modal('show');
-											//-- location.reload();
+											location.reload();
 										}
 										$('#loading_modal').modal('hide');
 									},
