@@ -192,7 +192,7 @@ try {
 	
 } catch (Exception $e) {
 	$msg = "can not Confirm User order : ".$e;
-	$obj->write_log($msg)
+	$obj->write_log($msg);
 	$result["success"] = false;
 	echo json_encode($result);
 }
