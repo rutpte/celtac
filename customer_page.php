@@ -87,6 +87,9 @@ require dirname(__FILE__) . '/includes/global_js_init.php';
 				  <a class="nav-link" style="color:#abadad" id="gen_qrcode" href="#" onclick="celtac.g_func.gen_qrcode()">generate QR code</a>
 				  <?php if ($_SESSION['is_staff']) {?>
 				  <a class="nav-link" style="color:#abadad" id="report_excel" href="#" onclick="celtac.g_func.modal_export('export_report')">report</a>
+				  <a class="nav-link" style="color:#abadad" id="HEAT" href="/a4m_celtac" onclick="">HEAT</a>
+				  <a class="nav-link" style="color:#abadad" id="celtic" href="/celtic" onclick="">Logistic</a>
+				  <a class="nav-link" style="color:#abadad" id="celprograms" href="/programs/R-Oa.exe" onclick="">R-Oa</a>
 				  <?php }?>
 				</div>
 			  </li>
@@ -1250,7 +1253,7 @@ require dirname(__FILE__) . '/includes/global_js_init.php';
 		<main role="main" class="container">
 
 
-		  <div>
+			<div>
 				<!--
 				<div class="row">
 				<div class="col-3"><div style="color:#77797c">code</div></div>
@@ -1262,100 +1265,100 @@ require dirname(__FILE__) . '/includes/global_js_init.php';
 				</div> 
 				-->
 				
-<?php 
-	$pre_code = '';
-	//$swichted = false;
-	$index_color = 0;
-	$color_deactive = "";
-/*
-		$length = count($data);
-		for ($x = 0; $x < $length; $x++) {
-			//echo "The data is: {$data[$x]['is_active']} <br>";
-			var_dump($data[$x]);
-			echo "------------------------------------------";
-		} 
-		exit;
-*/
-/*
-	//$data = [1,2,3,4,5,6,7,8,9,10];
-	$length = count($data);
-	//var_dump($length);exit;
-	for ($x = 0; $x <$length; $x++) {
-		//----------------------------
-		//echo "nub".$x."| ";
-		$value = $data[$x]['customer_name'];
-		var_dump($value);
-		//$value = $data[$x];
-		//var_dump($value['customer_name']);
-		//var_dump($value['is_active']);
-	}
-	exit;
-	*/
-	//----------------------------------
-	$length = count($data);
-	for ($x = 0; $x < $length; $x++) {
-		//----------------------------
-		//var_dump($x);
-		$val_data = $data[$x];
+				<?php 
+					$pre_code = '';
+					//$swichted = false;
+					$index_color = 0;
+					$color_deactive = "";
+				/*
+						$length = count($data);
+						for ($x = 0; $x < $length; $x++) {
+							//echo "The data is: {$data[$x]['is_active']} <br>";
+							var_dump($data[$x]);
+							echo "------------------------------------------";
+						} 
+						exit;
+				*/
+				/*
+					//$data = [1,2,3,4,5,6,7,8,9,10];
+					$length = count($data);
+					//var_dump($length);exit;
+					for ($x = 0; $x <$length; $x++) {
+						//----------------------------
+						//echo "nub".$x."| ";
+						$value = $data[$x]['customer_name'];
+						var_dump($value);
+						//$value = $data[$x];
+						//var_dump($value['customer_name']);
+						//var_dump($value['is_active']);
+					}
+					exit;
+				*/
+				//----------------------------------
+				$length = count($data);
+				for ($x = 0; $x < $length; $x++) {
+					//----------------------------
+					//var_dump($x);
+					$val_data = $data[$x];
 
-		if($val_data['is_active']){
-			$color_deactive = "";
-			$icon_active = "ui-icon-unlocked";
-		} else {
-			//--> false.
-			$color_deactive = "#9e3f45";
-			$icon_active = "ui-icon-locked";
-		}
-		
-		//----------------------------
-		if($pre_code != ''){
-			
-			if($val_data['order_code'] == $pre_code){
-				if(($index_color%2)==0){
-					$color = '#fcfcfc';
-				} else {
-					$color = '#c6c6c6';
-				}
-				$pre_code = $val_data['order_code'];
-			}else{
-				$index_color++;
-				if($color == '#c6c6c6'){
-					$color = '#fcfcfc';
-				} else {
-					$color = '#c6c6c6';
-				}
-				$pre_code = $val_data['order_code'];
-			}
-		} else {
-			//--> init_config.
-			$color = '#fcfcfc';
-			$pre_code = $val_data['order_code'];
-		}
-?>
-				
-				<div class="row"  style="background-color:<?php echo $color; ?>">
+					if($val_data['is_active']){
+						$color_deactive = "";
+						$icon_active = "ui-icon-unlocked";
+					} else {
+						//--> false.
+						$color_deactive = "#9e3f45";
+						$icon_active = "ui-icon-locked";
+					}
 					
-					<div class="col-1 text-truncate font-weight-light" style="color:<?php echo $color_deactive; ?>"><div><?php echo $val_data['order_code']?></div></div>
-					<div class="col-1 text-truncate font-weight-light" style="color:<?php echo $color_deactive; ?>"><div><?php echo $val_data['id']?></div></div>
-					<div class="col-2 text-truncate font-weight-light" style="color:<?php echo $color_deactive; ?>"><div><?php echo $val_data['customer_name']?></div></div>
-					<div class="col-2 text-truncate font-weight-light" style="color:<?php echo $color_deactive; ?>"><div><?php echo $val_data['product_type']?></div></div>
-					<div class="col-3 text" style="color:<?php echo $color_deactive; ?>"><div><?php echo $val_data['delivery_date_time']?></div></div>
-					<div class="col-1"><a href="#" onclick="celtac.g_func.order('view_order',<?php echo $val_data['id']?>)"><span style="margin:5px" class="ui-icon ui-icon-search"></span></p></a></div>
-					<div class="col-1"><a href="#" onclick="celtac.g_func.order('delete_order',<?php echo $val_data['id']?>)"><span style="margin-top:5px" class="ui-icon ui-icon-trash"></span></p></a></div>
-					<?php if ($_SESSION['is_staff']) {?>
-						<div class="col-1"><a href="#" onclick="celtac.g_func.order('change_active',<?php echo $val_data['id']?>)"><span style="margin-top:5px" class="ui-icon <?php echo $icon_active; ?>"></span></p></a></div>
-					<?php }?>
-				</div>
-				<hr class="mb-0">
+					//----------------------------
+					if($pre_code != ''){
+						
+						if($val_data['order_code'] == $pre_code){
+							if(($index_color%2)==0){
+								$color = '#fcfcfc';
+							} else {
+								$color = '#c6c6c6';
+							}
+							$pre_code = $val_data['order_code'];
+						}else{
+							$index_color++;
+							if($color == '#c6c6c6'){
+								$color = '#fcfcfc';
+							} else {
+								$color = '#c6c6c6';
+							}
+							$pre_code = $val_data['order_code'];
+						}
+					} else {
+						//--> init_config.
+						$color = '#fcfcfc';
+						$pre_code = $val_data['order_code'];
+					}
+					?>
+					
+					<div class="row"  style="background-color:<?php echo $color; ?>">
+						
+						<div class="col-1 text-truncate font-weight-light" style="color:<?php echo $color_deactive; ?>"><div><?php echo $val_data['order_code']?></div></div>
+						<div class="col-1 text-truncate font-weight-light" style="color:<?php echo $color_deactive; ?>"><div><?php echo $val_data['id']?></div></div>
+						<div class="col-2 text-truncate font-weight-light" style="color:<?php echo $color_deactive; ?>"><div><?php echo $val_data['customer_name']?></div></div>
+						<div class="col-2 text-truncate font-weight-light" style="color:<?php echo $color_deactive; ?>"><div><?php echo $val_data['product_type']?></div></div>
+						<div class="col-3 text" style="color:<?php echo $color_deactive; ?>"><div><?php echo $val_data['delivery_date_time']?></div></div>
+						<div class="col-1"><a href="#" onclick="celtac.g_func.order('view_order',<?php echo $val_data['id']?>)"><span style="margin:5px" class="ui-icon ui-icon-search"></span></p></a></div>
+						<div class="col-1"><a href="#" onclick="celtac.g_func.order('delete_order',<?php echo $val_data['id']?>)"><span style="margin-top:5px" class="ui-icon ui-icon-trash"></span></p></a></div>
+						<?php if ($_SESSION['is_staff']) {?>
+							<div class="col-1"><a href="#" onclick="celtac.g_func.order('change_active',<?php echo $val_data['id']?>)"><span style="margin-top:5px" class="ui-icon <?php echo $icon_active; ?>"></span></p></a></div>
+						<?php }?>
+					</div>
+					<hr class="mb-0">
 				
-<?php 
-	}
-?>
+				<?php 
+					}
+				?>
 
 				<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.order('show_model_addorder')"><span class="ui-icon ui-icon-plus"></span></button>
 				<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.order('update_order')"><span class="ui-icon ui-icon-check"></span></button>
 				
-		  </div>
+			</div>
 
 		</main>
 
