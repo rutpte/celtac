@@ -541,6 +541,41 @@ class Order extends DBConnection
         }
     }
     //---------------------------------------------------------
+    public function getOrderAllLogistic ()
+    {
+        $sql ="
+            select 
+				*
+            from order_product
+			where 1=1
+			and delivery_date_time >= now()::date
+			and is_active IS true
+			order by sender, delivery_date_time
+        ";
+		//and delivery_date_time >= now()
+		//now()::date
+        //echo "<pre>", $sql; exit;
+        $sth = $this->db->prepare($sql);  //sql2
+        $result = array();
+        if (!$sth->execute()) {
+            echo '<pre>'.$sql;
+            print_r($sth->errorInfo());
+        } else {
+			$get_num_row = $sth->rowCount();
+            //var_dump($sth->rowCount());
+            //$result = $sth->fetchObject();
+			if($get_num_row > 0){
+				$rs = $sth->fetchAll(PDO::FETCH_ASSOC);
+				$result["success"] = true;
+				$result["data"] = $rs;
+				return ($result);
+			} else {
+				$result["success"] = false;
+				return ($result);
+			}
+        }
+    }
+    //---------------------------------------------------------
     //-----------------------------------------------------------------
     public function getOrderStaff ()
     {
