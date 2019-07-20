@@ -81,12 +81,19 @@ require dirname(__FILE__) . '/includes/global_js_init.php';
 
 			  </li>  
 			  <li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">menu</a>
+				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">tool</a>
 				<div class="dropdown-menu bg-dark" aria-labelledby="dropdown01">
 				  <a class="nav-link" style="color:#abadad" id="export_excel" href="#" onclick="celtac.g_func.modal_export('export_order')">export</a>
-				  <a class="nav-link" style="color:#abadad" id="gen_qrcode" href="#" onclick="celtac.g_func.gen_qrcode()">generate QR code</a>
 				  <?php if ($_SESSION['is_staff']) {?>
 				  <a class="nav-link" style="color:#abadad" id="report_excel" href="#" onclick="celtac.g_func.modal_export('export_report')">report</a>
+				  <?php }?>
+				</div>
+			  </li>
+			  <li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">link</a>
+				<div class="dropdown-menu bg-dark" aria-labelledby="dropdown02">
+				  <a class="nav-link" style="color:#abadad" id="gen_qrcode" href="#" onclick="celtac.g_func.gen_qrcode()">generate QR code</a>
+				  <?php if ($_SESSION['is_staff']) {?>
 				  <a class="nav-link" style="color:#abadad" id="HEAT" href="/a4m_celtac" onclick="">HEAT</a>
 				  <a class="nav-link" style="color:#abadad" id="celtic" href="/celtic" onclick="">Logistic</a>
 				  <a class="nav-link" style="color:#abadad" id="celprograms" href="/programs/R-Oa.exe" onclick="">R-Oa</a> 
