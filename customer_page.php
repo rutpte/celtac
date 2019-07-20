@@ -89,7 +89,7 @@ require dirname(__FILE__) . '/includes/global_js_init.php';
 				  <a class="nav-link" style="color:#abadad" id="report_excel" href="#" onclick="celtac.g_func.modal_export('export_report')">report</a>
 				  <a class="nav-link" style="color:#abadad" id="HEAT" href="/a4m_celtac" onclick="">HEAT</a>
 				  <a class="nav-link" style="color:#abadad" id="celtic" href="/celtic" onclick="">Logistic</a>
-				  <a class="nav-link" style="color:#abadad" id="celprograms" href="/programs/R-Oa.exe" onclick="">R-Oa</a>
+				  <a class="nav-link" style="color:#abadad" id="celprograms" href="/programs/R-Oa.exe" onclick="">R-Oa</a> 
 				  <?php }?>
 				</div>
 			  </li>
