@@ -3,7 +3,7 @@
 	if (isset($_SESSION['email'])) {
 		//stand by
 		$obj 	= new Order($pdo);
-		$rs_arr = $obj->getOrderAll();
+		$rs_arr = $obj->getOrderAllLogistic();
 		$data = array();
 	
 		if($rs_arr['success']){
