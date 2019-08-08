@@ -14,7 +14,7 @@ if ($_SERVER['HTTP_HOST'] == 'xxxxx') {
 	
 
 
-}else if ($_SERVER['HTTP_HOST'] == 'localhost') {
+}else if ($_SERVER['HTTP_HOST'] == 'localhost_pte') {
     
     // Database host
     define("DB_HOST", '127.0.0.1');
@@ -22,9 +22,19 @@ if ($_SERVER['HTTP_HOST'] == 'xxxxx') {
     define("PORT", '5434');
     // Database password
     define("DB_PASS", 'pgpteadmin');
-	define("REMOTE_HOST", '127.0.0.1');
+	define("REMOTE_HOST", '127.0.0.1');//--> not use now.
 	define("PROJ_NAME", 'celtac');
 	
+}else if ($_SERVER['HTTP_HOST'] == 'localhost') { //localhost my room.
+    
+    // Database host
+    define("DB_HOST", '127.0.0.1');
+    // Port
+    define("PORT", '5432');
+    // Database password
+    define("DB_PASS", 'pgceltacadmin');
+	define("REMOTE_HOST", '127.0.0.1');//--> not use now.
+	define("PROJ_NAME", 'celtac');
 
 
 } else {
@@ -37,7 +47,7 @@ if ($_SERVER['HTTP_HOST'] == 'xxxxx') {
     define("PORT", '5432');
     // Database password
     define("DB_PASS", 'pgceltacadmin');
-	define("REMOTE_HOST", '163.44.196.239');
+	define("REMOTE_HOST", '163.44.196.239');//--> not use now.
 	define("PROJ_NAME", 'celtac');
 	
 
@@ -49,9 +59,12 @@ define("DB_USER", 'postgres');
 
 //--> defined db.
 define("DB_CELTAC", 'celtac');
+//--> defined db authen.
+define("DB_CELTAC_AUTHEN", 'authen');
 //--> defined driver.
 if(true){
 	define("DSN_CELTAC", 'pgsql:host= '. DB_HOST .'; dbname=' . DB_CELTAC .' port=' . PORT );
+	define("DSN_CELTAC_AUTHEN", 'pgsql:host= '. DB_HOST .'; dbname=' . DB_CELTAC_AUTHEN .' port=' . PORT );
 } else {
 	define("DSN_CELTAC", 'mysql:host= '. DB_HOST .'; dbname=' . DB_CELTAC .' port=' . PORT );
 }
