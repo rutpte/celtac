@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$email   	= isset($_POST['email']) ? $_POST['email'] : '';
 			$passwd     = isset($_POST['passwd']) ? $_POST['passwd'] : '';
             
-            $auth = new Authentication($pdoCeltac);
+            $auth = new Authentication($pdoAuthen);//pdoAuthen,pdoCeltac
 			
 			//--> create sesstion.
             $loged_in_rs = $auth->login($email, $passwd);
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $passwd     = '1234';
             $mem_passwd = 0;
             // $_SESSION['phase_edit'] = true;
-            $auth = new Authentication($pdoCeltac);
+            $auth = new Authentication($pdoAuthen);//pdoAuthen,pdoCeltac
 
             $loged_in = $auth->login($username, $passwd, $mem_passwd, false);
 
