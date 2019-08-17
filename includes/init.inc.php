@@ -4,14 +4,14 @@ $_SESSION['logined']  = false;
 try {
     $pdoCeltac = new PDO(DSN_CELTAC, DB_USER, DB_PASS);
 	
-	$pdoAuthen = new PDO(DSN_CELTAC_AUTHEN, DB_USER, DB_PASS);
+	//$pdoAuthen = new PDO(DSN_CELTAC_AUTHEN, DB_USER, DB_PASS);
 
     //------------------------------------------------------
     $pdoCeltac->setAttribute(PDO::ATTR_EMULATE_PREPARES,  false);
     $pdoCeltac->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	
-    $pdoAuthen->setAttribute(PDO::ATTR_EMULATE_PREPARES,  false);
-    $pdoAuthen->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //$pdoAuthen->setAttribute(PDO::ATTR_EMULATE_PREPARES,  false);
+    //$pdoAuthen->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 } catch(PDOException $e) {
     echo 'Connection failed: <pre>' .  $e->getMessage();
