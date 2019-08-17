@@ -2454,8 +2454,8 @@
 
 					$.ajax({
 						//url: "authen.php",
-						//url: "http://163.44.196.239"+"/celtac_authen_service/authen.php",
-						url: "http://"+window.location.hostname+"/celtac_authen_service/authen.php",
+						url: "http://163.44.196.239"+"/celtac_authen_service/authen.php",
+						//url: "http://"+window.location.hostname+"/celtac_authen_service/authen.php",
 						dataType: 'text', // Notice! JSONP <-- P (lowercase)
 						method : 'POST',
 						data: { 
