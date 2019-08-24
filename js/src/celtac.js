@@ -1857,7 +1857,7 @@
 								type: "GET",
 								success:function(response){
 									celtac.g_func.order("send_line");
-									celtac.g_func.order("send_line_logistic");
+									//celtac.g_func.order("send_line_logistic");
 									celtac.g_func.order("send_mail");
 								},
 								error:function(response){
@@ -2454,8 +2454,8 @@
 
 					$.ajax({
 						//url: "authen.php",
-						url: "http://163.44.196.239"+"/celtac_authen_service/authen.php",
-						//url: "http://"+window.location.hostname+"/celtac_authen_service/authen.php",
+						//url: "http://163.44.196.239"+"/celtac_authen_service/authen.php",
+						url: "http://"+window.location.hostname+"/celtac_authen_service/authen.php",
 						dataType: 'text', // Notice! JSONP <-- P (lowercase)
 						method : 'POST',
 						data: { 
