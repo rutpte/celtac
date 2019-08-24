@@ -170,7 +170,7 @@
 		//--$str_msg .= " อื่นๆ : ".$value['comment_else']."\n";
 		//$str_msg .= " *----* \n";
 		
-		$str_msg .= "  ผู้ส่ง  : ".$value['sender']."\n";
+		//$str_msg .= "  ผู้ส่ง  : ".$value['sender']."\n";
 		
 		//$str_msg .= " *----* \n";
 
