@@ -811,12 +811,12 @@ require dirname(__FILE__) . '/includes/global_js_init.php';
 
 							<div>
 								<div class="row">
-									<div class="col-4">
-										<label for="sender">sender</label>
+									<div class="">
+										<label for="sender"></label>
 									</div>
 									
-									<div class="col-8">
-										<input type="text" class="form-control" id="sender" placeholder="sender">
+									<div class="">
+										<input type="hidden" class="form-control" id="sender" value="-" placeholder="sender">
 									</div>
 								</div>
 								<div id="sender_vlid"></div>
@@ -825,11 +825,11 @@ require dirname(__FILE__) . '/includes/global_js_init.php';
 							<div>
 								<div class="row">
 									<div class="col-4">
-										<label for="receiver">receiver</label>
+										<label for="receiver"></label>
 									</div>
 									
 									<div class="col-8">
-										<input type="text" class="form-control" id="receiver" placeholder="receiver">
+										<input type="hidden" class="form-control" id="receiver" value="-" placeholder="receiver">
 									</div>
 								</div>
 								<div id="receiver_vlid"></div>
