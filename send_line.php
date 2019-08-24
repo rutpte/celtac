@@ -15,7 +15,7 @@
 		header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/index.php");
 	} 
 
-	$Token = 'CxlMmXRcLg458GiyTx9kINPOKQjyLReSUnGLSyGdFwA';
+	$Token = '';
 	$message = isset($_POST["message"])? $_POST["message"] : 'help!' ;
 	//--------------------------------------------
 	
