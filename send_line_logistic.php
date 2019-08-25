@@ -1,4 +1,4 @@
-<?php
+<?php exit;
 	require dirname(__FILE__) . '/includes/init.inc.php';
 	if (isset($_SESSION['email'])) {
 		//stand by
@@ -16,7 +16,7 @@
 		header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/index.php");
 	} 
 
-	$Token = 'n6CCafOSXXpteZoJbffm3dKPxhcU9H8rxt583aYrqmQ';//lab: CxlMmXRcLg458GiyTx9kINPOKQjyLReSUnGLSyGdFwA //logis:n6CCafOSXXpteZoJbffm3dKPxhcU9H8rxt583aYrqmQ
+	$Token = '';//
 	$message = isset($_POST["message"])? $_POST["message"] : 'help!' ;
 	//--------------------------------------------
 	
@@ -136,6 +136,7 @@
 		$str_msg .= ", ".$daliv_time." ";
 		$str_msg .= " ที่ ".$value['customer_name']." \n";
 		//$str_msg .= " ชนิดสินค้า : ".$value['product_type']." ";
+		//https://maps.google.com/?q=<lat>,<lng>
 		
 		
 		//--------------------------
