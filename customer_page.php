@@ -1261,6 +1261,8 @@ require dirname(__FILE__) . '/includes/global_js_init.php';
 
 
 			<div>
+				<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.order('show_model_addorder')"><span class="ui-icon ui-icon-plus"></span></button>
+				<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.order('update_order')"><span class="ui-icon ui-icon-check"></span></button>
 				<!--
 				<div class="row">
 				<div class="col-3"><div style="color:#77797c">code</div></div>
@@ -1362,8 +1364,7 @@ require dirname(__FILE__) . '/includes/global_js_init.php';
 					}
 				?>
 
-				<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.order('show_model_addorder')"><span class="ui-icon ui-icon-plus"></span></button>
-				<button class="btn my-2 my-sm-0" type="button" onclick="celtac.g_func.order('update_order')"><span class="ui-icon ui-icon-check"></span></button>
+
 				
 			</div>
 
