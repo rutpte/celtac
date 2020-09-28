@@ -550,7 +550,22 @@
 									
 									$('#set').prop('disabled', false);
 									
-								
+								} else if(this.value == "nad"){
+									$("#vial").prop('disabled', false);
+									$('#total_cel').prop('disabled', true);
+									$('#quantity').prop('disabled', true);
+									$('#package_type').prop('disabled', true);
+									
+									
+									$('#quantity').val('');
+									//$('#set').val('');
+									$('#vial').val('');
+									$('#total_cel').val('');
+									$('#package_type').val('');
+									
+									
+									$('#set').prop('disabled', true);
+									
 								} else {
 									//$('#quantity').hide();
 									//$('#vial').hide();
@@ -1231,7 +1246,13 @@
 								$('#total_cel_edit').hide();
 								$('#package_type_edit').prop('disabled', true);
 								$('#quantity_edit').hide();
-							}else {
+							}else if(product_type == "nad"){
+								$('#set_edit').hide();
+								$('#vial_edit').show();
+								$('#total_cel_edit').hide();
+								$('#package_type_edit').prop('disabled', true);
+								$('#quantity_edit').hide();
+							} else{
 								$('#set_edit').hide();
 								$('#vial_edit').show();
 								$('#total_cel_edit').hide();
@@ -1433,11 +1454,12 @@
 
 							//--
 
-							//--
+							//-- vial check.
 							if (
 								product_type == "prp_ready"   //vial
 								|| product_type == "placenta" //vial
 								|| product_type == "prfm_tuee"//vial
+								|| product_type == "nad"//vial
 								){
 
 								//--
@@ -1830,6 +1852,12 @@
 								$('#total_cel_view').hide();
 								$('#package_type_view').hide();
 								$('#quantity_view').hide();
+							} else if(data.product_type == "nad") {
+								$('#set_view').hide();
+								$('#vial_view').show();
+								$('#total_cel_view').hide();
+								$('#package_type_view').hide();
+								$('#quantity_view').hide();
 							} else {
 								$('#set_view').hide();
 								$('#vial_view').show();
@@ -2078,16 +2106,15 @@
 							var product_type			= $('#product_type').val();
 							var quantity				= $('#quantity').val();
 							//----------
+							
+							//--> set default value.
 							if($('#set').val()== "" || $('#set').val()== "0"){
 								var set = 0;
 							} else {
 								var set = $('#set').val();
 							};
-							
-							// if (set == "" || set == "0"){
-								// set = 0;
-							// }
-							//----------
+
+							//----------*****
 							if($('#vial').val()== ""){
 								if(product_type == "cell"){
 									var vial = 1;
@@ -2112,7 +2139,7 @@
 							
 
 							
-						
+						/*
 							var arr_dom_id = new Array();
 							arr_dom_id.push('product_type');
 							arr_dom_id.push('quantity');
@@ -2120,6 +2147,7 @@
 							arr_dom_id.push('package_type');
 							arr_dom_id.push('giveaway');
 							arr_dom_id.push('price_rate');
+							*/
 	
 							
 
@@ -2164,7 +2192,7 @@
 									celtac.g_func.notice_div_error(true,"quantity");
 									sta_validate = false;
 								}
-							} else {
+							} else { //--> close error.
 								if($('#product_type').val() == "cell"
 								|| $('#product_type').val() == "gcsf"
 								|| $('#product_type').val() == "hyagan" ){
@@ -2205,7 +2233,25 @@
 								}
 								
 							}
-							//---------------------------------------------------------
+							//--------------------------------------------------------
+							//--cell
+							// if(product_type == "cell"){
+								// if($('#vial').val()== ""){
+									// var vial = 1;
+								// } else {
+									// var vial = 0;
+								// }
+							// }
+
+							//--------------------------------------------------------
+							//--nad
+							if($('#product_type').val() == "nad"){
+								if (vial == "" || vial == "0"){
+									celtac.g_func.notice_div_error(true,"vial");
+									sta_validate = false;
+								}
+							}
+							//----------------#############----------------------------------
 							if(sta_validate){
 								var obj_set_data = {};
 								obj_set_data.product_type 	= product_type;
@@ -2305,6 +2351,8 @@
 										str_items += 								item.quantity + " box | ";
 									} else if(item.product_type == "prfm_set") {
 										str_items += 								item.set + " set | ";
+									} else if(item.product_type == "nad") {
+										str_items += 								item.vial + " vial | ";
 									} else {
 										//str_items += 								item.set + " set | ";
 										str_items += 								item.vial + " vial | ";

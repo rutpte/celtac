@@ -423,6 +423,7 @@ require dirname(__FILE__) . '/includes/global_js_init.php';
 											<option value="prfm_tuee">PRFM TUEE</option>
 											<option value="gcsf">GCSF</option>
 											<option value="hyagan">Hyagan</option>
+											<option value="nad">NAD</option>
 										</select>
 									</div>
 								</div>
@@ -920,6 +921,8 @@ require dirname(__FILE__) . '/includes/global_js_init.php';
 											<option value="prfm_tuee">PRFM TUEE</option>
 											<option value="gcsf">GCSF</option>
 											<option value="hyagan">Hyagan</option>
+											<option value="nad">NAD</option>
+											
 										</select>
 									</div>
 								</div>
