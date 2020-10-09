@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$email   	= isset($_POST['email']) ? $_POST['email'] : '';
 			$passwd     = isset($_POST['passwd']) ? $_POST['passwd'] : '';
             
-            $auth = new Authentication($pdoAuthen);//pdoAuthen,pdoCeltac
+            $auth = new Authentication($pdoCeltac);//pdoAuthen,pdoCeltac
 			
 			//--> create sesstion.
             $loged_in_rs = $auth->login($email, $passwd);
