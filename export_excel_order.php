@@ -25,7 +25,8 @@
  * @version    ##VERSION##, ##DATE##
  */
 	require dirname(__FILE__) . '/includes/init.inc.php';
-	if (isset($_SESSION['email'])) {
+	$export_excel 	= in_array("export_order", $_SESSION['permissions']);
+	if($export_excel){
 		$obj 	= new Order($pdo);
 		$rs_arr = $obj->getOrderAll();
 		$data = array();

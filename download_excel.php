@@ -24,19 +24,20 @@
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt	LGPL
  * @version    ##VERSION##, ##DATE##
  */
-	require dirname(__FILE__) . '/includes/init.inc.php';
-	if (isset($_SESSION['email'])) {
-		$obj 	= new Order($pdo);
-		$rs_arr = $obj->getOrderAll();
-		$data = array();
-	
-		if($rs_arr['success']){
-			$data = $rs_arr['data'];
-		}
+require dirname(__FILE__) . '/includes/init.inc.php';
+$rs_permis = in_array("export_order", $_SESSION['permissions']);
+if($rs_permis){
+	$obj 	= new Order($pdo);
+	$rs_arr = $obj->getOrderAll();
+	$data = array();
 
-	} else {
-		header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/index.php");
-	} 
+	if($rs_arr['success']){
+		$data = $rs_arr['data'];
+	}
+
+} else {
+	header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/index.php");
+} 
 
 /** Error reporting */
 error_reporting(E_ALL);

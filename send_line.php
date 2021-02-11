@@ -1,6 +1,7 @@
 <?php
 	require dirname(__FILE__) . '/includes/init.inc.php';
-	if (isset($_SESSION['email'])) {
+	$rs_permis 	= in_array("send_line_cell", $_SESSION['permissions']);
+	if($rs_permis){
 		//stand by
 		$obj 	= new Order($pdo);
 		$rs_arr = $obj->getOrderAll();

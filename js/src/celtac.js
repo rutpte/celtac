@@ -36,7 +36,7 @@
 				return s;
 			}
 			//-----------------------------------------------------------------------------------------
-			,"manage_page" : function(user_type){
+			,"manage_page" : function(user_type){ //not use.
 				//--> not use but keep for prototype.
 				if(user_type == "superuser"){
 					window.location = window.location.origin+ "/" + celtac.pjName + "/admin_page.php";
