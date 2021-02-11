@@ -1,6 +1,7 @@
 <?php
 require dirname(__FILE__) . '/includes/init.inc.php';
- if (isset($_SESSION['is_staff'])) {
+$rs_permis 	= in_array("manage_cell", $_SESSION['permissions']);
+if ($rs_permis) {
 	
 	$obj_date 		= new DateTime();
 	$timezone 		= new DateTimeZone("Asia/Bangkok");

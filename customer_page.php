@@ -1,9 +1,11 @@
 <?php
 //--require dirname(__FILE__) . '/includes/init.inc.php';
 require dirname(__FILE__) . '/includes/global_js_init.php';
- if (isset($_SESSION['email'])) {
+$rs_permis 	= in_array("order_cell", $_SESSION['permissions']);
+if($rs_permis){
 	$obj 	= new Order($pdo);
-	if ($_SESSION['is_staff']) {
+	$rs_permis = in_array("manage_cell", $_SESSION['permissions']);
+	if ($rs_permis ) {
 		$rs_arr = $obj->getOrderStaff();
 	} else {
 		$rs_arr = $obj->getOrder();
@@ -84,8 +86,11 @@ require dirname(__FILE__) . '/includes/global_js_init.php';
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">tool</a>
 				<div class="dropdown-menu bg-dark" aria-labelledby="dropdown01">
 				  <a class="nav-link" style="color:#abadad" id="export_excel" href="#" onclick="celtac.g_func.modal_export('export_order')">export</a>
-				  <?php if ($_SESSION['is_staff']) {?>
-				  <a class="nav-link" style="color:#abadad" id="report_excel" href="#" onclick="celtac.g_func.modal_export('export_report')">report</a>
+				  <?php
+					$rs_permis = in_array("export_report", $_SESSION['permissions']);				  
+					if ($rs_permis) {
+					?>
+						<a class="nav-link" style="color:#abadad" id="report_excel" href="#" onclick="celtac.g_func.modal_export('export_report')">report</a>
 				  <?php }?>
 				</div>
 			  </li>
@@ -93,7 +98,11 @@ require dirname(__FILE__) . '/includes/global_js_init.php';
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">link</a>
 				<div class="dropdown-menu bg-dark" aria-labelledby="dropdown02">
 				  <a class="nav-link" style="color:#abadad" id="gen_qrcode" href="#" onclick="celtac.g_func.gen_qrcode()">generate QR code</a>
-				  <?php if ($_SESSION['is_staff']) {?>
+				  <?php
+					$rs_permis = in_array("export_report", $_SESSION['permissions']);				  
+					if ($rs_permis) {
+					  
+				  ?>
 				  <a class="nav-link" style="color:#abadad" id="HEAT" href="/a4m_celtac" onclick="">HEAT</a>
 				  <a class="nav-link" style="color:#abadad" id="celtic" href="/celtic" onclick="">Logistic</a>
 				  <a class="nav-link" style="color:#abadad" id="celprograms" href="/programs/R-Oa.exe" onclick="">R-Oa</a> 
@@ -921,8 +930,13 @@ require dirname(__FILE__) . '/includes/global_js_init.php';
 											<option value="prfm_tuee">PRFM TUEE</option>
 											<option value="gcsf">GCSF</option>
 											<option value="hyagan">Hyagan</option>
+											<?php
+												
+												$rs_permis = in_array("order_nad", $_SESSION['permissions']);
+												if($rs_permis){
+											?>
 											<option value="nad">NAD</option>
-											
+												<?php } ?>
 										</select>
 									</div>
 								</div>
@@ -1357,7 +1371,10 @@ require dirname(__FILE__) . '/includes/global_js_init.php';
 						<div class="col-3 text" style="color:<?php echo $color_deactive; ?>"><div><?php echo $val_data['delivery_date_time']?></div></div>
 						<div class="col-1"><a href="#" onclick="celtac.g_func.order('view_order',<?php echo $val_data['id']?>)"><span style="margin:5px" class="ui-icon ui-icon-search"></span></p></a></div>
 						<div class="col-1"><a href="#" onclick="celtac.g_func.order('delete_order',<?php echo $val_data['id']?>)"><span style="margin-top:5px" class="ui-icon ui-icon-trash"></span></p></a></div>
-						<?php if ($_SESSION['is_staff']) {?>
+						<?php
+						$rs_permis = in_array("confirm_order_cell", $_SESSION['permissions']);				  
+						if ($rs_permis) {
+						?>
 							<div class="col-1"><a href="#" onclick="celtac.g_func.order('change_active',<?php echo $val_data['id']?>)"><span style="margin-top:5px" class="ui-icon <?php echo $icon_active; ?>"></span></p></a></div>
 						<?php }?>
 					</div>

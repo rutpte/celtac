@@ -1,4 +1,4 @@
-<?php
+<?php exit('not use.');
 /******************************************
  | Class name  : Authentication.class.php |
  | Last Modify : Jan 2013                 |

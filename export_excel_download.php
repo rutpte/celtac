@@ -32,26 +32,32 @@
 	 $str_date_start      	= isset($_GET['str_date_start']) ? $_GET['str_date_start'] : '';
 	 $str_date_end       	= isset($_GET['str_date_end']) ? $_GET['str_date_end'] : '';
 	 //var_dump($_SESSION['email']); exit;
-	 
-	if (isset($_SESSION['email'])) {//email,is_staff
-		$obj 	= new Order($pdo);
-		$rs_arr = $obj->getOrderExport($str_date_start, $str_date_end);
-		$data = array();
-	
-		if($rs_arr['success']){
-			$data = $rs_arr['data'];
-		}
-		//----> debug.
-		// foreach($data as $key => $value)
-		// {
-			// var_dump($value['order_code']);
-		// }
-		// exit;
-		//------
+	$export_excel 	= in_array("export_order", $_SESSION['permissions']);
+	if($export_excel){
+		if (isset($_SESSION['email'])) {//email,is_staff
+			$obj 	= new Order($pdo);
+			$rs_arr = $obj->getOrderExport($str_date_start, $str_date_end);
+			$data = array();
 		
-	} else {
+			if($rs_arr['success']){
+				$data = $rs_arr['data'];
+			}
+			//----> debug.
+			// foreach($data as $key => $value)
+			// {
+				// var_dump($value['order_code']);
+			// }
+			// exit;
+			//------
+			
+		} else {
+			header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/index.php");
+		} 
+	
+	}else {
 		header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/index.php");
 	} 
+
 	//-------------------------------------------------
 
 	

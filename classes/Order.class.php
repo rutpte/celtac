@@ -80,8 +80,10 @@ class Order extends DBConnection
 		//--> check avilable time to order.
 		$delivery_date_time	= isset($post['delivery_date']) 		? "'".$date_formated."'" : 'null';
 		$sta_allow_time_deliv = $this->check_diff_time_by_strtime($delivery_date_time, 720);
+		
+		$rs_permis = in_array("confirm_order_cell", $_SESSION['permissions']);
 		//check time deliv and cell number. or is_staff can be access.
-	if(($sta_allow_time_deliv == 1) && ($total_cell_sum <= 10) || $_SESSION['is_staff']){
+		if(($sta_allow_time_deliv == 1) && ($total_cell_sum <= 10) || $rs_permis){
 			$is_active = 'true';
 		} else {
 			$is_active = 'false';
@@ -236,7 +238,9 @@ class Order extends DBConnection
 			// echo "xxxxx false xxxxx";
 			// exit;
 		// }
-		if($sta_allow == 1 || $_SESSION['is_staff']){
+		
+		$rs_permis = in_array("manage_cell", $_SESSION['permissions']);
+		if($sta_allow == 1 || $rs_permis){
 			//-------------------------------
 			/*
 			$sql = "
@@ -303,7 +307,9 @@ class Order extends DBConnection
     public function updateOrder($post){
 		$sta_allow = $this->check_diff_time_by_id($post['order_id_edit'], 120); //--> 300 minute == 5 hours.
 		//--var_dump($sta_allow); exit;
-		if($sta_allow == 1 || $_SESSION['is_staff']){
+		
+		$rs_permis = in_array("manage_cell", $_SESSION['permissions']);
+		if($sta_allow == 1 || $rs_permis){
 				//---------------------------------------------
 
 			$user_id			= isset($_SESSION['owner_id']) ? $_SESSION['owner_id']	: 'null';
@@ -362,8 +368,12 @@ class Order extends DBConnection
 			
 			//------------------------------------------------------
 			$sta_allow_time_deliv = $this->check_diff_time_by_strtime($delivery_date_time, 300);
+			
+			$rs_permis = in_array("manage_cell", $_SESSION['permissions']);
+			
+			
 			//check time deliv and cell number. or is_staff can be access.
-			if(($sta_allow_time_deliv == 1 && $total_cell <= 10) || $_SESSION['is_staff']){
+			if(($sta_allow_time_deliv == 1 && $total_cell <= 10) || $rs_permis){
 				$is_active = 'true';
 			} else {
 				$is_active = 'false';
@@ -419,6 +429,7 @@ class Order extends DBConnection
 			//---------------------------------------------
 		}else{ //$sta_allow == 0
 			$result['success'] = false;
+			$result['msg'] = 'time is over to edit.';
 			return json_encode($result);
 		}
     }
@@ -508,37 +519,40 @@ class Order extends DBConnection
     //-----------------------------------------------------------------
     public function getOrderAll ()
     {
-        $sql ="
-            select 
-				*
-            from order_product
-			where 1=1
-			and delivery_date_time >= now()::date
-			and is_active IS true
-			order by delivery_date_time
-        ";
-		//and delivery_date_time >= now()
-		//now()::date
-        //echo "<pre>", $sql; exit;
-        $sth = $this->db->prepare($sql);  //sql2
-        $result = array();
-        if (!$sth->execute()) {
-            echo '<pre>'.$sql;
-            print_r($sth->errorInfo());
-        } else {
-			$get_num_row = $sth->rowCount();
-            //var_dump($sth->rowCount());
-            //$result = $sth->fetchObject();
-			if($get_num_row > 0){
-				$rs = $sth->fetchAll(PDO::FETCH_ASSOC);
-				$result["success"] = true;
-				$result["data"] = $rs;
-				return ($result);
+		$manage_cell 	= in_array("manage_cell", $_SESSION['permissions']);
+		if($manage_cell){
+			$sql ="
+				select 
+					*
+				from order_product
+				where 1=1
+				and delivery_date_time >= now()::date
+				and is_active IS true
+				order by delivery_date_time
+			";
+			//and delivery_date_time >= now()
+			//now()::date
+			//echo "<pre>", $sql; exit;
+			$sth = $this->db->prepare($sql);  //sql2
+			$result = array();
+			if (!$sth->execute()) {
+				echo '<pre>'.$sql;
+				print_r($sth->errorInfo());
 			} else {
-				$result["success"] = false;
-				return ($result);
+				$get_num_row = $sth->rowCount();
+				//var_dump($sth->rowCount());
+				//$result = $sth->fetchObject();
+				if($get_num_row > 0){
+					$rs = $sth->fetchAll(PDO::FETCH_ASSOC);
+					$result["success"] = true;
+					$result["data"] = $rs;
+					return ($result);
+				} else {
+					$result["success"] = false;
+					return ($result);
+				}
 			}
-        }
+		}
     }
     //---------------------------------------------------------
     public function getOrderAllLogistic ()
@@ -579,73 +593,25 @@ class Order extends DBConnection
     //-----------------------------------------------------------------
     public function getOrderStaff ()
     {
-
-		$pre_a_mount = date('Y-m-28',  strtotime('-1 month'));
-        $sql ="
-            select 
-				*
-            from order_product
-			where 1=1
-			--and delivery_date_time >= now()::date
-			and delivery_date_time >= '{$pre_a_mount}'
-			order by delivery_date_time, id, order_code
-        ";
-		//and is_active IS true
-		//and delivery_date_time >= now()
-		//now()::date
-        //echo "<pre>", $sql; exit;
-        $sth = $this->db->prepare($sql);  //sql2
-        $result = array();
-        if (!$sth->execute()) {
-            echo '<pre>'.$sql;
-            print_r($sth->errorInfo());
-        } else {
-			$get_num_row = $sth->rowCount();
-            //var_dump($sth->rowCount());
-            //$result = $sth->fetchObject();
-			if($get_num_row > 0){
-				$rs = $sth->fetchAll(PDO::FETCH_ASSOC);
-				$result["success"] = true;
-				$result["data"] = $rs;
-				return ($result);
-			} else {
-				$result["success"] = false;
-				return ($result);
-			}
-        }
-    }
-    //---------------------------------------------------------
-    //-----------------------------------------------------------------
-    public function getOrderExport ($str_date_start, $str_date_end)
-    {
-		//var_dump($str_date_start);exit;
-        $sql ="
-            select 
-				*
-            from order_product
-			where 1=1
-			
-			and 	
-				delivery_date_time 
-				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
-			
-        ";
-		if($_SESSION['is_staff']){
-			//--> nothing act.
-		} else {
-			$sql .=" and user_id = '{$_SESSION['owner_id']}'";
-		}
-		$sql .=" and is_active = true";
-		$sql .=" order by delivery_date_time";
-		//and delivery_date_time >= now()
-		//now()::date
-        //echo "<pre>", $sql; exit;
-        $sth = $this->db->prepare($sql);  //sql2
-        $result = array();
-		
-		try{
+		$manage_cell 	= in_array("manage_cell", $_SESSION['permissions']);
+		if($manage_cell){
+			$pre_a_mount = date('Y-m-28',  strtotime('-1 month'));
+			$sql ="
+				select 
+					*
+				from order_product
+				where 1=1
+				--and delivery_date_time >= now()::date
+				and delivery_date_time >= '{$pre_a_mount}'
+				order by delivery_date_time, id, order_code
+			";
+			//and is_active IS true
+			//and delivery_date_time >= now()
+			//now()::date
+			//echo "<pre>", $sql; exit;
+			$sth = $this->db->prepare($sql);  //sql2
+			$result = array();
 			if (!$sth->execute()) {
-				
 				echo '<pre>'.$sql;
 				print_r($sth->errorInfo());
 			} else {
@@ -662,9 +628,73 @@ class Order extends DBConnection
 					return ($result);
 				}
 			}
-		}catch(Exception $e){
-			echo "error. cannot expotr excel file.";
-			exit;
+		}else {
+			$result = array();
+			$result["success"] = false;
+			return ($result);
+		}
+
+    }
+    //---------------------------------------------------------
+    //-----------------------------------------------------------------
+    public function getOrderExport ($str_date_start, $str_date_end)
+    {
+		$export_excel 	= in_array("export_order", $_SESSION['permissions']);
+		if($export_excel){
+			$sql ="
+				select 
+					*
+				from order_product
+				where 1=1
+				
+				and 	
+					delivery_date_time 
+					BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
+				
+			";
+			
+			$rs_permis = in_array("manage_cell", $_SESSION['permissions']);
+			if($rs_permis){
+				//--> nothing act.
+			} else {
+				$sql .=" and user_id = '{$_SESSION['owner_id']}'";
+			}
+			$sql .=" and is_active = true";
+			$sql .=" order by delivery_date_time";
+			//and delivery_date_time >= now()
+			//now()::date
+			//echo "<pre>", $sql; exit;
+			$sth = $this->db->prepare($sql);  //sql2
+			$result = array();
+			
+			try{
+				if (!$sth->execute()) {
+					
+					echo '<pre>'.$sql;
+					print_r($sth->errorInfo());
+				} else {
+					$get_num_row = $sth->rowCount();
+					//var_dump($sth->rowCount());
+					//$result = $sth->fetchObject();
+					if($get_num_row > 0){
+						$rs = $sth->fetchAll(PDO::FETCH_ASSOC);
+						$result["success"] = true;
+						$result["data"] = $rs;
+						return ($result);
+					} else {
+						$result["success"] = false;
+						return ($result);
+					}
+				}
+			}catch(Exception $e){
+				echo "error. cannot expotr excel file.";
+				exit;
+			}
+
+		}else {
+			$result = array();
+			$result["success"] = false;
+			return ($result);
 		}
 
     }    
@@ -786,7 +816,9 @@ class Order extends DBConnection
 		*/
 		//exit;
 		//echo $sql_prp_ready;
-		if($_SESSION['is_staff']){
+		//$rs_permis 		= in_array("manage_cell", $_SESSION['permissions']);
+		$export_excel 	= in_array("export_report", $_SESSION['permissions']);
+		if($export_excel){
 
 			//echo "<pre>", $sql; exit;
 			// $sth1 = $this->db->prepare($sql_cell); 
@@ -974,7 +1006,8 @@ class Order extends DBConnection
     {
 		//$sta_allow = $this->check_diff_time_by_id($id, 300); //--> 300 minute == 5 hours.
 		//--var_dump($sta_allow); exit;
-		if($_SESSION['is_staff']){
+		$rs_permis = in_array("confirm_order_cell", $_SESSION['permissions']);
+		if($rs_permis){
 			//-------------------------------
 			/*
 			$sql = "

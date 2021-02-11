@@ -1,4 +1,4 @@
-<?php
+<?php exit('not use.');
 require dirname(__FILE__) . '/includes/init.inc.php';
 
  if ($_SESSION['is_superuser'] =='t') {

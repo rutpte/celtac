@@ -4,7 +4,29 @@
 	function celtac () {
 		this.pjName = "celtac";
 		this.g_func = {
-			"func1" : function(){
+			//-----------------------------------------------
+			check_permit_action : function (permit_name) {
+				//--> how to use.
+				// var permit_hole = celtac.g_func.check_permit_action("hole");
+				// if(permit_hole){
+					//your code.
+				// }
+				//--------------------
+				//--> this function create for check perimssion to access something by action list from group_id of user group
+				//--> create variable status for set hide/show this layer : default is false
+				var status = false;
+				//--> loop check permission
+				gl_permission_action.forEach(function(value) {
+					//console.debug(own_layer_name ,' == ',value.layer_name);
+					if(permit_name == value.action_name){
+						status = true;
+						return false;
+					}
+				});
+				//--> set show/hide by boolean
+				return status;
+			}
+			,"func1" : function(){
 				console.log("usesing func1");
 			}
 			//-----------------------------------------------------------------------------------------
@@ -76,7 +98,7 @@
 							var firstName	= $('#firstName').val();
 							var lastName	= $('#lastName').val();
 							var address		= $('#address').val();
-							var is_staff	= $('#is_staff').is(":checked");
+							//var is_staff	= $('#is_staff').is(":checked");
 							
 
 							//debugger;
@@ -144,7 +166,7 @@
 										,"address"       : address
 										,"email"         : email
 										,"pass"          : pass
-										,"is_staff"		 : is_staff	
+										//,"is_staff"		 : is_staff	
 										
 									},
 									type: "GET",
@@ -185,7 +207,7 @@
 							var firstName = obj_all_user[id_user].first_name;
 							var lastName = obj_all_user[id_user].last_name;
 							var address = obj_all_user[id_user].address;
-							var is_staff = obj_all_user[id_user].is_staff;
+							//var is_staff = obj_all_user[id_user].is_staff;
 							
 							
 							//--> auto add exits data.
@@ -198,7 +220,7 @@
 							$('#modal_edit_user').find('#firstName_edit').val(firstName);
 							$('#modal_edit_user').find('#lastName_edit').val(lastName);
 							$('#modal_edit_user').find('#address_edit').val(address);
-							$('#modal_edit_user').find('#is_staff_edit').prop('checked', is_staff);
+							//$('#modal_edit_user').find('#is_staff_edit').prop('checked', is_staff);
 							//--> mission complete.
 						}
 
@@ -214,7 +236,7 @@
 							var firstName	= $('#modal_edit_user').find('#firstName_edit').val();
 							var lastName	= $('#modal_edit_user').find('#lastName_edit').val();
 							var address		= $('#modal_edit_user').find('#address_edit').val();
-							var is_staff	= $('#modal_edit_user').find('#is_staff_edit').is(":checked");
+							//var is_staff	= $('#modal_edit_user').find('#is_staff_edit').is(":checked");
 							
 
 							var arr_dom_id = new Array();
@@ -292,7 +314,7 @@
 										,"address"       : address
 										,"email"         : email
 										,"pass"          : pass
-										,"is_staff"		 : is_staff	
+										//,"is_staff"		 : is_staff	
 										
 									},
 									type: "GET",
@@ -708,6 +730,7 @@
 
 						break;
 					case "add_order": //--> add sql.
+						
 						if(true){
 							
 							var order_code				= $('#order_code').val();
@@ -918,14 +941,13 @@
 							var m 							= $('#delivery_time_minute').val();
 
 							var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 720);
-							
-							if(rs || gl_is_staff == "1"){
+							var rs_permis = celtac.g_func.check_permit_action("manage_cell");
+
+							if(rs || rs_permis){
 								//--> can save. time_validate still is true.
 							} else {
 								//--> set for open dialog confirm.
 								time_validate = false;
-								$('#modal_notice_customer').find('#msg_modal_notice_customer').html('can not save data because time less than 12 Hour. </br> please connect admistrator for buy your order.');
-								$('#modal_notice_customer').modal('show');
 							}
 							//-------------------------------------------------------------------------------------
 							/*
@@ -950,6 +972,7 @@
 							} else {
 								celtac.g_func.notice_div_error(false,"div_items_order");
 							}
+							//--> create function save data and call after validate.
 							var save_data = function(){
 								if(sta_validate){
 									$('#bt_save_add_order').prop('disabled', true);
@@ -1005,7 +1028,9 @@
 										}
 									});
 									
-								}//end if false.
+								}else{
+									alert('fail.');
+								}
 							}
 							
 							//---------------------
@@ -1561,14 +1586,14 @@
 								var h 							= $('#delivery_time_hour_edit').val();
 								var m 							= $('#delivery_time_minute_edit').val();
 								var check_12h = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 720);
-								
-								if((check_12h) && (total_cel <= 10) || gl_is_staff == "1"){
+								var rs_permis = celtac.g_func.check_permit_action("manage_cell");
+								if((check_12h) && (total_cel <= 10) || rs_permis){
 									//--> no action.
-								} else {
+								} else { //can save but still not approve. validate on php.
 									//$('#modal_notice_customer').find('#msg_modal_notice_customer').html('your order (cell) time less than 5 hour or total cell over 10 m. </br> please connect admistrator for approve your order.');
 									//$('#modal_notice_customer').modal('show');
 									alert('your order (cell) time less than 12 hour or total cell over 10 m. please connect admistrator for approve your order.');
-									is_active = false;//--> is_active not use.
+									is_active = false;//--> is_active not use. is active valiate on php instead.
 								}
 								
 							} else { //--> not eqaul cell.
@@ -1578,8 +1603,8 @@
 								
 								var rs = celtac.g_func.check_avalible_time_order(str_daliverly_date, h, m, 5);
 								
-								
-								if( rs  || gl_is_staff == "1"){
+								var rs_permis = celtac.g_func.check_permit_action("manage_cell");
+								if( rs  || rs_permis){
 									//---no act.
 								} else {
 									$('#modal_notice_customer').find('#msg_modal_notice_customer').html('can not save data because time less than 5 minute. </br> please connect admistrator for buy your order.');
@@ -1600,7 +1625,7 @@
 									method : 'POST',
 									data: { 
 										"q"              					: "edit_order"
-										,"is_active_edit"					: is_active //just send but not use in php.
+										,"is_active_edit"					: is_active //just send but not use in php. is active valiate on php.
 										,"order_id_edit"					: order_id
 										,"order_code_edit"         			: order_code	
 										,"customer_name_edit"         		: customer_name	

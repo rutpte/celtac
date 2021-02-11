@@ -4,8 +4,8 @@ $remotehost = '"http://'.REMOTE_HOST.'"';
 //var_dump($_SESSION['is_staff']);exit;
 $jsInit = array (
     'gl_project_name' => '"' . PROJ_NAME . '"',
-    'gl_is_staff'     => isset($_SESSION['is_staff']) ? '"'.$_SESSION['is_staff'].'"': 'xxx',
 	'remotehost'      => $remotehost
+	,'gl_permission_action'  => isset($_SESSION['session_permission_action']) ? $_SESSION['session_permission_action'] : 'null'
   
 );
 $pageTitle = 'celtec';

@@ -34,85 +34,90 @@
 	 $str_date_start      	= isset($_GET['str_date_start']) ? $_GET['str_date_start'] : '';
 	 $str_date_end       	= isset($_GET['str_date_end']) ? $_GET['str_date_end'] : '';
 	 //var_dump($_SESSION['email']); exit;
-	 
-	if (isset($_SESSION['email'])) {//email,is_staff
-		$obj 	= new Order($pdo);
-		$rs_arr = $obj->getOrderExportReport($str_date_start, $str_date_end);
-		$data = $rs_arr;
-		//-----------------------------
-		// echo '<pre>';
-		// foreach($data as $key => $value)
-		// {
-			// var_dump($value);continue;
-			// if (is_array($value) || is_object($value))
+	$rs_permis 	= in_array("export_report", $_SESSION['permissions']);
+	if($rs_permis){
+		if (isset($_SESSION['email'])) { //email,is_staff
+			$obj 	= new Order($pdo);
+			$rs_arr = $obj->getOrderExportReport($str_date_start, $str_date_end);
+			$data = $rs_arr;
+			//-----------------------------
+			// echo '<pre>';
+			// foreach($data as $key => $value)
 			// {
-				// foreach ($value as $val)
+				// var_dump($value);continue;
+				// if (is_array($value) || is_object($value))
 				// {
-					// echo 'xxx ; ';
-					// var_dump($val);continue;
+					// foreach ($value as $val)
+					// {
+						// echo 'xxx ; ';
+						// var_dump($val);continue;
+					// }
 				// }
-			// }
 
-		// }
-		// exit;
-		//---------------------------------------------
-		/*
-		echo '<pre>';
-		foreach($data as $key => $value)
-		{
-			//echo $key;
-			// if($key == "success"){
-				// echo $key.' ont in';
-				// echo'<br>';
-				// continue;
 			// }
-			//--
-			if (is_array($value) || is_object($value))
+			// exit;
+			//---------------------------------------------
+			/*
+			echo '<pre>';
+			foreach($data as $key => $value)
 			{
-				foreach ($value as $val)
+				//echo $key;
+				// if($key == "success"){
+					// echo $key.' ont in';
+					// echo'<br>';
+					// continue;
+				// }
+				//--
+				if (is_array($value) || is_object($value))
 				{
-					echo $key;
-					//var_dump($val);
+					foreach ($value as $val)
+					{
+						echo $key;
+						//var_dump($val);
+					}
 				}
+				
 			}
+			exit;
+			*/
+			//---------------------------------------------
+			//echo '<pre>';
+			//var_dump($rs_arr["cell"]);
 			
-		}
-		exit;
-		*/
-		//---------------------------------------------
-		//echo '<pre>';
-		//var_dump($rs_arr["cell"]);
-		
-		// if($rs_arr["cell"]){
-			// echo 'true';
-		// }else{
-			// echo 'false';
-		// }
-		// exit;
-		//var_dump($rs_arr["prfm_tuee"]); exit;
-		// if($rs_arr['success']){
-			// if($rs_arr["prfm_tuee"] != false){
-				// $data['prfm_tuee'] = $rs_arr["prfm_tuee"];
+			// if($rs_arr["cell"]){
+				// echo 'true';
+			// }else{
+				// echo 'false';
 			// }
+			// exit;
+			//var_dump($rs_arr["prfm_tuee"]); exit;
+			// if($rs_arr['success']){
+				// if($rs_arr["prfm_tuee"] != false){
+					// $data['prfm_tuee'] = $rs_arr["prfm_tuee"];
+				// }
+				
+			// } else {
+				// echo 'false.....';
+			// }
+			//----> debug.
 			
-		// } else {
-			// echo 'false.....';
-		// }
-		//----> debug.
-		
-		//echo '<pre> ';
-		//var_dump($data);exit;
-		
-		// foreach($data as $key => $value)
-		// {
-			// var_dump($value);
-		// }
-		// exit;
-		//------
-		
-	} else {
+			//echo '<pre> ';
+			//var_dump($data);exit;
+			
+			// foreach($data as $key => $value)
+			// {
+				// var_dump($value);
+			// }
+			// exit;
+			//------
+			
+		} else {
+			header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/index.php");
+		} 
+	}else {
 		header("Location: http://" . $_SERVER['HTTP_HOST'] ."/".PROJ_NAME. "/index.php");
 	} 
+
 	//-------------------------------------------------
 
 	

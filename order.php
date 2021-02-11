@@ -2,7 +2,8 @@
 session_start();
 require_once dirname(__FILE__) . '/includes/init.inc.php';
 header('Content-type: application/json');
-if (isset($_SESSION['email'])) {
+$rs_permis = in_array("order_cell", $_SESSION['permissions']);
+if($rs_permis){
 	if ($_SERVER["REQUEST_METHOD"] == "GET") {
 		$q = isset($_GET['q']) ? $_GET['q'] : '';
 		switch ($q)
@@ -44,7 +45,7 @@ if (isset($_SESSION['email'])) {
 				
 			break;
 			//--------------------------------------------
-			case "get_order_all" :
+			case "get_order_all" : //no use.
 				$rs = array();
 				$rs["success"] = false;
 

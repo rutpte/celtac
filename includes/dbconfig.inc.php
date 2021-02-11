@@ -2,57 +2,41 @@
 session_start();
 header('Content-Type: text/html; charset=utf-8');
 
-if ($_SERVER['HTTP_HOST'] == 'xxxxx') {
+if ($_SERVER['HTTP_HOST'] == '163.44.196.239') {
     
     // Database host
-    define("DB_HOST", '127.0.0.1');
+    define("DB_HOST", '163.44.196.239');
     // Port
     define("PORT", '5432');
     // Database password
-    define("DB_PASS", 'xxx');
-
-	
-
-
-}else if ($_SERVER['HTTP_HOST'] == 'localhost_pte') {
-    
-    // Database host
-    define("DB_HOST", '127.0.0.1');
-    // Port
-    define("PORT", '5434');
-    // Database password
-    define("DB_PASS", 'pgpteadmin');
-	define("REMOTE_HOST", '127.0.0.1');//--> not use now.
-	define("PROJ_NAME", 'celtac');
+    define("DB_PASS", 'pgceltacadmin');//pgceltacadmin
 	
 }else if ($_SERVER['HTTP_HOST'] == 'localhost') { //localhost my room.
     
-    // Database host
-    define("DB_HOST", '127.0.0.1');
-    // Port
-    define("PORT", '5432');
-    // Database password
-    define("DB_PASS", '');
-	define("REMOTE_HOST", '127.0.0.1');//--> not use now.
-	define("PROJ_NAME", 'celtac');
+	if(true){ //--> use on real server.
+		// Database host
+		define("DB_HOST", '163.44.196.239');
+		// Port
+		define("PORT", '5432');
+		// Database password
+		define("DB_PASS", 'pgceltacadmin');//pgceltacadmin
+		define("REMOTE_HOST", '163.44.196.239');//--> not use now.
 
+		
+	} else { //use in local for dev.
+		// Database host
+		define("DB_HOST", 'localhost');
+		// Port
+		define("PORT", '5432');
+		// Database password
+		define("DB_PASS", 'pgPTE@min1234');//pgceltacadmin
+
+	}
 
 } else {
-
-    //--> for dev
-    
-    // Database host
-    define("DB_HOST", '127.0.0.1');
-    // Port
-    define("PORT", '5432');
-    // Database password
-    define("DB_PASS", '');
-	define("REMOTE_HOST", '163.44.196.239');//--> not use now.
-	define("PROJ_NAME", 'celtac');
-	
-
-
+	exit('use localhost instead.');
 }
+
 //--------------------------------------------------------- end if else swith server --------------------------------------------------
 // Database host
 define("DB_USER", 'postgres');

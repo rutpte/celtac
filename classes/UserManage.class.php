@@ -1,4 +1,4 @@
-<?php
+<?php exit('not use.');
 /************************************************
  | Class name  : UserManage.class.php           |
  | Last Modify : Jan 2013                       |
