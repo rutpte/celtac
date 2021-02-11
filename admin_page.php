@@ -1,7 +1,8 @@
 <?php exit('not use.');
 require dirname(__FILE__) . '/includes/init.inc.php';
 
- if ($_SESSION['is_superuser'] =='t') {
+$rs_permis = in_array("xxx", $_SESSION['permissions']);
+if($rs_permis){
 	$mu 	= new UserManage($pdo);
 	$rs_arr = $mu->get_all_user();
 	//print_r($rs); exit;
