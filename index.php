@@ -1,5 +1,6 @@
 <?php
 require dirname(__FILE__) . '/includes/init.inc.php';
+//var_dump($_SESSION['permissions']);exit;
 
 $rs_permis 	= in_array("order_cell", $_SESSION['permissions']);
 if($rs_permis){
