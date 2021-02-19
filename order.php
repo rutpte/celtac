@@ -45,7 +45,7 @@ if($rs_permis){
 				
 			break;
 			//--------------------------------------------
-			case "get_order_all" : //no use.
+			case "get_order_all" : //use on auto email.
 				$rs = array();
 				$rs["success"] = false;
 

@@ -25,8 +25,8 @@
  * @version    ##VERSION##, ##DATE##
  */
 require dirname(__FILE__) . '/includes/init.inc.php';
-$rs_permis = in_array("export_order", $_SESSION['permissions']);
-if($rs_permis){
+//$rs_permis = in_array("export_order", $_SESSION['permissions']);
+if(true){
 	$obj 	= new Order($pdo);
 	$rs_arr = $obj->getOrderAll();
 	$data = array();

@@ -556,7 +556,7 @@ class Order extends DBConnection
     }
     //---------------------------------------------------------
     public function getOrderAllLogistic ()
-    {
+    { exit;
         $sql ="
             select 
 				*
