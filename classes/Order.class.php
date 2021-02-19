@@ -519,8 +519,8 @@ class Order extends DBConnection
     //-----------------------------------------------------------------
     public function getOrderAll ()
     {
-		$export_order 	= in_array("export_order", $_SESSION['permissions']);
-		if($export_order){
+		//$export_order 	= in_array("export_order", $_SESSION['permissions']);
+		if(true){
 			$sql ="
 				select 
 					*
