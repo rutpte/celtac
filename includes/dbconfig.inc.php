@@ -11,7 +11,7 @@ if ($_SERVER['HTTP_HOST'] == '163.44.196.239') {
     // Database password
     define("DB_PASS", 'pgceltacadmin');//pgceltacadmin
 	
-}else if ($_SERVER['HTTP_HOST'] == 'localhost') { //localhost my room.
+}else if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') { //localhost my room.
     
 	if(true){ //--> use on real server.
 		// Database host
