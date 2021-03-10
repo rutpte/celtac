@@ -49,6 +49,7 @@ define("DB_CELTAC_AUTHEN", 'authen');
 if(true){
 	define("DSN_CELTAC", 'pgsql:host= '. DB_HOST .'; dbname=' . DB_CELTAC .' port=' . PORT );
 	define("DSN_CELTAC_AUTHEN", 'pgsql:host= '. DB_HOST .'; dbname=' . DB_CELTAC_AUTHEN .' port=' . PORT );
+	define('DB_LINK_AUTHEN','dbname=' . DB_CELTAC_AUTHEN . ' port=' . PORT . ' user=' . DB_USER . ' password=' . DB_PASS);
 } else {
 	define("DSN_CELTAC", 'mysql:host= '. DB_HOST .'; dbname=' . DB_CELTAC .' port=' . PORT );
 }
