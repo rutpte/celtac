@@ -648,7 +648,7 @@ class Order extends DBConnection
 				where 1=1
 				
 				and 	
-					delivery_date_time 
+					last_update_date 
 					BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
 				
 			";
@@ -709,7 +709,7 @@ class Order extends DBConnection
 			WHERE 1=1
 			AND product_type = 'cell'
 			AND 	
-				delivery_date_time 
+				last_update_date 
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
 			GROUP BY customer_name,staff.first_name,dealer_company,price_rate,user_id
 		";
@@ -722,7 +722,7 @@ class Order extends DBConnection
 			WHERE 1=1
 			AND product_type = 'prp_ready'
 			AND 	
-				delivery_date_time 
+				last_update_date 
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
 			GROUP BY customer_name,user_id,staff.first_name,dealer_company,price_rate
 		";
@@ -735,7 +735,7 @@ class Order extends DBConnection
 			WHERE 1=1
 			AND product_type = 'placenta'
 			AND 	
-				delivery_date_time 
+				last_update_date 
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
 			GROUP BY customer_name,user_id,staff.first_name,dealer_company,price_rate
 		";
@@ -747,7 +747,7 @@ class Order extends DBConnection
 			WHERE 1=1
 			AND product_type = 'prfm_set'
 			AND 	
-				delivery_date_time 
+				last_update_date 
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
 			GROUP BY customer_name,user_id,staff.first_name,dealer_company,price_rate
 		";
@@ -759,7 +759,7 @@ class Order extends DBConnection
 			WHERE 1=1
 			AND product_type = 'prfm_tuee'
 			AND 	
-				delivery_date_time 
+				last_update_date 
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
 			GROUP BY customer_name,user_id,staff.first_name,dealer_company,price_rate
 		";			
@@ -778,7 +778,7 @@ class Order extends DBConnection
 			WHERE 1=1
 			AND product_type = 'gcsf'
 			AND 	
-				delivery_date_time 
+				last_update_date 
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
 			GROUP BY customer_name,user_id,staff.first_name,dealer_company,price_rate
 		";
@@ -796,7 +796,7 @@ class Order extends DBConnection
 			WHERE 1=1
 			AND product_type = 'hyagan'
 			AND 	
-				delivery_date_time 
+				last_update_date 
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
 			GROUP BY customer_name,user_id,staff.first_name,dealer_company,price_rate
 		";
