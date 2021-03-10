@@ -713,7 +713,7 @@ class Order extends DBConnection
                 WHERE 1=1
                 AND is_active = ''t''
                 '
-                    ) AS x(first_name TEXT, id TEXT) 
+                    ) AS x(id integer, first_name TEXT) 
             WHERE x.first_name IS NOT NULL
             --LIMIT 1
         ";
@@ -722,7 +722,7 @@ class Order extends DBConnection
 		$sql_cell ="
 			select customer_name, SUM(total_cell)as total_cell, staff.first_name as staff_n ,dealer_company,price_rate,user_id 
 			from  order_product
-			inner join ('{$sql_staff}')as staff on staff.id = order_product.user_id
+			inner join ({$sql_staff})as staff on staff.id = order_product.user_id
 			WHERE 1=1
 			AND product_type = 'cell'
 			AND 	
@@ -730,12 +730,12 @@ class Order extends DBConnection
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
 			GROUP BY customer_name,staff.first_name,dealer_company,price_rate,user_id
 		";
-		echo '<pre>'.$sql_cell; exit;
+		//echo '<pre>'.$sql_cell; exit;
 			//-----------------------------
 		$sql_prp_ready ="
 			select customer_name,SUM(set) as set,SUM(vial)as vial, staff.first_name as staff_n ,dealer_company,price_rate,user_id 
 			from  order_product
-			inner join staff on staff.id = order_product.user_id
+			inner join ({$sql_staff})as staff on staff.id = order_product.user_id
 			WHERE 1=1
 			AND product_type = 'prp_ready'
 			AND 	
@@ -748,7 +748,7 @@ class Order extends DBConnection
 		$sql_placenta ="
 			select customer_name,staff.first_name as staff_n ,user_id,SUM(set) as set,SUM(vial)as vial,dealer_company,price_rate 
 			from  order_product
-			inner join staff on staff.id = order_product.user_id
+			inner join ({$sql_staff})as staff on staff.id = order_product.user_id
 			WHERE 1=1
 			AND product_type = 'placenta'
 			AND 	
@@ -760,7 +760,7 @@ class Order extends DBConnection
 		$sql_prfm_set ="
 			select customer_name,staff.first_name as staff_n ,user_id,SUM(set) as set,SUM(vial)as vial ,dealer_company,price_rate
 			from  order_product
-			inner join staff on staff.id = order_product.user_id
+			inner join ({$sql_staff})as staff on staff.id = order_product.user_id
 			WHERE 1=1
 			AND product_type = 'prfm_set'
 			AND 	
@@ -772,7 +772,7 @@ class Order extends DBConnection
 		$sql_prfm_tuee ="
 			select customer_name,staff.first_name as staff_n,user_id,SUM(set) as set,SUM(vial)as vial,dealer_company,price_rate 
 			from  order_product
-			inner join staff on staff.id = order_product.user_id
+			inner join ({$sql_staff})as staff on staff.id = order_product.user_id
 			WHERE 1=1
 			AND product_type = 'prfm_tuee'
 			AND 	
@@ -791,7 +791,7 @@ class Order extends DBConnection
 				,dealer_company
 				,price_rate 
 			from  order_product
-			inner join staff on staff.id = order_product.user_id
+			inner join ({$sql_staff})as staff on staff.id = order_product.user_id
 			WHERE 1=1
 			AND product_type = 'gcsf'
 			AND 	
@@ -809,7 +809,7 @@ class Order extends DBConnection
 				,dealer_company
 				,price_rate 
 			from  order_product
-			inner join staff on staff.id = order_product.user_id
+			inner join ({$sql_staff})as staff on staff.id = order_product.user_id
 			WHERE 1=1
 			AND product_type = 'hyagan'
 			AND 	
@@ -818,6 +818,18 @@ class Order extends DBConnection
 			GROUP BY customer_name,user_id,staff.first_name,dealer_company,price_rate
 		";
 		
+		//--------------------------------------------------------------------------------------------
+		$sql_nad ="
+			select customer_name,SUM(set) as set,SUM(vial)as vial, staff.first_name as staff_n ,dealer_company,price_rate,user_id 
+			from  order_product
+			inner join ({$sql_staff})as staff on staff.id = order_product.user_id
+			WHERE 1=1
+			AND product_type = 'nad'
+			AND 	
+				delivery_date_time 
+				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
+			GROUP BY customer_name,user_id,staff.first_name,dealer_company,price_rate
+		";
 		//--------------------------------------------------------------------------------------------
 		/*
 		echo '<pre>';
@@ -902,6 +914,14 @@ class Order extends DBConnection
 				echo $sql_hyagan;
 			}
 			//------------------------------------------------------
+			try {
+				$rs8 = $this->db->query($sql_nad);
+			} catch (Exception $e) {
+				echo 'Caught exception: ',  $e->getMessage(), "\n";
+				echo "-------------------";
+				echo $sql_nad;
+			}
+			//------------------------------------------------------
 
 
 				if (
@@ -912,6 +932,7 @@ class Order extends DBConnection
 					&& $rs5 != false
 					&& $rs6 != false
 					&& $rs7 != false
+					&& $rs8 != false
 				) {
 					$result["success"] = true;
 					
@@ -923,6 +944,7 @@ class Order extends DBConnection
 					$rs_prfm_tuee	= $rs5->fetchAll(PDO::FETCH_ASSOC);
 					$rs_gcsf		= $rs6->fetchAll(PDO::FETCH_ASSOC);
 					$rs_hyagan		= $rs7->fetchAll(PDO::FETCH_ASSOC);
+					$rs_nad			= $rs8->fetchAll(PDO::FETCH_ASSOC);
 					
 
 					
@@ -933,6 +955,7 @@ class Order extends DBConnection
 					$result["prfm_tuee"] = $rs_prfm_tuee;
 					$result["gcsf"] 	 = $rs_gcsf;
 					$result["hyagan"] 	 = $rs_hyagan;
+					$result["nad"] 	     = $rs_nad;
 					
 					$result["date_time"] = $str_date_start.' - '.$str_date_end;
 					
