@@ -648,7 +648,7 @@ class Order extends DBConnection
 				where 1=1
 				
 				and 	
-					last_update_date 
+					delivery_date_time 
 					BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
 				
 			";
@@ -701,19 +701,36 @@ class Order extends DBConnection
 	//-----------------------------------------------------------------
     public function getOrderExportReport ($str_date_start, $str_date_end)
     {
+        $db_pro = DB_LINK_AUTHEN;
+        $sql_staff ="
+            SELECT x.* 
+            FROM dblink('{$db_pro}',
+                '
+				SELECT 
+					staff.id,
+                    staff.first_name
+                FROM staff
+                WHERE 1=1
+                AND is_active = ''t''
+                '
+                    ) AS x(first_name TEXT, id TEXT) 
+            WHERE x.first_name IS NOT NULL
+            --LIMIT 1
+        ";
 		
+		//----------------------------------------------
 		$sql_cell ="
 			select customer_name, SUM(total_cell)as total_cell, staff.first_name as staff_n ,dealer_company,price_rate,user_id 
 			from  order_product
-			inner join staff on staff.id = order_product.user_id
+			inner join ('{$sql_staff}')as staff on staff.id = order_product.user_id
 			WHERE 1=1
 			AND product_type = 'cell'
 			AND 	
-				last_update_date 
+				delivery_date_time 
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
 			GROUP BY customer_name,staff.first_name,dealer_company,price_rate,user_id
 		";
-		//echo '<pre>'.$sql_cell; exit;
+		echo '<pre>'.$sql_cell; exit;
 			//-----------------------------
 		$sql_prp_ready ="
 			select customer_name,SUM(set) as set,SUM(vial)as vial, staff.first_name as staff_n ,dealer_company,price_rate,user_id 
@@ -722,7 +739,7 @@ class Order extends DBConnection
 			WHERE 1=1
 			AND product_type = 'prp_ready'
 			AND 	
-				last_update_date 
+				delivery_date_time 
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
 			GROUP BY customer_name,user_id,staff.first_name,dealer_company,price_rate
 		";
@@ -735,7 +752,7 @@ class Order extends DBConnection
 			WHERE 1=1
 			AND product_type = 'placenta'
 			AND 	
-				last_update_date 
+				delivery_date_time 
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
 			GROUP BY customer_name,user_id,staff.first_name,dealer_company,price_rate
 		";
@@ -747,7 +764,7 @@ class Order extends DBConnection
 			WHERE 1=1
 			AND product_type = 'prfm_set'
 			AND 	
-				last_update_date 
+				delivery_date_time 
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
 			GROUP BY customer_name,user_id,staff.first_name,dealer_company,price_rate
 		";
@@ -759,7 +776,7 @@ class Order extends DBConnection
 			WHERE 1=1
 			AND product_type = 'prfm_tuee'
 			AND 	
-				last_update_date 
+				delivery_date_time 
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
 			GROUP BY customer_name,user_id,staff.first_name,dealer_company,price_rate
 		";			
@@ -778,7 +795,7 @@ class Order extends DBConnection
 			WHERE 1=1
 			AND product_type = 'gcsf'
 			AND 	
-				last_update_date 
+				delivery_date_time 
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
 			GROUP BY customer_name,user_id,staff.first_name,dealer_company,price_rate
 		";
@@ -796,7 +813,7 @@ class Order extends DBConnection
 			WHERE 1=1
 			AND product_type = 'hyagan'
 			AND 	
-				last_update_date 
+				delivery_date_time 
 				BETWEEN '{$str_date_start}'::timestamp AND '{$str_date_end}'::timestamp
 			GROUP BY customer_name,user_id,staff.first_name,dealer_company,price_rate
 		";
