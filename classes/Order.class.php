@@ -654,7 +654,8 @@ class Order extends DBConnection
 			";
 			
 			$rs_permis = in_array("manage_cell", $_SESSION['permissions']);
-			if($rs_permis){
+			$exp_all   = in_array("export_order_all", $_SESSION['permissions']);
+			if($rs_permis || $exp_all){
 				//--> nothing act.
 			} else {
 				$sql .=" and user_id = '{$_SESSION['owner_id']}'";
