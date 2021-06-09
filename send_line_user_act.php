@@ -44,7 +44,7 @@
 	function line_notify($Token, $message)
 	{
 		$obj 	= new Order($pdo);
-		//$msg = $message ."'http://163.44.196.239/celtac/excel_output/order_cell.xls'";
+		//$msg = $message ."'http://150.95.89.128/celtac/excel_output/order_cell.xls'";
 		//-----------------------------------------------------
 		$message_data = array(
 			'message' => $message
@@ -136,7 +136,7 @@
 		
 		//$str_msg .= " *----* \n";
 
-		//$str_msg .= "http://163.44.196.239/celtac/excel_output/order_cell.xls";
+		//$str_msg .= "http://150.95.89.128/celtac/excel_output/order_cell.xls";
 		$str_msg .= " ";
 		
 		//--> send line.

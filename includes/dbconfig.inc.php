@@ -2,10 +2,10 @@
 session_start();
 header('Content-Type: text/html; charset=utf-8');
 
-if ($_SERVER['HTTP_HOST'] == '163.44.196.239') {
+if ($_SERVER['HTTP_HOST'] == '150.95.89.128') {
     
     // Database host
-    define("DB_HOST", '163.44.196.239');
+    define("DB_HOST", '150.95.89.128');
     // Port
     define("PORT", '5432');
     // Database password
@@ -15,12 +15,12 @@ if ($_SERVER['HTTP_HOST'] == '163.44.196.239') {
     
 	if(true){ //--> use on real server.
 		// Database host
-		define("DB_HOST", '163.44.196.239');
+		define("DB_HOST", '150.95.89.128');
 		// Port
 		define("PORT", '5432');
 		// Database password
 		define("DB_PASS", 'pgceltacadmin');//pgceltacadmin
-		define("REMOTE_HOST", '163.44.196.239');//--> not use now.
+		define("REMOTE_HOST", '150.95.89.128');//--> not use now.
 
 		
 	} else { //use in local for dev.

@@ -23,7 +23,7 @@
 	function line_notify($Token, $message)
 	{
 		$obj 	= new Order($pdo);
-		//$msg = $message ."'http://163.44.196.239/celtac/excel_output/order_cell.xls'";
+		//$msg = $message ."'http://150.95.89.128/celtac/excel_output/order_cell.xls'";
 		//-----------------------------------------------------
 		$message_data = array(
 			'message' => $message
@@ -69,7 +69,7 @@
 	$obj_date 		= new DateTime($value['delivery_date_time']);;
 	$daliv_date 	= $obj_date->format('d-m-Y');
 	$daliv_time 	= $obj_date->format('H:i:s');
-	//-- $message .= "\n http://163.44.196.239/celtac/excel_output/order_cell.xls?a=".$daliv_date.'_'.$daliv_time ;
+	//-- $message .= "\n http://150.95.89.128/celtac/excel_output/order_cell.xls?a=".$daliv_date.'_'.$daliv_time ;
 	line_notify($Token, $message);
 	*/
 	//---------------------------------------------------------------------------------------------------------------
@@ -110,7 +110,7 @@
 		
 		//$str_msg .= " *----* \n";
 
-		//$str_msg .= "http://163.44.196.239/celtac/excel_output/order_cell.xls";
+		//$str_msg .= "http://150.95.89.128/celtac/excel_output/order_cell.xls";
 		$str_msg .= "\n\n\n";
 		
 		//--> send line.
@@ -175,7 +175,7 @@
 		
 		//$str_msg .= " *----* \n";
 
-		//$str_msg .= "http://163.44.196.239/celtac/excel_output/order_cell.xls";
+		//$str_msg .= "http://150.95.89.128/celtac/excel_output/order_cell.xls";
 		$str_msg .= " ";
 		
 		//--> send line.
@@ -236,7 +236,7 @@
 			
 			//$str_msg .= " *----* \n";
 
-			$str_msg .= "http://163.44.196.239/celtac/excel_output/order_cell.xls";
+			$str_msg .= "http://150.95.89.128/celtac/excel_output/order_cell.xls";
 			$str_msg .= "\n\n\n";
 			
 			//--> send line.

@@ -2527,7 +2527,7 @@
 
 					$.ajax({
 						//url: "authen.php",
-						//url: "http://163.44.196.239"+"/celtac_authen_service/authen.php",
+						//url: "http://150.95.89.128"+"/celtac_authen_service/authen.php",
 						url: "http://"+window.location.hostname+"/celtac_authen_service/authen.php", //--> this file is important to dev.
 						dataType: 'text', // Notice! JSONP <-- P (lowercase)
 						method : 'POST',
@@ -2571,7 +2571,7 @@
 
 					$.ajax({
 						//url: "authen.php",
-						//url: "http://163.44.196.239"+"/celtac_authen_service/authen.php",
+						//url: "http://150.95.89.128"+"/celtac_authen_service/authen.php",
 						url: "http://"+window.location.hostname+"/celtac_authen_service/authen.php", //--> this file is important to dev.
 						dataType: 'text', // Notice! JSONP <-- P (lowercase)
 						method : 'POST',
