@@ -57,6 +57,7 @@ class Order extends DBConnection
 		//echo $date->format('d-m-Y');
 		//echo $date_formated; exit;
 		//---------------------------------------------------
+		//order_group_id_seq --> create new for generate group id.
 		$order_group_id_sql = "select nextval('order_group_id_seq'::regclass) as order_group_id";//select currval('order_group_id_seq');//select nextval('order_group_id_seq'::regclass) as order_group_id
 		$sth_order_group 	= $this->db->prepare($order_group_id_sql);
 		$sth_order_group->execute();
