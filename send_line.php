@@ -17,7 +17,7 @@
 	} 
 
 	$Token = 'CxlMmXRcLg458GiyTx9kINPOKQjyLReSUnGLSyGdFwA';
-	$message = isset($_POST["message"])? $_POST["message"] : 'help!' ;
+	$message = isset($_POST["message"])? $_POST["message"] : 'new update.' ;
 	//--------------------------------------------
 	
 	function line_notify($Token, $message)
