@@ -10,7 +10,7 @@ $obj 	= new Order($pdo);
 		$data = $rs_arr['data'];
 	}
 	// foreach ($rs_arr as &$value) {
-		// echo $value;
+		// var_dump($value);
 	// }
 	// exit;
 } else {
@@ -35,6 +35,8 @@ $from_email 		= 'celtac.order@gmail.com';
 $from_email_pass  	= 'celtac12345678';
 //$mailTo 			= array("yupa.pangtum@gmail.com", "thongjet@hotmail.com", "my_name_is_ken@live.com", "iloveubon@gmail.com", "zerokung_2011@hotmail.com");
 $mailTo 			= array($_SESSION['email']);
+
+//var_dump($mailTo);exit;
 
 //-----------------------------------------------------------------------------------------
 $tb_rut .='<table class="table"';
