@@ -198,8 +198,7 @@ $html_mail = $new_tb;
 // exit;
 //-----------------------------------------------------------------------------------------
 $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
-try {
-    //Server settings
+if(true){
 	$mail->CharSet = 'UTF-8';
     $mail->SMTPDebug = 2;                                 // Enable verbose debug output
     $mail->isSMTP();                                      // Set mailer to use SMTP
@@ -207,19 +206,13 @@ try {
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
     $mail->Username = $from_email;                 // SMTP username
     $mail->Password = $from_email_pass;                           // SMTP password
-    //$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted//tls
-    //$mail->Port = 587;   
     $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted//tls
     $mail->Port = 465; 
-	// TCP port to connect to//587
-	//$mail->SMTPAuth = false;
-	//$mail->SMTPSecure = false;
 		
 	$obj_date 		= new DateTime();
 	$timezone 		= new DateTimeZone("Asia/Bangkok");
 	$obj_date->setTimezone( $timezone );
 	$date_formated 	= $obj_date->format('Y-m-d H:i:s');
-	//echo $date_formated; exit;
     //Recipients
     $mail->setFrom('celtac.order@gmail.com', 'Order-Cell : '.$date_formated.'.');
 	
@@ -228,16 +221,6 @@ try {
 	foreach ($mailTo as &$value) {
 		$mail->addAddress($value, $value);
 	}
-   
-    //$mail->addAddress('ellen@example.com');               // Name is optional
-    //$mail->addReplyTo('pte.engineer@gmail.com', 'Information');
-    //$mail->addCC('cc@example.com');
-    //$mail->addBCC('bcc@example.com');
-
-    //Attachments
-    //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-    //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-
     //Content
     $mail->isHTML(true);                                  // Set email format to HTML
     $mail->Subject = $date_formated;
@@ -245,14 +228,64 @@ try {
     $mail->AltBody = 'Order-Cell3';
 	$mail->AddAttachment('excel_output/order_cell.xls', "order.xls");
     $mail->send();
-	//--> it will return many text.
-    // $result["success"] = true;
-	// echo json_encode($result);
-	// exit;
-} catch (Exception $e) {
-	//write log.
-	$msg = "can not send order : ".$e;
-	$obj->write_log($msg);
-	$result["success"] = false;
-	echo json_encode($result);
+}
+if(false){
+	try {
+		//Server settings
+		$mail->CharSet = 'UTF-8';
+		$mail->SMTPDebug = 2;                                 // Enable verbose debug output
+		$mail->isSMTP();                                      // Set mailer to use SMTP
+		$mail->Host = 'smtp.gmail.com';  					  // Specify main and backup SMTP servers
+		$mail->SMTPAuth = true;                               // Enable SMTP authentication
+		$mail->Username = $from_email;                 // SMTP username
+		$mail->Password = $from_email_pass;                           // SMTP password
+		//$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted//tls
+		//$mail->Port = 587;   
+		$mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted//tls
+		$mail->Port = 465; 
+		// TCP port to connect to//587
+		//$mail->SMTPAuth = false;
+		//$mail->SMTPSecure = false;
+			
+		$obj_date 		= new DateTime();
+		$timezone 		= new DateTimeZone("Asia/Bangkok");
+		$obj_date->setTimezone( $timezone );
+		$date_formated 	= $obj_date->format('Y-m-d H:i:s');
+		//echo $date_formated; exit;
+		//Recipients
+		$mail->setFrom('celtac.order@gmail.com', 'Order-Cell : '.$date_formated.'.');
+		
+		//--> loop add mail.Add a recipient
+		
+		foreach ($mailTo as &$value) {
+			$mail->addAddress($value, $value);
+		}
+	   
+		//$mail->addAddress('ellen@example.com');               // Name is optional
+		//$mail->addReplyTo('pte.engineer@gmail.com', 'Information');
+		//$mail->addCC('cc@example.com');
+		//$mail->addBCC('bcc@example.com');
+
+		//Attachments
+		//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+		//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+
+		//Content
+		$mail->isHTML(true);                                  // Set email format to HTML
+		$mail->Subject = $date_formated;
+		$mail->Body    = $html_mail;
+		$mail->AltBody = 'Order-Cell3';
+		$mail->AddAttachment('excel_output/order_cell.xls', "order.xls");
+		$mail->send();
+		//--> it will return many text.
+		// $result["success"] = true;
+		// echo json_encode($result);
+		// exit;
+	} catch (Exception $e) {
+		//write log.
+		$msg = "can not send order : ".$e;
+		$obj->write_log($msg);
+		$result["success"] = false;
+		echo json_encode($result);
+	}
 }
