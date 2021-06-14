@@ -32,7 +32,7 @@ require 'libs/PHPMailer/src/SMTP.php';
 //--> loop data for create content html and set it to $html_mail.
 
 $from_email 		= 'celtac.order@gmail.com';
-$from_email_pass  	= '';
+$from_email_pass  	= 'celtac12345678';
 //$mailTo 			= array("yupa.pangtum@gmail.com", "thongjet@hotmail.com", "my_name_is_ken@live.com", "iloveubon@gmail.com", "zerokung_2011@hotmail.com");
 $mailTo 			= array($_SESSION['email']);
 
