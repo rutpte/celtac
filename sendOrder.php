@@ -207,6 +207,7 @@ if(true){
     $mail->Username = $from_email;                 // SMTP username
     $mail->Password = $from_email_pass;                           // SMTP password
     $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted//tls
+	$mail->SMTPAutoTLS = false;
     $mail->Port = 465; 
 		
 	$obj_date 		= new DateTime();
