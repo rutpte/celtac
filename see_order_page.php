@@ -134,10 +134,7 @@ if($rs_permis){
 		<link rel="icon" href="logo.jpg">
 
 		<title>celtac order</title>
-		<script type='text/javascript' src='js/js_index_src.js'></script>
-		<!-- Bootstrap core CSS -->
-		<link href="css/css.css" rel="stylesheet">
-		
+	
 		<style type="text/css">
 		.tg  {border-collapse:collapse;border-color:#93a1a1;border-spacing:0;}
 		.tg td{background-color:#fdf6e3;border-color:#93a1a1;border-style:solid;border-width:1px;color:#002b36;
