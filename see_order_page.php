@@ -132,6 +132,7 @@ if($rs_permis){
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<link rel="apple-touch-icon" href='logo.jpg'>
+		<link rel="icon" href="logo.jpg">
 
 		<title>celtac order</title>
 	
