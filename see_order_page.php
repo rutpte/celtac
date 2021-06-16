@@ -131,7 +131,7 @@ if($rs_permis){
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<link rel="icon" href="logo.jpg">
+		<link rel="apple-touch-icon" href='logo.jpg'>
 
 		<title>celtac order</title>
 	
