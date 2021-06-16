@@ -4,7 +4,7 @@ require dirname(__FILE__) . '/includes/global_js_init.php';
 $rs_permis 	= in_array("see_order_lab", $_SESSION['permissions']);
 if($rs_permis){
 	$obj 	= new Order($pdo);
-	$rs_arr = $obj->getOrderStaff();
+	$rs_arr = $obj->getOrderAll();
 
 	//print_r($rs); exit;
 	//print_r($val_data['name']);exit;
@@ -27,11 +27,99 @@ if($rs_permis){
 
 
 	
-	echo '<pre>';
-	print_r($arr_key);
-	exit;
+	// echo '<pre>';
+	// print_r($arr_key);
+	// exit;
 
+			
+			
+	//-----------------------------------------------------------------------------------------
+	$tb_rut .='<table class="tg"';
+		//$tb_rut .='<tr>';
+		
+			$tb_rut .='<thead>';
+				$tb_rut .='<tr>';
+					$tb_rut .='<th class="tg-0pky">delivery_date</td>';
+					$tb_rut .='<th class="tg-0pky">delivery_time</td>';
+					$tb_rut .='<th class="tg-0pky">order_code</td>';
+					$tb_rut .='<th class="tg-0pky">id</td>';
+					$tb_rut .='<th class="tg-0pky">customer</td>';
+					$tb_rut .='<th class="tg-0pky">product</td>';
+					$tb_rut .='<th class="tg-0pky">quantity</td>';
+					$tb_rut .='<th class="tg-0pky">vial</td>';
+					$tb_rut .='<th class="tg-0pky">total</td>';
+					$tb_rut .='<th class="tg-0pky">package</td>';
+					$tb_rut .='<th class="tg-0pky">giveaway</td>';
+					$tb_rut .='<th class="tg-0pky">sender</td>';
+					$tb_rut .='<th class="tg-0pky">receiver</td>';
+					$tb_rut .='<th class="tg-0pky">dealer_person</td>';
+					$tb_rut .='<th class="tg-0pky">dealer_company</td>';
+					$tb_rut .='<th class="tg-0pky">price_rate</td>';
+					$tb_rut .='<th class="tg-0pky">..........note..........</td>';
+				$tb_rut .='</tr>';
+			$tb_rut .='</thead>';
+			$tb_rut .='<tbody>';
+			
+		//$tb_rut .='</tr>';
+		//$tb_rut .='<tbody>';
+		$pre_code = '';
+		foreach ($data as &$value) {
+			
+			$obj_date 		= new DateTime($value['delivery_date_time']);
+			$daliv_date 	= $obj_date->format('d-m-Y');
+			$daliv_time 	= $obj_date->format('H:i:s');
+			//-------------------------------------------
+			if($pre_code != ''){
+				
+				if($daliv_date == $pre_code){
+					if(($index_color%2)==0){
+						$color = '#f4f2f2';
+					} else {
+						$color = '#ffffff';
+					}
+					$pre_code = $daliv_date;
+				}else{
+					$index_color++;
+					if($color == '#ffffff'){
+						$color = '#f4f2f2';
+					} else {
+						$color = '#ffffff';
+					}
+					$pre_code = $daliv_date;
+				}
+			} else {
+				//--> init_config.
+				$color = '#f4f2f2';
+				$pre_code = $daliv_date;
+			}
+			//-------------------------------------------
+			
+				$tb_rut .='<tr>';
+					$tb_rut .='<td class="tg" style="background-color:'.$color.'" id = "delivery_date">'.$daliv_date.'</td>';
+					$tb_rut .='<td class="tg" style="background-color:'.$color.'" id = "delivery_time">'.$daliv_time.'</td>';
+					$tb_rut .='<td class="tg" style="background-color:'.$color.'" id = "order_code">'.$value['order_code'].'</td>';
+					$tb_rut .='<td class="tg" style="background-color:'.$color.'" id = "id">'.$value['id'].'</td>';
+					$tb_rut .='<td class="tg" style="background-color:'.$color.'" id = "customer_name">'.$value['customer_name'].'</td>';
+					$tb_rut .='<td class="tg" style="background-color:'.$color.'" id = "product_type">'.$value['product_type'].'</td>';
+					$tb_rut .='<td class="tg" style="background-color:'.$color.'" id = "quantity">'.$value['quantity'].'</td>';
+					$tb_rut .='<td class="tg" style="background-color:'.$color.'" id = "vial">'.$value['vial'].'</td>';
+					$tb_rut .='<td class="tg" style="background-color:'.$color.'" id = "total_cel">'.$value['total_cell'].'</td>';
+					$tb_rut .='<td class="tg" style="background-color:'.$color.'" id = "package_type">'.$value['package_type'].'</td>';
+					$tb_rut .='<td class="tg" style="background-color:'.$color.'" id = "giveaway">'.$value['giveaway'].'</td>';
+					$tb_rut .='<td class="tg" style="background-color:'.$color.'" id = "sender">'.$value['sender'].'</td>';
+					$tb_rut .='<td class="tg" style="background-color:'.$color.'" id = "receiver">'.$value['receiver'].'</td>';
+					$tb_rut .='<td class="tg" style="background-color:'.$color.'" id = "dealer_person">'.$value['dealer_person'].'</td>';
+					$tb_rut .='<td class="tg" style="background-color:'.$color.'" id = "dealer_company">'.$value['dealer_company'].'</td>';
+					$tb_rut .='<td class="tg" style="background-color:'.$color.'" id = "price_rate">'.$value['price_rate'].'</td>';
+					$tb_rut .='<td class="tg" style="background-color:'.$color.'" id = "comment_else">'.$value['comment_else'].'</td>';
+				$tb_rut .='</tr>';
+			
+		}//end loop tr value.
+		$tb_rut .='</tbody>';
 
+		//$tb_rut .='</tbody>';
+	$tb_rut .='</table>';
+	//-----------------------------------------------------------------------------------------
 
 ?> 
 
@@ -57,72 +145,28 @@ if($rs_permis){
 		.tg th{background-color:#657b83;border-color:#93a1a1;border-style:solid;border-width:1px;color:#fdf6e3;
 		  font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
 		.tg .tg-2bhk{background-color:#eee8d5;border-color:inherit;text-align:left;vertical-align:top}
-		.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
 		.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
 		
 		.el_center {
-		  max-width: 500px;
+		  
 		  margin: auto;
 		  background-color: #635e4e;
 		  margin-top: 10px;
+		  margin-left: 10px;
 		}
 		</style>
 
 
 	</head>
 	<body class ="el_center">
+	
+	
+	
+	
+	
 		<div>
 
-			<table class="tg">
-			<thead>
-			  <tr>
-				<th class="tg-c3ow">dfdfd</th>
-				<th class="tg-0pky">dfdfd</th>
-				<th class="tg-0pky">dfdf</th>
-				<th class="tg-0pky">dfdfdfd</th>
-				<th class="tg-0pky">dfdfdfdf</th>
-				<th class="tg-0pky">dfdfdfd</th>
-				<th class="tg-0pky">dfdfdf</th>
-				<th class="tg-0pky">dfdfdf</th>
-				<th class="tg-0pky">dfdfdfd</th>
-			  </tr>
-			</thead>
-			<tbody>
-			  <tr>
-				<td class="tg-2bhk">erere</td>
-				<td class="tg-2bhk">ererer</td>
-				<td class="tg-2bhk">ererer</td>
-				<td class="tg-2bhk">erer</td>
-				<td class="tg-2bhk">erer</td>
-				<td class="tg-2bhk">ere</td>
-				<td class="tg-2bhk">er</td>
-				<td class="tg-2bhk">er</td>
-				<td class="tg-2bhk">er</td>
-			  </tr>
-			  <tr>
-				<td class="tg-0pky">erer</td>
-				<td class="tg-0pky">erer</td>
-				<td class="tg-0pky">erer</td>
-				<td class="tg-0pky">erer</td>
-				<td class="tg-0pky">erer</td>
-				<td class="tg-0pky">rer</td>
-				<td class="tg-0pky">er</td>
-				<td class="tg-0pky">er</td>
-				<td class="tg-0pky">er</td>
-			  </tr>
-			  <tr>
-				<td class="tg-2bhk">erer</td>
-				<td class="tg-2bhk">erer</td>
-				<td class="tg-2bhk">erer</td>
-				<td class="tg-2bhk">erer</td>
-				<td class="tg-2bhk">erer</td>
-				<td class="tg-2bhk">erer</td>
-				<td class="tg-2bhk">ere</td>
-				<td class="tg-2bhk">ere</td>
-				<td class="tg-2bhk">er</td>
-			  </tr>
-			</tbody>
-			</table>
+			<?php echo $tb_rut; ?>
 		</div>
 		<!--<script type='text/javascript' src='js/js_index_src.js'></script>-->
 		<script>
